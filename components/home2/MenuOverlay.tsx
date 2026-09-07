@@ -10,7 +10,7 @@ import { mapsHref } from "@/content/footer";
 import { useQuote } from "@/components/quote/QuoteModal";
 import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 
-const items: NavItem[] = navigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
+const items: NavItem[] = navigation;
 
 /**
  * Menu plein écran (tablette, mobile, et desktop une fois la page défilée), direction hestera.ch.

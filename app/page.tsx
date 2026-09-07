@@ -1,25 +1,35 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { ServicesList } from "@/components/sections/ServicesList";
-import { Mission } from "@/components/sections/Mission";
-import { Process } from "@/components/sections/Process";
-import { Audience } from "@/components/sections/Audience";
-import { CtaBand } from "@/components/sections/CtaBand";
+import type { Metadata } from "next";
+import { HeaderDark } from "@/components/home2/HeaderDark";
+import { HeroDark } from "@/components/home2/HeroDark";
+import { ServicePanels } from "@/components/home2/ServicePanels";
+import { RenovationAZ } from "@/components/home2/RenovationAZ";
+import { Audience2 } from "@/components/home2/Audience2";
+import { Approach } from "@/components/home2/Approach";
+import { Stats } from "@/components/home2/Stats";
+import { Territory } from "@/components/home2/Territory";
+import { ContactDark } from "@/components/home2/ContactDark";
+import { FooterDark } from "@/components/home2/FooterDark";
+
+/** Accueil officiel : direction sombre et cinématographique, géométrie NERA. Sections et textes du client. */
+export const metadata: Metadata = {
+  title: "NERA Ingénieurs Conseils | Bureau d'ingénieurs en énergie et physique du bâtiment à Genève",
+};
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <HeaderDark />
       <main>
-        <Hero />
-        <ServicesList />
-        <Mission />
-        <Process />
-        <Audience />
-        <CtaBand />
+        <HeroDark />
+        <ServicePanels />
+        <RenovationAZ />
+        <Audience2 />
+        <Approach />
+        <Stats />
+        <Territory />
+        <ContactDark />
       </main>
-      <Footer />
+      <FooterDark />
     </>
   );
 }

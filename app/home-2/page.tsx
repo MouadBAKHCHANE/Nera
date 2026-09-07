@@ -1,39 +1,32 @@
 import type { Metadata } from "next";
-import { HeaderDark } from "@/components/home2/HeaderDark";
-import { HeroDark } from "@/components/home2/HeroDark";
-import { ServicePanels } from "@/components/home2/ServicePanels";
-import { RenovationAZ } from "@/components/home2/RenovationAZ";
-import { Audience2 } from "@/components/home2/Audience2";
-import { Approach } from "@/components/home2/Approach";
-import { Stats } from "@/components/home2/Stats";
-import { Territory } from "@/components/home2/Territory";
-import { ContactDark } from "@/components/home2/ContactDark";
-import { FooterDark } from "@/components/home2/FooterDark";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Hero } from "@/components/sections/Hero";
+import { ServicesList } from "@/components/sections/ServicesList";
+import { Mission } from "@/components/sections/Mission";
+import { Process } from "@/components/sections/Process";
+import { Audience } from "@/components/sections/Audience";
+import { CtaBand } from "@/components/sections/CtaBand";
 
-/**
- * Variante d'accueil « Home 2 », direction sombre et cinématographique, géométrie NERA.
- * Sections et textes du client. Route de comparaison, non indexée.
- */
+/** Variante claire de l'accueil (direction For Future), conservée pour comparaison. Non indexée. */
 export const metadata: Metadata = {
-  title: "Accueil, variante 2",
+  title: "Accueil, variante claire",
   robots: { index: false, follow: false },
 };
 
-export default function Home2() {
+export default function HomeLight() {
   return (
     <>
-      <HeaderDark />
+      <Header />
       <main>
-        <HeroDark />
-        <ServicePanels />
-        <RenovationAZ />
-        <Audience2 />
-        <Approach />
-        <Stats />
-        <Territory />
-        <ContactDark />
+        <Hero />
+        <ServicesList />
+        <Mission />
+        <Process />
+        <Audience />
+        <CtaBand />
       </main>
-      <FooterDark />
+      <Footer />
     </>
   );
 }

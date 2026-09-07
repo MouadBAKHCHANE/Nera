@@ -4,10 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, Phone } from "lucide-react";
-import { navigation as baseNavigation, contactCta } from "@/content/navigation";
-
-/** Sur la variante Home 2, « Accueil » renvoie vers /home-2. */
-const navigation = baseNavigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
+import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
 import { QuoteButton } from "@/components/quote/QuoteModal";
@@ -48,7 +45,7 @@ export function HeaderDark() {
       >
         <div className="flex h-[72px] items-center px-6 md:px-10 lg:h-[82px] lg:px-12">
           <Link
-            href="/home-2"
+            href="/"
             aria-label={company.shortName}
             className="shrink-0 drop-shadow-[0_1px_10px_rgba(10,36,64,0.6)] lg:w-[220px]"
           >
