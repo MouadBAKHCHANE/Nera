@@ -74,8 +74,8 @@ export function FooterDark() {
       </div>
 
       <div className="flex flex-col items-center gap-4 border-t border-nera-cream/15 px-6 py-6 text-[12px] font-light text-nera-cream/60 md:flex-row md:justify-between md:px-10 lg:px-[120px]">
-        <p>© {new Date().getFullYear()} {company.name}. Tous droits réservés.</p>
-        <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+        <p className="order-2 md:order-1">© {new Date().getFullYear()} {company.name}. Tous droits réservés.</p>
+        <ul className="order-1 flex flex-wrap justify-center gap-x-5 gap-y-2 md:order-2">
           {footerLegal.map((l) => (
             <li key={l.href}>
               <Link href={l.href} className="transition-colors hover:text-nera-cream">{l.label}</Link>

@@ -76,8 +76,8 @@ export function Footer() {
 
       <div className="border-t border-hairline">
         <Container className="flex flex-col items-center gap-3 py-5 text-body-sm text-mute md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} {company.name}. Tous droits réservés.</p>
-          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+          <p className="order-2 md:order-1">© {new Date().getFullYear()} {company.name}. Tous droits réservés.</p>
+          <ul className="order-1 flex flex-wrap justify-center gap-x-5 gap-y-2 md:order-2">
             {footerLegal.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="transition-colors hover:text-nera-navy">{l.label}</Link>
