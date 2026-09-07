@@ -190,10 +190,10 @@ Ratio d'usage indicatif sur une page : 70 % crème/blanc, 20 % marine, 5 % vert,
 
 - Conteneur 1216 px, gouttières 24 px, grille 12 colonnes.
 - Sections : 112 px de padding vertical sur desktop, 72 px sur mobile. Une idée par section.
-- Alternance des fonds : crème, blanc, crème, marine (au plus une section marine par page, placée avant le footer ou en CTA).
-- Alignement à gauche partout. Le centrage est réservé aux CTA de fin de page.
+- Alternance des fonds : crème, marine, crème, marine (photo assombrie), blanc, crème. Jamais deux sections marine qui se suivent.
+- Titres de section centrés avec une étiquette pilule au-dessus (direction For Future). Le contenu sous le titre est aligné à gauche : listes en lignes, grilles de cartes, deux colonnes.
 - Titre de section = eyebrow vert + H2 marine + un paragraphe body-lg, largeur max 640 px.
-- Cartes prestations : grille 3 colonnes desktop, 1 colonne mobile, bordure hairline, pas d'ombre, bordure verte au survol.
+- Prestations sur l'accueil : liste en lignes sur fond marine, filets crème à 15 %, icône dans un carré à filet, flèche en bout de ligne. Sur les pages intérieures : cartes blanches à bordure hairline, bordure verte au survol.
 
 ## Profondeur et surfaces
 
