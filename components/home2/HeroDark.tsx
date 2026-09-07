@@ -69,11 +69,11 @@ export function HeroDark() {
         </Reveal>
       </div>
 
-      <div className="relative flex items-end justify-center px-6 pb-5 md:justify-between md:px-10 lg:px-[120px]">
+      <div className="relative flex items-end justify-center px-6 pb-3 md:justify-between md:pb-4 lg:px-[120px] md:px-10">
         <span className="hidden text-[12px] font-light uppercase tracking-[0.3em] text-nera-cream/80 md:block">
           Physique du bâtiment · CVC · Énergie
         </span>
-        <a href="#prestations" className="group flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:absolute md:bottom-5 md:left-1/2 md:-translate-x-1/2">
+        <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:absolute md:bottom-2 md:left-1/2 md:mt-0 md:-translate-x-1/2">
           <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
           <span className="relative block h-12 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
             <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
