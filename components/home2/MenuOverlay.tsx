@@ -16,7 +16,7 @@ const items = [
 ];
 
 /**
- * Menu plein écran (tablette et mobile), direction hestera.ch : voile marine qui
+ * Menu plein écran (tablette, mobile, et desktop une fois la page défilée), direction hestera.ch : voile marine qui
  * descend depuis le haut, tout centré sous le header : titres en capitales espacées
  * (l'actif en graisse Medium), puis bouton « Nous contacter », puis coordonnées avec icônes.
  */
@@ -40,7 +40,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
       aria-modal="true"
       aria-label="Menu"
       aria-hidden={!open}
-      className={`fixed inset-0 z-40 flex flex-col bg-nera-navy bg-blueprint text-nera-cream transition-transform duration-500 ease-out-quart lg:hidden ${
+      className={`fixed inset-0 z-40 flex flex-col bg-nera-navy bg-blueprint text-nera-cream transition-transform duration-500 ease-out-quart ${
         open ? "translate-y-0" : "-translate-y-full"
       }`}
     >

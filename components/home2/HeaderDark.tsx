@@ -25,6 +25,8 @@ export function HeaderDark() {
   }, []);
 
   const solid = scrolled || open;
+  /** Desktop, page défilée et menu fermé : header réduit au seul burger sur fond transparent. */
+  const collapsed = scrolled && !open;
   const link =
     "inline-flex items-center gap-1 px-4 py-2 text-[13px] font-medium uppercase tracking-[0.12em] text-nera-cream transition-colors hover:text-accent [text-shadow:0_1px_12px_rgba(10,36,64,0.6)]";
 
@@ -32,11 +34,20 @@ export function HeaderDark() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-base ${
-          solid ? "bg-nera-navy border-b border-nera-cream/10" : "bg-gradient-to-b from-nera-navy/80 to-transparent"
+          open
+            ? "bg-nera-navy border-b border-nera-cream/10"
+            : collapsed
+              ? "bg-nera-navy border-b border-nera-cream/10 lg:border-0 lg:bg-transparent"
+              : "bg-gradient-to-b from-nera-navy/80 to-transparent"
         }`}
       >
         <div className="flex h-[72px] items-center px-6 md:px-10 lg:h-[82px] lg:px-12">
-          <Link href="/home-2" aria-label={company.shortName} className="shrink-0 lg:w-[220px]">
+          <Link
+            href="/home-2"
+            aria-label={company.shortName}
+            className={`shrink-0 transition-opacity duration-base lg:w-[220px] ${collapsed ? "lg:pointer-events-none lg:opacity-0" : ""}`}
+            tabIndex={collapsed ? -1 : undefined}
+          >
             <Image
               src="/logos/nera-tagline-cream-green.svg"
               alt={company.shortName}
@@ -47,7 +58,10 @@ export function HeaderDark() {
             />
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden flex-1 items-center justify-center lg:flex">
+          <nav
+            aria-label="Navigation principale"
+            className={`hidden flex-1 items-center justify-center ${collapsed ? "" : "lg:flex"}`}
+          >
             {navigation.map((item) =>
               item.children ? (
                 <div key={item.href} className="group relative">
@@ -78,7 +92,7 @@ export function HeaderDark() {
             )}
           </nav>
 
-          <div className="ml-auto hidden lg:flex lg:w-[220px] lg:justify-end">
+          <div className={`ml-auto hidden lg:w-[220px] lg:justify-end ${collapsed ? "" : "lg:flex"}`}>
             <Link
               href={contactCta.href}
               className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white"
@@ -87,14 +101,20 @@ export function HeaderDark() {
             </Link>
           </div>
 
-          {/* Burger en SVG inline, tablette et mobile seulement. */}
+          {/* Burger en SVG inline : tablette et mobile, et desktop une fois la page défilée. */}
           <button
             type="button"
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="ml-auto -mr-2 inline-flex size-11 items-center justify-center text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] transition-colors hover:text-accent lg:hidden"
+            className={`ml-auto -mr-2 inline-flex size-11 items-center justify-center text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] transition-colors hover:text-accent ${
+              collapsed
+                ? "lg:mr-0 lg:size-12 lg:rounded-full lg:bg-nera-navy/90 lg:shadow-[0_2px_16px_rgba(10,36,64,0.35)] lg:drop-shadow-none"
+                : open
+                  ? ""
+                  : "lg:hidden"
+            }`}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               {open ? (
