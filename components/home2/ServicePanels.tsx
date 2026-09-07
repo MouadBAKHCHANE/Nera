@@ -8,7 +8,7 @@ import { Ruler } from "./Logomark";
  * numérotés en grand, posés en escalier sur une grille de plan.
  * Les 7 prestations du cahier des charges sont regroupées en 4 familles.
  */
-const panels = [
+const panels: { n: string; title: string; text: string; href: string; img: string; offset: string; pos?: string }[] = [
   {
     n: "01",
     title: "Audits et modélisation",
@@ -31,6 +31,7 @@ const panels = [
     text: "Conception et suivi de rénovations énergétiques, accompagnement Minergie, HPE et THPE jusqu'à la certification.",
     href: "/prestations/renovation-energetique",
     img: "/img/prestation-renovation-batiment.jpg",
+    pos: "object-[50%_70%]",
     offset: "lg:mt-32",
   },
   {
@@ -63,7 +64,7 @@ export function ServicePanels() {
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100"
+                  className={`object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100 ${p.pos ?? ""}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10 transition-opacity duration-700 group-hover:opacity-60" aria-hidden />
                 <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/40 transition-colors duration-base group-hover:text-accent">
