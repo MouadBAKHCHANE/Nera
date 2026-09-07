@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/ui/Reveal";
 
 /**
- * Section 2b : « Pour qui travaillons-nous ? ». Trois colonnes sur fond crème
+ * Section 2b : « Pour qui travaillons-nous ? ». Trois colonnes sur fond crème
  * et grille de plan claire, séparées par des filets, chiffre romain et graduation verte.
  * Textes du client.
  */
@@ -36,7 +36,7 @@ export function Audience2() {
             Nos clients
           </p>
           <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.15] text-nera-navy md:text-[2.5rem]">
-            Pour qui travaillons-nous ?
+            Pour qui travaillons-nous ?
           </h2>
         </Reveal>
         <ol className="mt-12 grid divide-y divide-nera-navy/15 border-y border-nera-navy/15 md:grid-cols-3 md:divide-x md:divide-y-0">

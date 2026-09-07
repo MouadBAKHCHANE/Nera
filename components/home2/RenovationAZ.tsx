@@ -26,7 +26,7 @@ export function RenovationAZ() {
             {/* Fond marine en losange derrière le médaillon, pour la lisibilité sur la photo */}
             <span className="absolute inset-[14%] rotate-45 bg-nera-navy-deep" aria-hidden />
             <DiamondOutline className="absolute inset-0 animate-spin-slow" strokeWidth={1} />
-            <span className="text-center text-[11px] font-medium uppercase leading-[1.4] tracking-[0.2em]">
+            <span className="relative text-center text-[11px] font-medium uppercase leading-[1.4] tracking-[0.2em]">
               De A
               <br />à Z
             </span>
