@@ -28,7 +28,7 @@ export function HeroDark() {
       <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-nera-navy/90 to-transparent" aria-hidden />
 
       {/* Motif logomark : grand, au trait, coupé par le bord droit */}
-      <div className="pointer-events-none absolute right-[4vw] top-[50%] hidden w-[min(42vw,66vh)] -translate-y-1/2 text-nera-cream/20 lg:block">
+      <div className="pointer-events-none absolute right-[4vw] top-[50%] hidden w-[46vw] -translate-y-1/2 text-nera-cream/20 lg:block">
         <div className="relative">
           <LogomarkOutline className="w-full" strokeWidth={1} />
           <DiamondOutline className="absolute left-1/2 top-[43%] w-[58%] -translate-x-1/2 -translate-y-1/2 animate-spin-slow text-accent/50" />
