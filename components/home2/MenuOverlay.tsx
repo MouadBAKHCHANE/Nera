@@ -17,8 +17,8 @@ const items = [
 
 /**
  * Menu plein écran (tablette et mobile), direction hestera.ch : voile marine qui
- * descend depuis le haut, titres en grandes capitales espacées à gauche (l'actif en
- * graisse Medium), coordonnées avec icônes à droite, bouton « Nous contacter » centré en bas.
+ * descend depuis le haut, tout centré sous le header : titres en capitales espacées
+ * (l'actif en graisse Medium), puis bouton « Nous contacter », puis coordonnées avec icônes.
  */
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         open ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex flex-1 flex-col justify-center gap-12 overflow-y-auto px-6 pb-10 pt-24 md:grid md:grid-cols-[1fr_auto] md:content-center md:items-center md:gap-16 md:px-12">
+      <div className="flex flex-1 flex-col items-center justify-center gap-10 overflow-y-auto px-6 pb-10 pt-[88px] text-center md:gap-14 md:pt-[112px]">
         <nav aria-label="Navigation">
           <ul className="space-y-1">
             {items.map((item, i) => {
@@ -58,7 +58,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
                   <Link
                     href={item.href}
                     onClick={onClose}
-                    className={`block py-2.5 font-display text-[1.5rem] uppercase leading-none tracking-[0.18em] transition-colors hover:text-accent md:text-[1.875rem] ${
+                    className={`block py-2 font-display text-[1.375rem] uppercase leading-none tracking-[0.2em] transition-colors hover:text-accent md:py-3 md:text-[1.875rem] ${
                       active ? "font-medium text-nera-cream" : "font-light text-nera-cream/90"
                     }`}
                   >
@@ -71,31 +71,8 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         </nav>
 
         <div
-          className={`transition-all duration-500 ease-out-quart md:text-right ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
-          style={{ transitionDelay: open ? "380ms" : "0ms" }}
-        >
-          <p className="text-[12px] font-medium uppercase tracking-[0.3em] text-nera-cream/80">Coordonnées</p>
-          <ul className="mt-5 space-y-3 text-body-sm font-light md:text-body-md">
-            <li className="flex items-center gap-3 md:flex-row-reverse">
-              <MapPin className="size-5 shrink-0 text-accent" strokeWidth={1.5} />
-              <span>
-                {company.street}, {company.zip} {company.city}
-              </span>
-            </li>
-            <li className="flex items-center gap-3 md:flex-row-reverse">
-              <Phone className="size-5 shrink-0 text-accent" strokeWidth={1.5} />
-              <a href={company.phoneHref} className="transition-colors hover:text-accent">{company.phone}</a>
-            </li>
-            <li className="flex items-center gap-3 md:flex-row-reverse">
-              <Mail className="size-5 shrink-0 text-accent" strokeWidth={1.5} />
-              <a href={`mailto:${company.email}`} className="transition-colors hover:text-accent">{company.email}</a>
-            </li>
-          </ul>
-        </div>
-
-        <div
-          className={`flex justify-center transition-all duration-500 ease-out-quart md:col-span-2 ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
-          style={{ transitionDelay: open ? "460ms" : "0ms" }}
+          className={`transition-all duration-500 ease-out-quart ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
+          style={{ transitionDelay: open ? "420ms" : "0ms" }}
         >
           <Link
             href="/contact"
@@ -104,6 +81,29 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
           >
             Nous contacter
           </Link>
+        </div>
+
+        <div
+          className={`transition-all duration-500 ease-out-quart ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
+          style={{ transitionDelay: open ? "480ms" : "0ms" }}
+        >
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-nera-cream/70">Coordonnées</p>
+          <ul className="mt-4 space-y-2.5 text-body-sm font-light md:text-body-md">
+            <li className="flex items-center justify-center gap-2.5">
+              <MapPin className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              <span>
+                {company.street}, {company.zip} {company.city}
+              </span>
+            </li>
+            <li className="flex items-center justify-center gap-2.5">
+              <Phone className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              <a href={company.phoneHref} className="transition-colors hover:text-accent">{company.phone}</a>
+            </li>
+            <li className="flex items-center justify-center gap-2.5">
+              <Mail className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              <a href={`mailto:${company.email}`} className="transition-colors hover:text-accent">{company.email}</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
