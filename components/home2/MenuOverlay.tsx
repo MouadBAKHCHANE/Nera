@@ -8,7 +8,7 @@ import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { mapsHref } from "@/content/footer";
 
-const items: NavItem[] = [{ label: "Accueil", href: "/home-2" }, ...navigation];
+const items: NavItem[] = navigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
 
 /**
  * Menu plein écran (tablette, mobile, et desktop une fois la page défilée), direction hestera.ch.

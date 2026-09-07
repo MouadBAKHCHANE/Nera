@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, Phone } from "lucide-react";
-import { navigation, contactCta } from "@/content/navigation";
+import { navigation as baseNavigation, contactCta } from "@/content/navigation";
+
+/** Sur la variante Home 2, « Accueil » renvoie vers /home-2. */
+const navigation = baseNavigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
 

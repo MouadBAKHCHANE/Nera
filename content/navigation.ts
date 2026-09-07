@@ -7,8 +7,9 @@ export type NavItem = {
   children?: NavChild[];
 };
 
-/** Menu principal, identique au pied de page : Prestations, Le bureau (déroulants), Actualités. */
+/** Menu principal : Accueil, puis comme le pied de page : Prestations, Le bureau (déroulants), Actualités. */
 export const navigation: NavItem[] = [
+  { label: "Accueil", href: "/" },
   { label: "Prestations", href: "/prestations", children: footerPrestations },
   { label: "Le bureau", href: "/bureau", children: footerBureau },
   { label: "Actualités", href: "/actualites" },
