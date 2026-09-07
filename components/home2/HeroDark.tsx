@@ -36,34 +36,44 @@ export function HeroDark() {
         </div>
       </div>
 
-      <div className="relative flex flex-1 flex-col justify-center px-6 pb-16 pt-28 md:px-10 lg:px-[120px] lg:pt-[120px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
-        <Reveal as="p" className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/90 md:text-[14px]">
-          <span className="h-px w-10 bg-accent" aria-hidden />
-          {company.shortName} · Genève
+      <div className="relative flex flex-1 flex-col justify-center px-6 pb-10 pt-24 md:px-10 lg:px-[120px] lg:pt-[110px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
+        <Reveal as="p" className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[13px]">
+          <span className="h-px w-10 shrink-0 bg-accent" aria-hidden />
+          Bureau d&apos;ingénieurs en énergie et physique du bâtiment à Genève
         </Reveal>
         <Reveal
           as="h1"
           delay={0.06}
-          className="mt-7 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
+          className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
         >
-          L&apos;équilibre entre <span className="font-medium text-accent">la technique</span>, l&apos;humain et
-          l&apos;environnement, appliqué au bâtiment
+          Au service de la <span className="font-medium text-accent">performance énergétique</span> de vos bâtiments
         </Reveal>
-        <Reveal delay={0.1} className="mt-6 max-w-lg text-body-md font-light leading-[1.7] text-nera-cream/90">
-          Audits CECB, physique du bâtiment, installations CVC, rénovation énergétique, labels et subventions.
-          Un bureau indépendant, de l&apos;étude à la réalisation, en Suisse romande.
+        <Reveal delay={0.1} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
+          <p>
+            NERA Ingénieurs Conseils est un bureau d&apos;ingénierie indépendant spécialisé en énergétique, physique du
+            bâtiment et CVC (chauffage, ventilation et climatisation), basé à Genève et actif dans toute la Suisse romande.
+          </p>
+          <p>
+            Nous accompagnons les particuliers et copropriétés, les régies, fondations et collectivités, ainsi que les
+            architectes et entreprises générales à chaque étape de leurs projets : diagnostic, conception, autorisations,
+            subventions et suivi.
+          </p>
+          <p>
+            Notre objectif : réduire les consommations, valoriser le patrimoine immobilier et sécuriser les démarches
+            techniques et administratives, sans compromis sur le confort.
+          </p>
         </Reveal>
-        <Reveal delay={0.14} className="mt-9 max-w-xs">
+        <Reveal delay={0.14} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />
-          <ArrowLink href="/bureau">Découvrir le bureau</ArrowLink>
+          <ArrowLink href="/contact">Demander un devis gratuit</ArrowLink>
         </Reveal>
       </div>
 
-      <div className="relative flex items-end justify-between px-6 pb-5 md:px-10 lg:px-[120px]">
+      <div className="relative flex items-end justify-center px-6 pb-5 md:justify-between md:px-10 lg:px-[120px]">
         <span className="hidden text-[12px] font-light uppercase tracking-[0.3em] text-nera-cream/80 md:block">
           Physique du bâtiment · CVC · Énergie
         </span>
-        <a href="#prestations" className="group absolute left-1/2 bottom-5 flex -translate-x-1/2 flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent">
+        <a href="#prestations" className="group flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:absolute md:bottom-5 md:left-1/2 md:-translate-x-1/2">
           <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
           <span className="relative block h-12 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
             <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
