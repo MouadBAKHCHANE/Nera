@@ -30,7 +30,7 @@ function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: 
         if (!entry.isIntersecting) return;
         io.disconnect();
         const start = performance.now();
-        const dur = 1200;
+        const dur = 2600;
         const tick = (t: number) => {
           const p = Math.min(1, (t - start) / dur);
           const eased = 1 - Math.pow(1 - p, 3);
