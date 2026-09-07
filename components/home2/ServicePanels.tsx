@@ -85,7 +85,7 @@ export function ServicePanels() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {panels.map((p, i) => (
-            <Reveal key={p.href} delay={(i % 3) * 0.08} className={i % 3 === 1 ? "lg:mt-12" : ""}>
+            <Reveal key={p.href} effect="slide-up" delay={(i % 3) * 0.1} className={i % 3 === 1 ? "lg:mt-12" : ""}>
               <article className="group relative flex min-h-[520px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[560px]">
                 <Image
                   src={p.img}

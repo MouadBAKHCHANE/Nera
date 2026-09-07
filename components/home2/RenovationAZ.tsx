@@ -23,17 +23,15 @@ export function RenovationAZ() {
             />
           </div>
           <div className="absolute -bottom-6 right-2 flex size-28 items-center justify-center text-accent lg:size-36">
-            {/* Fond marine en losange derrière le médaillon, pour la lisibilité sur la photo */}
-            <span className="absolute inset-[14%] rotate-45 bg-nera-navy-deep" aria-hidden />
             <DiamondOutline className="absolute inset-0 animate-spin-slow" strokeWidth={1} />
-            <span className="relative text-center text-[11px] font-medium uppercase leading-[1.4] tracking-[0.2em]">
+            <span className="relative text-center text-[11px] font-semibold uppercase leading-[1.4] tracking-[0.2em] text-nera-navy">
               De A
               <br />à Z
             </span>
           </div>
         </Reveal>
 
-        <Reveal className="order-1 max-w-xl lg:order-2">
+        <Reveal effect="fade-right" className="order-1 max-w-xl lg:order-2">
           <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
             <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
             Accompagnement global

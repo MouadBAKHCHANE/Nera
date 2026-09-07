@@ -12,7 +12,7 @@ export function Approach() {
       <LogomarkOutline className="pointer-events-none absolute -left-[6vw] top-1/2 hidden w-[30vw] -translate-y-1/2 text-nera-cream/10 lg:block" strokeWidth={1} />
       <div className="px-6 md:px-10 lg:px-[120px]">
         <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-24">
-          <Reveal>
+          <Reveal effect="fade-right">
             <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
               <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
               Notre approche

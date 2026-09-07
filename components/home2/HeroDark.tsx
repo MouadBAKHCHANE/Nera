@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
+import { SplitReveal } from "@/components/ui/SplitReveal";
 import { ArrowLink } from "./ArrowLink";
 import { DiamondOutline, LogomarkOutline, Ruler } from "./Logomark";
 import { company } from "@/content/prestations";
@@ -37,18 +38,18 @@ export function HeroDark() {
       </div>
 
       <div className="relative flex flex-1 flex-col justify-center px-6 pb-10 pt-24 md:px-10 lg:px-[120px] lg:pt-[110px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
-        <Reveal as="p" className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
+        <Reveal as="p" effect="fade" className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
           <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
           Bureau d&apos;ingénieurs en énergie et physique du bâtiment à Genève
         </Reveal>
-        <Reveal
+        <SplitReveal
           as="h1"
-          delay={0.06}
+          text="Au service de la performance énergétique de vos bâtiments"
+          accent="performance énergétique"
+          delay={0.2}
           className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
-        >
-          Au service de la <span className="font-medium text-accent">performance énergétique</span> de vos bâtiments
-        </Reveal>
-        <Reveal delay={0.1} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
+        />
+        <Reveal delay={1.2} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
           <p>
             Bureau d&apos;ingénierie indépendant à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
@@ -59,7 +60,7 @@ export function HeroDark() {
             consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
         </Reveal>
-        <Reveal delay={0.14} className="mt-8 max-w-xs">
+        <Reveal delay={1.8} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />
           <ArrowLink href="/contact">Demander un devis gratuit</ArrowLink>
         </Reveal>
@@ -68,8 +69,8 @@ export function HeroDark() {
       <div className="relative flex justify-center px-6 pb-0">
         <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:mt-0 lg:absolute lg:-bottom-1 lg:left-1/2 lg:-translate-x-1/2">
           <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
-          <span className="relative block h-12 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
-            <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
+          <span className="relative block h-12 w-px bg-nera-cream/25" aria-hidden>
+            <span className="absolute inset-x-0 bottom-0 h-1/4 bg-accent animate-scroll-down" />
           </span>
         </a>
       </div>
