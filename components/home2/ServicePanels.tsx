@@ -46,7 +46,7 @@ const panels = [
 export function ServicePanels() {
   return (
     <section id="prestations" className="relative bg-nera-navy bg-blueprint py-20 text-nera-cream lg:py-28">
-      <div className="px-6 md:px-10 lg:px-[120px]">
+      <div className="px-5 md:px-8 lg:px-12">
         <Reveal className="flex flex-wrap items-end justify-between gap-6 border-b border-nera-cream/15 pb-8">
           <h2 className="font-display text-[1.75rem] font-light leading-[1.15] text-nera-cream md:text-[2.5rem]">
             Sept prestations, <span className="text-accent">quatre familles</span>, un interlocuteur
@@ -54,22 +54,22 @@ export function ServicePanels() {
           <Ruler className="w-48 text-nera-cream" ticks={30} />
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {panels.map((p, i) => (
             <Reveal key={p.href} delay={i * 0.08} className={p.offset}>
-              <article className="group relative flex min-h-[520px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[600px]">
+              <article className="group relative flex min-h-[560px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[680px]">
                 <Image
                   src={p.img}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover opacity-60 transition-all duration-500 ease-out-quart group-hover:scale-105 group-hover:opacity-80"
+                  className="object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10" aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10 transition-opacity duration-700 group-hover:opacity-60" aria-hidden />
                 <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/40 transition-colors duration-base group-hover:text-accent">
                   {p.n}
                 </span>
-                <div className="relative p-7">
+                <div className="relative p-8">
                   <h3 className="font-display text-[1.375rem] font-medium leading-[1.25] text-nera-cream md:text-[1.5rem]">{p.title}</h3>
                   <p className="mt-4 text-body-sm font-light leading-[1.7] text-nera-cream/80">{p.text}</p>
                   <ArrowLink href={p.href} className="mt-6 min-w-0 w-full">
