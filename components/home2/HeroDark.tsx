@@ -50,17 +50,13 @@ export function HeroDark() {
         </Reveal>
         <Reveal delay={0.1} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
           <p>
-            NERA Ingénieurs Conseils est un bureau d&apos;ingénierie indépendant spécialisé en énergétique, physique du
-            bâtiment et CVC (chauffage, ventilation et climatisation), basé à Genève et actif dans toute la Suisse romande.
+            Bureau d&apos;ingénierie indépendant à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
+            bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
+            subventions et suivi de rénovation.
           </p>
           <p>
-            Nous accompagnons les particuliers et copropriétés, les régies, fondations et collectivités, ainsi que les
-            architectes et entreprises générales à chaque étape de leurs projets : diagnostic, conception, autorisations,
-            subventions et suivi.
-          </p>
-          <p>
-            Notre objectif : réduire les consommations, valoriser le patrimoine immobilier et sécuriser les démarches
-            techniques et administratives, sans compromis sur le confort.
+            Particuliers, copropriétés, régies, collectivités, architectes et entreprises générales : nous réduisons vos
+            consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
         </Reveal>
         <Reveal delay={0.14} className="mt-8 max-w-xs">
