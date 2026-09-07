@@ -81,7 +81,7 @@ export function HeaderDark() {
           <div className="ml-auto hidden lg:flex lg:w-[220px] lg:justify-end">
             <Link
               href={contactCta.href}
-              className="inline-flex h-11 items-center rounded-sm bg-accent px-6 text-[15px] font-medium text-white shadow-[0_2px_16px_rgba(10,36,64,0.35)] transition-colors duration-base hover:bg-accent-deep"
+              className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white"
             >
               {contactCta.label}
             </Link>
