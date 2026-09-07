@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { QuoteProvider } from "@/components/quote/QuoteModal";
 
 const clash = localFont({
   src: [
@@ -47,7 +48,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr-CH" className={`${clash.variable} ${satoshi.variable} h-full`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <QuoteProvider>{children}</QuoteProvider>
+      </body>
     </html>
   );
 }

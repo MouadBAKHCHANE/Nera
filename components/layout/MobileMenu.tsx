@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
+import { useQuote } from "@/components/quote/QuoteModal";
+import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 
 export function MobileMenu({
   open,
@@ -15,6 +17,7 @@ export function MobileMenu({
   /** true : menu plein écran à toutes les tailles (variante hestera, burger seul). */
   allSizes?: boolean;
 }) {
+  const { open: openQuote } = useQuote();
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {
@@ -61,13 +64,16 @@ export function MobileMenu({
         </ul>
 
         <div className="mt-8 flex flex-col gap-3">
-          <Link
-            href={contactCta.href}
-            onClick={onClose}
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              openQuote();
+            }}
             className="inline-flex h-12 items-center justify-center rounded-sm bg-nera-navy px-6 text-[15px] font-medium text-nera-cream"
           >
             {contactCta.label}
-          </Link>
+          </button>
           <a
             href={company.phoneHref}
             className="inline-flex h-12 items-center justify-center rounded-sm border border-nera-navy px-6 text-[15px] font-medium text-nera-navy"
@@ -76,9 +82,14 @@ export function MobileMenu({
           </a>
         </div>
 
-        <p className="mt-8 text-body-sm text-mute">
-          {company.street}, {company.zip} {company.city}
-        </p>
+        <div className="mt-8 flex items-center justify-between gap-4">
+          <p className="text-body-sm text-mute">
+            {company.street}, {company.zip} {company.city}
+          </p>
+          <a href={company.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-hairline text-nera-navy transition-colors hover:border-accent hover:text-accent-deep">
+            <LinkedInIcon />
+          </a>
+        </div>
       </nav>
     </div>
   );

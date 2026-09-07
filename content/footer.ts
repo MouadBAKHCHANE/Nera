@@ -13,11 +13,10 @@ export const footerPrestations = [
   { label: "Rénovation énergétique globale", href: "/prestations/renovation-energetique" },
 ];
 
-export const footerBureau = [
+export const footerBureau: { label: string; href: string; external?: boolean }[] = [
   { label: "À propos", href: "/bureau" },
   { label: "Nos références", href: "/references" },
   { label: "Contact", href: "/contact" },
-  { label: "LinkedIn", href: company.linkedin, external: true },
 ];
 
 export const footerLegal = [

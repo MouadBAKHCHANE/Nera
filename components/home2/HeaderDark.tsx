@@ -10,6 +10,7 @@ import { navigation as baseNavigation, contactCta } from "@/content/navigation";
 const navigation = baseNavigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
+import { QuoteButton } from "@/components/quote/QuoteModal";
 
 /**
  * Header Home 2 : transparent sur le héro, marine opaque au scroll.
@@ -99,12 +100,9 @@ export function HeaderDark() {
           </nav>
 
           <div className={`ml-auto hidden lg:w-[220px] lg:justify-end ${showNav ? "lg:flex" : ""}`}>
-            <Link
-              href={contactCta.href}
-              className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white"
-            >
+            <QuoteButton className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white">
               {contactCta.label}
-            </Link>
+            </QuoteButton>
           </div>
 
           <div className="ml-auto flex items-center gap-1 text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] lg:gap-3">

@@ -7,6 +7,8 @@ import { ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { mapsHref } from "@/content/footer";
+import { useQuote } from "@/components/quote/QuoteModal";
+import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 
 const items: NavItem[] = navigation.map((n) => (n.href === "/" ? { ...n, href: "/home-2" } : n));
 
@@ -19,6 +21,7 @@ const items: NavItem[] = navigation.map((n) => (n.href === "/" ? { ...n, href: "
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);
+  const { open: openQuote } = useQuote();
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
@@ -119,13 +122,16 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
           className={`transition-all duration-500 ease-out-quart lg:order-3 lg:justify-self-end ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
           style={{ transitionDelay: open ? "420ms" : "0ms" }}
         >
-          <Link
-            href="/contact"
-            onClick={onClose}
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              openQuote();
+            }}
             className="inline-flex h-12 items-center rounded-sm bg-accent px-8 text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep"
           >
-            Nous contacter
-          </Link>
+            Devis gratuit
+          </button>
         </div>
 
         <div
@@ -149,6 +155,15 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
               <a href={`mailto:${company.email}`} className="transition-colors hover:text-accent">{company.email}</a>
             </li>
           </ul>
+          <a
+            href={company.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="mt-5 inline-flex size-11 items-center justify-center border border-nera-cream/25 text-nera-cream transition-colors hover:border-accent hover:text-accent"
+          >
+            <LinkedInIcon />
+          </a>
         </div>
       </div>
     </div>

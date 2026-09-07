@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
+import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 
 const link = "text-body-sm text-nera-ink transition-colors hover:text-accent-deep";
 const head = "text-eyebrow font-medium uppercase text-mute";
@@ -40,6 +41,15 @@ export function Footer() {
               {company.email}
             </a>
           </address>
+          <a
+            href={company.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="mt-6 inline-flex size-11 items-center justify-center rounded-sm border border-hairline text-nera-navy transition-colors hover:border-accent hover:text-accent-deep"
+          >
+            <LinkedInIcon />
+          </a>
         </div>
 
         <div>

@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
+import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 
 const link = "text-body-sm font-light text-nera-cream/80 transition-colors hover:text-accent";
 const head = "text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream";
@@ -39,6 +40,15 @@ export function FooterDark() {
               {company.email}
             </a>
           </address>
+          <a
+            href={company.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="mt-6 inline-flex size-11 items-center justify-center border border-nera-cream/20 text-nera-cream transition-colors hover:border-accent hover:text-accent"
+          >
+            <LinkedInIcon />
+          </a>
         </div>
 
         <div>

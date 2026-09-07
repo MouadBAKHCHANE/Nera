@@ -7,6 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MobileMenu } from "./MobileMenu";
+import { QuoteButton } from "@/components/quote/QuoteModal";
 
 /**
  * Header en trois cellules séparées par des filets verticaux (direction For Future home-b) :
@@ -70,12 +71,9 @@ export function Header() {
           </nav>
 
           <div className="ml-auto hidden items-center px-10 lg:flex lg:w-[280px] lg:justify-end lg:border-l lg:border-hairline">
-            <Link
-              href={contactCta.href}
-              className="inline-flex h-12 items-center rounded-sm border border-nera-navy px-6 text-[15px] font-medium text-nera-navy transition-colors duration-base hover:bg-nera-navy hover:text-nera-cream"
-            >
+            <QuoteButton className="inline-flex h-12 items-center rounded-sm border border-nera-navy px-6 text-[15px] font-medium text-nera-navy transition-colors duration-base hover:bg-nera-navy hover:text-nera-cream">
               {contactCta.label}
-            </Link>
+            </QuoteButton>
           </div>
 
           {/* Burger en SVG inline : jamais des barres CSS (bug iPhone constaté). */}
