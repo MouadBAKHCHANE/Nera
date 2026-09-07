@@ -40,15 +40,6 @@ export function FooterDark() {
               {company.email}
             </a>
           </address>
-          <a
-            href={company.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="mt-6 inline-flex size-11 items-center justify-center border border-nera-cream/20 text-nera-cream transition-colors hover:border-accent hover:text-accent"
-          >
-            <LinkedInIcon />
-          </a>
         </div>
 
         <div>
@@ -77,6 +68,15 @@ export function FooterDark() {
               ),
             )}
           </ul>
+          <a
+            href={company.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="mt-5 inline-flex size-11 items-center justify-center border border-nera-cream/20 text-nera-cream transition-colors hover:border-accent hover:text-accent"
+          >
+            <LinkedInIcon />
+          </a>
         </div>
 
       </div>

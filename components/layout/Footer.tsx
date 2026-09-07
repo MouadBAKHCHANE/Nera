@@ -41,15 +41,6 @@ export function Footer() {
               {company.email}
             </a>
           </address>
-          <a
-            href={company.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="mt-6 inline-flex size-11 items-center justify-center rounded-sm border border-hairline text-nera-navy transition-colors hover:border-accent hover:text-accent-deep"
-          >
-            <LinkedInIcon />
-          </a>
         </div>
 
         <div>
@@ -78,6 +69,15 @@ export function Footer() {
               ),
             )}
           </ul>
+          <a
+            href={company.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="mt-5 inline-flex size-11 items-center justify-center rounded-sm border border-hairline text-nera-navy transition-colors hover:border-accent hover:text-accent-deep"
+          >
+            <LinkedInIcon />
+          </a>
         </div>
 
       </Container>
