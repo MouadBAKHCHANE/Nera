@@ -61,16 +61,16 @@ export function CookieBanner() {
   if (!open) return null;
 
   const outline =
-    "inline-flex h-10 items-center justify-center rounded-sm border border-nera-navy px-4 text-[14px] font-medium text-nera-navy transition-colors duration-base hover:bg-nera-navy-soft";
+    "inline-flex h-10 flex-1 items-center justify-center whitespace-nowrap rounded-sm border border-nera-navy px-2 text-[13px] font-medium text-nera-navy sm:flex-none sm:px-4 sm:text-[14px] transition-colors duration-base hover:bg-nera-navy-soft";
   const filled =
-    "inline-flex h-10 items-center justify-center rounded-sm bg-nera-navy px-4 text-[14px] font-medium text-nera-cream transition-colors duration-base hover:bg-nera-navy-deep";
+    "inline-flex h-10 flex-1 items-center justify-center whitespace-nowrap rounded-sm bg-nera-navy px-2 text-[13px] font-medium text-nera-cream sm:flex-none sm:px-4 sm:text-[14px] transition-colors duration-base hover:bg-nera-navy-deep";
 
   return (
     <div
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed bottom-4 left-4 right-4 z-[90] max-w-[460px] rounded-md border border-hairline bg-canvas-alt p-5 shadow-[0_20px_60px_rgba(10,36,64,0.25)] sm:left-auto sm:right-5 sm:bottom-5 sm:p-6"
+      className="fixed bottom-4 left-4 right-4 z-[90] max-w-[460px] rounded-md border border-hairline bg-canvas-alt p-4 shadow-[0_20px_60px_rgba(10,36,64,0.25)] sm:left-auto sm:right-5 sm:bottom-5 sm:p-6"
     >
       <div className="flex items-start gap-2">
         {custom && (
@@ -90,12 +90,12 @@ export function CookieBanner() {
 
       {!custom ? (
         <>
-          <p className="mt-3 text-body-sm leading-[1.55] text-body">
+          <p className="mt-2.5 text-[13px] leading-[1.5] text-body sm:text-body-sm">
             Nous utilisons des cookies pour améliorer votre expérience de navigation, diffuser des publicités ou des
             contenus personnalisés et analyser notre trafic. En cliquant sur « Tout accepter », vous consentez à notre
             utilisation des cookies.
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-4 flex gap-2">
             <button type="button" onClick={() => setCustom(true)} className={outline}>
               Personnaliser
             </button>
