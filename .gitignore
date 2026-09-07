@@ -44,3 +44,7 @@ next-env.d.ts
 /assets-client/
 /captures/
 /seo/raw/
+
+# Outils Claude Code (skills, agents, réglages locaux)
+/.claude/
+!.env.example

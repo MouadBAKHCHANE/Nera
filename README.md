@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NERA Ingénieurs Conseils · site vitrine
 
-## Getting Started
+Site vitrine de [NERA Ingénieurs Conseils](https://www.nera-ing.ch), bureau d'ingénieurs en énergie, physique du bâtiment et CVC basé à Genève, actif en Suisse romande.
 
-First, run the development server:
+Next.js 16 (App Router), Tailwind CSS 4, Sanity (actualités), Resend (formulaires), Vercel.
+
+## Démarrer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # puis renseigner les clés
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Routes utiles en développement :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Contenu |
+|---|---|
+| `/` | Accueil, variante claire (direction For Future) |
+| `/home-2` | Accueil, variante sombre (géométrie NERA), non indexée |
+| `/devis` | Formulaire de devis gratuit hors pop-up |
+| `/api/devis` | Réception du formulaire de devis (POST multipart) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+app/                 pages (App Router), route API devis, layout avec polices locales
+components/
+  layout/            header, menu mobile, footer de l'accueil principal
+  home2/             composants de la variante sombre (header, héro, prestations, …)
+  quote/             pop-up et formulaire « Devis gratuit » en 4 étapes
+  sections/, ui/     sections de l'accueil principal et primitives (Button, Reveal, …)
+content/             données typées : prestations, navigation, footer, formulaire devis
+public/fonts         Clash Display et Satoshi (woff2, auto-hébergées)
+public/logos         logos SVG NERA (déclinaisons couleur)
+public/img           visuels du client, optimisés
+DESIGN.md            système de design (palette, typographie, règles)
+PRODUCT.md           contexte produit et contraintes
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Variables d'environnement
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Rôle |
+|---|---|
+| `RESEND_API_KEY` | envoi des e-mails du formulaire de devis. Sans clé, la demande est journalisée (développement). |
+| `CONTACT_TO` | destinataire des demandes (défaut : info@nera-ing.ch) |
+| `CONTACT_FROM` | expéditeur vérifié sur le domaine nera-ing.ch |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN` | actualités (à venir) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Règles de contenu
 
-## Deploy on Vercel
+- Palette et polices uniquement via les tokens de `app/globals.css`, jamais de couleur en dur.
+- Les prestations, coordonnées et menus vivent dans `content/` et sont consommés partout.
+- Aucun chiffre, certification ou logo partenaire qui ne soit fourni par le client.
+- Chaque composant est vérifié à 1440×900 et 390×844 : zéro erreur console, pas de débordement horizontal.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Déploiement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel, déploiement automatique à chaque push sur `main`. Domaine nera-ing.ch (DNS chez Infomaniak, enregistrements fournis par Vercel).
+
+© NERA Ingénieurs Conseils Sàrl. Développement : MouaDev.
