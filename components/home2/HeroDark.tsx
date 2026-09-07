@@ -28,21 +28,11 @@ export function HeroDark() {
       <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-nera-navy/90 to-transparent" aria-hidden />
 
       {/* Motif logomark : grand, au trait, coupé par le bord droit */}
-      <div className="pointer-events-none absolute right-[4vw] top-[50%] hidden w-[46vw] -translate-y-1/2 text-nera-cream/20 lg:block">
+      <div className="pointer-events-none absolute -right-[8vw] top-1/2 hidden w-[46vw] -translate-y-1/2 text-nera-cream/20 lg:block" aria-hidden>
         <div className="relative">
           <LogomarkOutline className="w-full" strokeWidth={1} />
           <DiamondOutline className="absolute left-1/2 top-[43%] w-[58%] -translate-x-1/2 -translate-y-1/2 animate-spin-slow text-accent/50" />
           <DiamondOutline className="absolute left-1/2 top-[43%] w-[74%] -translate-x-1/2 -translate-y-1/2 animate-spin-slower text-nera-cream/15" />
-          {/* « Nos prestations » dans le rectangle de base du logomark */}
-          <a
-            href="#prestations"
-            className="group pointer-events-auto absolute left-[11.3%] top-[80.8%] flex h-[18.9%] w-[77.3%] flex-col items-center justify-center gap-2 text-nera-cream transition-colors hover:text-accent"
-          >
-            <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
-            <span className="relative block h-8 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
-              <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
-            </span>
-          </a>
         </div>
       </div>
 
@@ -75,8 +65,8 @@ export function HeroDark() {
         </Reveal>
       </div>
 
-      <div className="relative flex justify-center px-6 pb-1 lg:hidden">
-        <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:mt-0">
+      <div className="relative flex justify-center px-6 pb-2">
+        <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:mt-0 lg:absolute lg:bottom-2 lg:left-1/2 lg:-translate-x-1/2">
           <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
           <span className="relative block h-12 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
             <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
