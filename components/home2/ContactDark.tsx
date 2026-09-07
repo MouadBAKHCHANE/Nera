@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/content/prestations";
 import { prestations } from "@/content/prestations";
+import { mapsHref } from "@/content/footer";
 
 const field =
   "w-full border-0 border-b border-nera-cream/40 bg-transparent px-0 py-3 text-body-md font-light text-nera-cream placeholder:text-nera-cream/60 focus:border-accent focus:outline-none";
@@ -14,9 +15,9 @@ const field =
  */
 export function ContactDark() {
   return (
-    <section id="contact" className="bg-nera-navy-deep bg-blueprint py-24 text-nera-cream lg:py-[140px]">
+    <section id="contact" className="bg-nera-navy-deep bg-blueprint py-20 text-nera-cream lg:py-[100px]">
       <div className="px-6 md:px-10 lg:px-[120px]">
-        <div className="grid gap-12 border-b border-nera-cream/15 pb-16 lg:grid-cols-2">
+        <div className="grid gap-10 border-b border-nera-cream/15 pb-12 lg:grid-cols-2">
           <Reveal>
             <p className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"><span className="h-px w-10 bg-accent" aria-hidden />Contact</p>
             <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">Parlons de votre bâtiment avec un ingénieur</h2>
@@ -26,7 +27,9 @@ export function ContactDark() {
             <ul className="mt-6 space-y-3 text-body-md font-light">
               <li className="flex items-center gap-3">
                 <MapPin className="size-4 text-accent" strokeWidth={1.5} />
-                {company.street}, {company.zip} {company.city}
+                <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-accent">
+                  {company.street}, {company.zip} {company.city}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="size-4 text-accent" strokeWidth={1.5} />
@@ -40,19 +43,15 @@ export function ContactDark() {
           </Reveal>
         </div>
 
-        <Reveal className="pt-16">
+        <Reveal className="pt-12">
           <h3 className="text-[15px] font-medium uppercase tracking-[0.2em] text-nera-cream">
             Entrez en contact avec NERA
           </h3>
-          <form action="#" method="post" className="mt-10 grid gap-x-16 gap-y-8 lg:grid-cols-2">
-            <div className="grid gap-8">
+          <form action="#" method="post" className="mt-8 grid gap-x-16 gap-y-6 lg:grid-cols-2">
+            <div className="grid content-start gap-6">
               <label className="block">
-                <span className="sr-only">Prénom</span>
-                <input name="prenom" type="text" placeholder="Prénom*" required autoComplete="given-name" className={field} />
-              </label>
-              <label className="block">
-                <span className="sr-only">Nom</span>
-                <input name="nom" type="text" placeholder="Nom*" required autoComplete="family-name" className={field} />
+                <span className="sr-only">Nom complet</span>
+                <input name="nom" type="text" placeholder="Nom complet*" required autoComplete="name" className={field} />
               </label>
               <label className="block">
                 <span className="sr-only">Adresse e-mail</span>
@@ -67,11 +66,11 @@ export function ContactDark() {
                 <input name="telephone" type="tel" placeholder="Téléphone" autoComplete="tel" className={field} />
               </label>
             </div>
-            <div className="grid content-start gap-8">
+            <div className="grid content-start gap-6">
               <label className="block">
-                <span className="sr-only">Concerne</span>
-                <select name="concerne" defaultValue="" className={`${field} appearance-none`}>
-                  <option value="" disabled className="text-nera-ink">Concerne*</option>
+                <span className="sr-only">Sujet</span>
+                <select name="sujet" defaultValue="" className={`${field} appearance-none`}>
+                  <option value="" disabled className="text-nera-ink">Sujet*</option>
                   {prestations.map((p) => (
                     <option key={p.slug} value={p.slug} className="text-nera-ink">{p.title}</option>
                   ))}
@@ -80,7 +79,7 @@ export function ContactDark() {
               </label>
               <label className="block">
                 <span className="sr-only">Message</span>
-                <textarea name="message" rows={7} placeholder="Message*" required className={`${field} resize-none`} />
+                <textarea name="message" rows={5} placeholder="Message*" required className={`${field} resize-none`} />
               </label>
               {/* Honeypot anti-spam */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
