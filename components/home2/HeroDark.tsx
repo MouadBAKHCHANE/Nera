@@ -54,7 +54,7 @@ export function HeroDark() {
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
             subventions et suivi de rénovation.
           </p>
-          <p>
+          <p className="hidden lg:block">
             Particuliers, copropriétés, régies, collectivités, architectes et entreprises générales : nous réduisons vos
             consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
