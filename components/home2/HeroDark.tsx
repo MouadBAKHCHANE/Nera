@@ -49,7 +49,7 @@ export function HeroDark() {
           delay={0.2}
           className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
         />
-        <Reveal delay={1.2} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
+        <Reveal delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md">
           <p>
             Bureau d&apos;ingénierie indépendant à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
@@ -60,7 +60,7 @@ export function HeroDark() {
             consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
         </Reveal>
-        <Reveal delay={1.8} className="mt-8 max-w-xs">
+        <Reveal delay={2.4} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />
           <ArrowLink href="/contact">Demander un devis gratuit</ArrowLink>
         </Reveal>

@@ -15,7 +15,7 @@ export function SplitReveal({
   as: Tag = "h1",
   className = "",
   delay = 0,
-  stagger = 0.02,
+  stagger = 0.035,
 }: {
   text: string;
   accent?: string;
@@ -55,7 +55,7 @@ export function SplitReveal({
                   className={`inline-block will-change-transform ${inAccent ? "font-medium text-accent" : ""}`}
                   style={{
                     transform: on || reduce ? "translateY(0)" : "translateY(150%)",
-                    transition: reduce ? "none" : "transform 1s cubic-bezier(0.5, 0, 0, 1)",
+                    transition: reduce ? "none" : "transform 1.4s cubic-bezier(0.5, 0, 0, 1)",
                     transitionDelay: `${d}s`,
                   }}
                 >

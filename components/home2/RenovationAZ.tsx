@@ -23,8 +23,8 @@ export function RenovationAZ() {
             />
           </div>
           <div className="absolute -bottom-6 right-2 flex size-28 items-center justify-center text-accent lg:size-36">
-            <DiamondOutline className="absolute inset-0 animate-spin-slow" strokeWidth={1} />
-            <span className="relative text-center text-[11px] font-semibold uppercase leading-[1.4] tracking-[0.2em] text-nera-navy">
+            <DiamondOutline className="absolute inset-0 animate-spin-slow drop-shadow-[0_1px_3px_rgba(10,36,64,0.7)]" strokeWidth={1} />
+            <span className="relative text-center text-[11px] font-semibold uppercase leading-[1.4] tracking-[0.2em] text-accent [text-shadow:0_1px_2px_rgba(10,36,64,0.9),0_0_12px_rgba(10,36,64,0.7)]">
               De A
               <br />à Z
             </span>

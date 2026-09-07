@@ -7,17 +7,17 @@ type Effect = "fade" | "fade-right" | "fade-up" | "slide-up";
 
 /**
  * Reveal au scroll, calé sur hestera.ch (AOS) :
- * - `fade` (défaut) : opacité seule, 1 s, easing « ease ».
+ * - `fade` (défaut) : opacité seule, 1,4 s, easing « ease ».
  * - `fade-right` : arrive de la gauche (−100 px), 1 s.
  * - `fade-up` : arrive du bas (+100 px), 1 s.
  * - `slide-up` : cartes, 0,6 s, cubic-bezier(0,0,0,1) (panneaux prestations).
  * `delay` en secondes, `duration` en millisecondes.
  */
 const effects: Record<Effect, { from: Record<string, number>; duration: number; ease: [number, number, number, number] }> = {
-  fade: { from: { opacity: 0 }, duration: 1000, ease: [0.25, 0.1, 0.25, 1] },
-  "fade-right": { from: { opacity: 0, x: -100 }, duration: 1000, ease: [0.25, 0.1, 0.25, 1] },
-  "fade-up": { from: { opacity: 0, y: 100 }, duration: 1000, ease: [0.25, 0.1, 0.25, 1] },
-  "slide-up": { from: { opacity: 0, y: 80 }, duration: 600, ease: [0, 0, 0, 1] },
+  fade: { from: { opacity: 0 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
+  "fade-right": { from: { opacity: 0, x: -100 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
+  "fade-up": { from: { opacity: 0, y: 100 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
+  "slide-up": { from: { opacity: 0, y: 80 }, duration: 900, ease: [0, 0, 0, 1] },
 };
 
 export function Reveal({

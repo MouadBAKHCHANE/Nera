@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote/QuoteModal";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 
 const clash = localFont({
   src: [
@@ -49,7 +50,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr-CH" className={`${clash.variable} ${satoshi.variable} h-full`}>
       <body className="min-h-full flex flex-col">
-        <QuoteProvider>{children}</QuoteProvider>
+        <QuoteProvider>
+          {children}
+          <CookieBanner />
+        </QuoteProvider>
       </body>
     </html>
   );
