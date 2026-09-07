@@ -52,8 +52,8 @@ export function Mission() {
           </Reveal>
           <Reveal delay={0.08} className="relative min-h-[320px] overflow-hidden rounded-md bg-nera-navy-soft">
             <Image
-              src="/img/mission-villa-blanche.jpg"
-              alt="Villa contemporaine à l'enveloppe blanche"
+              src="/img/bureau-batiment-clair-moderne.jpg"
+              alt="Immeuble contemporain à la façade claire"
               fill
               sizes="(min-width: 1024px) 58vw, 100vw"
               className="object-cover"

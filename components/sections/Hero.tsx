@@ -5,8 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Héro clair et centré (direction For Future home-b) : H1 large, paragraphe court,
- * deux boutons, puis photo pleine largeur. La photo est un placeholder Unsplash
- * en attendant les photos du client.
+ * deux boutons, puis photo pleine largeur. Photo fournie par le client (Assets/Visuels).
  */
 export function Hero() {
   return (
@@ -34,8 +33,8 @@ export function Hero() {
 
       <div className="relative h-[56vw] max-h-[720px] min-h-[320px] w-full overflow-hidden bg-nera-navy">
         <Image
-          src="/img/hero-immeuble-residentiel.jpg"
-          alt="Façade d'un immeuble résidentiel"
+          src="/img/hero-immeuble-geneve-soleil.jpg"
+          alt="Immeuble résidentiel à Genève au soleil"
           fill
           priority
           sizes="100vw"

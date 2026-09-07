@@ -8,13 +8,13 @@ import { company } from "@/content/prestations";
  * Héro plein écran, ton sombre et cinématographique, mais construit sur la
  * géométrie NERA : grille de plan en fond, logomark au trait en grand motif,
  * anneaux de losanges en rotation lente, règle graduée sous le titre.
- * Photo : placeholder Unsplash en attendant les visuels du client.
+ * Photo : visuel fourni par le client (Assets/Visuels).
  */
 export function HeroDark() {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-nera-navy text-nera-cream">
       <Image
-        src="/img/maison-contemporaine-soir.jpg"
+        src="/img/hero-immeuble-geneve-soleil.jpg"
         alt=""
         fill
         priority

@@ -16,8 +16,8 @@ export function AboutDark() {
           <div className="absolute inset-y-6 left-6 right-0 border border-accent/60" aria-hidden />
           <div className="absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
             <Image
-              src="/img/maison-contemporaine-soir.jpg"
-              alt="Maison contemporaine au crépuscule"
+              src="/img/bureau-batiment-clair-moderne.jpg"
+              alt="Façade d'un immeuble contemporain à Genève"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"

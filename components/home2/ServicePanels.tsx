@@ -14,7 +14,7 @@ const panels = [
     title: "Audits et modélisation",
     text: "Audits CECB et CECB Plus, modélisation thermique Lesosai : un diagnostic clair de l'enveloppe et des besoins, avec des scénarios chiffrés.",
     href: "/prestations/audit-cecb",
-    img: "/img/hero-immeuble-residentiel.jpg",
+    img: "/img/prestation-diagnostic-energetique.jpg",
     offset: "lg:mt-0",
   },
   {
@@ -22,7 +22,7 @@ const panels = [
     title: "Installations CVC",
     text: "Études et conception des installations de chauffage, ventilation et climatisation, énergies renouvelables, soumissions et suivi.",
     href: "/prestations/installations-cvc",
-    img: "/img/prestation-thermostat.jpg",
+    img: "/img/prestation-pompe-a-chaleur.jpg",
     offset: "lg:mt-16",
   },
   {
@@ -30,7 +30,7 @@ const panels = [
     title: "Rénovation et labels",
     text: "Conception et suivi de rénovations énergétiques, accompagnement Minergie, HPE et THPE jusqu'à la certification.",
     href: "/prestations/renovation-energetique",
-    img: "/img/mission-villa-blanche.jpg",
+    img: "/img/prestation-renovation-batiment.jpg",
     offset: "lg:mt-32",
   },
   {
@@ -38,7 +38,7 @@ const panels = [
     title: "Autorisations et subventions",
     text: "Dépôt du volet énergétique des autorisations de construire, montage et suivi des demandes Programme Bâtiments et communales.",
     href: "/prestations/subventions",
-    img: "/img/process-panneaux-solaires.jpg",
+    img: "/img/prestation-plans-autorisation.jpg",
     offset: "lg:mt-48",
   },
 ];
