@@ -1,19 +1,16 @@
-import { prestations } from "./prestations";
+import { footerPrestations, footerBureau } from "./footer";
 
+export type NavChild = { label: string; href: string; external?: boolean };
 export type NavItem = {
   label: string;
   href: string;
-  children?: { label: string; href: string }[];
+  children?: NavChild[];
 };
 
+/** Menu principal, identique au pied de page : Prestations, Le bureau (déroulants), Actualités. */
 export const navigation: NavItem[] = [
-  { label: "Le bureau", href: "/bureau" },
-  {
-    label: "Prestations",
-    href: "/prestations",
-    children: prestations.map((p) => ({ label: p.title, href: `/prestations/${p.slug}` })),
-  },
-  { label: "Références", href: "/references" },
+  { label: "Prestations", href: "/prestations", children: footerPrestations },
+  { label: "Le bureau", href: "/bureau", children: footerBureau },
   { label: "Actualités", href: "/actualites" },
 ];
 

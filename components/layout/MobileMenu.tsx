@@ -43,9 +43,15 @@ export function MobileMenu({
                 <ul className="mb-3 space-y-1 pl-1">
                   {item.children.map((c) => (
                     <li key={c.href}>
-                      <Link href={c.href} onClick={onClose} className="block py-2 text-body-sm text-body">
-                        {c.label}
-                      </Link>
+                      {c.external ? (
+                        <a href={c.href} target="_blank" rel="noopener noreferrer" className="block py-2 text-body-sm text-body">
+                          {c.label}
+                        </a>
+                      ) : (
+                        <Link href={c.href} onClick={onClose} className="block py-2 text-body-sm text-body">
+                          {c.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

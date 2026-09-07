@@ -73,12 +73,15 @@ export function HeaderDark() {
                     <ul className="w-80 border border-nera-cream/15 bg-nera-navy-deep p-2">
                       {item.children.map((c) => (
                         <li key={c.href}>
-                          <Link
-                            href={c.href}
-                            className="block rounded-sm px-3 py-2.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:bg-nera-navy hover:text-nera-cream"
-                          >
-                            {c.label}
-                          </Link>
+                          {c.external ? (
+                            <a href={c.href} target="_blank" rel="noopener noreferrer" className="block rounded-sm px-3 py-2.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:bg-nera-navy hover:text-nera-cream">
+                              {c.label}
+                            </a>
+                          ) : (
+                            <Link href={c.href} className="block rounded-sm px-3 py-2.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:bg-nera-navy hover:text-nera-cream">
+                              {c.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>

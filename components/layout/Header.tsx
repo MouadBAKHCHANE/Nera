@@ -47,12 +47,15 @@ export function Header() {
                     <ul className="w-80 border border-hairline bg-canvas-alt p-2">
                       {item.children.map((c) => (
                         <li key={c.href}>
-                          <Link
-                            href={c.href}
-                            className="block rounded-sm px-3 py-2.5 text-body-sm text-body transition-colors hover:bg-canvas hover:text-nera-navy"
-                          >
-                            {c.label}
-                          </Link>
+                          {c.external ? (
+                            <a href={c.href} target="_blank" rel="noopener noreferrer" className="block rounded-sm px-3 py-2.5 text-body-sm text-body transition-colors hover:bg-canvas hover:text-nera-navy">
+                              {c.label}
+                            </a>
+                          ) : (
+                            <Link href={c.href} className="block rounded-sm px-3 py-2.5 text-body-sm text-body transition-colors hover:bg-canvas hover:text-nera-navy">
+                              {c.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
