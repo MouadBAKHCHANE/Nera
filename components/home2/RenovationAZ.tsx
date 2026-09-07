@@ -23,6 +23,8 @@ export function RenovationAZ() {
             />
           </div>
           <div className="absolute -bottom-6 right-2 flex size-28 items-center justify-center text-accent lg:size-36">
+            {/* Fond marine en losange derrière le médaillon, pour la lisibilité sur la photo */}
+            <span className="absolute inset-[14%] rotate-45 bg-nera-navy-deep" aria-hidden />
             <DiamondOutline className="absolute inset-0 animate-spin-slow" strokeWidth={1} />
             <span className="text-center text-[11px] font-medium uppercase leading-[1.4] tracking-[0.2em]">
               De A

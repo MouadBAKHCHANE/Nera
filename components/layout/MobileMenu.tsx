@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { useQuote } from "@/components/quote/QuoteModal";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 export function MobileMenu({
   open,
@@ -82,13 +82,11 @@ export function MobileMenu({
           </a>
         </div>
 
-        <div className="mt-8 flex items-center justify-between gap-4">
+        <div className="mt-8 flex flex-col items-center gap-4 text-center">
           <p className="text-body-sm text-mute">
             {company.street}, {company.zip} {company.city}
           </p>
-          <a href={company.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-hairline text-nera-navy transition-colors hover:border-accent hover:text-accent-deep">
-            <LinkedInIcon />
-          </a>
+          <SocialLinks tone="dark" />
         </div>
       </nav>
     </div>

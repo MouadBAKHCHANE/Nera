@@ -8,7 +8,7 @@ import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { mapsHref } from "@/content/footer";
 import { useQuote } from "@/components/quote/QuoteModal";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 const items: NavItem[] = navigation;
 
@@ -155,15 +155,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
               <a href={`mailto:${company.email}`} className="transition-colors hover:text-accent">{company.email}</a>
             </li>
           </ul>
-          <a
-            href={company.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="mt-5 inline-flex size-11 items-center justify-center border border-nera-cream/25 text-nera-cream transition-colors hover:border-accent hover:text-accent"
-          >
-            <LinkedInIcon />
-          </a>
+          <SocialLinks tone="light" className="mt-5 justify-center lg:justify-end" />
         </div>
       </div>
     </div>
