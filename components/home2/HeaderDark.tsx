@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Mail, Phone } from "lucide-react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
@@ -24,8 +24,9 @@ export function HeaderDark() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const solid = scrolled || open;
-  /** Desktop, page défilée et menu fermé : header réduit au seul burger sur fond transparent. */
+  /** Desktop : menu centré et bouton visibles seulement en haut de page, menu fermé. */
+  const showNav = !scrolled && !open;
+  /** Desktop, page défilée : fond transparent, logo + icônes e-mail / téléphone + burger (direction hestera). */
   const collapsed = scrolled && !open;
   const link =
     "inline-flex items-center gap-1 px-4 py-2 text-[13px] font-medium uppercase tracking-[0.12em] text-nera-cream transition-colors hover:text-accent [text-shadow:0_1px_12px_rgba(10,36,64,0.6)]";
@@ -45,8 +46,7 @@ export function HeaderDark() {
           <Link
             href="/home-2"
             aria-label={company.shortName}
-            className={`shrink-0 transition-opacity duration-base lg:w-[220px] ${collapsed ? "lg:pointer-events-none lg:opacity-0" : ""}`}
-            tabIndex={collapsed ? -1 : undefined}
+            className="shrink-0 drop-shadow-[0_1px_10px_rgba(10,36,64,0.6)] lg:w-[220px]"
           >
             <Image
               src="/logos/nera-tagline-cream-green.svg"
@@ -60,7 +60,7 @@ export function HeaderDark() {
 
           <nav
             aria-label="Navigation principale"
-            className={`hidden flex-1 items-center justify-center ${collapsed ? "" : "lg:flex"}`}
+            className={`hidden flex-1 items-center justify-center ${showNav ? "lg:flex" : ""}`}
           >
             {navigation.map((item) =>
               item.children ? (
@@ -92,7 +92,7 @@ export function HeaderDark() {
             )}
           </nav>
 
-          <div className={`ml-auto hidden lg:w-[220px] lg:justify-end ${collapsed ? "" : "lg:flex"}`}>
+          <div className={`ml-auto hidden lg:w-[220px] lg:justify-end ${showNav ? "lg:flex" : ""}`}>
             <Link
               href={contactCta.href}
               className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white"
@@ -101,36 +101,47 @@ export function HeaderDark() {
             </Link>
           </div>
 
-          {/* Burger en SVG inline : tablette et mobile, et desktop une fois la page défilée. */}
-          <button
-            type="button"
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-            className={`ml-auto -mr-2 inline-flex size-11 items-center justify-center text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] transition-colors hover:text-accent ${
-              collapsed
-                ? "lg:mr-0 lg:size-12 lg:rounded-full lg:bg-nera-navy/90 lg:shadow-[0_2px_16px_rgba(10,36,64,0.35)] lg:drop-shadow-none"
-                : open
-                  ? ""
-                  : "lg:hidden"
-            }`}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-              {open ? (
-                <>
-                  <path d="M5 5l14 14" />
-                  <path d="M19 5L5 19" />
-                </>
-              ) : (
-                <>
-                  <path d="M3 6h18" />
-                  <path d="M3 12h18" />
-                  <path d="M3 18h18" />
-                </>
-              )}
-            </svg>
-          </button>
+          <div className="ml-auto flex items-center gap-1 text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] lg:gap-3">
+            {/* E-mail et téléphone : visibles au défilement (desktop) et dans le menu ouvert. */}
+            <a
+              href={`mailto:${company.email}`}
+              aria-label="Écrire à NERA"
+              className={`hidden size-11 items-center justify-center transition-colors hover:text-accent ${showNav ? "" : "lg:inline-flex"}`}
+            >
+              <Mail className="size-6" strokeWidth={1.5} />
+            </a>
+            <a
+              href={company.phoneHref}
+              aria-label="Appeler NERA"
+              className={`hidden size-11 items-center justify-center transition-colors hover:text-accent ${showNav ? "" : "lg:inline-flex"}`}
+            >
+              <Phone className="size-6" strokeWidth={1.5} />
+            </a>
+            {/* Burger en SVG inline : tablette et mobile, et desktop une fois la page défilée. */}
+            <button
+              type="button"
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen((v) => !v)}
+              className={`-mr-2 inline-flex size-11 items-center justify-center transition-colors hover:text-accent ${showNav ? "lg:hidden" : ""}`}
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                {open ? (
+                  <>
+                    <path d="M5 5l14 14" />
+                    <path d="M19 5L5 19" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M3 6h18" />
+                    <path d="M3 12h18" />
+                    <path d="M3 18h18" />
+                  </>
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
       <MenuOverlay open={open} onClose={() => setOpen(false)} />
