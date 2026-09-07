@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# NERA — travail
+/assets-client/
+/captures/
+/seo/raw/

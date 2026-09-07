@@ -1,3 +1,34 @@
+# nera-ing — instructions agent
+
+Site vitrine de NERA Ingénieurs Conseils (Genève). Lire dans l'ordre : `PRODUCT.md`, `DESIGN.md`, puis `../GUIDE-SITE-VITRINE-AVEC-CLAUDE.md` pour la méthode complète.
+
+## Règles non négociables
+
+- Français de Suisse romande partout (UI, code commenté, commits en anglais acceptés).
+- Palette et polices : uniquement les tokens de `app/globals.css`. Aucun hex en dur dans un composant.
+- Les 7 prestations et les coordonnées vivent dans `content/prestations.ts`. Ne jamais les dupliquer.
+- Aucun chiffre, avis, certification ou logo partenaire qui ne soit fourni par le client.
+- Périmètre : ~10 pages. Ne pas créer de page hors arborescence sans accord explicite.
+- Motion : Framer Motion seulement. Pas de GSAP, Lenis, Three.js sauf demande explicite.
+- Ne jamais `git push` sans accord explicite. Committer localement librement.
+- Vérifier chaque composant avec Chrome DevTools à 1440×900 et 390×844 avant de rendre la main : zéro erreur console, pas de débordement horizontal.
+
+## Stack
+
+Next.js 16 (App Router, TypeScript), Tailwind 4 (config CSS-first dans `globals.css`), Sanity (actualités uniquement), Vercel. Polices locales via `next/font/local`.
+
+## Assets
+
+Les sources client (logos SVG complets, polices, CDC, devis) sont dans le dossier parent `../Charte graphique/`. Seules les versions utilisées sont copiées dans `public/`.
+
+Logos disponibles dans `public/logos/` : `nera-horizontal-navy-green.svg` (header sur crème), `nera-horizontal-cream-green.svg` (footer sur marine), `nera-mark-green.svg` (favicon, icône), `nera-tagline-*.svg` (OG image, pied de page).
+
+## Skills installés
+
+- `.claude/skills/impeccable` : `/impeccable shape|craft|critique|audit|quieter|typeset|layout|polish`. Éviter `overdrive`, `delight`, `bolder`.
+- `.claude/skills/design-taste-frontend` (taste-skill) : dials VARIANCE 3, MOTION 3, DENSITY 4.
+- `~/.claude/skills/img2threejs` : optionnel, hors forfait.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
