@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 type Consent = { necessary: true; analytics: boolean; marketing: boolean; date: string };
 const KEY = "nera-cookie-consent";
@@ -71,9 +72,21 @@ export function CookieBanner() {
       aria-labelledby="cookie-title"
       className="fixed bottom-4 left-4 right-4 z-[90] max-w-[460px] rounded-md border border-hairline bg-canvas-alt p-5 shadow-[0_20px_60px_rgba(10,36,64,0.25)] sm:left-auto sm:right-5 sm:bottom-5 sm:p-6"
     >
-      <h2 id="cookie-title" className="font-display text-[1.125rem] font-semibold leading-tight text-nera-navy md:text-[1.25rem]">
-        Nous respectons votre vie privée.
-      </h2>
+      <div className="flex items-start gap-2">
+        {custom && (
+          <button
+            type="button"
+            onClick={() => setCustom(false)}
+            aria-label="Retour"
+            className="-ml-1 mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-sm text-nera-navy transition-colors hover:bg-nera-navy-soft"
+          >
+            <ArrowLeft className="size-4" strokeWidth={1.75} />
+          </button>
+        )}
+        <h2 id="cookie-title" className="font-display text-[1.125rem] font-semibold leading-tight text-nera-navy md:text-[1.25rem]">
+          {custom ? "Personnaliser mes cookies" : "Nous respectons votre vie privée."}
+        </h2>
+      </div>
 
       {!custom ? (
         <>
