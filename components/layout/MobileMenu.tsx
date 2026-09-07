@@ -5,7 +5,16 @@ import { useEffect } from "react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 
-export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function MobileMenu({
+  open,
+  onClose,
+  allSizes = false,
+}: {
+  open: boolean;
+  onClose: () => void;
+  /** true : menu plein écran à toutes les tailles (variante hestera, burger seul). */
+  allSizes?: boolean;
+}) {
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {
@@ -17,7 +26,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
     <div
       id="mobile-menu"
       hidden={!open}
-      className="fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto border-t border-hairline bg-canvas lg:hidden"
+      className={`fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto border-t border-hairline bg-canvas ${allSizes ? "" : "lg:hidden"}`}
     >
       <nav aria-label="Navigation mobile" className="px-6 py-6">
         <ul className="divide-y divide-hairline">

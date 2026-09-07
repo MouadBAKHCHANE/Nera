@@ -122,3 +122,38 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Home 2 : textures et animations propres à NERA (grille de plan, logomark).
+   --------------------------------------------------------------------------- */
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-nera-cream) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-nera-cream) 8%, transparent) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+@utility bg-blueprint-light {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-nera-navy) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-nera-navy) 7%, transparent) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Coin supérieur droit entaillé en losange : rappel du logomark */
+@utility clip-notch {
+  clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%);
+}
+
+@keyframes nera-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@utility animate-spin-slow {
+  animation: nera-spin 90s linear infinite;
+}
+
+@utility animate-spin-slower {
+  animation: nera-spin 160s linear infinite reverse;
+}
