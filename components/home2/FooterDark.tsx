@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { navigation } from "@/content/navigation";
 import { prestations, company } from "@/content/prestations";
 
@@ -22,6 +23,24 @@ export function FooterDark() {
           <p className="mt-6 max-w-sm text-body-sm font-light leading-[1.7] text-nera-cream/80">
             Bureau d&apos;ingénieurs conseils en énergie, physique du bâtiment et CVC. Genève et Suisse romande.
           </p>
+          <div className="mt-6 flex items-center gap-2 text-nera-cream">
+            <a
+              href={company.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="inline-flex size-11 items-center justify-center border border-nera-cream/20 transition-colors hover:border-accent hover:text-accent"
+            >
+              <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" /></svg>
+            </a>
+            <a
+              href={`mailto:${company.email}`}
+              aria-label="Écrire à NERA"
+              className="inline-flex size-11 items-center justify-center border border-nera-cream/20 transition-colors hover:border-accent hover:text-accent"
+            >
+              <Mail className="size-5" strokeWidth={1.5} />
+            </a>
+          </div>
         </div>
         <div>
           <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream">Prestations</h3>
