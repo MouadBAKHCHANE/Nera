@@ -163,7 +163,7 @@ Site B2B pour un bureau d'ingénieurs conseils genevois (énergie, physique du b
 
 Le nom NERA vient de l'idée d'équilibre. Le design le traduit par la symétrie, l'alignement et le calme, jamais par des effets.
 
-Références de direction : arkey.ch et hestera.ch (structure, rythme, retenue). On réplique la direction, jamais les fichiers.
+Références de direction : forfuture.webflow.io/homepage/home-b (structure de l'accueil : header en trois cellules, héro clair centré puis photo pleine largeur, liste de prestations sur fond sombre, mission centrée, processus numéroté), hestera.ch et arkey.ch (retenue suisse). On réplique la direction, jamais les fichiers.
 
 ## Palette
 
@@ -197,7 +197,7 @@ Ratio d'usage indicatif sur une page : 70 % crème/blanc, 20 % marine, 5 % vert,
 
 ## Profondeur et surfaces
 
-Plat. Aucune ombre portée. La hiérarchie vient des fonds (crème/blanc/marine) et des bordures hairline `#DCDAD3`. Rayons de 4 à 6 px maximum. Pas de verre, pas de flou, pas de dégradé.
+Plat. Aucune ombre portée. La hiérarchie vient des fonds (crème/blanc/marine) et des bordures hairline `#DCDAD3`. Rayons de 4 à 6 px maximum, avec une seule exception : les étiquettes de section (eyebrow) sont des pilules à filet, direction For Future home-b. Pas de verre, pas de flou, pas de dégradé.
 
 ## Motion
 
