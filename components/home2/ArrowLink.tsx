@@ -16,8 +16,8 @@ export function ArrowLink({
   className?: string;
 }) {
   const tones = {
-    light: "border-nera-cream/50 text-nera-cream hover:border-nera-cream",
-    dark: "border-nera-navy/40 text-nera-navy hover:border-nera-navy",
+    light: "border-nera-cream/50 text-nera-cream hover:border-accent hover:text-accent",
+    dark: "border-nera-navy/40 text-nera-navy hover:border-accent-deep hover:text-accent-deep",
   };
   return (
     <Link
