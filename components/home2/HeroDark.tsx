@@ -65,8 +65,8 @@ export function HeroDark() {
         </Reveal>
       </div>
 
-      <div className="relative flex justify-center px-6 pb-2">
-        <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:mt-0 lg:absolute lg:bottom-2 lg:left-1/2 lg:-translate-x-1/2">
+      <div className="relative flex justify-center px-6 pb-0">
+        <a href="#prestations" className="group mt-6 flex flex-col items-center gap-3 text-nera-cream transition-colors hover:text-accent md:mt-0 lg:absolute lg:-bottom-1 lg:left-1/2 lg:-translate-x-1/2">
           <span className="text-[12px] font-medium uppercase tracking-[0.35em]">Nos prestations</span>
           <span className="relative block h-12 w-px overflow-hidden bg-nera-cream/30" aria-hidden>
             <span className="absolute inset-x-0 top-0 h-1/2 bg-accent animate-scroll-line" />
