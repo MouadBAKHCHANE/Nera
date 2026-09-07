@@ -44,7 +44,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         open ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex flex-1 flex-col items-center justify-center gap-10 overflow-y-auto px-6 pb-10 pt-[88px] text-center md:gap-14 md:pt-[112px]">
+      <div className="flex flex-1 flex-col items-center justify-start gap-10 overflow-y-auto px-6 pb-10 pt-[104px] text-center md:gap-12 md:pt-[120px]">
         <nav aria-label="Navigation">
           <ul className="space-y-1">
             {items.map((item, i) => {
