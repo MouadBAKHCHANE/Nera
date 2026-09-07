@@ -1,29 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { navigation } from "@/content/navigation";
-import { prestations, company } from "@/content/prestations";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { company } from "@/content/prestations";
+import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
+import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 
-const legal = [
-  { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Confidentialité", href: "/confidentialite" },
-  { label: "Cookies", href: "/cookies" },
-];
+const link = "text-body-sm font-light text-nera-cream/80 transition-colors hover:text-accent";
+const head = "text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream";
 
 /**
- * Pied de page sombre variante hestera.ch : marque + accroche, prestations, liens rapides.
+ * Pied de page sombre (Home 2) : marque + accroche + réseaux + coordonnées cliquables,
+ * prestations, le bureau, mentions légales.
  */
 export function FooterDark() {
-  const link = "text-body-sm font-light text-nera-cream/80 transition-colors hover:text-accent";
   return (
     <footer className="border-t border-nera-cream/15 bg-nera-navy-deep text-nera-cream">
-      <div className="grid gap-12 px-6 py-16 md:grid-cols-2 md:px-10 lg:grid-cols-[6fr_3fr_3fr] lg:px-[120px] lg:py-20">
+      <div className="grid gap-12 px-6 py-16 md:grid-cols-2 md:px-10 lg:grid-cols-[5fr_3fr_2fr_3fr] lg:px-[120px] lg:py-20">
         <div>
           <Image src="/logos/nera-tagline-cream-green.svg" alt={company.shortName} width={220} height={57} style={{ height: 48, width: "auto" }} />
-          <p className="mt-6 max-w-sm text-body-sm font-light leading-[1.7] text-nera-cream/80">
-            Bureau d&apos;ingénieurs conseils en énergie, physique du bâtiment et CVC. Genève et Suisse romande.
-          </p>
-          <div className="mt-6 flex items-center gap-2 text-nera-cream">
+          <p className="mt-6 max-w-sm text-body-sm font-light leading-[1.7] text-nera-cream/80">{footerTagline}</p>
+
+          <div className="mt-6 flex items-center gap-2">
             <a
               href={company.linkedin}
               target="_blank"
@@ -33,51 +30,73 @@ export function FooterDark() {
             >
               <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" /></svg>
             </a>
-            <a
-              href={`mailto:${company.email}`}
-              aria-label="Écrire à NERA"
-              className="inline-flex size-11 items-center justify-center border border-nera-cream/20 transition-colors hover:border-accent hover:text-accent"
-            >
-              <Mail className="size-5" strokeWidth={1.5} />
-            </a>
           </div>
+
+          <address className="mt-8 space-y-3 not-italic text-body-sm font-light text-nera-cream/85">
+            <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 transition-colors hover:text-accent">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              <span>
+                {company.street}
+                <br />
+                {company.zip} {company.city}
+              </span>
+            </a>
+            <a href={company.phoneHref} className="flex items-center gap-3 transition-colors hover:text-accent">
+              <Phone className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              {company.phone}
+            </a>
+            <a href={`mailto:${company.email}`} className="flex items-center gap-3 transition-colors hover:text-accent">
+              <Mail className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
+              {company.email}
+            </a>
+          </address>
         </div>
+
         <div>
-          <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream">Prestations</h3>
+          <h3 className={head}>Prestations</h3>
           <ul className="mt-6 space-y-2.5">
-            {prestations.map((p) => (
-              <li key={p.slug}>
-                <Link href={`/prestations/${p.slug}`} className={link}>{p.title}</Link>
+            {footerPrestations.map((p) => (
+              <li key={p.href}>
+                <Link href={p.href} className={link}>{p.label}</Link>
               </li>
             ))}
           </ul>
         </div>
+
         <div>
-          <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream">Liens rapides</h3>
+          <h3 className={head}>Le bureau</h3>
           <ul className="mt-6 space-y-2.5">
-            {navigation.map((n) => (
-              <li key={n.href}>
-                <Link href={n.href} className={link}>{n.label}</Link>
+            {footerBureau.map((b) =>
+              b.external ? (
+                <li key={b.href}>
+                  <a href={b.href} target="_blank" rel="noopener noreferrer" className={link}>{b.label}</a>
+                </li>
+              ) : (
+                <li key={b.href}>
+                  <Link href={b.href} className={link}>{b.label}</Link>
+                </li>
+              ),
+            )}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className={head}>Informations légales</h3>
+          <ul className="mt-6 space-y-2.5">
+            {footerLegal.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={link}>{l.label}</Link>
               </li>
             ))}
-            <li><Link href="/contact" className={link}>Contact</Link></li>
             <li>
-              <a href={company.linkedin} target="_blank" rel="noopener noreferrer" className={link}>LinkedIn</a>
+              <CookiePrefsButton className={`${link} cursor-pointer`} />
             </li>
           </ul>
         </div>
       </div>
+
       <div className="border-t border-nera-cream/15 px-6 py-6 text-center text-[12px] font-light text-nera-cream/60 md:px-10 lg:px-[120px]">
-        <p>
-          © {new Date().getFullYear()} {company.name} · {company.street}, {company.zip} {company.city}
-        </p>
-        <ul className="mt-2 flex flex-wrap justify-center gap-5">
-          {legal.map((l) => (
-            <li key={l.href}>
-              <Link href={l.href} className="transition-colors hover:text-nera-cream">{l.label}</Link>
-            </li>
-          ))}
-        </ul>
+        © {new Date().getFullYear()} {company.name}. Tous droits réservés.
       </div>
     </footer>
   );
