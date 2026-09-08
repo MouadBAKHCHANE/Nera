@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote/QuoteModal";
 import { CookieBanner } from "@/components/ui/CookieBanner";
+import { CallButton } from "@/components/ui/CallButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { seo } from "@/content/seo";
 
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <QuoteProvider>
           {children}
           <CookieBanner />
+          <CallButton />
         </QuoteProvider>
       </body>
     </html>

@@ -21,7 +21,7 @@ export function PrestationsMenu({ tone = "dark" }: { tone?: "dark" | "light" }) 
       <div className="grid grid-cols-[180px_1fr] gap-3">
         {/* Carte de gauche : logo vertical en haut à gauche, lien « Toutes les prestations » en bas à gauche */}
         <div className={`flex flex-col justify-between rounded-sm p-4 ${card}`}>
-          <Image src={dark ? "/logos/nera-vertical-cream-green.svg" : "/logos/nera-mark-green.svg"} alt="NERA" width={120} height={120} style={{ height: 88, width: "auto" }} />
+          <Image src={dark ? "/logos/nera-vertical-cream-green.svg" : "/logos/nera-mark-green.svg"} alt="NERA" width={120} height={120} style={{ height: 64, width: "auto" }} />
           <Link href="/prestations" className={`group mt-6 inline-flex items-center gap-2 text-[14px] font-semibold transition-colors hover:text-accent ${title}`}>
             Toutes les prestations
             <ArrowRight className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
