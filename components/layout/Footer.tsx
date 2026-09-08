@@ -75,7 +75,7 @@ export function Footer() {
       <div className="border-t border-hairline">
         <Container className="py-8">
           <p className="text-center text-eyebrow font-medium uppercase text-mute">Certifications et partenaires</p>
-          <PartnerLogos className="mt-5" />
+          <PartnerLogos className="mt-5" tile={false} />
         </Container>
       </div>
 

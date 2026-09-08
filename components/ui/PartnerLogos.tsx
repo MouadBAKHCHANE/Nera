@@ -12,7 +12,8 @@ const partners = [
   { src: "/logos/partenaires/epiqr.png", alt: "EPIQR", w: 377, href: "https://www.epiqr.ch" },
 ];
 
-export function PartnerLogos({ className = "" }: { className?: string }) {
+/** `tile` : tuile blanche sous chaque logo (utile sur fond sombre) ; désactivée sur fond clair. */
+export function PartnerLogos({ className = "", tile = true }: { className?: string; tile?: boolean }) {
   return (
     <ul className={`flex flex-wrap items-center justify-center gap-5 md:gap-7 ${className}`} aria-label="Certifications et partenaires">
       {partners.map((p) => (
@@ -21,7 +22,7 @@ export function PartnerLogos({ className = "" }: { className?: string }) {
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-14 items-center rounded-sm bg-white px-4 transition-opacity hover:opacity-90"
+            className={`flex h-14 items-center rounded-sm transition-opacity hover:opacity-90 ${tile ? "bg-white px-4" : "px-2"}`}
             title={p.alt}
           >
             <Image src={p.src} alt={p.alt} width={p.w} height={160} className="h-8 w-auto" />
