@@ -13,14 +13,17 @@ export function RenovationAZ() {
       <div className="grid gap-16 px-6 md:px-10 lg:grid-cols-2 lg:gap-24 lg:px-[120px]">
         <Reveal delay={0.05} className="relative order-2 min-h-[360px] lg:order-1 lg:min-h-[520px]">
           <div className="absolute inset-y-6 left-6 right-0 border border-accent/60" aria-hidden />
-          <div className="absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
+          <div className="group absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
             <Image
               src="/img/bureau-batiment-clair-moderne.jpg"
               alt="Façade d'un immeuble contemporain rénové"
               fill
+              quality={85}
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out-quart group-hover:scale-[1.04]"
             />
+            {/* Voile bleu clair au survol */}
+            <div className="absolute inset-0 bg-nera-navy-soft/0 transition-colors duration-500 group-hover:bg-nera-navy-soft/35" aria-hidden />
           </div>
           <div className="absolute -bottom-6 right-2 flex size-28 items-center justify-center text-accent lg:size-36">
             <DiamondOutline className="absolute inset-0 animate-spin-slow drop-shadow-[0_1px_3px_rgba(10,36,64,0.7)]" strokeWidth={1} />
