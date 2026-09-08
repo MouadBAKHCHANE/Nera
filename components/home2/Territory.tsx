@@ -19,7 +19,7 @@ export function Territory() {
             </h2>
             <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body">
               Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans le
-              reste de la Suisse romande selon la nature des projets :
+              reste de la Suisse romande selon la nature des projets.
             </p>
           </Reveal>
           <ul className="grid grid-cols-3 gap-3 md:grid-cols-6 lg:gap-4">
