@@ -14,14 +14,14 @@ const partners = [
 
 export function PartnerLogos({ className = "" }: { className?: string }) {
   return (
-    <ul className={`flex flex-wrap items-center justify-center gap-3 ${className}`} aria-label="Certifications et partenaires">
+    <ul className={`flex flex-wrap items-center justify-center gap-5 md:gap-7 ${className}`} aria-label="Certifications et partenaires">
       {partners.map((p) => (
         <li key={p.src}>
           <a
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-14 items-center rounded-sm bg-white px-3 transition-opacity hover:opacity-90"
+            className="flex h-14 items-center rounded-sm bg-white px-4 transition-opacity hover:opacity-90"
             title={p.alt}
           >
             <Image src={p.src} alt={p.alt} width={p.w} height={160} className="h-8 w-auto" />
