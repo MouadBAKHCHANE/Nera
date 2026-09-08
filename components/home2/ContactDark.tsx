@@ -19,7 +19,7 @@ export function ContactDark() {
       <div className="px-6 md:px-10 lg:px-[120px]">
         <div className="grid gap-10 border-b border-nera-cream/15 pb-12 lg:grid-cols-2">
           <Reveal>
-            <p className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"><span className="h-px w-10 bg-accent" aria-hidden />Contact</p>
+            <p className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"><span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />Contact</p>
             <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">Parlons de votre bâtiment avec un ingénieur</h2>
           </Reveal>
           <Reveal delay={0.08}>
