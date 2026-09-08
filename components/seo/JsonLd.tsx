@@ -30,7 +30,7 @@ export function JsonLd() {
       addressCountry: company.country,
     },
     areaServed: cantons.map((c) => ({ "@type": "AdministrativeArea", name: c })),
-    sameAs: [company.linkedin],
+    sameAs: [company.linkedin, company.socials.facebook, company.socials.instagram],
     knowsAbout: seo.keywords,
     hasOfferCatalog: {
       "@type": "OfferCatalog",

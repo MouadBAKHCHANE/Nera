@@ -8,8 +8,8 @@ import { Reveal } from "@/components/ui/Reveal";
 const stats = [
   { value: 300, prefix: "+", label: "CECB et CECB Plus réalisés" },
   { value: 50, prefix: "+", label: "dossiers de subventions déposés" },
-  { value: 50, label: "projets réalisés en 2026" },
-  { value: 15, suffix: " ans", label: "d'expérience métier" },
+  { value: 50, prefix: "+", label: "projets réalisés en 2026" },
+  { value: 15, prefix: "+", suffix: " ans", label: "d'expérience métier" },
   { value: 7, label: "collaborateurs" },
 ];
 

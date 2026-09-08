@@ -88,8 +88,10 @@ export const company = {
   phoneHref: "tel:+41223137354",
   email: "info@nera-ing.ch",
   linkedin: "https://www.linkedin.com/company/nera-ingenieurs-conseils/",
-  /** URL à fournir par le client ; « # » tant qu'elles ne sont pas connues. */
-  socials: { facebook: "#", instagram: "#" },
+  socials: {
+    facebook: "https://www.facebook.com/profile.php?id=61593837668290&locale=fr_FR",
+    instagram: "https://www.instagram.com/nera.ingenieurs.conseils/",
+  },
   googleBusiness: "https://share.google/fQDYbp8M5fQtVEoow",
   founded: 2025,
   founder: {

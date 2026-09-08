@@ -6,6 +6,7 @@ import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { PartnerLogos } from "@/components/ui/PartnerLogos";
 
 const link = "text-body-sm text-nera-ink transition-colors hover:text-accent-deep";
 const head = "text-eyebrow font-medium uppercase text-mute";
@@ -70,6 +71,13 @@ export function Footer() {
           <SocialLinks tone="dark" />
         </div>
       </Container>
+
+      <div className="border-t border-hairline">
+        <Container className="py-8">
+          <p className="text-center text-eyebrow font-medium uppercase text-mute">Certifications et partenaires</p>
+          <PartnerLogos className="mt-5" />
+        </Container>
+      </div>
 
       <div className="border-t border-hairline">
         <Container className="flex flex-col items-center gap-3 py-5 text-center text-body-sm text-mute lg:flex-row lg:justify-between lg:text-left">

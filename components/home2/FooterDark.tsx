@@ -5,6 +5,7 @@ import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { PartnerLogos } from "@/components/ui/PartnerLogos";
 
 const link = "text-body-sm font-light text-nera-cream/80 transition-colors hover:text-accent";
 const head = "text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream";
@@ -71,6 +72,11 @@ export function FooterDark() {
         <div className="flex justify-center md:col-span-2 lg:hidden">
           <SocialLinks tone="light" />
         </div>
+      </div>
+
+      <div className="border-t border-nera-cream/15 px-6 py-8 md:px-10 lg:px-[120px]">
+        <p className="text-center text-[11px] font-medium uppercase tracking-[0.3em] text-nera-cream/60">Certifications et partenaires</p>
+        <PartnerLogos className="mt-5" />
       </div>
 
       <div className="flex flex-col items-center gap-4 border-t border-nera-cream/15 px-6 py-6 text-center text-[12px] font-light text-nera-cream/60 md:px-10 lg:flex-row lg:justify-between lg:px-[120px] lg:text-left">
