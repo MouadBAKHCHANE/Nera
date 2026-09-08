@@ -21,7 +21,7 @@ export function PartnerLogos({ className = "" }: { className?: string }) {
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-14 items-center rounded-sm bg-white px-4 transition-opacity hover:opacity-90"
+            className="flex h-10 items-center rounded-sm bg-white px-2.5 transition-opacity hover:opacity-90 md:h-14 md:px-4"
             title={p.alt}
           >
             <Image src={p.src} alt={p.alt} width={p.w} height={160} className="h-5 w-auto md:h-8" />
