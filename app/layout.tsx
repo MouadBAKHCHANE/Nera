@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote/QuoteModal";
 import { CookieBanner } from "@/components/ui/CookieBanner";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { seo } from "@/content/seo";
 
 const clash = localFont({
   src: [
@@ -27,16 +29,17 @@ const satoshi = localFont({
   preload: true,
 });
 
-const SITE_URL = "https://www.nera-ing.ch";
+const SITE_URL = seo.siteUrl;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NERA Ingénieurs Conseils | Bureau d'ingénieurs en énergie et physique du bâtiment à Genève",
-    template: "%s | NERA Ingénieurs Conseils",
+    default: seo.title,
+    template: "%s | NERA",
   },
-  description:
-    "Bureau d'ingénieurs conseils indépendant à Genève : audits CECB, physique du bâtiment, CVC, rénovation énergétique, Minergie, autorisations de construire et subventions. Suisse romande.",
+  description: seo.description,
+  keywords: seo.keywords,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_CH",
@@ -50,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr-CH" className={`${clash.variable} ${satoshi.variable} h-full`}>
       <body className="min-h-full flex flex-col">
+        <JsonLd />
         <QuoteProvider>
           {children}
           <CookieBanner />

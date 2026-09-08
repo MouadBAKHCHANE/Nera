@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { seo } from "@/content/seo";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { HeroDark } from "@/components/home2/HeroDark";
 import { ServicePanels } from "@/components/home2/ServicePanels";
@@ -12,7 +13,10 @@ import { FooterDark } from "@/components/home2/FooterDark";
 
 /** Accueil officiel : direction sombre et cinématographique, géométrie NERA. Sections et textes du client. */
 export const metadata: Metadata = {
-  title: "NERA Ingénieurs Conseils | Bureau d'ingénieurs en énergie et physique du bâtiment à Genève",
+  title: { absolute: seo.title },
+  description: seo.description,
+  alternates: { canonical: "/" },
+  openGraph: { title: seo.title, description: seo.description, url: "/" },
 };
 
 export default function Home() {
