@@ -48,7 +48,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Identifier les aides mobilisables, préparer les demandes et assurer leur suivi jusqu'à la remise des justificatifs d'achèvement.",
     cta: "Découvrir les prestations subventions",
     href: "/prestations/subventions",
-    img: "/img/process-panneaux-solaires-immeuble.jpg",
+    img: "/img/prestation-subventions-plans.jpg",
   },
   {
     n: "06",

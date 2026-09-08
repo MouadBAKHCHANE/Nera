@@ -8,6 +8,7 @@ import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
 import { QuoteButton } from "@/components/quote/QuoteModal";
+import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
 
 /**
  * Header Home 2 : transparent sur le héro, marine opaque au scroll.
@@ -71,21 +72,7 @@ export function HeaderDark() {
                     <ChevronDown className="size-3.5" strokeWidth={1.75} />
                   </Link>
                   <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-base group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <ul className="w-80 border border-nera-cream/15 bg-nera-navy-deep p-2">
-                      {item.children.map((c) => (
-                        <li key={c.href}>
-                          {c.external ? (
-                            <a href={c.href} target="_blank" rel="noopener noreferrer" className="block rounded-sm px-3 py-2.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:bg-nera-navy hover:text-nera-cream">
-                              {c.label}
-                            </a>
-                          ) : (
-                            <Link href={c.href} className="block rounded-sm px-3 py-2.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:bg-nera-navy hover:text-nera-cream">
-                              {c.label}
-                            </Link>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+                    <PrestationsMenu tone="dark" />
                   </div>
                 </div>
               ) : (

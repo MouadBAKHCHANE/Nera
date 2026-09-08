@@ -8,6 +8,7 @@ import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MobileMenu } from "./MobileMenu";
 import { QuoteButton } from "@/components/quote/QuoteModal";
+import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
 
 /**
  * Header en trois cellules séparées par des filets verticaux (direction For Future home-b) :
@@ -44,22 +45,8 @@ export function Header() {
                     {item.label}
                     <ChevronDown className="size-3.5" strokeWidth={1.75} />
                   </Link>
-                  <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-all duration-base group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <ul className="w-80 border border-hairline bg-canvas-alt p-2">
-                      {item.children.map((c) => (
-                        <li key={c.href}>
-                          {c.external ? (
-                            <a href={c.href} target="_blank" rel="noopener noreferrer" className="block rounded-sm px-3 py-2.5 text-body-sm text-body transition-colors hover:bg-canvas hover:text-nera-navy">
-                              {c.label}
-                            </a>
-                          ) : (
-                            <Link href={c.href} className="block rounded-sm px-3 py-2.5 text-body-sm text-body transition-colors hover:bg-canvas hover:text-nera-navy">
-                              {c.label}
-                            </Link>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-base group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <PrestationsMenu tone="light" />
                   </div>
                 </div>
               ) : (
