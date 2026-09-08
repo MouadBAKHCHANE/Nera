@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowLink } from "./ArrowLink";
 import { Ruler } from "./Logomark";
+import { ActiveOnView } from "@/components/ui/ActiveOnView";
 
 /**
  * Prestations sous le héro : H2 + introduction du client, puis six cartes au coin
@@ -86,16 +87,17 @@ export function ServicePanels() {
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {panels.map((p, i) => (
             <Reveal key={p.href} effect="slide-up" delay={(i % 3) * 0.1} className={i % 3 === 1 ? "lg:mt-12" : ""}>
-              <article className="group relative flex min-h-[520px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[560px]">
+              <ActiveOnView className="group">
+              <article className="relative flex min-h-[520px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[560px]">
                 <Image
                   src={p.img}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className={`object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100 ${p.pos ?? ""}`}
+                  className={`object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100 group-data-active:scale-[1.06] group-data-active:opacity-100 ${p.pos ?? ""}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10 transition-opacity duration-700 group-hover:opacity-60" aria-hidden />
-                <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/40 transition-colors duration-base group-hover:text-accent">
+                <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10 transition-opacity duration-700 group-hover:opacity-60 group-data-active:opacity-60" aria-hidden />
+                <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/40 transition-colors duration-base group-hover:text-accent group-data-active:text-accent">
                   {p.n}
                 </span>
                 <div className="relative p-8">
@@ -106,6 +108,7 @@ export function ServicePanels() {
                   </ArrowLink>
                 </div>
               </article>
+              </ActiveOnView>
             </Reveal>
           ))}
         </div>
