@@ -4,6 +4,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/content/prestations";
 import { prestations } from "@/content/prestations";
 import { mapsHref } from "@/content/footer";
+import { QuoteButton } from "@/components/quote/QuoteModal";
+import { FormNotice } from "@/components/ui/FormNotice";
 
 const field =
   "w-full border-0 border-b border-nera-cream/40 bg-transparent px-0 py-3 text-body-md font-light text-nera-cream placeholder:text-nera-cream/60 focus:border-accent focus:outline-none";
@@ -20,7 +22,19 @@ export function ContactDark() {
         <div className="grid gap-10 border-b border-nera-cream/15 pb-12 lg:grid-cols-2">
           <Reveal>
             <p className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"><span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />Contact</p>
-            <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">Parlons de votre bâtiment avec un ingénieur</h2>
+            <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">Parlons de votre bâtiment</h2>
+            <p className="mt-6 max-w-[46ch] text-body-md font-light text-nera-cream/80">
+              Vous prévoyez une vente, une rénovation, une transformation, un remplacement de chauffage ou une
+              nouvelle construction ?
+            </p>
+            <p className="mt-3 max-w-[46ch] text-body-md font-light text-nera-cream/80">
+              Décrivez-nous votre bâtiment et votre objectif. NERA vous aidera à identifier la prestation et le niveau
+              d’accompagnement adaptés.
+            </p>
+            <QuoteButton className="group mt-8 inline-flex items-center gap-3 rounded-sm bg-accent px-6 py-3.5 text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep">
+              Demander un devis gratuit
+              <ArrowRight className="size-4 transition-transform duration-base group-hover:translate-x-1" strokeWidth={1.75} />
+            </QuoteButton>
           </Reveal>
           <Reveal delay={0.08}>
             <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">Coordonnées</h3>
@@ -90,6 +104,7 @@ export function ContactDark() {
                 Envoyer le message
                 <ArrowRight className="size-4 transition-transform duration-base group-hover:translate-x-1.5" strokeWidth={1.75} />
               </button>
+              <FormNotice variant="contact" className="text-nera-cream/60" />
             </div>
           </form>
         </Reveal>

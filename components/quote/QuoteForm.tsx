@@ -13,6 +13,7 @@ import {
   devisMaxFileMb,
   type DevisPayload,
 } from "@/content/devis";
+import { FormNotice } from "@/components/ui/FormNotice";
 
 const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
 
@@ -311,6 +312,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       </div>
 
       <p className="mt-4 text-center text-[12px] text-mute sm:mt-6 sm:text-body-sm">{devisNote}</p>
+      <FormNotice variant="devis" className="mt-3 text-mute" />
     </form>
   );
 }
