@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { navigation, contactCta } from "@/content/navigation";
+import { navigation } from "@/content/navigation";
 import { company } from "@/content/prestations";
-import { useQuote } from "@/components/quote/QuoteModal";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 export function MobileMenu({
@@ -17,7 +16,6 @@ export function MobileMenu({
   /** true : menu plein écran à toutes les tailles (variante hestera, burger seul). */
   allSizes?: boolean;
 }) {
-  const { open: openQuote } = useQuote();
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {
@@ -64,16 +62,6 @@ export function MobileMenu({
         </ul>
 
         <div className="mt-8 flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              openQuote();
-            }}
-            className="inline-flex h-12 items-center justify-center rounded-sm bg-nera-navy px-6 text-[15px] font-medium text-nera-cream"
-          >
-            {contactCta.label}
-          </button>
           <a
             href={company.phoneHref}
             className="inline-flex h-12 items-center justify-center rounded-sm border border-nera-navy px-6 text-[15px] font-medium text-nera-navy"

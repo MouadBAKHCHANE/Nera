@@ -7,7 +7,6 @@ import { ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { mapsHref } from "@/content/footer";
-import { useQuote } from "@/components/quote/QuoteModal";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 const items: NavItem[] = navigation;
@@ -21,7 +20,6 @@ const items: NavItem[] = navigation;
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);
-  const { open: openQuote } = useQuote();
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
@@ -49,7 +47,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
       }`}
     >
       <div className="flex flex-1 flex-col items-center justify-start gap-10 overflow-y-auto px-6 pb-10 pt-[104px] text-center md:gap-12 md:pt-[120px] lg:grid lg:grid-cols-[1fr_auto] lg:content-center lg:items-center lg:gap-x-24 lg:px-[120px] lg:text-left">
-        <nav aria-label="Navigation" className="w-full lg:row-span-2 lg:self-center">
+        <nav aria-label="Navigation" className="w-full lg:self-center">
           <ul className="space-y-1 lg:space-y-2">
             {items.map((item, i) => {
               const active = pathname === item.href;
@@ -117,22 +115,6 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
             })}
           </ul>
         </nav>
-
-        <div
-          className={`transition-all duration-500 ease-out-quart lg:order-3 lg:justify-self-end ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
-          style={{ transitionDelay: open ? "420ms" : "0ms" }}
-        >
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              openQuote();
-            }}
-            className="inline-flex h-12 items-center rounded-sm bg-accent px-8 text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep"
-          >
-            Devis gratuit
-          </button>
-        </div>
 
         <div
           className={`transition-all duration-500 ease-out-quart lg:order-2 lg:justify-self-end lg:text-right ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
