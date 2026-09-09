@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, FileText } from "lucide-react";
 import { useQuote } from "@/components/quote/QuoteModal";
 
 /**
  * Éléments flottants, téléphone et tablette seulement :
- * - onglet vertical « Devis gratuit » à mi-hauteur sur le bord droit, ouvre le pop-up ;
+ * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, ouvre le pop-up ;
  * - bouton « retour en haut » carré en bas à droite, visible après un défilement.
  */
 export function CallButton() {
@@ -25,9 +25,11 @@ export function CallButton() {
       <button
         type="button"
         onClick={() => open()}
-        className="fixed right-0 top-1/2 z-[80] rounded-l-sm bg-accent px-2.5 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-colors hover:bg-accent-deep lg:hidden [writing-mode:vertical-rl] [transform:translateY(-50%)_rotate(180deg)]"
+        aria-label="Demander un devis gratuit"
+        title="Devis gratuit"
+        className="fixed right-0 top-1/2 z-[80] inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-l-sm bg-accent text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-colors hover:bg-accent-deep lg:hidden"
       >
-        Devis gratuit
+        <FileText className="size-5" strokeWidth={1.75} />
       </button>
 
       <button
