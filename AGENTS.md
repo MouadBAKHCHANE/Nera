@@ -1,6 +1,6 @@
 # nera-ing — instructions agent
 
-Site vitrine de NERA Ingénieurs Conseils (Genève). Lire dans l'ordre : `PRODUCT.md`, `DESIGN.md`, puis `../GUIDE-SITE-VITRINE-AVEC-CLAUDE.md` pour la méthode complète.
+Site vitrine de NERA Ingénieurs Conseils (Genève). Lire dans l'ordre : `ETAT.md` (où en est le projet), `content/source/README.md` (textes client), `PRODUCT.md`, `DESIGN.md`, puis `../GUIDE-SITE-VITRINE-AVEC-CLAUDE.md` pour la méthode complète.
 
 ## Règles non négociables
 
@@ -11,7 +11,26 @@ Site vitrine de NERA Ingénieurs Conseils (Genève). Lire dans l'ordre : `PRODUC
 - Périmètre : ~10 pages. Ne pas créer de page hors arborescence sans accord explicite.
 - Motion : Framer Motion seulement. Pas de GSAP, Lenis, Three.js sauf demande explicite.
 - Ne jamais `git push` sans accord explicite. Committer localement librement.
-- Vérifier chaque composant avec Chrome DevTools à 1440×900 et 390×844 avant de rendre la main : zéro erreur console, pas de débordement horizontal.
+- Vérifier chaque composant à 1440×900 et 390×844 avant de rendre la main : zéro erreur console, pas de débordement horizontal. Voir « Vérification » ci-dessous pour la méthode la moins coûteuse.
+
+## Textes client
+
+Tous les textes fournis par NERA sont déjà extraits dans `content/source/`. **Partir de là**,
+jamais des `.docx`/`.pdf` d'origine. Lire `content/source/README.md` en premier : il contient
+l'index par ligne des 11 pages, le maillage interne et l'identité légale (IDE, RC).
+
+Lire une seule page : `sed -n '<début>,<fin>p' content/source/textes-client.md`.
+Ne jamais charger le fichier entier (800 lignes).
+
+## Vérification
+
+Par ordre de coût croissant, s'arrêter au premier niveau qui répond à la question :
+
+1. `npx tsc --noEmit` puis `npm run build` — attrape la majorité des régressions.
+2. `curl -s localhost:3000/<route> | grep` — présence d'un texte, d'une balise, d'un lien.
+3. Playwright `browser_evaluate` renvoyant un objet — mesures, classes, comportement au clic.
+4. Capture d'écran — **uniquement** quand le rendu visuel est le sujet, et une seule fois
+   à la fin plutôt qu'à chaque itération. Les images restent en contexte pour toute la session.
 
 ## Stack
 
