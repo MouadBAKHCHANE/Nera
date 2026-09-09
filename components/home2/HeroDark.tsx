@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { ArrowLink } from "./ArrowLink";
+import { QuoteButton } from "@/components/quote/QuoteModal";
 import { DiamondOutline, LogomarkOutline, Ruler } from "./Logomark";
 import { company } from "@/content/prestations";
 
@@ -61,9 +62,17 @@ export function HeroDark() {
             consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
         </Reveal>
-        <Reveal delay={2.4} className="mt-8 max-w-xs">
-          <Ruler className="mb-5 text-nera-cream" />
-          <ArrowLink href="/contact">Demander un devis gratuit</ArrowLink>
+        <Reveal delay={2.4} className="mt-8 max-w-xs max-lg:max-w-none">
+          <Ruler className="mb-5 text-nera-cream max-lg:hidden" />
+          <ArrowLink href="/contact" className="max-lg:hidden">
+            Demander un devis gratuit
+          </ArrowLink>
+          {/* Mobile et tablette : bouton centré qui ouvre le formulaire de devis */}
+          <div className="flex justify-center lg:hidden">
+            <QuoteButton className="inline-flex h-12 items-center justify-center rounded-sm bg-accent px-8 text-[15px] font-medium text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-colors duration-base hover:bg-accent-deep">
+              Demander un devis gratuit
+            </QuoteButton>
+          </div>
         </Reveal>
       </div>
 

@@ -31,12 +31,12 @@ const empty: DevisPayload = {
 };
 
 const field =
-  "w-full rounded-sm border border-hairline bg-canvas-alt px-3.5 py-3 text-body-md text-nera-ink placeholder:text-mute focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+  "w-full rounded-sm border border-hairline bg-canvas-alt px-3 py-2.5 text-body-sm sm:px-3.5 sm:py-3 sm:text-body-md text-nera-ink placeholder:text-mute focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
 const label = "mb-1.5 block text-body-sm font-medium text-nera-navy";
 const btnPrimary =
-  "inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-6 text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-accent px-5 text-[14px] sm:h-12 sm:px-6 sm:text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60";
 const btnGhost =
-  "inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-hairline px-5 text-[15px] font-medium text-nera-navy transition-colors duration-base hover:border-nera-navy";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-hairline px-4 text-[14px] sm:h-12 sm:px-5 sm:text-[15px] font-medium text-nera-navy transition-colors duration-base hover:border-nera-navy";
 
 /**
  * Formulaire de devis gratuit en quatre étapes (direction i-neea.ch) avec les champs
@@ -138,17 +138,21 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
   return (
     <form onSubmit={submit} noValidate>
       {/* Étapes */}
-      <ol className="mb-8 grid grid-cols-4 gap-2" aria-label="Étapes">
+      {/* Mobile : étape courante en toutes lettres ; dès sm : les quatre libellés */}
+      <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.14em] text-nera-navy sm:hidden">
+        Étape {step + 1}/{steps.length} · {steps[step]}
+      </p>
+      <ol className="mb-6 grid grid-cols-4 gap-1.5 sm:mb-8 sm:gap-2" aria-label="Étapes">
         {steps.map((s, i) => (
           <li key={s} className="text-center">
-            <span className={`block text-[11px] font-medium uppercase tracking-[0.14em] ${i <= step ? "text-nera-navy" : "text-mute"}`}>{s}</span>
-            <span className={`mt-2 block h-1 rounded-full ${i <= step ? "bg-accent" : "bg-hairline"}`} aria-hidden />
+            <span className={`hidden text-[11px] font-medium uppercase tracking-[0.1em] sm:block ${i <= step ? "text-nera-navy" : "text-mute"}`}>{s}</span>
+            <span className={`block h-1 rounded-full sm:mt-2 ${i <= step ? "bg-accent" : "bg-hairline"}`} aria-hidden />
           </li>
         ))}
       </ol>
 
       {step === 0 && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           <div>
             <label htmlFor="q-prestation" className={label}>Prestation souhaitée*</label>
             <select id="q-prestation" value={data.prestation} onChange={set("prestation")} className={field} required>
@@ -171,7 +175,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       )}
 
       {step === 1 && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           <div>
             <label htmlFor="q-batiment" className={label}>Type de bâtiment*</label>
             <select id="q-batiment" value={data.batiment} onChange={set("batiment")} className={field} required>
@@ -210,7 +214,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       )}
 
       {step === 2 && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           <div>
             <label htmlFor="q-nom" className={label}>Nom*</label>
             <input id="q-nom" value={data.nom} onChange={set("nom")} className={field} autoComplete="name" required />
@@ -285,7 +289,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         </p>
       )}
 
-      <div className="mt-8 flex items-center justify-between gap-3">
+      <div className="mt-6 flex items-center justify-between gap-3 sm:mt-8">
         {step > 0 ? (
           <button type="button" onClick={back} className={btnGhost}>
             <ArrowLeft className="size-4" strokeWidth={1.75} />
@@ -306,7 +310,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         )}
       </div>
 
-      <p className="mt-6 text-center text-body-sm text-mute">{devisNote}</p>
+      <p className="mt-4 text-center text-[12px] text-mute sm:mt-6 sm:text-body-sm">{devisNote}</p>
     </form>
   );
 }

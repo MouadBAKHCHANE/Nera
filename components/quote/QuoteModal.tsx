@@ -45,20 +45,20 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
             aria-modal="true"
             aria-labelledby="quote-title"
             onClick={(e) => e.stopPropagation()}
-            className="relative my-8 w-full max-w-[576px] rounded-md border border-hairline bg-canvas p-6 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:p-8"
+            className="relative my-4 w-full max-w-[576px] rounded-md border border-hairline bg-canvas p-4 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:my-8 sm:p-8"
           >
-            <button type="button" onClick={close} aria-label="Fermer" className="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-sm text-mute transition-colors hover:bg-canvas-alt hover:text-nera-navy">
+            <button type="button" onClick={close} aria-label="Fermer" className="absolute right-3 top-3 inline-flex size-10 items-center justify-center rounded-sm text-mute transition-colors hover:bg-canvas-alt hover:text-nera-navy">
               <X className="size-5" strokeWidth={1.75} />
             </button>
             <p className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.2em] text-accent-deep">
               <span className="h-2 w-7 bg-accent" aria-hidden />
               Devis gratuit
             </p>
-            <h2 id="quote-title" className="mt-3 font-display text-display-sm text-nera-navy md:text-display-md">
+            <h2 id="quote-title" className="mt-2 font-display text-[1.25rem] text-nera-navy sm:mt-3 sm:text-display-sm md:text-display-md">
               Votre devis gratuit
             </h2>
-            <p className="mt-1 text-body-sm text-body">Bureau d&apos;ingénieurs en énergie et physique du bâtiment, Genève.</p>
-            <div className="mt-6">
+            <p className="mt-1 hidden text-body-sm text-body sm:block">Bureau d&apos;ingénieurs en énergie et physique du bâtiment, Genève.</p>
+            <div className="mt-4 sm:mt-6">
               <QuoteForm key={prestation} initialPrestation={prestation} onDone={close} />
             </div>
           </div>
