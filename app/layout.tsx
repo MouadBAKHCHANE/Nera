@@ -52,7 +52,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr-CH" className={`${clash.variable} ${satoshi.variable} h-full`}>
+    // data-scroll-behavior : Next 16 ne neutralise plus `scroll-behavior: smooth` pendant les
+    // transitions de route sans cet attribut. Sans lui, un lien du pied de page fait défiler
+    // en douceur jusqu'en haut de la nouvelle page au lieu de l'ouvrir directement en haut.
+    <html lang="fr-CH" data-scroll-behavior="smooth" className={`${clash.variable} ${satoshi.variable} h-full`}>
       <body className="min-h-full flex flex-col">
         <JsonLd />
         <QuoteProvider>

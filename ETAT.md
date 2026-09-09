@@ -11,6 +11,10 @@ Mis à jour le 9 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Pages légales `/mentions-legales`, `/confidentialite`, `/cookies` : gabarit partagé
   `components/legal/LegalPage.tsx`, contenu dans `content/legal-pages.ts` (texte client mot pour
   mot). Les liens du pied de page et des mentions sous formulaires ne sont plus en 404.
+- Méga-menu Prestations élargi, une icône Lucide par prestation (`components/ui/PrestationIcon.tsx`,
+  table unique alimentée par `content/prestations.ts`), reprise dans le sous-menu mobile.
+- Écran de chargement des routes : le logomark se dessine en boucle (`app/loading.tsx`,
+  `components/ui/LogoLoader.tsx`, keyframes dans `globals.css`).
 - SEO accueil, `sitemap.ts`, `robots.ts`, images OG/Twitter, JSON-LD `ProfessionalService`.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
@@ -29,6 +33,13 @@ Par ordre de priorité.
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
 6. **Nettoyage** — supprimer `/home-2` et les composants clairs une fois la variante validée,
    ajouter la page 404, soumettre à la Search Console.
+
+## Défilement entre pages
+
+`app/globals.css` pose `scroll-behavior: smooth` pour les ancres internes. Next 16 ne
+neutralise plus ce réglage pendant les transitions de route sans l'attribut
+`data-scroll-behavior="smooth"` sur `<html>` : sans lui, un lien du pied de page ouvrait la
+page suivante en bas. L'attribut est posé dans `app/layout.tsx` — ne pas le retirer.
 
 ## Gestionnaire de cookies
 

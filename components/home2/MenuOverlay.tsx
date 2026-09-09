@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
+import { PrestationIcon } from "@/components/ui/PrestationIcon";
 import { mapsHref } from "@/content/footer";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
@@ -96,8 +97,9 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
                               <Link
                                 href={c.href}
                                 onClick={onClose}
-                                className="block py-1.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:text-accent md:text-body-md"
+                                className="flex items-center gap-2.5 py-1.5 text-body-sm font-light text-nera-cream/85 transition-colors hover:text-accent md:text-body-md"
                               >
+                                <PrestationIcon of={c.href} className="size-4 shrink-0 text-accent" />
                                 {c.label}
                               </Link>
                             </li>

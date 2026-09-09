@@ -211,3 +211,42 @@
 @media (prefers-reduced-motion: reduce) {
   .arrow-link:hover::before { animation: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Chargement : le logomark se dessine en boucle (trait vert), le losange
+   intérieur respire. `pathLength="1"` normalise la longueur des tracés, ce qui
+   permet d'exprimer le pointillé en unités de 1 quelle que soit la géométrie.
+   --------------------------------------------------------------------------- */
+@keyframes nera-trace {
+  0% { stroke-dashoffset: 1; }
+  45% { stroke-dashoffset: 0; }
+  55% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1; }
+}
+
+@utility animate-trace {
+  stroke-dasharray: 1;
+  animation: nera-trace 2.2s var(--ease-out-quart) infinite;
+}
+
+@keyframes nera-breathe {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.75; }
+}
+
+@utility animate-breathe {
+  animation: nera-breathe 2.2s ease-in-out infinite;
+}
+
+/* Sans animation : le logomark reste entièrement tracé plutôt que figé à mi-course. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-trace {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+  .animate-breathe {
+    opacity: 0.6;
+    animation: none !important;
+  }
+}
