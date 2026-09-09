@@ -48,3 +48,7 @@ next-env.d.ts
 # Outils Claude Code (skills, agents, réglages locaux)
 /.claude/
 !.env.example
+
+# artefacts Playwright MCP (captures, logs console)
+.playwright-mcp/
+*.png.tmp
