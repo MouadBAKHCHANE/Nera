@@ -19,7 +19,7 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
 export function FooterDark() {
   return (
     <footer className="border-t border-nera-cream/15 bg-nera-navy-deep text-nera-cream">
-      <div className="grid gap-12 px-6 py-16 text-center md:grid-cols-2 md:px-10 lg:grid-cols-[6fr_3fr_3fr] lg:px-[120px] lg:py-20 lg:text-left">
+      <div className="grid gap-12 px-6 py-16 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 md:px-10 lg:grid-cols-[6fr_3fr_3fr] lg:px-[120px] lg:py-20 lg:text-left">
         {/* Marque + coordonnées */}
         <div className="flex flex-col items-center md:col-span-2 lg:col-span-1 lg:items-start">
           <Image src="/logos/nera-tagline-cream-green.svg" alt={company.shortName} width={220} height={57} style={{ height: 48, width: "auto" }} />
@@ -65,11 +65,11 @@ export function FooterDark() {
               </li>
             ))}
           </ul>
-          <SocialLinks tone="light" className="mt-4 -ml-2.5 hidden lg:flex" />
+          <SocialLinks tone="light" className="mt-4 hidden md:flex md:justify-end lg:-ml-2.5 lg:justify-start" />
         </div>
 
         {/* Icônes sociales centrées, mobile et tablette seulement */}
-        <div className="flex justify-center md:col-span-2 lg:hidden">
+        <div className="flex justify-center md:hidden">
           <SocialLinks tone="light" />
         </div>
       </div>

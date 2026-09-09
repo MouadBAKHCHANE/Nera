@@ -20,7 +20,7 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
 export function Footer() {
   return (
     <footer className="border-t border-hairline bg-canvas">
-      <Container className="grid gap-10 py-14 text-center md:grid-cols-2 lg:grid-cols-[6fr_3fr_3fr] lg:py-20 lg:text-left">
+      <Container className="grid gap-10 py-14 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 lg:grid-cols-[6fr_3fr_3fr] lg:py-20 lg:text-left">
         <div className="flex flex-col items-center md:col-span-2 lg:col-span-1 lg:items-start">
           <Image src="/logos/nera-tagline-navy-green.svg" alt={company.shortName} width={220} height={57} style={{ height: 52, width: "auto" }} />
           <p className="mt-6 max-w-xs text-body-sm text-body">{footerTagline}</p>
@@ -64,10 +64,10 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <SocialLinks tone="dark" className="mt-4 -ml-2.5 hidden lg:flex" />
+          <SocialLinks tone="dark" className="mt-4 hidden md:flex md:justify-end lg:-ml-2.5 lg:justify-start" />
         </div>
 
-        <div className="flex justify-center md:col-span-2 lg:hidden">
+        <div className="flex justify-center md:hidden">
           <SocialLinks tone="dark" />
         </div>
       </Container>
