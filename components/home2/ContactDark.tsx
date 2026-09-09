@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/content/prestations";
 import { prestations } from "@/content/prestations";
 import { mapsHref } from "@/content/footer";
-import { QuoteButton } from "@/components/quote/QuoteModal";
+import { ArrowQuoteButton } from "./ArrowQuoteButton";
 import { FormNotice } from "@/components/ui/FormNotice";
 
 const field =
@@ -31,10 +31,7 @@ export function ContactDark() {
               Décrivez-nous votre bâtiment et votre objectif. NERA vous aidera à identifier la prestation et le niveau
               d’accompagnement adaptés.
             </p>
-            <QuoteButton className="group mt-8 inline-flex items-center gap-3 rounded-sm bg-accent px-6 py-3.5 text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep">
-              Demander un devis gratuit
-              <ArrowRight className="size-4 transition-transform duration-base group-hover:translate-x-1" strokeWidth={1.75} />
-            </QuoteButton>
+            <ArrowQuoteButton className="mt-8" />
           </Reveal>
           <Reveal delay={0.08}>
             <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">Coordonnées</h3>
