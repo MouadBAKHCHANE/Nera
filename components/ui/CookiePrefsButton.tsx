@@ -1,8 +1,10 @@
 "use client";
 
+import { openConsentManager } from "@/lib/consent";
+
 /**
- * « Gérer mes cookies » : déclenche l'événement que le gestionnaire de consentement
- * écoutera (à brancher avec les pages légales). Sans gestionnaire, renvoie vers /cookies.
+ * « Gérer mes cookies » : rouvre le bandeau de consentement sur la vue « Personnaliser ».
+ * Si aucun bandeau n'écoute (JavaScript désactivé côté bandeau), renvoie vers /cookies.
  */
 export function CookiePrefsButton({ className = "" }: { className?: string }) {
   return (
@@ -10,9 +12,7 @@ export function CookiePrefsButton({ className = "" }: { className?: string }) {
       type="button"
       className={className}
       onClick={() => {
-        const ev = new CustomEvent("nera:open-cookie-preferences", { cancelable: true });
-        const handled = !window.dispatchEvent(ev);
-        if (!handled) window.location.href = "/cookies";
+        if (!openConsentManager()) window.location.href = "/cookies";
       }}
     >
       Gérer mes cookies

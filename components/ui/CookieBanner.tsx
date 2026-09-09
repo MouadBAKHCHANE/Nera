@@ -4,24 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { cookieBanner, cookieCategories } from "@/content/legal";
-
-type Consent = { necessary: true; analytics: boolean; marketing: boolean; maps: boolean; date: string };
-const KEY = "nera-cookie-consent";
-
-const read = (): Consent | null => {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? (JSON.parse(raw) as Consent) : null;
-  } catch {
-    return null;
-  }
-};
-const write = (c: Consent) => {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(c));
-  } catch {}
-  window.dispatchEvent(new CustomEvent("nera:cookie-consent", { detail: c }));
-};
+import { CONSENT_OPEN, readConsent, writeConsent } from "@/lib/consent";
 
 /**
  * Bandeau cookies. Titre, texte et libellés de boutons repris mot pour mot du document
@@ -38,7 +21,7 @@ export function CookieBanner() {
   const [maps, setMaps] = useState(false);
 
   useEffect(() => {
-    const saved = read();
+    const saved = readConsent();
     if (!saved) setOpen(true);
     else {
       setAnalytics(saved.analytics);
@@ -50,12 +33,12 @@ export function CookieBanner() {
       setCustom(true);
       setOpen(true);
     };
-    window.addEventListener("nera:open-cookie-preferences", reopen);
-    return () => window.removeEventListener("nera:open-cookie-preferences", reopen);
+    window.addEventListener(CONSENT_OPEN, reopen);
+    return () => window.removeEventListener(CONSENT_OPEN, reopen);
   }, []);
 
   const save = (a: boolean, m: boolean, g: boolean) => {
-    write({ necessary: true, analytics: a, marketing: m, maps: g, date: new Date().toISOString() });
+    writeConsent({ necessary: true, analytics: a, marketing: m, maps: g, date: new Date().toISOString() });
     setAnalytics(a);
     setMarketing(m);
     setMaps(g);
