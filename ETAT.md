@@ -100,6 +100,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   bouton « Contacter NERA » de la section « Rencontrons-nous autour de votre projet », alors
   que le texte client prévoyait les deux CTA. `bureau.closing` ne porte donc plus que le titre
   et le libellé du devis.
+  Les deux premières sections ont échangé leur traitement, à la demande du client : « L'équilibre
+  comme principe » porte désormais une icône Lucide plate par ligne (`equilibreIcons` : balance,
+  éclair, pièces, thermomètre, immeuble, feuille — dans l'ordre du texte), et « Notre mission »
+  reprend les cartes à numéro en losange que portait l'équilibre. Les cartes de la mission sont
+  en crème sur la section blanche, l'inverse de la section précédente, sinon elles se
+  confondraient avec le fond.
   Écart assumé au texte client, demandé par le client : les quatre listes de la page —
   « L'équilibre comme principe » (six lignes), « Notre mission » (sept), « Une équipe
   spécialisée et complémentaire » (huit) et « Une connaissance concrète des procédures »

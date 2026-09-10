@@ -1,6 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Award, BadgeCheck, ChevronRight, Mail, Phone, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  Award,
+  BadgeCheck,
+  Building2,
+  ChevronRight,
+  Coins,
+  Leaf,
+  Mail,
+  Phone,
+  Scale,
+  ShieldCheck,
+  Sparkles,
+  Thermometer,
+  Zap,
+} from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
@@ -16,6 +30,13 @@ import { seo } from "@/content/seo";
 
 /** Une icône Lucide par qualification, dans l'ordre du contenu : CECB, Minergie, REG B, MPQ. */
 const qualificationIcons = [BadgeCheck, Sparkles, Award, ShieldCheck];
+
+/**
+ * Une icône Lucide par ligne de « L'équilibre comme principe », dans l'ordre du texte client :
+ * performance et faisabilité, ambition énergétique, investissement et exploitation, technique
+ * et confort, transformation du bâti, humain et environnement.
+ */
+const equilibreIcons = [Scale, Zap, Coins, Thermometer, Building2, Leaf];
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -155,7 +176,7 @@ export function BureauPage() {
           </Container>
         </header>
 
-        {/* 1. L'équilibre comme principe — crème. Les six « entre… » en médaillons losange. */}
+        {/* 1. L'équilibre comme principe — crème. Les six « entre… », une icône plate par ligne. */}
         <section id={bureau.equilibre.id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
@@ -166,21 +187,21 @@ export function BureauPage() {
                 </p>
               </Reveal>
               <ul className="grid gap-4 sm:grid-cols-2 lg:pt-2">
-                {bureau.equilibre.items.map((item, i) => (
-                  <Reveal as="li" key={item} delay={i * 0.06} className="flex items-center gap-5 border border-hairline bg-canvas-alt p-5">
-                    <span className="relative flex size-12 shrink-0 items-center justify-center">
-                      <DiamondOutline className="absolute inset-0 text-accent" strokeWidth={1} />
-                      <span className="font-display text-[13px] font-medium text-nera-navy">{pad(i + 1)}</span>
-                    </span>
-                    <p className="text-body-md leading-[1.6] text-nera-navy">{item}</p>
-                  </Reveal>
-                ))}
+                {bureau.equilibre.items.map((item, i) => {
+                  const Icon = equilibreIcons[i];
+                  return (
+                    <Reveal as="li" key={item} delay={i * 0.06} className="flex items-center gap-5 border border-hairline bg-canvas-alt p-5">
+                      <Icon className="size-6 shrink-0 text-accent-deep" strokeWidth={1.5} aria-hidden />
+                      <p className="text-body-md leading-[1.6] text-nera-navy">{item}</p>
+                    </Reveal>
+                  );
+                })}
               </ul>
             </div>
           </Container>
         </section>
 
-        {/* 2. Notre mission — blanc. Phrase de mission, puis les sept verbes numérotés. */}
+        {/* 2. Notre mission — blanc. Phrase de mission, puis les sept verbes en cartes à numéro. */}
         <section id={bureau.mission.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
             <Reveal className="max-w-3xl">
@@ -190,11 +211,19 @@ export function BureauPage() {
               </p>
               <p className="mt-8 text-body-md text-body">{bureau.mission.lead}</p>
             </Reveal>
-            <ol className="mt-8 grid gap-x-10 gap-y-5 border-t border-hairline pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {bureau.mission.items.map((item, i) => (
-                <Reveal as="li" key={item} delay={i * 0.05} className="flex gap-4">
-                  <span className="font-display text-[1.375rem] font-light leading-none text-accent-deep">{pad(i + 1)}</span>
-                  <p className="pt-0.5 text-body-md leading-[1.6] text-body">{item}</p>
+                <Reveal
+                  as="li"
+                  key={item}
+                  delay={i * 0.05}
+                  className="flex items-center gap-5 border border-hairline bg-canvas p-5"
+                >
+                  <span className="relative flex size-12 shrink-0 items-center justify-center">
+                    <DiamondOutline className="absolute inset-0 text-accent" strokeWidth={1} />
+                    <span className="font-display text-[13px] font-medium text-nera-navy">{pad(i + 1)}</span>
+                  </span>
+                  <p className="text-body-md leading-[1.6] text-nera-navy">{item}</p>
                 </Reveal>
               ))}
             </ol>
