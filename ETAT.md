@@ -100,6 +100,10 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   bouton « Contacter NERA » de la section « Rencontrons-nous autour de votre projet », alors
   que le texte client prévoyait les deux CTA. `bureau.closing` ne porte donc plus que le titre
   et le libellé du devis.
+  Deux écarts assumés au texte client, demandés par le client : les six lignes de
+  « L'équilibre comme principe » et les sept de « Notre mission » prennent une capitale
+  initiale et perdent leur point-virgule (ou point) final, parce qu'elles sont présentées en
+  cartes autonomes et non en énumération. Les mots restent ceux du document.
 - `Stats` et `Territory` (accueil) acceptent désormais `items` / `title` + `text` et un `id` : le
   bureau les réutilise avec ses propres libellés client (plus longs que ceux de l'accueil).
   L'accueil est inchangé. Le compteur de `Stats` initialise la valeur finale sous

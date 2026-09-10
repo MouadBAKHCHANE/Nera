@@ -33,14 +33,19 @@ export const bureau = {
     id: "equilibre",
     title: "L’équilibre comme principe",
     intro: "Le nom NERA évoque l’équilibre, la mesure et la justesse. Cette idée traduit notre manière d’aborder les projets :",
-    /** Chaque ligne « entre A et B » du client, gardée telle quelle. */
+    /**
+     * Les six lignes « entre A et B » du client. Le document les écrit en énumération
+     * (minuscule initiale, point-virgule final) ; présentées ici en cartes autonomes, elles
+     * prennent une capitale et perdent leur ponctuation de liste, à la demande du client.
+     * Les mots eux-mêmes sont inchangés.
+     */
     items: [
-      "équilibre entre performance et faisabilité ;",
-      "entre ambition énergétique et réalité constructive ;",
-      "entre investissement et coûts d’exploitation ;",
-      "entre technique et confort ;",
-      "entre transformation et préservation du bâti ;",
-      "entre l’humain et l’environnement.",
+      "Équilibre entre performance et faisabilité",
+      "Entre ambition énergétique et réalité constructive",
+      "Entre investissement et coûts d’exploitation",
+      "Entre technique et confort",
+      "Entre transformation et préservation du bâti",
+      "Entre l’humain et l’environnement",
     ],
   },
 
@@ -49,14 +54,15 @@ export const bureau = {
     title: "Notre mission",
     intro: "Apporter des solutions d’ingénierie énergétique fiables, durables et adaptées aux exigences suisses.",
     lead: "NERA aide ses clients à :",
+    /** Même règle que `equilibre.items` : capitale initiale, sans ponctuation de liste. */
     items: [
-      "comprendre leur bâtiment ;",
-      "identifier les priorités ;",
-      "comparer les variantes ;",
-      "prendre des décisions documentées ;",
-      "intégrer les exigences réglementaires ;",
-      "traduire leurs objectifs dans un projet cohérent ;",
-      "accompagner sa mise en œuvre.",
+      "Comprendre leur bâtiment",
+      "Identifier les priorités",
+      "Comparer les variantes",
+      "Prendre des décisions documentées",
+      "Intégrer les exigences réglementaires",
+      "Traduire leurs objectifs dans un projet cohérent",
+      "Accompagner sa mise en œuvre",
     ],
   },
 
