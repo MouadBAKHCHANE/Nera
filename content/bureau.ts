@@ -89,15 +89,16 @@ export const bureau = {
     title: "Une équipe spécialisée et complémentaire",
     intro: "NERA réunit sept collaborateurs actifs dans les domaines de l’énergie, de la physique du bâtiment et des techniques CVC.",
     lead: "Cette organisation permet d’aborder conjointement :",
+    /** Même règle que `equilibre.items` : capitale initiale, sans ponctuation de liste. */
     items: [
-      "l’enveloppe ;",
-      "les installations ;",
-      "les diagnostics ;",
-      "les certifications ;",
-      "les procédures cantonales ;",
-      "les subventions ;",
-      "la coordination technique ;",
-      "le suivi des projets.",
+      "L’enveloppe",
+      "Les installations",
+      "Les diagnostics",
+      "Les certifications",
+      "Les procédures cantonales",
+      "Les subventions",
+      "La coordination technique",
+      "Le suivi des projets",
     ],
     outro: "Le client conserve un interlocuteur identifié tout en bénéficiant des compétences nécessaires aux différentes étapes.",
     image: "/img/bureau-equipe-etude.jpg",
@@ -108,12 +109,13 @@ export const bureau = {
     title: "Une connaissance concrète des procédures",
     intro:
       "L’expérience réunie au sein de NERA comprend un parcours au sein de l’Office cantonal de l’énergie (OCEN). Cette connaissance contribue à :",
+    /** Même règle que `equilibre.items` : capitale initiale, sans ponctuation de liste. */
     items: [
-      "mieux comprendre la logique des procédures ;",
-      "structurer les dossiers ;",
-      "anticiper certains points de clarification ;",
-      "préparer des réponses argumentées ;",
-      "suivre les évolutions réglementaires.",
+      "Mieux comprendre la logique des procédures",
+      "Structurer les dossiers",
+      "Anticiper certains points de clarification",
+      "Préparer des réponses argumentées",
+      "Suivre les évolutions réglementaires",
     ],
   },
 
