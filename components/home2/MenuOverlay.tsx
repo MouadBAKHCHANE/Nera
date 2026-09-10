@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, MapPin, Phone, Mail } from "lucide-react";
+import { ChevronDown, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { PrestationIcon } from "@/components/ui/PrestationIcon";
@@ -104,6 +104,18 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
                               </Link>
                             </li>
                           ),
+                        )}
+                        {item.href === "/prestations" && (
+                          <li className="mt-2 border-t border-nera-cream/15 pt-2">
+                            <Link
+                              href="/prestations"
+                              onClick={onClose}
+                              className="group inline-flex items-center gap-2 py-1 text-body-sm font-medium text-accent transition-colors hover:text-nera-cream md:text-body-md"
+                            >
+                              <span>Toutes les prestations</span>
+                              <ArrowRight className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-1" strokeWidth={2} />
+                            </Link>
+                          </li>
                         )}
                       </ul>
                     </>

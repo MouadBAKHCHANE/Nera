@@ -5,9 +5,11 @@ import { ArrowUp, FileText } from "lucide-react";
 import { useQuote } from "@/components/quote/QuoteModal";
 
 /**
- * Éléments flottants, téléphone et tablette seulement :
- * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, apparaît après le héro ;
- * - bouton « retour en haut » carré en bas à droite, visible après un défilement.
+ * Éléments flottants :
+ * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, téléphone et
+ *   tablette seulement, apparaît après le héro ;
+ * - bouton « retour en haut » carré en bas à droite, sur tous les formats, visible après
+ *   un défilement.
  */
 export function CallButton() {
   const { open } = useQuote();
@@ -44,7 +46,7 @@ export function CallButton() {
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Retour en haut"
-        className={`fixed bottom-4 right-3 z-[80] inline-flex size-10 items-center justify-center rounded-sm bg-nera-navy text-nera-cream shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-nera-navy-deep lg:hidden ${
+        className={`fixed bottom-4 right-3 z-[80] inline-flex size-10 items-center justify-center rounded-sm bg-nera-navy text-nera-cream shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-nera-navy-deep lg:bottom-6 lg:right-6 lg:size-11 ${
           showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
         }`}
       >

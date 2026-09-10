@@ -15,7 +15,7 @@ import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
  * Desktop : logo à gauche, menu centré en capitales espacées, bouton « Nous contacter » à droite.
  * Tablette et mobile : logo + burger, qui ouvre le menu plein écran (MenuOverlay).
  */
-export function HeaderDark() {
+export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean } = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -28,7 +28,11 @@ export function HeaderDark() {
 
   /** Desktop : menu centré et bouton visibles seulement en haut de page, menu fermé. */
   const showNav = !scrolled && !open;
-  /** Desktop, page défilée : fond transparent, logo + icônes e-mail / téléphone + burger (direction hestera). */
+  /**
+   * Desktop, page défilée : fond transparent sur l'accueil (direction hestera), logo +
+   * icônes e-mail / téléphone + burger. `solidOnScroll` garde le fond marine sur les pages
+   * à corps clair, où le logo crème serait illisible.
+   */
   const collapsed = scrolled && !open;
   const link =
     "inline-flex items-center gap-1 px-4 py-2 text-[13px] font-medium uppercase tracking-[0.12em] text-nera-cream transition-colors hover:text-accent [text-shadow:0_1px_12px_rgba(10,36,64,0.6)]";
@@ -40,7 +44,9 @@ export function HeaderDark() {
           open
             ? "bg-nera-navy border-b border-nera-cream/10"
             : collapsed
-              ? "bg-nera-navy border-b border-nera-cream/10 lg:border-0 lg:bg-transparent"
+              ? solidOnScroll
+                ? "bg-nera-navy border-b border-nera-cream/10"
+                : "bg-nera-navy border-b border-nera-cream/10 lg:border-0 lg:bg-transparent"
               : "bg-gradient-to-b from-nera-navy/80 to-transparent"
         }`}
       >

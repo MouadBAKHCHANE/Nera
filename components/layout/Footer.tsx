@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
@@ -52,6 +52,15 @@ export function Footer() {
                 <Link href={p.href} className={link}>{p.label}</Link>
               </li>
             ))}
+            <li className="pt-1.5">
+              <Link
+                href="/prestations"
+                className="group inline-flex items-center justify-center gap-1.5 text-body-sm font-medium text-accent-deep transition-colors hover:text-nera-navy md:justify-start"
+              >
+                <span>Toutes les prestations</span>
+                <ArrowRight className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2} />
+              </Link>
+            </li>
           </ul>
         </div>
 
