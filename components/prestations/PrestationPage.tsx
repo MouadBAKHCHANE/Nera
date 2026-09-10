@@ -54,7 +54,7 @@ export function PrestationPage({ page }: { page: Page }) {
             alt=""
             fill
             priority
-            quality={80}
+            quality={90}
             sizes="100vw"
             className={`object-cover opacity-30 ${page.imagePosition ?? ""}`}
           />

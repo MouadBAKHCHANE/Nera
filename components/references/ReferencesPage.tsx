@@ -36,7 +36,7 @@ export function ReferencesPage() {
             alt=""
             fill
             priority
-            quality={80}
+            quality={90}
             sizes="100vw"
             className="object-cover object-[50%_35%] opacity-30"
           />

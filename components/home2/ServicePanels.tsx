@@ -93,7 +93,7 @@ export function ServicePanels() {
                   src={p.img}
                   alt=""
                   fill
-                  quality={80}
+                  quality={90}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className={`object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100 group-data-active:scale-[1.06] group-data-active:opacity-100 ${p.pos ?? ""}`}
                 />

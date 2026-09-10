@@ -55,7 +55,7 @@ export function PrestationsIndexPage() {
             alt=""
             fill
             priority
-            quality={80}
+            quality={90}
             sizes="100vw"
             className="object-cover opacity-30"
           />

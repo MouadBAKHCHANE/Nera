@@ -18,7 +18,7 @@ export function RenovationAZ() {
               src="/img/bureau-batiment-clair-moderne.jpg"
               alt="Façade d'un immeuble contemporain rénové"
               fill
-              quality={85}
+              quality={90}
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />

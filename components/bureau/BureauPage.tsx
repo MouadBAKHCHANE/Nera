@@ -110,7 +110,7 @@ export function BureauPage() {
             alt=""
             fill
             priority
-            quality={80}
+            quality={90}
             sizes="100vw"
             className="object-cover opacity-30"
           />
@@ -254,12 +254,12 @@ export function BureauPage() {
         <section id={bureau.equipe.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:items-center lg:gap-20">
-              <Reveal effect="fade-right" className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[5/6]">
+              <Reveal effect="fade-right" className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[4/5]">
                 <Image
                   src={bureau.equipe.image}
-                  alt="Séance de travail au bureau NERA"
+                  alt="Trois personnes réunies autour d’un plan d’étage lors d’une séance de travail"
                   fill
-                  quality={80}
+                  quality={90}
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover saturate-[0.85]"
                 />

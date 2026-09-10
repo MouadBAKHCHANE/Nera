@@ -136,6 +136,44 @@ Par ordre de priorité.
 5. **Nettoyage** — supprimer `/home-2` et les composants clairs une fois la variante validée,
    ajouter la page 404, soumettre à la Search Console.
 
+## Photos
+
+Les fichiers de `public/img/` sont des ré-exports des originaux de `../Assets/Visuels/`, jamais
+des fichiers retouchés à la main. **Règle d'export** : plus grand côté à 2560 px au maximum (la
+plus grande valeur de `deviceSizes` dans `next.config.ts`), jamais d'agrandissement, qualité JPEG
+92 sans sous-échantillonnage de la chrominance (`subsampling=0`), progressif. Plafonner le plus
+grand côté et non la largeur : une image en portrait exportée à 2560 px de large pèse trois fois
+plus pour rien.
+
+Ces fichiers ne sont que les masters : `next/image` les ré-encode en AVIF à la volée. C'est donc
+l'attribut `quality` des composants qui décide de la qualité livrée — il est à **90** partout, et
+90 doit rester dans `images.qualities` de `next.config.ts`, sinon Next refuse la valeur.
+
+Les premiers exports plafonnaient à 1400 px en qualité 82 : sur un écran large ou à densité
+double, il ne restait plus de pixels à servir et les photos paraissaient floues à côté des
+originaux. Total actuel : environ 8 Mo de masters, une page d'accueil servie en AVIF autour de
+100 Ko pour le héro pleine largeur.
+
+Correspondance master → original (vérifiée par comparaison d'images, à conserver pour tout
+ré-export) :
+
+| `public/img/`                            | `Assets/Visuels/`                 |
+| ---------------------------------------- | --------------------------------- |
+| `hero-immeuble-geneve-soleil.jpg`        | Immeuble ville soleil.jpg         |
+| `bureau-batiment-clair-moderne.jpg`      | Batiment clair moderne.jpg        |
+| `bureau-equipe-etude.jpg`                | Etude plans 2.jpg                 |
+| `references-immeubles-modernes.jpg`      | Immeubles modernes ciel bleu.jpg  |
+| `process-panneaux-solaires-immeuble.jpg` | Panneaux solaires immeuble 2.png  |
+| `prestation-diagnostic-energetique.jpg`  | Diagnostic énergétique.jpg        |
+| `prestation-enveloppe-facade-vitree.jpg` | Batiment vitré moderne.jpg        |
+| `prestation-plans-autorisation.jpg`      | Plans construction.png            |
+| `prestation-pompe-a-chaleur.jpg`         | Pompe à chaleur.jpg               |
+| `prestation-renovation-batiment.jpg`     | Rénovation bâtiment.jpg           |
+| `prestation-subventions-plans.jpg`       | Plans maison écologie.jpg         |
+
+Les noms de fichiers du client sont en Unicode décomposé (NFD) : un script qui les ouvre par
+nom littéral échoue en `FileNotFoundError`. Comparer sur `unicodedata.normalize("NFC", nom)`.
+
 ## Défilement entre pages
 
 `app/globals.css` pose `scroll-behavior: smooth` pour les ancres internes. Next 16 ne
