@@ -162,7 +162,7 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
   return (
     <div className={`relative flex select-none items-center justify-center ${className}`}>
       <svg
-        viewBox="28 78 744 626"
+        viewBox="28 78 744 598"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="h-full w-full font-sans [&_*]:[vector-effect:non-scaling-stroke]"

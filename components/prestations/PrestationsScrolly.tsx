@@ -30,6 +30,32 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
   const [active, setActive] = useState(0);
   const sections = useRef<(HTMLElement | null)[]>([]);
+  const panel = useRef<HTMLDivElement | null>(null);
+  /** Padding bas du dernier bloc, mesuré : voir `useEffect` ci-dessous. */
+  const [lastPad, setLastPad] = useState<number | undefined>(undefined);
+
+  // Le panneau collant se décroche quand le bas de la colonne texte atteint le bas du
+  // panneau. Pour qu'il se décroche exactement quand le CTA du dernier bloc arrive au niveau
+  // du bas du dessin (pas de la boîte, qui garde du vide sous un SVG limité en largeur), le
+  // dernier bloc reçoit pour padding bas la distance bas du panneau - bas du dessin, lue
+  // dans la matrice du SVG. Sous `lg`, le panneau est masqué : pas de padding mesuré.
+  useEffect(() => {
+    const update = () => {
+      const el = panel.current;
+      const svg = el?.querySelector("svg");
+      const ctm = svg?.getScreenCTM();
+      if (!el || !svg || !ctm || el.offsetWidth === 0) {
+        setLastPad(undefined);
+        return;
+      }
+      const vb = svg.viewBox.baseVal;
+      const drawnBottom = ctm.f + ctm.d * (vb.y + vb.height);
+      setLastPad(Math.max(0, Math.round(el.getBoundingClientRect().bottom - drawnBottom)));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   // Calcul de la prestation active au défilement
   const updateActiveSection = useCallback(() => {
@@ -101,7 +127,7 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
       {/* S'ancre à la 1re prestation, reste en place pour les 6, part avec la dernière */}
       {/* ============================================================ */}
       <div className="hidden lg:col-span-6 lg:block xl:col-span-6">
-        <div className="sticky top-20 flex h-[calc(100vh-6rem)] flex-col justify-center">
+        <div ref={panel} className="sticky top-20 flex h-[calc(100vh-6rem)] flex-col justify-center">
           <div className="relative flex h-full max-h-[640px] w-full items-center justify-center">
             {/* L'illustration isométrique vectorielle flottante (sans carte blanche ni bordure) */}
             <PrestationIllustration
@@ -159,7 +185,8 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
             ref={(el) => {
               sections.current[i] = el;
             }}
-            className="scroll-mt-28 border-b border-hairline py-14 last:border-0 lg:flex lg:min-h-[calc(100vh-6rem)] lg:flex-col lg:justify-center lg:py-24 lg:last:min-h-0 lg:last:pb-10"
+            className="scroll-mt-28 border-b border-hairline py-14 last:border-0 lg:flex lg:min-h-[calc(100vh-6rem)] lg:flex-col lg:justify-center lg:py-24 lg:last:min-h-0"
+            style={i === entries.length - 1 ? { paddingBottom: lastPad } : undefined}
           >
             {/* Version mobile de l'illustration (affichée au-dessus de chaque texte sous lg) */}
             <div className="relative mb-8 overflow-hidden rounded-2xl lg:hidden">
