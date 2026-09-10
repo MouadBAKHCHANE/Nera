@@ -87,13 +87,36 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Lint : `react-hooks/set-state-in-effect` signale `setActive` dans l'effet d'observation de
   `PrestationsScrolly.tsx` (ligne ~115). Préexistant, sans effet à l'exécution ; à traiter lors du
   nettoyage (point 5).
+- Page `/bureau` (À propos) : `components/bureau/BureauPage.tsx`, contenu `content/bureau.ts`
+  (texte client mot pour mot, lignes 694 à 772). En-tête sombre sur `bureau-batiment-clair-moderne`,
+  sommaire, puis les H2 du client dans l'ordre : équilibre (six « entre… » en médaillons losange),
+  mission (sept verbes numérotés), fondateur (cartouche + coordonnées directes, section marine),
+  équipe (photo `bureau-equipe-etude.jpg` tirée de `people-having-debate…`), procédures (frise),
+  qualifications (quatre cartes + logos officiels), valeurs (cinq colonnes), chiffres, cantons,
+  CTA « Contacter NERA » (vert, vers `/contact`, à créer au point 2) + « Demander un devis gratuit ».
+  Alternance crème / blanc / marine sans deux marine consécutives. JSON-LD `BreadcrumbList` +
+  `AboutPage` (fondateur, adresse). Pas de portrait du fondateur : aucun fichier client, la
+  cartouche texte en tient lieu — à remplacer si le client en fournit un.
+- `Stats` et `Territory` (accueil) acceptent désormais `items` / `title` + `text` et un `id` : le
+  bureau les réutilise avec ses propres libellés client (plus longs que ceux de l'accueil).
+  L'accueil est inchangé. Le compteur de `Stats` initialise la valeur finale sous
+  `prefers-reduced-motion` au lieu d'un `setState` dans l'effet (lint corrigé).
+- Page `/references` : `components/references/ReferencesPage.tsx`, contenu
+  `content/references.ts`. Le client indique « En attente » pour le corps : la page porte le H1,
+  les logos officiels, le H2 « Vous souhaitez nous confier un projet ? » et le CTA « Présenter
+  mon projet » (pop-up devis). Une grille de projets est prête (`references.projects`, champs
+  `title`, `place`, `text`, `image?`) et s'affiche dès qu'elle est remplie. **Tant qu'elle est
+  vide, la page est en `noindex, follow` et absente du plan de site** : une page sans contenu
+  nuirait au référencement. Remplir le tableau suffit à lever les deux.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
 
 Par ordre de priorité.
 
-1. **`/bureau`** et **`/references`** — visuels dans `../Assets/Visuels/`.
+1. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
+   pour remplir `references.projects` ; vérifier ensuite que `/references` sort du noindex.
+   Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
 2. **`/contact`** — le formulaire simple, identique à la section contact de l'accueil.
 3. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
    tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.

@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Section 4 : « NERA en chiffres ». Chiffres fournis par le client. */
-const stats = [
+export type Stat = { value: number; prefix?: string; suffix?: string; label: string };
+
+/** Section 4 : « NERA en chiffres ». Chiffres fournis par le client (libellés de l'accueil). */
+const homeStats: Stat[] = [
   { value: 300, prefix: "+", label: "CECB et CECB Plus réalisés" },
   { value: 50, prefix: "+", label: "dossiers de subventions déposés" },
   { value: 50, prefix: "+", label: "projets réalisés en 2026" },
@@ -15,16 +17,13 @@ const stats = [
 
 function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(0);
   const reduce = useReducedMotion();
+  // Sans animation, on affiche la valeur finale d'emblée : pas de setState dans l'effet.
+  const [n, setN] = useState(reduce ? value : 0);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (reduce) {
-      setN(value);
-      return;
-    }
+    if (!el || reduce) return;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
@@ -54,9 +53,11 @@ function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: 
   );
 }
 
-export function Stats() {
+/** `items` permet à une autre page (le bureau) de reprendre la section avec ses propres libellés. */
+export function Stats({ items = homeStats, id }: { items?: readonly Stat[]; id?: string } = {}) {
+  const stats = items;
   return (
-    <section className="bg-nera-navy-deep py-20 text-nera-cream lg:py-28">
+    <section id={id} className="scroll-mt-24 bg-nera-navy-deep py-20 text-nera-cream lg:py-28">
       <div className="px-6 md:px-10 lg:px-[120px]">
         <Reveal className="flex flex-wrap items-end justify-between gap-6 border-b border-nera-cream/15 pb-8">
           <h2 className="font-display text-[1.75rem] font-light leading-[1.15] text-nera-cream md:text-[2.5rem]">
@@ -70,7 +71,7 @@ export function Stats() {
               <p className="mt-5 font-display text-[2.75rem] font-light leading-none text-nera-cream md:text-[3.5rem]">
                 <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
               </p>
-              <p className="mt-3 max-w-[14rem] text-body-sm font-light leading-[1.5] text-nera-cream/75">{s.label}</p>
+              <p className="mt-3 max-w-[16rem] text-body-sm font-light leading-[1.5] text-nera-cream/75">{s.label}</p>
             </Reveal>
           ))}
         </ul>

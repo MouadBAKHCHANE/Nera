@@ -4,9 +4,21 @@ import { DiamondOutline } from "./Logomark";
 /** Section 5 : « NERA intervient dans toute la Suisse romande ». Cantons en médaillons losange. */
 const cantons = ["Genève", "Vaud", "Valais", "Fribourg", "Neuchâtel", "Jura"];
 
-export function Territory() {
+/**
+ * `title` et `text` permettent au bureau de reprendre la section avec son propre H2 client.
+ * Le titre est un nœud React pour garder le mot mis en avant en vert.
+ */
+export function Territory({
+  id,
+  title,
+  text,
+}: {
+  id?: string;
+  title?: React.ReactNode;
+  text?: string;
+} = {}) {
   return (
-    <section className="bg-canvas bg-blueprint-light py-20 text-nera-navy lg:py-28">
+    <section id={id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-20 text-nera-navy lg:py-28">
       <div className="px-6 md:px-10 lg:px-[120px]">
         <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:items-center lg:gap-20">
           <Reveal>
@@ -15,11 +27,15 @@ export function Territory() {
               Territoire
             </p>
             <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.15] text-nera-navy md:text-[2.5rem]">
-              NERA intervient dans toute la <span className="font-medium text-accent-deep">Suisse romande</span>
+              {title ?? (
+                <>
+                  NERA intervient dans toute la <span className="font-medium text-accent-deep">Suisse romande</span>
+                </>
+              )}
             </h2>
             <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body">
-              Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans le
-              reste de la Suisse romande selon la nature des projets.
+              {text ??
+                "Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans le reste de la Suisse romande selon la nature des projets."}
             </p>
           </Reveal>
           <ul className="grid grid-cols-3 gap-3 md:grid-cols-6 lg:gap-4">
