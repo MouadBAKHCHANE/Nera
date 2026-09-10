@@ -156,7 +156,7 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
                           className={`block rounded-full transition-all duration-300 ${
                             isCurrent
                               ? "size-3 bg-nera-navy ring-2 ring-accent ring-offset-2 ring-offset-canvas"
-                              : "size-1.5 bg-slate-300 hover:size-2.5 hover:bg-slate-500"
+                              : "size-1.5 bg-hairline hover:size-2.5 hover:bg-mute"
                           }`}
                         />
                         {/* Tooltip au survol */}
@@ -197,19 +197,6 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
               <p className="flex items-center gap-3 text-[12px] font-medium uppercase tracking-[0.25em] text-accent-deep">
                 <span className="font-display text-[15px] tracking-normal text-mute">{pad(i + 1)}</span>
                 <PrestationIcon of={e.slug} className="size-5 text-accent-deep" />
-                <span className="text-[11px] tracking-[0.2em] text-mute">
-                  {i === 0
-                    ? "Diagnostic & Audit"
-                    : i === 1
-                    ? "Enveloppe & Physique"
-                    : i === 2
-                    ? "Ingénierie Fluides"
-                    : i === 3
-                    ? "Procédures Administratives"
-                    : i === 4
-                    ? "Financement Public"
-                    : "Accompagnement Global"}
-                </span>
               </p>
               <h2 className="mt-4 font-display text-[1.625rem] font-light leading-[1.2] text-nera-navy md:text-[2.125rem]">
                 {e.title}

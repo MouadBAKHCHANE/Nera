@@ -1,6 +1,6 @@
 # État du projet
 
-Mis à jour le 9 septembre 2026. Tenir ce fichier à jour en fin de session.
+Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 
 ## Fait
 
@@ -80,6 +80,13 @@ Mis à jour le 9 septembre 2026. Tenir ce fichier à jour en fin de session.
   desktop. Le bouton devis latéral reste téléphone et tablette.
 - SEO accueil, `sitemap.ts`, `robots.ts`, images OG/Twitter, JSON-LD `ProfessionalService`.
   Le plan du site tire les six routes prestation de `content/prestation-pages.ts`.
+- `PrestationsScrolly.tsx` : les sur-titres inventés (« Diagnostic & Audit », « Ingénierie
+  Fluides », « Financement Public »…) ont été retirés — seul le numéro et l'icône précèdent le H2,
+  conformément à la règle « aucun libellé hors texte client ». Le repère à points est revenu dans
+  la palette (`bg-hairline` / `hover:bg-mute` au lieu de `bg-slate-*`).
+- Lint : `react-hooks/set-state-in-effect` signale `setActive` dans l'effet d'observation de
+  `PrestationsScrolly.tsx` (ligne ~115). Préexistant, sans effet à l'exécution ; à traiter lors du
+  nettoyage (point 5).
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
