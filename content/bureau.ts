@@ -102,7 +102,7 @@ export const bureau = {
     ],
     outro: "Le client conserve un interlocuteur identifié tout en bénéficiant des compétences nécessaires aux différentes étapes.",
     /** Photo choisie par le client : `Assets/Visuels/Etude plans 2.jpg`. */
-    image: "/img/bureau-equipe-etude.jpg",
+    image: "/img/bureau-equipe-etude.webp",
   },
 
   procedures: {

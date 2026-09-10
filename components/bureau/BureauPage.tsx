@@ -106,7 +106,7 @@ export function BureauPage() {
         {/* En-tête : photo assombrie, fil d'Ariane, H1 et les trois paragraphes d'introduction. */}
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
-            src="/img/bureau-batiment-clair-moderne.jpg"
+            src="/img/bureau-batiment-clair-moderne.webp"
             alt=""
             fill
             priority

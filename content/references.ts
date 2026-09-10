@@ -21,5 +21,5 @@ export const references = {
     title: "Vous souhaitez nous confier un projet ?",
     cta: "Présenter mon projet",
   },
-  image: "/img/references-immeubles-modernes.jpg",
+  image: "/img/references-immeubles-modernes.webp",
 };

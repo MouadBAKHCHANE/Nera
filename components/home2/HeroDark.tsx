@@ -15,7 +15,7 @@ export function HeroDark() {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-nera-navy text-nera-cream">
       <Image
-        src="/img/hero-immeuble-geneve-soleil.jpg"
+        src="/img/hero-immeuble-geneve-soleil.webp"
         alt=""
         fill
         priority

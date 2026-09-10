@@ -52,7 +52,7 @@ export function Mission() {
           </Reveal>
           <Reveal delay={0.08} className="relative min-h-[320px] overflow-hidden rounded-md bg-nera-navy-soft">
             <Image
-              src="/img/bureau-batiment-clair-moderne.jpg"
+              src="/img/bureau-batiment-clair-moderne.webp"
               alt="Immeuble contemporain à la façade claire"
               fill
               sizes="(min-width: 1024px) 58vw, 100vw"

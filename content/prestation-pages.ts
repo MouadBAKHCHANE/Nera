@@ -63,7 +63,7 @@ export const prestationPages: PrestationPage[] = [
       "Les experts CECB de NERA établissent les certificats et diagnostics nécessaires pour évaluer la situation existante, identifier les possibilités d’amélioration et construire une stratégie cohérente.",
     ],
     heroCta: "Demander un devis CECB",
-    image: "/img/prestation-diagnostic-energetique.jpg",
+    image: "/img/prestation-diagnostic-energetique.webp",
     meta: {
       title: "CECB et CECB Plus à Genève | NERA",
       description:
@@ -308,7 +308,7 @@ export const prestationPages: PrestationPage[] = [
       "NERA réalise les études de physique du bâtiment nécessaires à la conception, à la transformation et à la rénovation de bâtiments performants, confortables et durables.",
     ],
     heroCta: "Demander une étude",
-    image: "/img/prestation-enveloppe-facade-vitree.jpg",
+    image: "/img/prestation-enveloppe-facade-vitree.webp",
     meta: {
       title: "Physique du bâtiment et labels à Genève | NERA",
       description:
@@ -500,7 +500,7 @@ export const prestationPages: PrestationPage[] = [
       "NERA étudie et planifie les installations de chauffage, ventilation et climatisation pour les constructions neuves, transformations et rénovations.",
     ],
     heroCta: "Demander une étude CVC",
-    image: "/img/prestation-pompe-a-chaleur.jpg",
+    image: "/img/prestation-pompe-a-chaleur.webp",
     meta: {
       title: "Ingénierie CVC et énergies renouvelables | NERA",
       description:
@@ -661,7 +661,7 @@ export const prestationPages: PrestationPage[] = [
       "NERA constitue le volet énergétique relevant de ses compétences et accompagne son instruction auprès des services concernés.",
     ],
     heroCta: "Faire analyser mon projet",
-    image: "/img/prestation-plans-autorisation.jpg",
+    image: "/img/prestation-plans-autorisation.webp",
     meta: {
       title: "Dossier énergétique et autorisations | NERA Genève",
       description:
@@ -818,7 +818,7 @@ export const prestationPages: PrestationPage[] = [
       "NERA identifie les aides potentiellement mobilisables, prépare les pièces prévues dans son mandat et accompagne le suivi administratif.",
     ],
     heroCta: "Étudier mes subventions",
-    image: "/img/prestation-subventions-plans.jpg",
+    image: "/img/prestation-subventions-plans.webp",
     meta: {
       title: "Subventions rénovation énergétique | NERA Genève",
       description:
@@ -978,7 +978,7 @@ export const prestationPages: PrestationPage[] = [
       "NERA accompagne le maître d’ouvrage comme interlocuteur technique tout au long du processus.",
     ],
     heroCta: "Présenter mon projet de rénovation",
-    image: "/img/prestation-renovation-batiment.jpg",
+    image: "/img/prestation-renovation-batiment.webp",
     imagePosition: "object-[50%_70%]",
     meta: {
       title: "Rénovation énergétique et AMO | NERA Genève",

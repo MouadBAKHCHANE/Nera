@@ -16,7 +16,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Évaluer la performance énergétique du bâtiment, identifier son potentiel d'amélioration et établir des scénarios de rénovation hiérarchisés.",
     cta: "Découvrir les CECB et CECB Plus",
     href: "/prestations/audit-cecb",
-    img: "/img/prestation-diagnostic-energetique.jpg",
+    img: "/img/prestation-diagnostic-energetique.webp",
   },
   {
     n: "02",
@@ -24,7 +24,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Réaliser les calculs thermiques, étudier l'enveloppe, le confort d'été et les problématiques d'humidité, et accompagner les démarches Minergie, HPE ou THPE.",
     cta: "Découvrir la physique du bâtiment",
     href: "/prestations/modelisation-thermique",
-    img: "/img/prestation-enveloppe-facade-vitree.jpg",
+    img: "/img/prestation-enveloppe-facade-vitree.webp",
   },
   {
     n: "03",
@@ -32,7 +32,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Étudier, dimensionner et intégrer les installations de chauffage, ventilation et climatisation, ainsi que les solutions renouvelables adaptées au bâtiment.",
     cta: "Découvrir l'ingénierie CVC",
     href: "/prestations/installations-cvc",
-    img: "/img/prestation-pompe-a-chaleur.jpg",
+    img: "/img/prestation-pompe-a-chaleur.webp",
   },
   {
     n: "04",
@@ -40,7 +40,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Préparer le volet énergétique des dossiers et accompagner les échanges techniques avec les mandataires et les services compétents.",
     cta: "Découvrir les prestations autorisations",
     href: "/prestations/autorisation-de-construire",
-    img: "/img/prestation-plans-autorisation.jpg",
+    img: "/img/prestation-plans-autorisation.webp",
   },
   {
     n: "05",
@@ -48,7 +48,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Identifier les aides mobilisables, préparer les demandes et assurer leur suivi jusqu'à la remise des justificatifs d'achèvement.",
     cta: "Découvrir les prestations subventions",
     href: "/prestations/subventions",
-    img: "/img/prestation-subventions-plans.jpg",
+    img: "/img/prestation-subventions-plans.webp",
   },
   {
     n: "06",
@@ -56,7 +56,7 @@ const panels: { n: string; title: string; text: string; cta: string; href: strin
     text: "Piloter les différentes étapes d'une rénovation, du diagnostic initial à la réception, en qualité d'interlocuteur technique du maître d'ouvrage.",
     cta: "Découvrir la rénovation énergétique",
     href: "/prestations/renovation-energetique",
-    img: "/img/prestation-renovation-batiment.jpg",
+    img: "/img/prestation-renovation-batiment.webp",
     pos: "object-[50%_70%]",
   },
 ];

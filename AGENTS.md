@@ -8,6 +8,9 @@ Site vitrine de NERA Ingénieurs Conseils (Genève). Lire dans l'ordre : `ETAT.m
 - Palette et polices : uniquement les tokens de `app/globals.css`. Aucun hex en dur dans un composant.
 - Les 7 prestations et les coordonnées vivent dans `content/prestations.ts`. Ne jamais les dupliquer.
 - Aucun chiffre, avis, certification ou logo partenaire qui ne soit fourni par le client.
+- **Toute photo est exportée en WebP**, depuis l'original de `../Assets/Visuels/`, plus grand
+  côté à 2560 px, `quality=90, method=6`. Jamais de JPEG, jamais de conversion depuis un export
+  déjà compressé. Détail et correspondance master → original : section « Photos » d'`ETAT.md`.
 - Périmètre : ~10 pages. Ne pas créer de page hors arborescence sans accord explicite.
 - Motion : Framer Motion seulement. Pas de GSAP, Lenis, Three.js sauf demande explicite.
 - Ne jamais `git push` sans accord explicite. Committer localement librement.

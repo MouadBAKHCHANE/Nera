@@ -51,7 +51,7 @@ export function PrestationsIndexPage() {
       <main>
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
-            src="/img/process-panneaux-solaires-immeuble.jpg"
+            src="/img/process-panneaux-solaires-immeuble.webp"
             alt=""
             fill
             priority

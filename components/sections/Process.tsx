@@ -29,7 +29,7 @@ export function Process() {
   return (
     <section className="relative overflow-hidden bg-nera-navy py-section-sm text-nera-cream lg:py-section">
       <Image
-        src="/img/process-panneaux-solaires-immeuble.jpg"
+        src="/img/process-panneaux-solaires-immeuble.webp"
         alt=""
         fill
         sizes="100vw"

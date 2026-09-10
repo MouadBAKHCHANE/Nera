@@ -33,7 +33,7 @@ export function Hero() {
 
       <div className="relative h-[56vw] max-h-[720px] min-h-[320px] w-full overflow-hidden bg-nera-navy">
         <Image
-          src="/img/hero-immeuble-geneve-soleil.jpg"
+          src="/img/hero-immeuble-geneve-soleil.webp"
           alt="Immeuble résidentiel à Genève au soleil"
           fill
           priority
