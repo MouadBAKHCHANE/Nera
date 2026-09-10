@@ -7,11 +7,10 @@ import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
 import { DiamondOutline, LogomarkOutline, Ruler } from "@/components/home2/Logomark";
 import { Stats } from "@/components/home2/Stats";
 import { Territory } from "@/components/home2/Territory";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
-import { bureau, bureauRoute, bureauToc } from "@/content/bureau";
+import { bureau, bureauRoute } from "@/content/bureau";
 import { company } from "@/content/prestations";
 import { seo } from "@/content/seo";
 
@@ -155,25 +154,6 @@ export function BureauPage() {
             </div>
           </Container>
         </header>
-
-        {/* Sommaire des sections, pour atteindre un H2 sans défiler. */}
-        <nav aria-label="Sections de la page" className="border-b border-hairline bg-canvas-alt py-8">
-          <Container>
-            <ol className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
-              {bureauToc.map((s, i) => (
-                <li key={s.id}>
-                  <a
-                    href={`#${s.id}`}
-                    className="group flex items-baseline gap-3 text-body-sm text-body transition-colors hover:text-accent-deep"
-                  >
-                    <span className="font-display text-[13px] text-mute">{pad(i + 1)}</span>
-                    <span>{s.title}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </Container>
-        </nav>
 
         {/* 1. L'équilibre comme principe — crème. Les six « entre… » en médaillons losange. */}
         <section id={bureau.equilibre.id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-section-sm lg:py-section">
@@ -399,12 +379,7 @@ export function BureauPage() {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {bureau.closing.title}
               </h2>
-              <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
-                <Button href={bureau.closing.primary.href} variant="accent">
-                  {bureau.closing.primary.label}
-                </Button>
-                <ArrowQuoteButton>{bureau.closing.secondary}</ArrowQuoteButton>
-              </div>
+              <ArrowQuoteButton className="mt-10">{bureau.closing.secondary}</ArrowQuoteButton>
             </Reveal>
           </Container>
         </section>

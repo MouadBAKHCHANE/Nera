@@ -93,10 +93,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   mission (sept verbes numérotés), fondateur (cartouche + coordonnées directes, section marine),
   équipe (photo `bureau-equipe-etude.jpg` tirée de `people-having-debate…`), procédures (frise),
   qualifications (quatre cartes + logos officiels), valeurs (cinq colonnes), chiffres, cantons,
-  CTA « Contacter NERA » (vert, vers `/contact`, à créer au point 2) + « Demander un devis gratuit ».
-  Alternance crème / blanc / marine sans deux marine consécutives. JSON-LD `BreadcrumbList` +
+  CTA « Demander un devis gratuit ». Alternance crème / blanc / marine sans deux marine consécutives. JSON-LD `BreadcrumbList` +
   `AboutPage` (fondateur, adresse). Pas de portrait du fondateur : aucun fichier client, la
   cartouche texte en tient lieu — à remplacer si le client en fournit un.
+  Retirés à la demande du client : le sommaire numéroté des sections, sous l'en-tête, et le
+  bouton « Contacter NERA » de la section « Rencontrons-nous autour de votre projet », alors
+  que le texte client prévoyait les deux CTA. `bureau.closing` ne porte donc plus que le titre
+  et le libellé du devis.
 - `Stats` et `Territory` (accueil) acceptent désormais `items` / `title` + `text` et un `id` : le
   bureau les réutilise avec ses propres libellés client (plus longs que ceux de l'accueil).
   L'accueil est inchangé. Le compteur de `Stats` initialise la valeur finale sous

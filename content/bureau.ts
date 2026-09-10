@@ -162,21 +162,12 @@ export const bureau = {
     text: "Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans les cantons du Valais, de Fribourg, de Neuchâtel et du Jura selon la nature des projets.",
   },
 
+  /**
+   * Dernier H2 du client. Le CTA « Contacter NERA » qu'il prévoyait a été retiré à la
+   * demande du client : seul « Demander un devis gratuit » reste.
+   */
   closing: {
     title: "Rencontrons-nous autour de votre projet",
-    primary: { label: "Contacter NERA", href: "/contact" },
     secondary: "Demander un devis gratuit",
   },
 } as const;
-
-/** Sommaire de la page, dans l'ordre des sections. */
-export const bureauToc = [
-  bureau.equilibre,
-  bureau.mission,
-  bureau.fondateur,
-  bureau.equipe,
-  bureau.procedures,
-  bureau.qualifications,
-  bureau.valeurs,
-  bureau.cantons,
-].map((s) => ({ id: s.id, title: s.title }));
