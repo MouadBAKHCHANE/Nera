@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
+import { prestationsIndexRoute } from "@/content/prestation-pages";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
@@ -47,20 +48,15 @@ export function Footer() {
         <div className="md:text-left">
           <p className={head}>Prestations</p>
           <ul className="mt-4 space-y-2.5">
+            {/* L'index en tête de liste, au même style que les six prestations. */}
+            <li>
+              <Link href={prestationsIndexRoute} className={link}>Toutes les prestations</Link>
+            </li>
             {footerPrestations.map((p) => (
               <li key={p.href}>
                 <Link href={p.href} className={link}>{p.label}</Link>
               </li>
             ))}
-            <li className="pt-1.5">
-              <Link
-                href="/prestations"
-                className="group inline-flex items-center justify-center gap-1.5 text-body-sm font-medium text-accent-deep transition-colors hover:text-nera-navy md:justify-start"
-              >
-                <span>Toutes les prestations</span>
-                <ArrowRight className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2} />
-              </Link>
-            </li>
           </ul>
         </div>
 

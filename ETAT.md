@@ -19,10 +19,11 @@ Mis à jour le 9 septembre 2026. Tenir ce fichier à jour en fin de session.
   `prestationsIndex` dans `content/prestation-pages.ts` (lignes 92 à 175 du texte client).
   JSON-LD `BreadcrumbList` + `ItemList`. La route n'est plus en 404 pour le méga-menu, le
   héro clair et `content/navigation.ts`, qui pointaient déjà dessus.
-- Liens « Toutes les prestations » redirigeant vers `/prestations` ajoutés dans le menu sandwich
+- Liens « Toutes les prestations » vers `/prestations` : dans le menu sandwich
   (`components/home2/MenuOverlay.tsx`) au bas du sous-menu Prestations déroulé, et dans les deux
   variantes de pied de page (`components/home2/FooterDark.tsx` et `components/layout/Footer.tsx`)
-  au bas de la colonne Prestations.
+  en tête de la colonne Prestations, au même style que les six entrées — le client ne voulait pas
+  de CTA fléché en bas de colonne.
 - Les six domaines de `/prestations` suivent la direction hestera.ch/nos-services
   (`components/prestations/PrestationsScrolly.tsx`, client) : à gauche, un panneau `sticky`
   qui s'ancre dès la première prestation, reste en place pendant les six et part avec la
