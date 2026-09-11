@@ -523,11 +523,11 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
             <Layer key="grants" reduce={reduce}>
               <polygon points={faceY(D, 0, W, 0, TOP)} fill="url(#nera-hatch)" opacity={0.35} />
               <polygon points={faceX(W, 0, D, 0, TOP)} fill="url(#nera-hatch)" opacity={0.35} />
-              <Tag reduce={reduce} delay={0.06} x={40} y={96} w={244} title="Isolation de l’enveloppe" lines={["Mesure pouvant être concernée"]} to={iso(60, D, 2 * F + 30)} accent />
-              <Tag reduce={reduce} delay={0.12} x={548} y={500} w={222} title="Chauffage" lines={["Remplacement d’un chauffage", "Pompes à chaleur, bois"]} to={iso(PAC.x1, 32, 14)} accent />
-              <Tag reduce={reduce} delay={0.18} x={548} y={80} w={222} title="Solaire thermique" lines={["Rénovations globales"]} to={iso(175, 92, TOP + 6)} accent />
+              <Tag reduce={reduce} delay={0.06} x={40} y={96} w={244} title="Isolation de l’enveloppe" to={iso(60, D, 2 * F + 30)} accent />
+              <Tag reduce={reduce} delay={0.12} x={548} y={500} w={222} title="Production de chaleur" to={iso(PAC.x1, 32, 14)} accent />
+              <Tag reduce={reduce} delay={0.18} x={548} y={80} w={222} title="Solaire thermique" to={iso(175, 92, TOP + 6)} accent />
               <Tag reduce={reduce} delay={0.24} x={548} y={580} w={222} title="Identification des aides" lines={["Dispositifs cantonaux", "et communaux"]} />
-              <Tag reduce={reduce} delay={0.3} x={40} y={590} w={280} title="Programme Bâtiments" lines={["Demande avant le début des travaux"]} />
+              <Tag reduce={reduce} delay={0.3} x={40} y={590} w={252} title="Programme Bâtiments" lines={["De la demande à l’achèvement"]} />
             </Layer>
           )}
         </AnimatePresence>
