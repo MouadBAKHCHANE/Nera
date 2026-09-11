@@ -552,7 +552,9 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
                         exit={reduce ? undefined : { opacity: 0 }}
                         transition={{ duration: reduce ? 0 : 0.32, delay: 0.1 + i * 0.06, ease: [0.25, 1, 0.5, 1] }}
                       >
-                        <rect width="128" height="28" rx="14" strokeWidth={1} className="fill-nera-white stroke-nera-navy" />
+                        {/* Même arrondi que les cartouches (`Tag`, rx 3) : des pastilles en
+                            capsule juraient avec le reste du dessin. */}
+                        <rect width="128" height="28" rx="3" strokeWidth={1} className="fill-nera-white stroke-nera-navy" />
                         <circle cx="15" cy="14" r="3" className="fill-accent" />
                         <text x="26" y="18.5" fontSize={13} fontWeight={500} className="fill-nera-navy">
                           {s}
