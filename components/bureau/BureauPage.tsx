@@ -125,7 +125,11 @@ export function BureauPage() {
     <>
       <HeaderDark solidOnScroll />
       <main>
-        {/* En-tête : photo assombrie, fil d'Ariane, H1 et les trois paragraphes d'introduction. */}
+        {/*
+          En-tête : photo assombrie, fil d'Ariane, H1 et les trois paragraphes d'introduction.
+          Le bloc titre apparaît en `fade` 1000 ms comme chez hestera ; le fil d'Ariane reste
+          immédiat, c'est un repère de navigation.
+        */}
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
             src="/img/bureau-batiment-clair-moderne.webp"
@@ -159,7 +163,7 @@ export function BureauPage() {
               </ol>
             </nav>
 
-            <div className="mt-10 max-w-3xl">
+            <Reveal {...aosBlock} className="mt-10 max-w-3xl">
               <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
                 <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
                 Le bureau
@@ -173,7 +177,7 @@ export function BureauPage() {
                 </p>
               ))}
               <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
-            </div>
+            </Reveal>
           </Container>
         </header>
 
