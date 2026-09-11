@@ -53,10 +53,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   six points cliquables. Sous `lg`, pas de colonne collante : l'illustration s'affiche en tête
   de chaque section. Respecte `prefers-reduced-motion`. Le dernier bloc ne force pas un écran
   de haut (`lg:last:min-h-0`), sinon un grand vide précède la section suivante ; son padding
-  bas est mesuré en JS (bas du panneau collant − bas du dessin, lu dans `getScreenCTM()` du
-  SVG et son `viewBox`), pour que le panneau se décroche exactement quand le CTA « Découvrir
-  notre accompagnement global » arrive au niveau du bas des pastilles — pas avant. Une formule
-  CSS ne suffisait pas : le SVG est limité en largeur et laisse du vide sous lui dans sa boîte.
+  bas est mesuré en JS et vaut deux parts additionnées : la distance bas du panneau collant −
+  bas du dessin (lue dans `getScreenCTM()` du SVG et son `viewBox`), **plus la moitié de la
+  hauteur du dessin**. La première empêche le panneau de se décrocher alors que le texte est
+  encore loin du dessin ; la seconde laisse le dernier bloc monter jusqu'au milieu du visuel au
+  lieu de s'arrêter à son bas — demande du client. Une formule CSS ne suffisait pas : le SVG est
+  limité en largeur et laisse du vide sous lui dans sa boîte.
   Le `viewBox` de l'illustration est cadré au bas des pastilles pour la même raison.
 - Fin de `/prestations` : « Une prestation ciblée ou un accompagnement complet » est rendue en
   trois cartes (`outro[].cards` dans `content/prestation-pages.ts`), une par paragraphe client,
