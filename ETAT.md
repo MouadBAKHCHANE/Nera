@@ -182,18 +182,22 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   E-mail : … » qui les précédait a été retirée : elle répétait ce que portent les boutons. JSON-LD `BreadcrumbList` +
   `ContactPage`.
 - Les champs du formulaire de contact vivent dans `components/contact/ContactForm.tsx`, avec un
-  `tone` clair ou sombre : la section contact de l'accueil et `/contact` partagent le même
+  `tone` clair ou sombre. La mention légale court sous les deux colonnes, alignée sur le bord
+  gauche du formulaire, et non plus sous la seule colonne de droite — sur l'accueil comme sur
+  `/contact`, puisque le composant est partagé.
+  Il est : la section contact de l'accueil et `/contact` partagent le même
   formulaire pour ne pas diverger. Toujours `action="#"` en attendant l'envoi des e-mails.
 - « Carte localisation » (`components/contact/ContactMap.tsx`) : bande pleine hauteur fixe
   (340 / 420 / 500 px), sans titre visible — le titre du client sert de nom accessible à la
-  section (`aria-label`). Le bord gauche s'aligne sur le texte de la page, le droit file
-  jusqu'au bord de l'écran : retrait
-  `max(2.5rem, calc((100% - var(--container-site)) / 2 + 2.5rem))`, calculé sur `100%` et non
-  `100vw` pour ne pas compter la barre de défilement.
-  La carte est centrée sur `46.214455, 6.104332`, coordonnées du 37, chemin J.-Ph.-de-Sauvage
-  relevées dans le registre fédéral des adresses (`api3.geo.admin.ch`), et `q=<lat>,<lon>` y
-  pose le repère. **Ne pas revenir à l'adresse écrite** : le géocodage par Google peut échouer
-  ou viser un bâtiment voisin (le chemin porte aussi des numéros 37.1 et 37.2).
+  section (`aria-label`), à fond perdu sur toute la largeur de l'écran.
+  La carte interroge Google avec la **raison sociale et l'adresse**, pas avec des coordonnées :
+  un `q=<lat>,<lon>` pose une épingle sans fiche, et le clic répond alors « Impossible de
+  charger les informations sur le lieu ». Avec la raison sociale, Google retrouve la fiche
+  d'établissement et le clic ouvre son panneau, avec le bouton d'itinéraire. **Ne pas repasser
+  aux coordonnées dans `q`.** Les coordonnées exactes du 37, chemin J.-Ph.-de-Sauvage
+  (`46.214455, 6.104332`, registre fédéral des adresses `api3.geo.admin.ch`) restent dans
+  `content/contact.ts` et alimentent le `geo` des données structurées, avec `hasMap` qui pointe
+  la fiche Google du client.
   Fournisseur : Google Maps, imposé par les textes juridiques du client, qui le nomment à trois
   endroits et promettent son blocage tant que la catégorie n'est pas acceptée. Ne pas le
   remplacer par OpenStreetMap sans faire corriger ces textes.

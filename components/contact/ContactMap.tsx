@@ -43,14 +43,21 @@ export function ContactMap() {
     });
   };
 
-  // `q=<latitude>,<longitude>` pose le repère exactement sur ce point, sans géocodage.
-  const point = `${contact.map.lat},${contact.map.lon}`;
+  /**
+   * Le repère doit correspondre à la fiche d'établissement Google, pas à un point brut :
+   * un `q=<latitude>,<longitude>` pose une épingle sans fiche, et le clic répond alors
+   * « Impossible de charger les informations sur le lieu ». Avec la raison sociale et
+   * l'adresse, Google retrouve l'établissement et le clic ouvre sa fiche, avec l'itinéraire.
+   * Les coordonnées de `content/contact.ts` restent la source du `geo` des données
+   * structurées.
+   */
+  const query = encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`);
 
   return (
     <div className="relative h-[340px] overflow-hidden bg-nera-navy-soft md:h-[420px] lg:h-[500px]">
       {allowed ? (
         <iframe
-          src={`https://www.google.com/maps?q=${point}&z=${contact.map.zoom}&output=embed&hl=fr`}
+          src={`https://www.google.com/maps?q=${query}&z=${contact.map.zoom}&output=embed&hl=fr`}
           title={`${company.shortName} — ${company.street}, ${company.zip} ${company.city}`}
           allowFullScreen
           loading="lazy"

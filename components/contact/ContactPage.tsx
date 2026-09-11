@@ -50,6 +50,8 @@ export function ContactPage() {
           addressLocality: company.city,
           addressCountry: company.country,
         },
+        geo: { "@type": "GeoCoordinates", latitude: contact.map.lat, longitude: contact.map.lon },
+        hasMap: company.googleBusiness,
         sameAs: [company.linkedin, company.socials.facebook, company.socials.instagram],
       },
     },
@@ -185,17 +187,7 @@ export function ContactPage() {
           cartographie sont acceptés.
         */}
         <section aria-label={contact.map.title} className="border-t border-hairline">
-          {/*
-            Le bord gauche s'aligne sur le texte de la page — même retrait que la mention
-            légale sous le formulaire — tandis que la carte file jusqu'au bord droit de
-            l'écran. `--container-site` (76rem) est la largeur du conteneur : au-delà, le
-            retrait vaut la moitié de la marge restante plus la gouttière ; en deçà, la
-            gouttière seule, d'où le `max()`. Le calcul porte sur `100%` et non `100vw`,
-            pour ne pas compter la largeur de la barre de défilement.
-          */}
-          <div className="pl-6 md:pl-10 lg:pl-[max(2.5rem,calc((100%_-_var(--container-site))/2_+_2.5rem))]">
-            <ContactMap />
-          </div>
+          <ContactMap />
         </section>
       </main>
       <FooterDark />
