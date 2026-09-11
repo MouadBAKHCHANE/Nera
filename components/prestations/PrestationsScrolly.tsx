@@ -34,11 +34,18 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
   /** Padding bas du dernier bloc, mesuré : voir `useEffect` ci-dessous. */
   const [lastPad, setLastPad] = useState<number | undefined>(undefined);
 
-  // Le panneau collant se décroche quand le bas de la colonne texte atteint le bas du
-  // panneau. Pour qu'il se décroche exactement quand le CTA du dernier bloc arrive au niveau
-  // du bas du dessin (pas de la boîte, qui garde du vide sous un SVG limité en largeur), le
-  // dernier bloc reçoit pour padding bas la distance bas du panneau - bas du dessin, lue
-  // dans la matrice du SVG. Sous `lg`, le panneau est masqué : pas de padding mesuré.
+  // Le panneau collant se décroche quand le bas de la colonne texte atteint le bas du panneau.
+  // Le padding bas du dernier bloc décide donc du moment où il se décroche, et jusqu'où le
+  // dernier texte peut remonter.
+  //
+  // Il vaut deux choses additionnées, mesurées et non devinées :
+  // 1. la distance bas du panneau - bas du dessin, lue dans la matrice du SVG. La boîte du
+  //    panneau garde du vide sous un dessin limité en largeur : sans cette part, le panneau se
+  //    décrocherait alors que le texte est encore loin du dessin ;
+  // 2. la moitié de la hauteur du dessin, pour que le dernier bloc continue de monter jusqu'au
+  //    milieu du visuel au lieu de s'arrêter à son bas — demande du client.
+  //
+  // Sous `lg`, le panneau est masqué : pas de padding mesuré.
   useEffect(() => {
     const update = () => {
       const el = panel.current;
@@ -49,8 +56,11 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
         return;
       }
       const vb = svg.viewBox.baseVal;
+      const drawnTop = ctm.f + ctm.d * vb.y;
       const drawnBottom = ctm.f + ctm.d * (vb.y + vb.height);
-      setLastPad(Math.max(0, Math.round(el.getBoundingClientRect().bottom - drawnBottom)));
+      const toDrawingBottom = el.getBoundingClientRect().bottom - drawnBottom;
+      const halfDrawing = (drawnBottom - drawnTop) / 2;
+      setLastPad(Math.max(0, Math.round(toDrawingBottom + halfDrawing)));
     };
     update();
     window.addEventListener("resize", update);
