@@ -77,6 +77,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   Programme Bâtiments / état des lieux, concept, AMO énergie, huit étapes). Dans le SVG, ne
   jamais poser `transform` sur un `motion.g` : Framer Motion l'écrase — mettre le `transform`
   sur un `<g>` parent.
+  L'étiquette-énergie de l'état CECB suit le **schéma usuel** : sept flèches de A à G, du vert
+  au rouge, lettres en blanc (`ENERGY_CLASSES` et `energyBar` dans
+  `components/prestations/PrestationIllustration.tsx`). **C'est le seul endroit du site où des
+  couleurs sont écrites en dur** ; `DESIGN.md` l'interdit dans un composant, mais cette gamme
+  n'appartient pas à la charte NERA : c'est un code couleur normalisé, au même titre que les
+  logos officiels. La transposer dans la palette du site rendrait l'étiquette méconnaissable.
   **Règle** : les libellés ne reprennent que des mots du texte client — jamais un chiffre, une
   classe, un montant ni une marque. La version précédente en inventait (Ug, COP, CHF, classe
   F → A, « conforme & validé ») et a été remplacée pour cette raison.

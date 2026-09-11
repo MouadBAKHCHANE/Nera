@@ -65,6 +65,27 @@ function Box({
 }
 
 /** Étiquette : cartouche blanc à filet marine, titre et lignes, reliée à un point du dessin. */
+/**
+ * Étiquette-énergie : les sept classes du schéma usuel, en flèches, du vert au rouge.
+ *
+ * **Seul endroit du site où des couleurs sont écrites en dur.** `DESIGN.md` l'interdit dans un
+ * composant, mais cette gamme n'appartient pas à la charte NERA : c'est le code couleur
+ * normalisé de l'étiquette-énergie, comme les logos officiels des partenaires. La transposer
+ * dans la palette du site la rendrait méconnaissable.
+ */
+const ENERGY_CLASSES = [
+  { letter: "A", color: "#189a4e" },
+  { letter: "B", color: "#5cbc94" },
+  { letter: "C", color: "#86c879" },
+  { letter: "D", color: "#ede62b" },
+  { letter: "E", color: "#f2a94e" },
+  { letter: "F", color: "#e99191" },
+  { letter: "G", color: "#df3b33" },
+] as const;
+
+/** Barre en flèche : rectangle dont le bord droit se termine en pointe. */
+const energyBar = (w: number, h = 15, tip = 9) => `M0 0 H${w - tip} L${w} ${h / 2} L${w - tip} ${h} H0 Z`;
+
 function Tag({
   x, y, w, title, lines = [], to, accent = false, delay = 0, reduce,
 }: {
@@ -398,19 +419,22 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
                 <text x="14" y="26" fontSize={17} fontWeight={500} className="fill-nera-navy">
                   Étiquette-énergie
                 </text>
-                {["A", "B", "C", "D", "E", "F", "G"].map((l, i) => (
-                  <g key={l} transform={`translate(14 ${42 + i * 20})`}>
-                    <motion.rect
-                      height="14"
-                      rx="1"
-                      className={i === 0 ? "fill-accent" : "fill-nera-navy"}
-                      style={{ opacity: i === 0 ? 1 : 0.85 - i * 0.09 }}
-                      initial={reduce ? false : { width: 0 }}
-                      animate={{ width: 70 + i * 14 }}
+                {ENERGY_CLASSES.map(({ letter, color }, i) => (
+                  <g key={letter} transform={`translate(14 ${42 + i * 20})`}>
+                    {/*
+                      Le `transform` reste sur ce `<g>` parent : posé sur un `motion.g`,
+                      Framer Motion l'écraserait. Le `motion.g` ne porte que l'échelle.
+                    */}
+                    <motion.g
+                      initial={reduce ? false : { scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
                       transition={{ duration: reduce ? 0 : 0.5, delay: 0.08 + i * 0.05, ease: [0.25, 1, 0.5, 1] }}
-                    />
-                    <text x="6" y="11" fontSize={11.5} fontWeight={500} className="fill-nera-cream">
-                      {l}
+                      style={{ transformOrigin: "0% 50%", transformBox: "fill-box" }}
+                    >
+                      <path d={energyBar(74 + i * 13)} fill={color} />
+                    </motion.g>
+                    <text x="7" y="11.5" fontSize={11.5} fontWeight={700} fill="#ffffff">
+                      {letter}
                     </text>
                   </g>
                 ))}
