@@ -43,14 +43,16 @@ export function ContactMap() {
     });
   };
 
-  const query = encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`);
+  // `q=<latitude>,<longitude>` pose le repère exactement sur ce point, sans géocodage.
+  const point = `${contact.map.lat},${contact.map.lon}`;
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-hairline bg-nera-navy-soft md:aspect-[21/9]">
+    <div className="relative h-[340px] overflow-hidden bg-nera-navy-soft md:h-[420px] lg:h-[500px]">
       {allowed ? (
         <iframe
-          src={`https://www.google.com/maps?q=${query}&output=embed&hl=fr`}
+          src={`https://www.google.com/maps?q=${point}&z=${contact.map.zoom}&output=embed&hl=fr`}
           title={`${company.shortName} — ${company.street}, ${company.zip} ${company.city}`}
+          allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           className="absolute inset-0 size-full border-0"

@@ -180,8 +180,22 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Les champs du formulaire de contact vivent dans `components/contact/ContactForm.tsx`, avec un
   `tone` clair ou sombre : la section contact de l'accueil et `/contact` partagent le même
   formulaire pour ne pas diverger. Toujours `action="#"` en attendant l'envoi des e-mails.
-- « Carte localisation » (`components/contact/ContactMap.tsx`) : l'iframe Google Maps n'est
-  montée qu'une fois la catégorie `maps` acceptée. Sans consentement, la zone affiche l'adresse,
+- « Carte localisation » (`components/contact/ContactMap.tsx`) : bande pleine hauteur fixe
+  (340 / 420 / 500 px), sans titre visible — le titre du client sert de nom accessible à la
+  section (`aria-label`). Le bord gauche s'aligne sur le texte de la page, le droit file
+  jusqu'au bord de l'écran : retrait
+  `max(2.5rem, calc((100% - var(--container-site)) / 2 + 2.5rem))`, calculé sur `100%` et non
+  `100vw` pour ne pas compter la barre de défilement.
+  La carte est centrée sur `46.214455, 6.104332`, coordonnées du 37, chemin J.-Ph.-de-Sauvage
+  relevées dans le registre fédéral des adresses (`api3.geo.admin.ch`), et `q=<lat>,<lon>` y
+  pose le repère. **Ne pas revenir à l'adresse écrite** : le géocodage par Google peut échouer
+  ou viser un bâtiment voisin (le chemin porte aussi des numéros 37.1 et 37.2).
+  Fournisseur : Google Maps, imposé par les textes juridiques du client, qui le nomment à trois
+  endroits et promettent son blocage tant que la catégorie n'est pas acceptée. Ne pas le
+  remplacer par OpenStreetMap sans faire corriger ces textes.
+  Un « www.google.com's server IP address could not be found » signalé en cours de route venait
+  d'une coupure DNS de la machine, pas du site : au retour du réseau, l'URL exacte de l'iframe
+  répond 200. L'iframe n'est montée qu'une fois la catégorie `maps` acceptée. Sans consentement, la zone affiche l'adresse,
   la raison, un bouton qui ouvre le gestionnaire de cookies et un lien vers Google Maps. Le
   consentement est lu via `useSyncExternalStore` sur l'évènement `nera:cookie-consent` — pas de
   `setState` dans un effet, que le lint refuse — donc accepter les cartes depuis le bandeau

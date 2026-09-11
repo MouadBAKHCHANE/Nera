@@ -45,7 +45,17 @@ export const contact = {
     linkedinCta: "LinkedIn",
   },
   map: {
+    /** Sert de nom accessible à la section : la carte occupe toute la largeur, sans titre visible. */
     title: "Carte localisation",
+    /**
+     * Coordonnées exactes du 37, chemin J.-Ph.-de-Sauvage, relevées dans le registre fédéral
+     * des adresses (`api3.geo.admin.ch`, « Chemin J.-Ph.-De-SAUVAGE 37, 1219 Châtelaine »).
+     * La carte est centrée dessus et y pose son repère : on ne dépend pas du géocodage de
+     * l'adresse écrite par Google, qui peut échouer ou viser le mauvais bâtiment.
+     */
+    lat: 46.214455,
+    lon: 6.104332,
+    zoom: 17,
     /** Affiché tant que le consentement « cartes » n'est pas donné. */
     consentText:
       "La carte est fournie par Google Maps. Elle se charge une fois les cookies de cartographie acceptés.",

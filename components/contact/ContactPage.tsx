@@ -179,16 +179,23 @@ export function ContactPage() {
           </Container>
         </section>
 
-        {/* « Carte localisation » : chargée seulement si les cookies de cartographie sont acceptés. */}
-        <section className="border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
-          <Container>
-            <Reveal {...aosBlock}>
-              <h2 className="text-[12px] font-medium uppercase tracking-[0.25em] text-nera-navy">{contact.map.title}</h2>
-              <div className="mt-6">
-                <ContactMap />
-              </div>
-            </Reveal>
-          </Container>
+        {/*
+          « Carte localisation » : pleine largeur, sans titre visible ni marge — le titre du
+          client devient le nom accessible de la section. Chargée seulement si les cookies de
+          cartographie sont acceptés.
+        */}
+        <section aria-label={contact.map.title} className="border-t border-hairline">
+          {/*
+            Le bord gauche s'aligne sur le texte de la page — même retrait que la mention
+            légale sous le formulaire — tandis que la carte file jusqu'au bord droit de
+            l'écran. `--container-site` (76rem) est la largeur du conteneur : au-delà, le
+            retrait vaut la moitié de la marge restante plus la gouttière ; en deçà, la
+            gouttière seule, d'où le `max()`. Le calcul porte sur `100%` et non `100vw`,
+            pour ne pas compter la largeur de la barre de défilement.
+          */}
+          <div className="pl-6 md:pl-10 lg:pl-[max(2.5rem,calc((100%_-_var(--container-site))/2_+_2.5rem))]">
+            <ContactMap />
+          </div>
         </section>
       </main>
       <FooterDark />
