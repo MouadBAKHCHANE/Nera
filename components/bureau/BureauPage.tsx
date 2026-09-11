@@ -1,20 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Award,
-  BadgeCheck,
-  Building2,
-  ChevronRight,
-  Coins,
-  Leaf,
-  Mail,
-  Phone,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  Thermometer,
-  Zap,
-} from "lucide-react";
+import { ChevronRight, Mail, Phone } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
@@ -30,16 +16,18 @@ import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
 import { bureau, bureauRoute } from "@/content/bureau";
 import { company } from "@/content/prestations";
 import { seo } from "@/content/seo";
+import { QualificationIconsList } from "@/components/bureau/QualificationIcons";
+import { PrincipeIconsList } from "@/components/bureau/PrincipeIcons";
 
-/** Une icône Lucide par qualification, dans l'ordre du contenu : CECB, Minergie, REG B, MPQ. */
-const qualificationIcons = [BadgeCheck, Sparkles, Award, ShieldCheck];
+/** Une icône flat sur-mesure par qualification, dans l'ordre du contenu : CECB, Minergie, REG B, MPQ. */
+const qualificationIcons = QualificationIconsList;
 
 /**
- * Une icône Lucide par ligne de « L'équilibre comme principe », dans l'ordre du texte client :
+ * Une icône flat sur-mesure par ligne de « L'équilibre comme principe », dans l'ordre du texte client :
  * performance et faisabilité, ambition énergétique, investissement et exploitation, technique
  * et confort, transformation du bâti, humain et environnement.
  */
-const equilibreIcons = [Scale, Zap, Coins, Thermometer, Building2, Leaf];
+const equilibreIcons = PrincipeIconsList;
 
 /**
  * Les cinq rectangles de « Nos valeurs », du plus foncé au plus clair — la progression des
@@ -174,7 +162,7 @@ export function BureauPage() {
           />
           <div className="absolute inset-0 bg-blueprint opacity-60" aria-hidden />
 
-          <Container className="relative">
+          <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -221,8 +209,8 @@ export function BureauPage() {
         </header>
 
         {/* 1. L'équilibre comme principe — crème. Les six « entre… », une icône plate par ligne. */}
-        <section id={bureau.equilibre.id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-section-sm lg:py-section">
-          <Container>
+        <section id={bureau.equilibre.id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-20 lg:py-28">
+          <Container wide>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
               <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Principe" title={bureau.equilibre.title} />
@@ -232,11 +220,20 @@ export function BureauPage() {
               </Reveal>
               <ul className="grid gap-4 sm:grid-cols-2 lg:pt-2">
                 {bureau.equilibre.items.map((item, i) => {
-                  const Icon = equilibreIcons[i];
+                  const Icon = equilibreIcons[i % equilibreIcons.length];
                   return (
-                    <Reveal as="li" key={item} {...aosItem} className="flex items-center gap-5 border border-hairline bg-canvas-alt p-5">
-                      <Icon className="size-6 shrink-0 text-accent-deep" strokeWidth={1.5} aria-hidden />
-                      <p className="text-body-md leading-[1.6] text-nera-navy">{item}</p>
+                    <Reveal
+                      as="li"
+                      key={item}
+                      {...aosItem}
+                      className="group relative flex items-center gap-5 overflow-hidden rounded-md border border-hairline bg-canvas-alt p-5 transition-all duration-300 hover:border-accent hover:shadow-md lg:p-6"
+                    >
+                      <div className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-115 group-hover:-translate-y-1 group-hover:rotate-2">
+                        <Icon className="size-13 lg:size-14" />
+                      </div>
+                      <p className="text-body-md font-medium leading-[1.6] text-nera-navy transition-colors duration-300 group-hover:text-accent">
+                        {item}
+                      </p>
                     </Reveal>
                   );
                 })}
@@ -252,13 +249,13 @@ export function BureauPage() {
         */}
         <section
           id={bureau.mission.id}
-          className="relative scroll-mt-24 overflow-hidden border-t border-hairline bg-canvas-alt py-section-sm lg:py-section"
+          className="relative scroll-mt-24 overflow-hidden border-t border-hairline bg-canvas-alt py-20 lg:py-28"
         >
           <LogomarkOutline
             className="pointer-events-none absolute -right-[12vw] top-0 hidden w-[38vw] text-nera-navy/[0.06] lg:block"
             strokeWidth={1}
           />
-          <Container className="relative">
+          <Container wide className="relative">
             <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Mission" title={bureau.mission.title} />
               <p className="mt-8 font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
@@ -286,12 +283,12 @@ export function BureauPage() {
         </section>
 
         {/* 3. Le fondateur — marine. Cartouche client à gauche, texte et contact à droite. */}
-        <section id={bureau.fondateur.id} className="relative scroll-mt-24 overflow-hidden bg-nera-navy bg-blueprint py-section-sm text-nera-cream lg:py-section">
+        <section id={bureau.fondateur.id} className="relative scroll-mt-24 overflow-hidden bg-nera-navy bg-blueprint py-20 text-nera-cream lg:py-28">
           <LogomarkOutline
             className="pointer-events-none absolute -right-[6vw] top-1/2 hidden w-[30vw] -translate-y-1/2 text-nera-cream/10 lg:block"
             strokeWidth={1}
           />
-          <Container className="relative">
+          <Container wide className="relative">
             <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Fondateur" title={bureau.fondateur.title} tone="light" />
             </Reveal>
@@ -335,8 +332,8 @@ export function BureauPage() {
         </section>
 
         {/* 4. L'équipe — crème. Photo à gauche, texte et huit domaines à droite. */}
-        <section id={bureau.equipe.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
-          <Container>
+        <section id={bureau.equipe.id} className="scroll-mt-24 bg-canvas py-20 lg:py-28">
+          <Container wide>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:items-center lg:gap-20">
               <ImageWipe curtain="bg-canvas" className="aspect-[4/3] rounded-md lg:aspect-[4/5]">
                 <Image
@@ -367,8 +364,8 @@ export function BureauPage() {
         </section>
 
         {/* 5. Les procédures — blanc. */}
-        <section id={bureau.procedures.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
-          <Container>
+        <section id={bureau.procedures.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-20 lg:py-28">
+          <Container wide>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
               <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Procédures" title={bureau.procedures.title} />
@@ -400,8 +397,8 @@ export function BureauPage() {
           L'icone passe en haut a droite de chaque carte, a la taille d'un reperage, pas d'une
           puce.
         */}
-        <section id={bureau.qualifications.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
-          <Container>
+        <section id={bureau.qualifications.id} className="scroll-mt-24 bg-canvas py-20 lg:py-28">
+          <Container wide>
             <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-16">
               <div className="lg:sticky lg:top-28">
                 <Reveal {...aosBlock}>
@@ -421,19 +418,23 @@ export function BureauPage() {
                       as="li"
                       key={q.title}
                       {...aosItem}
-                      className="flex items-start justify-between gap-6 rounded-md border border-hairline bg-canvas-alt p-7 transition-colors hover:border-accent lg:p-8"
+                      className="group relative overflow-hidden rounded-md border border-hairline bg-canvas-alt p-7 transition-all duration-300 hover:border-accent hover:shadow-md lg:p-8"
                     >
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-display text-[1.1875rem] font-medium leading-[1.25] text-nera-navy">
-                          {q.title}
-                        </h3>
-                        {q.text.map((t) => (
-                          <p key={t} className="mt-3 text-body-sm leading-[1.7] text-body">
-                            {t}
-                          </p>
-                        ))}
+                      <div className="flex items-start justify-between gap-6">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-display text-[1.1875rem] font-medium leading-[1.25] text-nera-navy transition-colors duration-300 group-hover:text-accent">
+                            {q.title}
+                          </h3>
+                          {q.text.map((t) => (
+                            <p key={t} className="mt-3 text-body-sm leading-[1.7] text-body">
+                              {t}
+                            </p>
+                          ))}
+                        </div>
+                        <div className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-115 group-hover:-translate-y-1.5 group-hover:rotate-2">
+                          <Icon className="size-14 lg:size-16" />
+                        </div>
                       </div>
-                      <Icon className="size-9 shrink-0 text-accent-deep lg:size-10" strokeWidth={1.25} aria-hidden />
                     </Reveal>
                   );
                 })}
@@ -456,9 +457,9 @@ export function BureauPage() {
         */}
         <section
           id={bureau.valeurs.id}
-          className="scroll-mt-24 border-t border-hairline bg-canvas-alt pt-section-sm lg:pt-section"
+          className="scroll-mt-24 border-t border-hairline bg-canvas-alt pt-20 lg:pt-28"
         >
-          <Container>
+          <Container wide>
             <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
             </Reveal>
@@ -502,8 +503,8 @@ export function BureauPage() {
         />
 
         {/* 10. Rencontrons-nous — marine, deux CTA du client. */}
-        <section className="bg-nera-navy-deep bg-blueprint py-section-sm text-nera-cream lg:py-section">
-          <Container>
+        <section className="bg-nera-navy-deep bg-blueprint py-20 text-nera-cream lg:py-28">
+          <Container wide>
             <Reveal className="max-w-3xl">
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {bureau.closing.title}

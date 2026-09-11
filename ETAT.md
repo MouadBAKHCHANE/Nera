@@ -267,6 +267,23 @@ Par ordre de priorité.
    Attention : `components/layout/` n'est pas mort, `app/devis/page.tsx` s'en sert et
    `HeaderDark` importe son `PrestationsMenu`. Puis soumettre le site à la Search Console.
 
+## Largeurs et rythme vertical
+
+Deux gabarits coexistent, portés par `components/ui/Container.tsx` :
+
+- **Par défaut** : conteneur centré de 76 rem (`max-w-site`), gouttières 24 / 40 px. C'est le
+  gabarit de l'accueil, des prestations, du contact, des références et des pages légales.
+- **`wide`** : pleine largeur sans maximum, gouttières 24 / 40 / **120 px**. C'est celui des
+  sections « NERA en chiffres » et « Territoire », écrites avant le composant.
+
+**`/bureau` est entièrement en `wide`**, à la demande du client : toutes ses sections s'alignent
+sur « NERA en chiffres », y compris l'en-tête, et leur rythme vertical est le même
+(`py-20 lg:py-28` au lieu de `py-section-sm lg:py-section`). Ne pas mélanger les deux gabarits
+sur une même page : le décalage se voit au défilement.
+
+Reste en dehors : l'en-tête du site garde `lg:px-12`, plus serré que les 120 px des sections.
+C'était déjà le cas sur l'accueil ; le corriger toucherait toutes les pages.
+
 ## Photos
 
 Les fichiers de `public/img/` sont des ré-exports des originaux de `../Assets/Visuels/`, jamais
