@@ -24,6 +24,7 @@ import { Territory } from "@/components/home2/Territory";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
+import { SplitReveal } from "@/components/ui/SplitReveal";
 import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
 import { bureau, bureauRoute } from "@/content/bureau";
 import { company } from "@/content/prestations";
@@ -127,8 +128,10 @@ export function BureauPage() {
       <main>
         {/*
           En-tête : photo assombrie, fil d'Ariane, H1 et les trois paragraphes d'introduction.
-          Le bloc titre apparaît en `fade` 1000 ms comme chez hestera ; le fil d'Ariane reste
-          immédiat, c'est un repère de navigation.
+          L'enchaînement d'apparition est celui du héro de l'accueil (`components/home2/HeroDark.tsx`) :
+          étiquette en fondu, titre lettre par lettre (`SplitReveal`), chapô à 1,6 s, règle graduée
+          à 2,4 s. Le fil d'Ariane reste immédiat, c'est un repère de navigation. Les autres
+          sections gardent les réglages hestera de `components/ui/aos.ts`.
         */}
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
@@ -163,21 +166,32 @@ export function BureauPage() {
               </ol>
             </nav>
 
-            <Reveal {...aosBlock} className="mt-10 max-w-3xl">
-              <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
+            <div className="mt-10 max-w-3xl">
+              <Reveal
+                as="p"
+                effect="fade"
+                className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"
+              >
                 <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
                 Le bureau
-              </p>
-              <h1 className="mt-6 font-display text-[1.875rem] font-light leading-[1.15] text-nera-cream md:text-[3rem]">
-                {bureau.h1}
-              </h1>
-              {bureau.lead.map((text, i) => (
-                <p key={i} className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
-                  {text}
-                </p>
-              ))}
-              <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
-            </Reveal>
+              </Reveal>
+              <SplitReveal
+                as="h1"
+                text={bureau.h1}
+                delay={0.2}
+                className="mt-6 font-display text-[1.875rem] font-light leading-[1.15] text-nera-cream md:text-[3rem]"
+              />
+              <Reveal delay={1.6}>
+                {bureau.lead.map((text, i) => (
+                  <p key={i} className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
+                    {text}
+                  </p>
+                ))}
+              </Reveal>
+              <Reveal delay={2.4}>
+                <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
+              </Reveal>
+            </div>
           </Container>
         </header>
 

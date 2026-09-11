@@ -135,14 +135,19 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   chiffres », « Territoire » et « Rencontrons-nous », laissées telles quelles à la demande du
   client, et à `/references` (grille de projets, bandeau de logos) hors en-tête et CTA de fin.
   L'accueil n'est pas touché.
-  L'en-tête de `/bureau` a suivi dans un second temps : le bloc titre (étiquette, H1, chapô,
-  règle graduée) apparaît en `fade` 1000 ms, comme le héro de hestera. Le fil d'Ariane reste
-  immédiat, c'est un repère de navigation. Conséquence à connaître : le bloc est servi en
-  `opacity: 0` et n'apparaît qu'au montage — c'est déjà le cas de tous les `Reveal` du site et
-  d'AOS chez hestera, mais au-dessus de la ligne de flottaison cela se voit davantage. Le H1
-  reste dans le HTML servi, donc le référencement n'est pas touché, et `prefers-reduced-motion`
-  affiche tout d'emblée. Les en-têtes de `/references` et `/contact` n'ont pas été alignés :
-  le client n'a demandé que `/bureau`.
+  L'en-tête de `/bureau` ne suit pas ces réglages : le client l'a voulu identique au héro de
+  l'accueil (`components/home2/HeroDark.tsx`), soit l'étiquette en fondu, le H1 lettre par
+  lettre (`SplitReveal`, départ à 0,2 s, 35 ms entre lettres, 1,4 s de montée), le chapô à
+  1,6 s et la règle graduée à 2,4 s. Le fil d'Ariane reste immédiat, c'est un repère de
+  navigation. Pas de mot en vert dans ce H1, contrairement à l'accueil : seule l'animation a
+  été reprise, colorer une partie du nom de la société n'a pas été demandé.
+  Conséquence à connaître : un bloc animé est servi en `opacity: 0` (et le H1 lettres en
+  `translateY(150%)`) jusqu'au montage — c'est déjà le cas partout sur le site, mais au-dessus
+  de la ligne de flottaison cela se voit davantage. Le H1 reste dans le HTML servi et
+  `SplitReveal` en répète le texte complet en `aria-label`, donc ni le référencement ni les
+  lecteurs d'écran ne sont touchés ; `prefers-reduced-motion` affiche tout d'emblée.
+  Les en-têtes de `/references` et `/contact` n'ont pas été alignés : le client n'a demandé
+  que `/bureau`.
 - Page `/contact` : `components/contact/ContactPage.tsx`, contenu `content/contact.ts` (texte
   client mot pour mot, lignes 781 à 800). En-tête sombre, puis le formulaire à gauche sous les
   deux phrases du client et les coordonnées à droite en carte : adresse cliquable vers Google
