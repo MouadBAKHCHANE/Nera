@@ -1,19 +1,14 @@
 import { MapPin, Phone, Mail } from "lucide-react";
-import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/content/prestations";
-import { prestations } from "@/content/prestations";
 import { mapsHref } from "@/content/footer";
 import { ArrowQuoteButton } from "./ArrowQuoteButton";
-import { FormNotice } from "@/components/ui/FormNotice";
-
-const field =
-  "w-full border-0 border-b border-nera-cream/40 bg-transparent px-0 py-3 text-body-md font-light text-nera-cream placeholder:text-nera-cream/60 focus:border-accent focus:outline-none";
+import { ContactForm } from "@/components/contact/ContactForm";
 
 /**
  * Bloc contact variante hestera.ch : titre CONTACT + coordonnées, puis formulaire
- * à champs soulignés sur fond marine. Le formulaire n'est pas encore relié
- * (Route Handler + Resend à venir) : l'attribut action est un placeholder.
+ * à champs soulignés sur fond marine. Les champs vivent dans `components/contact/ContactForm.tsx`,
+ * partagés avec la page `/contact` pour que les deux ne divergent pas.
  */
 export function ContactDark() {
   return (
@@ -58,52 +53,7 @@ export function ContactDark() {
           <h3 className="text-[15px] font-medium uppercase tracking-[0.2em] text-nera-cream">
             Entrez en contact avec NERA
           </h3>
-          <form action="#" method="post" className="mt-8 grid gap-x-16 gap-y-6 lg:grid-cols-2">
-            <div className="grid content-start gap-6">
-              <label className="block">
-                <span className="sr-only">Nom complet</span>
-                <input name="nom" type="text" placeholder="Nom complet*" required autoComplete="name" className={field} />
-              </label>
-              <label className="block">
-                <span className="sr-only">Adresse e-mail</span>
-                <input name="email" type="email" placeholder="Adresse e-mail*" required autoComplete="email" className={field} />
-              </label>
-              <label className="block">
-                <span className="sr-only">Entreprise</span>
-                <input name="entreprise" type="text" placeholder="Entreprise" autoComplete="organization" className={field} />
-              </label>
-              <label className="block">
-                <span className="sr-only">Téléphone</span>
-                <input name="telephone" type="tel" placeholder="Téléphone" autoComplete="tel" className={field} />
-              </label>
-            </div>
-            <div className="grid content-start gap-6">
-              <label className="block">
-                <span className="sr-only">Sujet</span>
-                <select name="sujet" defaultValue="" className={`${field} appearance-none`}>
-                  <option value="" disabled className="text-nera-ink">Sujet*</option>
-                  {prestations.map((p) => (
-                    <option key={p.slug} value={p.slug} className="text-nera-ink">{p.title}</option>
-                  ))}
-                  <option value="autre" className="text-nera-ink">Autre demande</option>
-                </select>
-              </label>
-              <label className="block">
-                <span className="sr-only">Message</span>
-                <textarea name="message" rows={5} placeholder="Message*" required className={`${field} resize-none`} />
-              </label>
-              {/* Honeypot anti-spam */}
-              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
-              <button
-                type="submit"
-                className="group ml-auto inline-flex items-center gap-4 border-t border-nera-cream/50 pt-4 text-[15px] font-medium text-nera-cream transition-colors hover:border-nera-cream"
-              >
-                Envoyer le message
-                <ArrowRight className="size-4 transition-transform duration-base group-hover:translate-x-1.5" strokeWidth={1.75} />
-              </button>
-              <FormNotice variant="contact" className="text-nera-cream/60" />
-            </div>
-          </form>
+          <ContactForm tone="dark" className="mt-8" />
         </Reveal>
       </div>
     </section>

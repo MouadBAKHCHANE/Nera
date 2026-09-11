@@ -24,6 +24,7 @@ import { Territory } from "@/components/home2/Territory";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
+import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
 import { bureau, bureauRoute } from "@/content/bureau";
 import { company } from "@/content/prestations";
 import { seo } from "@/content/seo";
@@ -180,7 +181,7 @@ export function BureauPage() {
         <section id={bureau.equilibre.id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
-              <Reveal effect="fade-right">
+              <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Principe" title={bureau.equilibre.title} />
                 <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body md:text-body-lg">
                   {bureau.equilibre.intro}
@@ -190,7 +191,7 @@ export function BureauPage() {
                 {bureau.equilibre.items.map((item, i) => {
                   const Icon = equilibreIcons[i];
                   return (
-                    <Reveal as="li" key={item} delay={i * 0.06} className="flex items-center gap-5 border border-hairline bg-canvas-alt p-5">
+                    <Reveal as="li" key={item} {...aosItem} className="flex items-center gap-5 border border-hairline bg-canvas-alt p-5">
                       <Icon className="size-6 shrink-0 text-accent-deep" strokeWidth={1.5} aria-hidden />
                       <p className="text-body-md leading-[1.6] text-nera-navy">{item}</p>
                     </Reveal>
@@ -204,7 +205,7 @@ export function BureauPage() {
         {/* 2. Notre mission — blanc. Phrase de mission, puis les sept verbes en cartes à numéro. */}
         <section id={bureau.mission.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
-            <Reveal className="max-w-3xl">
+            <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Mission" title={bureau.mission.title} />
               <p className="mt-8 font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
                 {bureau.mission.intro}
@@ -216,7 +217,7 @@ export function BureauPage() {
                 <Reveal
                   as="li"
                   key={item}
-                  delay={i * 0.05}
+                  {...aosItem}
                   className="flex items-center gap-5 border border-hairline bg-canvas p-5"
                 >
                   <span className="relative flex size-12 shrink-0 items-center justify-center">
@@ -237,11 +238,11 @@ export function BureauPage() {
             strokeWidth={1}
           />
           <Container className="relative">
-            <Reveal className="max-w-3xl">
+            <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Fondateur" title={bureau.fondateur.title} tone="light" />
             </Reveal>
             <div className="mt-12 grid gap-10 lg:grid-cols-[4fr_8fr] lg:gap-20">
-              <Reveal effect="fade-right" delay={0.05}>
+              <Reveal {...aosCard}>
                 <div className="border border-nera-cream/20 p-8">
                   <span className="block h-6 w-px bg-accent" aria-hidden />
                   <p className="mt-5 font-display text-[1.625rem] font-medium leading-[1.15] text-nera-cream">
@@ -252,7 +253,7 @@ export function BureauPage() {
                   <p className="mt-1 text-body-sm font-light text-nera-cream/85">{bureau.fondateur.card.field}</p>
                 </div>
               </Reveal>
-              <Reveal delay={0.1} className="max-w-2xl">
+              <Reveal {...aosBlock} className="max-w-2xl">
                 {bureau.fondateur.paragraphs.map((text) => (
                   <p key={text} className="mt-6 text-body-md font-light leading-[1.75] text-nera-cream/85 first:mt-0 md:text-body-lg">
                     {text}
@@ -283,7 +284,7 @@ export function BureauPage() {
         <section id={bureau.equipe.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:items-center lg:gap-20">
-              <Reveal effect="fade-right" className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[4/5]">
+              <Reveal {...aosCard} className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[4/5]">
                 <Image
                   src={bureau.equipe.image}
                   alt="Trois personnes réunies autour d’un plan d’étage lors d’une séance de travail"
@@ -293,7 +294,7 @@ export function BureauPage() {
                   className="object-cover saturate-[0.85]"
                 />
               </Reveal>
-              <Reveal delay={0.08}>
+              <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Équipe" title={bureau.equipe.title} />
                 <p className="mt-6 text-body-md font-light leading-[1.75] text-body md:text-body-lg">{bureau.equipe.intro}</p>
                 <p className="mt-6 text-body-md text-body">{bureau.equipe.lead}</p>
@@ -315,10 +316,10 @@ export function BureauPage() {
         <section id={bureau.procedures.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
-              <Reveal effect="fade-right">
+              <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Procédures" title={bureau.procedures.title} />
               </Reveal>
-              <Reveal delay={0.08} className="max-w-2xl lg:pt-2">
+              <Reveal {...aosBlock} className="max-w-2xl lg:pt-2">
                 <p className="text-body-md font-light leading-[1.75] text-body md:text-body-lg">{bureau.procedures.intro}</p>
                 <ol className="mt-8">
                   {bureau.procedures.items.map((item, i, all) => (
@@ -339,7 +340,7 @@ export function BureauPage() {
         {/* 6. Les qualifications — crème. Quatre cartes blanches à filet, puis les logos officiels. */}
         <section id={bureau.qualifications.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
           <Container>
-            <Reveal className="max-w-3xl">
+            <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Qualifications" title={bureau.qualifications.title} />
             </Reveal>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
@@ -349,7 +350,7 @@ export function BureauPage() {
                   <Reveal
                     as="li"
                     key={q.title}
-                    delay={i * 0.06}
+                    {...aosItem}
                     className="flex flex-col rounded-md border border-hairline bg-canvas-alt p-7 transition-colors hover:border-accent"
                   >
                     <Icon className="size-6 text-accent-deep" strokeWidth={1.5} aria-hidden />
@@ -363,7 +364,7 @@ export function BureauPage() {
                 );
               })}
             </ul>
-            <Reveal delay={0.1} className="mt-12 border-t border-hairline pt-10">
+            <Reveal {...aosItem} className="mt-12 border-t border-hairline pt-10">
               <PartnerLogos />
             </Reveal>
           </Container>
@@ -372,12 +373,12 @@ export function BureauPage() {
         {/* 7. Les valeurs — blanc. Cinq colonnes, un filet vert en tête de chacune. */}
         <section id={bureau.valeurs.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
-            <Reveal className="max-w-3xl">
+            <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
             </Reveal>
             <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-hairline">
-              {bureau.valeurs.items.map((v, i) => (
-                <Reveal as="li" key={v.title} delay={i * 0.06} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
+              {bureau.valeurs.items.map((v) => (
+                <Reveal as="li" key={v.title} {...aosItem} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
                   <span className="block h-6 w-px bg-accent" aria-hidden />
                   <h3 className="mt-5 font-display text-[1.25rem] font-medium leading-[1.25] text-nera-navy">{v.title}</h3>
                   <p className="mt-3 text-body-sm leading-[1.7] text-body">{v.text}</p>

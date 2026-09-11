@@ -8,6 +8,7 @@ import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
+import { aosItem } from "@/components/ui/aos";
 import { references, referencesRoute } from "@/content/references";
 import { seo } from "@/content/seo";
 
@@ -81,11 +82,11 @@ export function ReferencesPage() {
           <section className="bg-canvas py-section-sm lg:py-section">
             <Container>
               <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {references.projects.map((p, i) => (
+                {references.projects.map((p) => (
                   <Reveal
                     as="li"
                     key={p.title}
-                    delay={i * 0.05}
+                    {...aosItem}
                     className="flex flex-col overflow-hidden rounded-md border border-hairline bg-canvas-alt transition-colors hover:border-accent"
                   >
                     {p.image && (
@@ -108,7 +109,7 @@ export function ReferencesPage() {
         {/* Logos officiels, seuls éléments de référence disponibles en attendant les projets. */}
         <section className="border-b border-hairline bg-canvas py-14 lg:py-20">
           <Container>
-            <Reveal>
+            <Reveal {...aosItem}>
               <PartnerLogos />
             </Reveal>
           </Container>

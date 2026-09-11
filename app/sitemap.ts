@@ -4,9 +4,11 @@ import { prestationPages, prestationRoute, prestationsIndexRoute } from "@/conte
 import { legalDocs } from "@/content/legal-pages";
 import { bureauRoute } from "@/content/bureau";
 import { references, referencesRoute } from "@/content/references";
+import { contactRoute } from "@/content/contact";
 
 /**
- * Plan du site : accueil, devis, prestations, bureau, références (une fois les projets fournis)
+ * Plan du site : accueil, devis, prestations, bureau, contact, références (une fois les projets
+ * fournis)
  * et pages légales. Les autres s'ajoutent au fur et à mesure.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     { url: `${seo.siteUrl}${bureauRoute}`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${seo.siteUrl}${contactRoute}`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     // `/references` est en noindex tant que le client n'a pas fourni ses projets : on ne la liste pas.
     ...(references.projects.length > 0
       ? [{ url: `${seo.siteUrl}${referencesRoute}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 }]

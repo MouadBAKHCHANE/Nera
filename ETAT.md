@@ -125,6 +125,32 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   `title`, `place`, `text`, `image?`) et s'affiche dès qu'elle est remplie. **Tant qu'elle est
   vide, la page est en `noindex, follow` et absente du plan de site** : une page sans contenu
   nuirait au référencement. Remplir le tableau suffit à lever les deux.
+- Apparitions calées sur hestera.ch/a-propos, la direction validée avec le client. Les réglages
+  relevés dans leur HTML (`data-aos` / `data-aos-duration`, `AOS.init({ once: true })`, aucun
+  `data-aos-delay`) vivent dans `components/ui/aos.ts` : `aosBlock` (fade 1000 ms, bloc de
+  section), `aosItem` (fade 600 ms, élément répété d'un groupe), `aosCard` (fade-right 600 ms,
+  carte empilée à côté d'un texte). S'étaler en `<Reveal {...aosBlock}>`.
+  **Les cascades ont disparu** : hestera ne met aucun décalage entre les éléments d'une grille,
+  ils apparaissent ensemble. Appliqué à toutes les sections de `/bureau` sauf l'en-tête, « NERA
+  en chiffres », « Territoire » et « Rencontrons-nous », laissées telles quelles à la demande du
+  client, et à `/references` (grille de projets, bandeau de logos) hors en-tête et CTA de fin.
+  L'accueil n'est pas touché.
+- Page `/contact` : `components/contact/ContactPage.tsx`, contenu `content/contact.ts` (texte
+  client mot pour mot, lignes 781 à 800). En-tête sombre, puis le formulaire à gauche sous les
+  deux phrases du client et les coordonnées à droite en carte : adresse cliquable vers Google
+  Maps, téléphone, e-mail, les deux boutons « Appeler NERA » / « Envoyer un e-mail » et le lien
+  LinkedIn du document, plus le lien fléché vers le pop-up devis. JSON-LD `BreadcrumbList` +
+  `ContactPage`.
+- Les champs du formulaire de contact vivent dans `components/contact/ContactForm.tsx`, avec un
+  `tone` clair ou sombre : la section contact de l'accueil et `/contact` partagent le même
+  formulaire pour ne pas diverger. Toujours `action="#"` en attendant l'envoi des e-mails.
+- « Carte localisation » (`components/contact/ContactMap.tsx`) : l'iframe Google Maps n'est
+  montée qu'une fois la catégorie `maps` acceptée. Sans consentement, la zone affiche l'adresse,
+  la raison, un bouton qui ouvre le gestionnaire de cookies et un lien vers Google Maps. Le
+  consentement est lu via `useSyncExternalStore` sur l'évènement `nera:cookie-consent` — pas de
+  `setState` dans un effet, que le lint refuse — donc accepter les cartes depuis le bandeau
+  affiche la carte sans recharger. **C'est le premier traceur réellement branché sur le
+  gestionnaire de cookies** ; GA4, Google Ads et Meta Pixel restent à faire sur le même modèle.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -134,12 +160,11 @@ Par ordre de priorité.
 1. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
    pour remplir `references.projects` ; vérifier ensuite que `/references` sort du noindex.
    Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
-2. **`/contact`** — le formulaire simple, identique à la section contact de l'accueil.
-3. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
+2. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
    tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.
-4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
+3. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
-5. **Nettoyage** — supprimer `/home-2` et les composants clairs une fois la variante validée,
+4. **Nettoyage** — supprimer `/home-2` et les composants clairs une fois la variante validée,
    ajouter la page 404, soumettre à la Search Console.
 
 ## Photos
@@ -214,8 +239,9 @@ Le choix vit en localStorage sous `nera-cookie-consent`. `lib/consent.ts` est la
 de la clé, du type et des deux évènements : `nera:cookie-consent` (choix enregistré) et
 `nera:open-cookie-preferences` (demande d'ouverture, que le bandeau annule pour signaler qu'il a
 répondu). Le rappel de choix de `/cookies` et le lien « Gérer mes cookies » du pied de page
-passent tous deux par là. Aucun traceur n'est encore chargé : GA4, Google Ads, Meta Pixel et
-Google Maps restent à brancher sur ces catégories.
+passent tous deux par là. La carte de `/contact` est branchée sur la catégorie
+`maps` (voir `components/contact/ContactMap.tsx`, modèle à suivre) ; GA4, Google Ads et Meta
+Pixel restent à brancher sur les leurs.
 
 ## Décisions ouvertes
 
