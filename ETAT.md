@@ -76,8 +76,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   Alternance des fonds : crème (corps), blanc (FAQ), marine (CTA).
 - `HeaderDark` accepte `solidOnScroll` : sur les pages à corps clair, l'en-tête garde son
   fond marine une fois défilé, sinon le logo crème devient illisible. L'accueil est inchangé.
-- Bouton « retour en haut » (`components/ui/CallButton.tsx`) désormais visible aussi sur
-  desktop. Le bouton devis latéral reste téléphone et tablette.
+- Boutons flottants (`components/ui/CallButton.tsx`) : « retour en haut » et onglet
+  « Devis gratuit » à mi-hauteur du bord droit sont désormais visibles sur tous les formats,
+  desktop compris, une fois le héro passé. L'onglet devis passe à 48 px sous `lg`.
+- L'enveloppe de l'en-tête (`HeaderDark`) mène à `/contact` et non plus à un `mailto:` : le
+  visiteur choisit entre le formulaire, le téléphone et l'e-mail. Le lien `mailto:` direct
+  reste offert sur la page contact et dans le pied de page.
 - SEO accueil, `sitemap.ts`, `robots.ts`, images OG/Twitter, JSON-LD `ProfessionalService`.
   Le plan du site tire les six routes prestation de `content/prestation-pages.ts`.
 - `PrestationsScrolly.tsx` : les sur-titres inventés (« Diagnostic & Audit », « Ingénierie

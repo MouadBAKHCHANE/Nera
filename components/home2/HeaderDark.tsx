@@ -96,14 +96,19 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
           </div>
 
           <div className="ml-auto flex items-center gap-1 text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] lg:gap-3">
-            {/* E-mail et téléphone : visibles au défilement (desktop) et dans le menu ouvert. */}
-            <a
-              href={`mailto:${company.email}`}
-              aria-label="Écrire à NERA"
+            {/*
+              Enveloppe et téléphone : visibles au défilement (desktop) et dans le menu ouvert.
+              L'enveloppe mène à la page contact — et non plus à un `mailto:` — pour laisser le
+              choix entre le formulaire, le téléphone et l'e-mail. Le lien `mailto:` reste
+              offert sur la page contact et dans le pied de page.
+            */}
+            <Link
+              href="/contact"
+              aria-label="Contacter NERA"
               className={`hidden size-11 items-center justify-center transition-colors hover:text-accent ${showNav ? "" : "lg:inline-flex"}`}
             >
               <Mail className="size-6" strokeWidth={1.5} />
-            </a>
+            </Link>
             <a
               href={company.phoneHref}
               aria-label="Appeler NERA"

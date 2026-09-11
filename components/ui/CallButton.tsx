@@ -6,8 +6,8 @@ import { useQuote } from "@/components/quote/QuoteModal";
 
 /**
  * Éléments flottants :
- * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, téléphone et
- *   tablette seulement, apparaît après le héro ;
+ * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, sur tous les
+ *   formats, qui apparaît une fois le héro passé ;
  * - bouton « retour en haut » carré en bas à droite, sur tous les formats, visible après
  *   un défilement.
  */
@@ -35,7 +35,7 @@ export function CallButton() {
         onClick={() => open()}
         aria-label="Demander un devis gratuit"
         title="Devis gratuit"
-        className={`fixed right-0 top-1/2 z-[80] inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-l-sm bg-accent text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:hidden ${
+        className={`fixed right-0 top-1/2 z-[80] inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-l-sm bg-accent text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:size-12 ${
           showQuote ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-4 opacity-0"
         }`}
       >
