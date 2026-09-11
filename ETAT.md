@@ -209,6 +209,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   `setState` dans un effet, que le lint refuse — donc accepter les cartes depuis le bandeau
   affiche la carte sans recharger. **C'est le premier traceur réellement branché sur le
   gestionnaire de cookies** ; GA4, Google Ads et Meta Pixel restent à faire sur le même modèle.
+- Page 404 (`app/not-found.tsx`, textes dans `content/not-found.ts`) : écran marine plein
+  format, logomark au trait débordant à droite, grille de plan. Le « 404 » est composé avec le
+  losange de la charte (`DiamondOutline`) à la place du zéro — motif déjà employé dans le héro
+  et pour les cantons, rien d'inventé. Purement décoratif, donc `aria-hidden` : c'est le H1 qui
+  porte l'information. À droite, les quatre destinations du menu principal en lignes à filet,
+  pour repartir sans passer par l'accueil. `noindex, follow` et titre absolu.
+  Les textes sont d'interface, pas du client : le document source n'en prévoit pas.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -222,8 +229,9 @@ Par ordre de priorité.
    tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.
 3. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
-4. **Nettoyage** — supprimer `/home-2` et les composants clairs une fois la variante validée,
-   ajouter la page 404, soumettre à la Search Console.
+4. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
+   Attention : `components/layout/` n'est pas mort, `app/devis/page.tsx` s'en sert et
+   `HeaderDark` importe son `PrestationsMenu`. Puis soumettre le site à la Search Console.
 
 ## Photos
 
