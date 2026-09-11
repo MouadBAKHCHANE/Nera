@@ -57,7 +57,7 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
             <h2 id="quote-title" className="mt-2 font-display text-[1.25rem] text-nera-navy sm:mt-3 sm:text-display-sm md:text-display-md">
               Votre devis gratuit
             </h2>
-            <p className="mt-1 hidden text-body-sm text-body sm:block">Bureau d&apos;ingénieurs en énergie et physique du bâtiment, Genève.</p>
+            <p className="mt-1 hidden text-body-sm text-body sm:block">Bureau d&apos;ingénieurs en énergie et physique du bâtiment.</p>
             <div className="mt-4 sm:mt-6">
               <QuoteForm key={prestation} initialPrestation={prestation} onDone={close} />
             </div>

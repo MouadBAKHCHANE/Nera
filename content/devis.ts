@@ -28,7 +28,7 @@ export const devisMaxFileMb = 8;
 export type DevisPayload = {
   prestation: string;
   batiment: string;
-  commune: string;
+  codePostal: string;
   canton: string;
   annee: string;
   surface: string;

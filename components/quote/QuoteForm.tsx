@@ -20,7 +20,7 @@ const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
 const empty: DevisPayload = {
   prestation: "",
   batiment: "",
-  commune: "",
+  codePostal: "",
   canton: "",
   annee: "",
   surface: "",
@@ -57,10 +57,10 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
     if (s === 0 && !data.prestation) return "Choisissez une prestation.";
     if (s === 1) {
       if (!data.batiment) return "Indiquez le type de bâtiment.";
-      if (!data.commune.trim() || !data.canton) return "Indiquez la commune et le canton.";
+      if (!data.codePostal.trim() || !data.canton) return "Indiquez le code postal et le canton.";
     }
     if (s === 2) {
-      if (!data.nom.trim()) return "Indiquez votre nom.";
+      if (!data.nom.trim()) return "Indiquez vos nom et prénom.";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Indiquez une adresse e-mail valide.";
       if (!data.telephone.trim()) return "Indiquez un numéro de téléphone.";
     }
@@ -93,6 +93,14 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    // Entrée dans un champ vaut soumission implicite du formulaire, quel que soit le bouton
+    // affiché : sans ce garde-fou, valider un champ de l'étape « Coordonnées » envoyait la
+    // demande et affichait l'écran de confirmation sans que l'utilisateur ait cliqué.
+    // Hors de la dernière étape, la touche Entrée fait donc simplement avancer d'une étape.
+    if (step < steps.length - 1) {
+      next();
+      return;
+    }
     for (let s = 0; s < 3; s++) {
       const err = validate(s);
       if (err) {
@@ -188,8 +196,17 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="q-commune" className={label}>Commune*</label>
-              <input id="q-commune" value={data.commune} onChange={set("commune")} className={field} placeholder="Ex. Châtelaine" required />
+              <label htmlFor="q-code-postal" className={label}>Code postal*</label>
+              <input
+                id="q-code-postal"
+                value={data.codePostal}
+                onChange={set("codePostal")}
+                className={field}
+                inputMode="numeric"
+                autoComplete="postal-code"
+                placeholder="Ex. 1219"
+                required
+              />
             </div>
             <div>
               <label htmlFor="q-canton" className={label}>Canton*</label>
@@ -217,7 +234,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       {step === 2 && (
         <div className="space-y-4 sm:space-y-5">
           <div>
-            <label htmlFor="q-nom" className={label}>Nom*</label>
+            <label htmlFor="q-nom" className={label}>Nom et prénom*</label>
             <input id="q-nom" value={data.nom} onChange={set("nom")} className={field} autoComplete="name" required />
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -263,9 +280,9 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
             ["Prestation", data.prestation],
             ["Objectif", data.objectif || "—"],
             ["Bâtiment", data.batiment],
-            ["Lieu", `${data.commune}, ${data.canton}`],
+            ["Lieu", `${data.codePostal}, ${data.canton}`],
             ["Année / surface", [data.annee, data.surface && `${data.surface} m²`].filter(Boolean).join(" · ") || "—"],
-            ["Nom", data.nom],
+            ["Nom et prénom", data.nom],
             ["E-mail", data.email],
             ["Téléphone", data.telephone],
             ["Pièces jointes", files.length ? `${files.length} fichier(s)` : "—"],

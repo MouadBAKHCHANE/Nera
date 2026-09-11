@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     prestation: get("prestation"),
     objectif: get("objectif"),
     batiment: get("batiment"),
-    commune: get("commune"),
+    codePostal: get("codePostal"),
     canton: get("canton"),
     annee: get("annee"),
     surface: get("surface"),
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     message: get("message"),
   };
 
-  if (!data.prestation || !data.batiment || !data.commune || !data.canton || !data.nom || !data.telephone) {
+  if (!data.prestation || !data.batiment || !data.codePostal || !data.canton || !data.nom || !data.telephone) {
     return new NextResponse("Champs obligatoires manquants.", { status: 400 });
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
@@ -53,10 +53,10 @@ export async function POST(req: Request) {
     ["Prestation", data.prestation],
     ["Objectif", data.objectif || "—"],
     ["Type de bâtiment", data.batiment],
-    ["Commune / canton", `${data.commune}, ${data.canton}`],
+    ["Code postal / canton", `${data.codePostal}, ${data.canton}`],
     ["Année de construction", data.annee || "—"],
     ["Surface approximative", data.surface ? `${data.surface} m²` : "—"],
-    ["Nom", data.nom],
+    ["Nom et prénom", data.nom],
     ["E-mail", data.email],
     ["Téléphone", data.telephone],
     ["Pièces jointes", files.length ? files.map((f) => f.name).join(", ") : "—"],
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
   const ack = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#222"><p>Bonjour ${esc(data.nom)},</p><p>Nous avons bien reçu votre demande de devis concernant « ${esc(
     data.prestation,
-  )} » pour votre bien à ${esc(data.commune)} (${esc(data.canton)}).</p><p>${devisNote}</p><p>Cordialement,<br><strong>${company.shortName}</strong><br>${company.street}, ${company.zip} ${company.city}<br>${company.phone} · ${company.email}</p></div>`;
+  )} » pour votre bien à ${esc(data.codePostal)} (${esc(data.canton)}).</p><p>${devisNote}</p><p>Cordialement,<br><strong>${company.shortName}</strong><br>${company.street}, ${company.zip} ${company.city}<br>${company.phone} · ${company.email}</p></div>`;
 
   const key = process.env.RESEND_API_KEY;
   if (!key) {
@@ -84,7 +84,7 @@ export async function POST(req: Request) {
       from: FROM,
       to: TO,
       replyTo: data.email,
-      subject: `Devis gratuit : ${data.prestation} · ${data.commune} (${data.canton})`,
+      subject: `Devis gratuit : ${data.prestation} · ${data.codePostal} (${data.canton})`,
       html,
       attachments,
     }),

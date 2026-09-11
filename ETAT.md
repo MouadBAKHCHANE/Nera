@@ -272,6 +272,18 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Version PC des prestations : le bandeau blanc des six prestations passe en 16 px puis 18 px
   (numéros 15 puis 17), et les paragraphes, puces et réponses de FAQ passent à
   `lg:text-body-lg`. Le sommaire collant et les liens passent de 14 à 16 px.
+- Pop-up devis, corrections demandées par le client : « Code postal » remplace « Commune »
+  (la clé du formulaire est passée de `commune` à `codePostal`, dans `content/devis.ts`,
+  `QuoteForm` et `app/api/devis/route.ts`, e-mails compris), « Nom et prénom » remplace
+  « Nom », et le sous-titre du pop-up ne mentionne plus Genève.
+  **Bug corrigé** : la demande partait toute seule depuis l'étape « Coordonnées », affichant
+  l'écran de confirmation sans clic. En cause, la soumission implicite du formulaire : la
+  touche Entrée dans un champ soumet le `<form>` même quand le bouton visible est « Suivant ».
+  `submit()` s'arrête maintenant si l'on n'est pas à la dernière étape et se contente d'avancer
+  d'un pas.
+  À signaler au client : la politique de confidentialité annonce encore la collecte de la
+  « commune et canton » (`content/legal-pages.ts`), alors que le formulaire demande un code
+  postal.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
