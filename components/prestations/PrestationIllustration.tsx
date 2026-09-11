@@ -442,7 +442,8 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
               <Tag reduce={reduce} delay={0.12} x={40} y={440} w={244} title="Ponts thermiques" lines={["Continuité de l’enveloppe", "Étanchéité à l’air"]} to={iso(BALCONY.x0, D, F + 3)} accent />
               <Tag reduce={reduce} delay={0.18} x={548} y={80} w={222} title="Confort d’été" lines={["Protections solaires", "Inertie thermique"]} to={iso(W + 1, 126, 3 * F + 46)} accent />
               <Tag reduce={reduce} delay={0.24} x={548} y={580} w={222} title="Humidité et condensation" lines={["Analyse constructive", "Mesures sur site"]} to={iso(W, 30, F + 8)} accent />
-              <Tag reduce={reduce} delay={0.3} x={40} y={590} w={244} title="Minergie · HPE · THPE" lines={["Minergie Partenaire spécialiste"]} />
+              {/* Sans seconde ligne : « Minergie Partenaire spécialiste » a été retiré à la demande du client. */}
+              <Tag reduce={reduce} delay={0.3} x={40} y={590} w={244} title="Minergie · HPE · THPE" />
             </Layer>
           )}
         </AnimatePresence>
