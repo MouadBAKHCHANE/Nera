@@ -487,8 +487,8 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
                 ))}
               </g>
               <Tag reduce={reduce} delay={0.06} x={40} y={96} w={232} title="Genève · APA et DD" lines={["Bilans thermiques", "Formulaires énergie", "Attestations finales"]} to={iso(40, D, 2 * F + 30)} />
-              <Tag reduce={reduce} delay={0.14} x={40} y={590} w={232} title="Vaud · Valais · Fribourg" lines={["Neuchâtel · Jura", "Justificatifs adaptés au canton"]} />
-              <Tag reduce={reduce} delay={0.2} x={548} y={580} w={222} title="Pour quels projets ?" lines={["Transformation, surélévation", "Pompe à chaleur, solaire"]} to={iso(W, 130, 10)} />
+              <Tag reduce={reduce} delay={0.14} x={40} y={590} w={380} title="Vaud · Valais · Fribourg · Neuchâtel · Jura" lines={["Justificatifs adaptés au canton"]} />
+              <Tag reduce={reduce} delay={0.2} x={530} y={580} w={236} title="Pour quels projets ?" lines={["Transformation, surélévation,", "neuf, pompe à chaleur, solaire"]} to={iso(W, 130, 10)} />
             </Layer>
           )}
         </AnimatePresence>
