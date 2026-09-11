@@ -14,10 +14,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Accueil, version PC (demandes du client) : logo d'en-tête à 52 px dès `lg` (40 px ailleurs),
   et les paragraphes des sections passent à `lg:text-body-lg` — 18 px sur grand écran au lieu
   de 16. Les étiquettes et les titres sont inchangés.
-- Bandeau « Certifications et partenaires » : **fond blanc**, et les tuiles blanches derrière
-  chaque logo ont disparu, les logos posant directement dessus. Il a aussi quitté le pied de
+- Bandeau « Certifications et partenaires » : **fond crème**, et les logos y posent directement.
+  Les cinq fichiers de `public/logos/partenaires/` ont été **ré-exportés depuis
+  `Assets/Logos officiels` avec un fond transparent** (160 px de haut). Trois originaux avaient
+  déjà un canal alpha ; le blanc de Minergie et de REG a été retiré par remplissage depuis les
+  bords, méthode qui préserve le blanc *intérieur* — contre-formes du sigle CECB, croix suisse
+  de REG — là où un simple « tout le blanc devient transparent » les aurait troués.
+  Les tuiles blanches derrière chaque logo ont disparu. Il a aussi quitté le pied de
   page pour devenir une section de l'accueil (`components/home2/PartnerStrip.tsx`), placée
-  juste après « Territoire ». Il ne figure donc plus au pied des autres pages : `/bureau` a les
+  juste après « Territoire », sur fond crème comme les trois autres emplacements. Il ne figure donc plus au pied des autres pages : `/bureau` a les
   mêmes logos dans « Nos qualifications » et `/references` dans son propre bandeau. Conséquence
   à retenir : `PartnerLogos` n'a plus de fond à lui, **tous ses emplacements doivent rester sur
   fond clair** — sur du marine, ces logos en quadrichromie deviendraient illisibles. Les quatre
@@ -139,7 +144,8 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   L'accueil est inchangé. Le compteur de `Stats` initialise la valeur finale sous
   `prefers-reduced-motion` au lieu d'un `setState` dans l'effet (lint corrigé).
 - Page `/references` : `components/references/ReferencesPage.tsx`, contenu
-  `content/references.ts`. Le client indique « En attente » pour le corps : la page porte le H1,
+  `content/references.ts`. Le CTA de fin « Vous souhaitez nous confier un projet ? » est sur
+  fond marine, à la demande du client. Le client indique « En attente » pour le corps : la page porte le H1,
   les logos officiels, le H2 « Vous souhaitez nous confier un projet ? » et le CTA « Présenter
   mon projet » (pop-up devis). Une grille de projets est prête (`references.projects`, champs
   `title`, `place`, `text`, `image?`) et s'affiche dès qu'elle est remplie. **Tant qu'elle est

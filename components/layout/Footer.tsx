@@ -77,7 +77,8 @@ export function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-hairline">
+      {/* Fond crème explicite : les logos officiels sont désormais à fond transparent. */}
+      <div className="border-t border-hairline bg-canvas">
         <Container wide className="py-8">
           <p className="text-center text-eyebrow font-medium uppercase text-mute">Certifications et partenaires</p>
           <PartnerLogos className="mt-5" />

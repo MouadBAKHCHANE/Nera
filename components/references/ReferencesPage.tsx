@@ -115,15 +115,13 @@ export function ReferencesPage() {
           </Container>
         </section>
 
-        <section className="bg-canvas-alt py-section-sm lg:py-section">
+        <section className="bg-nera-navy-deep bg-blueprint py-section-sm text-nera-cream lg:py-section">
           <Container wide>
             <Reveal className="max-w-3xl">
-              <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-navy md:text-[2.5rem]">
+              <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {references.closing.title}
               </h2>
-              <ArrowQuoteButton tone="dark" className="mt-10">
-                {references.closing.cta}
-              </ArrowQuoteButton>
+              <ArrowQuoteButton className="mt-10">{references.closing.cta}</ArrowQuoteButton>
             </Reveal>
           </Container>
         </section>
