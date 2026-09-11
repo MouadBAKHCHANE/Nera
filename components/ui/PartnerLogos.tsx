@@ -13,20 +13,22 @@ const partners = [
 ];
 
 /**
- * `align` plutôt qu'une classe `justify-*` passée dans `className` : deux utilitaires
- * `justify-*` dans la même chaîne se départagent par l'ordre de la feuille de style, pas par
- * celui de la chaîne — le résultat serait imprévisible.
+ * L'alignement passe par `justify`, jamais par `className` : la classe de base n'en contient
+ * aucun, sinon deux utilitaires `justify-*` sur le même élément se départageraient par l'ordre
+ * de la feuille de style et non par celui de la chaîne. Les variantes de point de rupture sont
+ * admises (`"justify-center lg:justify-start"`) : elles vivent dans des media queries
+ * distinctes et ne se contredisent donc pas.
  */
 export function PartnerLogos({
   className = "",
-  align = "center",
+  justify = "justify-center",
 }: {
   className?: string;
-  align?: "center" | "start";
+  justify?: string;
 }) {
   return (
     <ul
-      className={`flex flex-wrap items-center gap-3 md:gap-7 ${align === "start" ? "justify-start" : "justify-center"} ${className}`}
+      className={`flex flex-wrap items-center gap-3 md:gap-7 ${justify} ${className}`}
       aria-label="Certifications et partenaires"
     >
       {partners.map((p) => (

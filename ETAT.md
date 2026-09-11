@@ -146,10 +146,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
     au panneau de `/prestations` qui demandait un calcul en JS : ici rien n'est mesuré, le bloc
     se décroche seul en fin de colonne. Sous `lg`, tout s'empile dans l'ordre de lecture.
     L'icône est passée en haut à droite de chaque carte, à 36 puis 40 px.
-    `PartnerLogos` prend un `align` (`center` par défaut, `start` ici) : deux utilitaires
-    `justify-*` dans la même chaîne de classes se départagent par l'ordre de la feuille de
-    style, pas par celui de la chaîne, donc passer `justify-start` en `className` n'était pas
-    fiable.
+    Les logos officiels sont **centrés sous `lg`** — la colonne occupe alors toute la largeur —
+    et alignés sur le titre dès qu'elle devient collante :
+    `<PartnerLogos justify="justify-center lg:justify-start" />`. L'alignement passe par la
+    propriété `justify` et jamais par `className` : la classe de base du composant n'en contient
+    aucun, sinon deux utilitaires `justify-*` sur le même élément se départageraient par l'ordre
+    de la feuille de style et non par celui de la chaîne. Les variantes de point de rupture sont
+    admises, elles vivent dans des media queries distinctes.
   - **« Nos valeurs »** : la progression de fond des `value-item` de hestera, sur une seule
     bande qui touche les deux bords de l'écran et le bas de la section. Le titre reste dans le
     conteneur, mais la liste en sort : ni gouttière, ni bordure, ni arrondi, et la section n'a

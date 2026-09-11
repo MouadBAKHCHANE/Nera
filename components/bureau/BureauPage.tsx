@@ -406,7 +406,8 @@ export function BureauPage() {
                 </Reveal>
                 {/* Les logos officiels accompagnent le titre : ils restent en vue pendant le defile. */}
                 <Reveal {...aosItem} className="mt-10 border-t border-hairline pt-10">
-                  <PartnerLogos align="start" />
+                  {/* Centrés tant que la colonne occupe toute la largeur ; alignés sur le titre dès que la colonne devient collante. */}
+                  <PartnerLogos justify="justify-center lg:justify-start" />
                 </Reveal>
               </div>
 
