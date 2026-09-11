@@ -448,6 +448,9 @@ export function BureauPage() {
           bordure, ni arrondi. Le fond s'eclaircit de gauche a droite, du marine fonce au blanc.
           Les cellules d'une grille s'etirent a la hauteur de la plus haute : les cinq
           rectangles restent donc de meme hauteur sans hauteur fixe. Sous `lg`, ils s'empilent.
+          Seule cascade du site, demandee par le client : 120 ms d'ecart entre les panneaux, qui
+          apparaissent donc de gauche a droite. Ailleurs, les elements d'un meme groupe
+          apparaissent ensemble, comme chez hestera.
           Les intitules sont en capitales espacees, comme la reference — seul endroit du site
           ou un titre est en capitales, ce que `DESIGN.md` proscrit ailleurs.
         */}
@@ -469,6 +472,7 @@ export function BureauPage() {
                   as="li"
                   key={v.title}
                   {...aosItem}
+                  delay={i * 0.12}
                   className={`flex min-h-[15rem] flex-col justify-center px-6 py-14 text-center lg:min-h-[19rem] lg:px-8 ${panel.bg}`}
                 >
                   <h3

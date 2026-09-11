@@ -167,7 +167,9 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   section), `aosItem` (fade 600 ms, élément répété d'un groupe), `aosCard` (fade-right 600 ms,
   carte empilée à côté d'un texte). S'étaler en `<Reveal {...aosBlock}>`.
   **Les cascades ont disparu** : hestera ne met aucun décalage entre les éléments d'une grille,
-  ils apparaissent ensemble. Appliqué à toutes les sections de `/bureau` sauf « NERA en
+  ils apparaissent ensemble. **Une seule exception, demandée par le client** : la bande « Nos
+  valeurs » garde 120 ms d'écart entre ses cinq panneaux, qui apparaissent donc de gauche à
+  droite (`delay={i * 0.12}`). Ne pas généraliser ce décalage ailleurs. Appliqué à toutes les sections de `/bureau` sauf « NERA en
   chiffres », « Territoire » et « Rencontrons-nous », laissées telles quelles à la demande du
   client, et à `/references` (grille de projets, bandeau de logos) hors en-tête et CTA de fin.
   L'accueil n'est pas touché.
