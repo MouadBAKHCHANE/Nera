@@ -325,9 +325,11 @@ Deux gabarits coexistent, portés par `components/ui/Container.tsx` :
 - **`wide`** : pleine largeur sans maximum, gouttières 24 / 40 / **120 px**. C'est celui des
   sections « NERA en chiffres » et « Territoire », écrites avant le composant.
 
-**`/bureau` est entièrement en `wide`**, à la demande du client : toutes ses sections s'alignent
-sur « NERA en chiffres », y compris l'en-tête, et leur rythme vertical est le même
-(`py-20 lg:py-28` au lieu de `py-section-sm lg:py-section`). Ne pas mélanger les deux gabarits
+**`/bureau` et `/prestations` sont entièrement en `wide`**, à la demande du client : toutes ses sections s'alignent
+sur l'accueil, y compris l'en-tête. Sur `/bureau`, le rythme vertical suit aussi
+« NERA en chiffres » (`py-20 lg:py-28` au lieu de `py-section-sm lg:py-section`).
+Les six pages `/prestations/<slug>` gardent le conteneur centré : seule la page d'index a été
+demandée. Ne pas mélanger les deux gabarits
 sur une même page : le décalage se voit au défilement.
 
 Reste en dehors : l'en-tête du site garde `lg:px-12`, plus serré que les 120 px des sections.

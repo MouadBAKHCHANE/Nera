@@ -65,7 +65,7 @@ export function PrestationsIndexPage() {
           />
           <div className="absolute inset-0 bg-blueprint opacity-60" aria-hidden />
 
-          <Container className="relative">
+          <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -103,7 +103,7 @@ export function PrestationsIndexPage() {
 
         {/* Sommaire des six domaines, pour atteindre une prestation sans défiler. */}
         <nav aria-label="Les six prestations" className="border-b border-hairline bg-canvas-alt py-8 lg:py-10">
-          <Container>
+          <Container wide>
             <ol className="grid gap-x-8 gap-y-3.5 sm:grid-cols-2 lg:grid-cols-3">
               {index.entries.map((e, i) => (
                 <li key={e.slug}>
@@ -122,7 +122,7 @@ export function PrestationsIndexPage() {
 
         {/* Les six domaines : texte à gauche, visuel collant à droite qui change à chaque prestation. */}
         <div className="bg-canvas">
-          <Container>
+          <Container wide>
             <PrestationsScrolly
               entries={index.entries.map((e) => {
                 const page = prestationPageBySlug.get(e.slug);
@@ -135,7 +135,7 @@ export function PrestationsIndexPage() {
         {/* Derniers H2 du document client, en cartes : blanches à filet, la conclusion en marine. */}
         {index.outro.map((s) => (
           <section key={s.id} id={s.id} className="scroll-mt-24 border-t border-hairline bg-canvas py-section-sm lg:py-section">
-            <Container>
+            <Container wide>
               <h2 className="max-w-3xl font-display text-[1.5rem] font-light leading-[1.25] text-nera-navy md:text-[1.875rem]">
                 {s.title}
               </h2>
@@ -163,7 +163,7 @@ export function PrestationsIndexPage() {
         ))}
 
         <section className="bg-nera-navy-deep bg-blueprint py-section-sm text-nera-cream lg:py-section">
-          <Container>
+          <Container wide>
             <div className="max-w-3xl">
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {index.closing.title}

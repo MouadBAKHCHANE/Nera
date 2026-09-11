@@ -453,8 +453,8 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
           {active === 2 && (
             <Layer key="cvc" reduce={reduce}>
               <Tag reduce={reduce} delay={0.06} x={548} y={80} w={222} title="Ventilation" lines={["Simple ou double flux", "Récupération de chaleur"]} to={iso(100, 30, TOP + 12)} accent />
-              <Tag reduce={reduce} delay={0.12} x={40} y={96} w={244} title="Photovoltaïque" lines={["Faisabilité, autoconsommation", "Solaire thermique intégré"]} to={iso(34, 79, TOP + 6)} accent />
-              <Tag reduce={reduce} delay={0.18} x={548} y={500} w={222} title="Pompe à chaleur" lines={["Source disponible", "Températures de distribution"]} to={iso(PAC.x1, 32, 14)} accent />
+              <Tag reduce={reduce} delay={0.12} x={40} y={96} w={286} title="Photovoltaïque et solaire thermique" lines={["Faisabilité et dimensionnement"]} to={iso(34, 79, TOP + 6)} accent />
+              <Tag reduce={reduce} delay={0.18} x={548} y={500} w={222} title="Production de chaleur" lines={["Source disponible", "Températures de distribution"]} to={iso(PAC.x1, 32, 14)} accent />
               <Tag reduce={reduce} delay={0.24} x={548} y={580} w={222} title="Réseau de chaleur" lines={["Possibilité de raccordement"]} to={iso(W + 60, 130, -3)} accent />
             </Layer>
           )}
