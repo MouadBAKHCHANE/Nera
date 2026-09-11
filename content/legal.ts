@@ -38,5 +38,4 @@ export const cookieCategories = [
   },
   { id: "analytics", label: "Mesure d'audience", desc: "Statistiques de fréquentation pour améliorer le site." },
   { id: "marketing", label: "Publicité", desc: "Contenus personnalisés et suivi des campagnes." },
-  { id: "maps", label: "Google Maps", desc: "Affichage de la carte interactive de nos bureaux." },
 ] as const;

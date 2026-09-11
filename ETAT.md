@@ -173,10 +173,17 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   Les en-têtes de `/references` et `/contact` n'ont pas été alignés : le client n'a demandé
   que `/bureau`.
 - Page `/contact` : `components/contact/ContactPage.tsx`, contenu `content/contact.ts` (texte
-  client mot pour mot, lignes 781 à 800). En-tête sombre, puis le formulaire à gauche sous les
-  deux phrases du client et les coordonnées à droite en carte : adresse cliquable vers Google
-  Maps, puis les deux boutons et le lien LinkedIn du document, plus le lien fléché vers le
-  pop-up devis. À la demande du client, les boutons portent le numéro et l'adresse e-mail au
+  client mot pour mot, lignes 781 à 800). En-tête sombre à deux colonnes : le titre et le chapô
+  à gauche, la carte « Nos coordonnées » à droite, en marine translucide sur le fond du héro
+  (adresse cliquable vers Google Maps, les deux boutons et le lien LinkedIn du document). Le
+  lien fléché vers le pop-up devis a été retiré de cette carte à la demande du client.
+  Vient ensuite le formulaire à gauche et une photo à droite (`contact-conseil.webp`, découverte
+  par `ImageWipe`). Le client a demandé une photo de quelqu'un au téléphone : il n'en existe
+  aucune dans `Assets/Visuels`, c'est donc la scène de conseil la plus proche qui a été retenue,
+  à remplacer dès qu'il en fournit une.
+  Le titre de ce bloc est passé de « Demandez un devis gratuit » (texte client) à
+  « Envoyez-nous un message », à sa demande : le formulaire de cette page est le formulaire de
+  contact simple, la demande d'offre détaillée passant par le pop-up. À la demande du client, les boutons portent le numéro et l'adresse e-mail au
   lieu de « Appeler NERA » et « Envoyer un e-mail » ; ces libellés restent en `aria-label`,
   sinon un lecteur d'écran n'annoncerait qu'une suite de chiffres. La ligne « Téléphone : … /
   E-mail : … » qui les précédait a été retirée : elle répétait ce que portent les boutons. JSON-LD `BreadcrumbList` +
@@ -187,7 +194,16 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   `/contact`, puisque le composant est partagé.
   Il est : la section contact de l'accueil et `/contact` partagent le même
   formulaire pour ne pas diverger. Toujours `action="#"` en attendant l'envoi des e-mails.
-- « Carte localisation » (`components/contact/ContactMap.tsx`) : bande pleine hauteur fixe
+- « Carte localisation » (`components/contact/ContactMap.tsx`) : **chargée sans condition**,
+  à la demande du client, et la catégorie « Google Maps » a quitté le bandeau cookies
+  (`content/legal.ts`, `lib/consent.ts`, `CookieBanner`, `CookieChoice`). Le composant est
+  redevenu un composant serveur, sans état ni consentement.
+  **Contradiction à régler — voir le point 1 d'« À faire » :** les textes juridiques du client
+  promettent encore le blocage de la carte tant que le visiteur n'a pas accepté, à trois
+  endroits (`content/legal-pages.ts` : « Google Maps » dans la politique de confidentialité,
+  « Contenus externes - Google Maps » et la liste des cookies tiers). Ces textes sont du client :
+  ils n'ont pas été réécrits ici. Soit il les fait corriger, soit on rétablit le blocage.
+  Bande pleine hauteur fixe
   (340 / 420 / 500 px), sans titre visible — le titre du client sert de nom accessible à la
   section (`aria-label`), à fond perdu sur toute la largeur de l'écran.
   La carte interroge Google avec la **raison sociale et l'adresse**, pas avec des coordonnées :
@@ -222,14 +238,18 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 
 Par ordre de priorité.
 
-1. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
+1. **Textes juridiques et carte** — faire corriger par le client les trois passages qui
+   promettent le blocage de Google Maps jusqu'au consentement, puisque la carte s'affiche
+   désormais d'emblée et que la catégorie a quitté le bandeau. À défaut, rétablir le blocage.
+   Tant que ce n'est pas tranché, le site contredit sa propre politique de cookies.
+2. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
    pour remplir `references.projects` ; vérifier ensuite que `/references` sort du noindex.
    Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
-2. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
+3. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
    tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.
-3. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
+4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
-4. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
+5. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
    Attention : `components/layout/` n'est pas mort, `app/devis/page.tsx` s'en sert et
    `HeaderDark` importe son `PrestationsMenu`. Puis soumettre le site à la Search Console.
 
@@ -305,9 +325,8 @@ Le choix vit en localStorage sous `nera-cookie-consent`. `lib/consent.ts` est la
 de la clé, du type et des deux évènements : `nera:cookie-consent` (choix enregistré) et
 `nera:open-cookie-preferences` (demande d'ouverture, que le bandeau annule pour signaler qu'il a
 répondu). Le rappel de choix de `/cookies` et le lien « Gérer mes cookies » du pied de page
-passent tous deux par là. La carte de `/contact` est branchée sur la catégorie
-`maps` (voir `components/contact/ContactMap.tsx`, modèle à suivre) ; GA4, Google Ads et Meta
-Pixel restent à brancher sur les leurs.
+passent tous deux par là. La carte de `/contact` n'y est plus soumise (voir plus haut) et la
+catégorie a été retirée ; GA4, Google Ads et Meta Pixel restent à brancher sur les leurs.
 
 ## Décisions ouvertes
 

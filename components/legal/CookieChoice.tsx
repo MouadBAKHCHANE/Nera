@@ -28,7 +28,6 @@ export function CookieChoice() {
     necessary: true,
     analytics: consent?.analytics ?? false,
     marketing: consent?.marketing ?? false,
-    maps: consent?.maps ?? false,
   };
 
   /** `null` si aucun choix n'est enregistré ou si la date stockée est illisible. */

@@ -18,7 +18,6 @@ export function CookieBanner() {
   const [custom, setCustom] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
-  const [maps, setMaps] = useState(false);
 
   useEffect(() => {
     const saved = readConsent();
@@ -26,7 +25,6 @@ export function CookieBanner() {
     else {
       setAnalytics(saved.analytics);
       setMarketing(saved.marketing);
-      setMaps(saved.maps ?? false);
     }
     const reopen = (e: Event) => {
       e.preventDefault();
@@ -37,11 +35,10 @@ export function CookieBanner() {
     return () => window.removeEventListener(CONSENT_OPEN, reopen);
   }, []);
 
-  const save = (a: boolean, m: boolean, g: boolean) => {
-    writeConsent({ necessary: true, analytics: a, marketing: m, maps: g, date: new Date().toISOString() });
+  const save = (a: boolean, m: boolean) => {
+    writeConsent({ necessary: true, analytics: a, marketing: m, date: new Date().toISOString() });
     setAnalytics(a);
     setMarketing(m);
-    setMaps(g);
     setOpen(false);
     setCustom(false);
   };
@@ -56,7 +53,6 @@ export function CookieBanner() {
   const toggles: Record<string, { on: boolean; set: (v: boolean) => void } | undefined> = {
     analytics: { on: analytics, set: setAnalytics },
     marketing: { on: marketing, set: setMarketing },
-    maps: { on: maps, set: setMaps },
   };
 
   return (
@@ -95,10 +91,10 @@ export function CookieBanner() {
             <button type="button" onClick={() => setCustom(true)} className={outline}>
               {cookieBanner.customise}
             </button>
-            <button type="button" onClick={() => save(false, false, false)} className={outline}>
+            <button type="button" onClick={() => save(false, false)} className={outline}>
               {cookieBanner.rejectAll}
             </button>
-            <button type="button" onClick={() => save(true, true, true)} className={filled}>
+            <button type="button" onClick={() => save(true, true)} className={filled}>
               {cookieBanner.acceptAll}
             </button>
           </div>
@@ -139,13 +135,13 @@ export function CookieBanner() {
             })}
           </ul>
           <div className="mt-4 flex flex-wrap gap-2">
-            <button type="button" onClick={() => save(false, false, false)} className={outline}>
+            <button type="button" onClick={() => save(false, false)} className={outline}>
               {cookieBanner.rejectAll}
             </button>
-            <button type="button" onClick={() => save(true, true, true)} className={outline}>
+            <button type="button" onClick={() => save(true, true)} className={outline}>
               {cookieBanner.acceptAll}
             </button>
-            <button type="button" onClick={() => save(analytics, marketing, maps)} className={filled}>
+            <button type="button" onClick={() => save(analytics, marketing)} className={filled}>
               {cookieBanner.save}
             </button>
           </div>

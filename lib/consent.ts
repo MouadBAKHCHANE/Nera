@@ -7,7 +7,6 @@ export type Consent = {
   necessary: true;
   analytics: boolean;
   marketing: boolean;
-  maps: boolean;
   /** ISO 8601, date à laquelle le choix a été enregistré. */
   date: string;
 };

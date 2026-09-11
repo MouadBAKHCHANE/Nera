@@ -29,10 +29,17 @@ export const contact = {
     "Présentez-nous votre bâtiment et votre objectif.",
     "Nous vous répondrons sous 48 heures ouvrées afin de préciser la prestation adaptée et les informations nécessaires à l’établissement d’une offre.",
   ],
-  /** Bloc « Formulaire devis ? » du document client : titre, phrase d'accompagnement. */
+  /**
+   * Bloc « Formulaire devis ? » du document client. Le client a remplacé son titre
+   * « Demandez un devis gratuit » par « Envoyez-nous un message » : le formulaire de cette page
+   * est le formulaire de contact simple, la demande d'offre détaillée passant par le pop-up.
+   * La phrase d'accompagnement reste celle du document.
+   */
   form: {
-    title: "Demandez un devis gratuit",
+    title: "Envoyez-nous un message",
     text: "Décrivez votre bâtiment, la prestation recherchée et le stade d’avancement du projet.",
+    image: "/img/contact-conseil.webp",
+    imageAlt: "Une conseillère présente un dossier à deux clients autour d’une table basse",
   },
   coordonnees: {
     title: "Nos coordonnées",
