@@ -36,9 +36,10 @@ export const contact = {
   },
   coordonnees: {
     title: "Nos coordonnées",
-    phoneLabel: "Téléphone",
-    emailLabel: "E-mail",
-    /** Libellés exacts des deux boutons et du lien du document client. */
+    /**
+     * Libellés exacts des deux boutons et du lien du document client. À la demande du client,
+     * les boutons affichent le numéro et l'adresse ; ces libellés servent d'`aria-label`.
+     */
     callCta: "Appeler NERA",
     mailCta: "Envoyer un e-mail",
     linkedinCta: "LinkedIn",

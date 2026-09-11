@@ -138,8 +138,11 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Page `/contact` : `components/contact/ContactPage.tsx`, contenu `content/contact.ts` (texte
   client mot pour mot, lignes 781 à 800). En-tête sombre, puis le formulaire à gauche sous les
   deux phrases du client et les coordonnées à droite en carte : adresse cliquable vers Google
-  Maps, téléphone, e-mail, les deux boutons « Appeler NERA » / « Envoyer un e-mail » et le lien
-  LinkedIn du document, plus le lien fléché vers le pop-up devis. JSON-LD `BreadcrumbList` +
+  Maps, puis les deux boutons et le lien LinkedIn du document, plus le lien fléché vers le
+  pop-up devis. À la demande du client, les boutons portent le numéro et l'adresse e-mail au
+  lieu de « Appeler NERA » et « Envoyer un e-mail » ; ces libellés restent en `aria-label`,
+  sinon un lecteur d'écran n'annoncerait qu'une suite de chiffres. La ligne « Téléphone : … /
+  E-mail : … » qui les précédait a été retirée : elle répétait ce que portent les boutons. JSON-LD `BreadcrumbList` +
   `ContactPage`.
 - Les champs du formulaire de contact vivent dans `components/contact/ContactForm.tsx`, avec un
   `tone` clair ou sombre : la section contact de l'accueil et `/contact` partagent le même

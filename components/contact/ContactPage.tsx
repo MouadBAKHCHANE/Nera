@@ -131,40 +131,32 @@ export function ContactPage() {
                         Suisse
                       </span>
                     </a>
-
-                    <ul className="mt-5 space-y-2.5 border-t border-hairline pt-5 text-body-md">
-                      <li className="flex items-center gap-3">
-                        <Phone className="size-4 shrink-0 text-accent-deep" strokeWidth={1.5} aria-hidden />
-                        <span className="text-mute">{contact.coordonnees.phoneLabel} :</span>
-                        <a href={company.phoneHref} className="text-body transition-colors hover:text-accent-deep">
-                          {company.phone}
-                        </a>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <Mail className="size-4 shrink-0 text-accent-deep" strokeWidth={1.5} aria-hidden />
-                        <span className="text-mute">{contact.coordonnees.emailLabel} :</span>
-                        <a href={`mailto:${company.email}`} className="text-body transition-colors hover:text-accent-deep">
-                          {company.email}
-                        </a>
-                      </li>
-                    </ul>
                   </address>
 
-                  {/* Les deux boutons et le lien LinkedIn du document client. */}
+                  {/*
+                    Les deux boutons et le lien LinkedIn du document client. Le client a demandé
+                    que le numéro et l'adresse s'affichent sur les boutons eux-mêmes, à la place
+                    de « Appeler NERA » et « Envoyer un e-mail » : ces libellés restent en
+                    `aria-label`, sinon un lecteur d'écran n'annoncerait qu'une suite de chiffres.
+                    La ligne « Téléphone : … / E-mail : … » qui les précédait a donc disparu :
+                    elle répétait mot pour mot ce que portent les boutons.
+                  */}
                   <div className="mt-8 flex flex-col gap-3 border-t border-hairline pt-8">
                     <a
                       href={company.phoneHref}
+                      aria-label={contact.coordonnees.callCta}
                       className="inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-nera-navy px-[22px] text-[15px] font-medium text-nera-cream transition-colors hover:bg-nera-navy-deep"
                     >
-                      <Phone className="size-4" strokeWidth={1.75} aria-hidden />
-                      {contact.coordonnees.callCta}
+                      <Phone className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
+                      {company.phone}
                     </a>
                     <a
                       href={`mailto:${company.email}`}
+                      aria-label={contact.coordonnees.mailCta}
                       className="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-nera-navy px-[22px] text-[15px] font-medium text-nera-navy transition-colors hover:bg-nera-navy-soft"
                     >
-                      <Mail className="size-4" strokeWidth={1.75} aria-hidden />
-                      {contact.coordonnees.mailCta}
+                      <Mail className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
+                      {company.email}
                     </a>
                     <a
                       href={company.linkedin}
