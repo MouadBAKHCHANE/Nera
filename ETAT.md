@@ -247,5 +247,8 @@ Pixel restent à brancher sur les leurs.
 
 - Le plan de site client ne mentionne aucune page Actualités, alors que le module CMS
   (Sanity) est au devis. À trancher avec le client.
-- Le formulaire de la section contact n'est pas encore relié (`action="#"`) ; il le sera
-  avec le point 2.
+- Le formulaire de contact (accueil et `/contact`, même composant) n'est pas encore relié
+  (`action="#"`) ; il le sera avec le point 2 de « À faire », l'envoi des e-mails.
+- Sur `/references` et `/contact`, le CTA de fin et l'en-tête gardent leurs apparitions
+  d'origine, par cohérence avec les quatre sections que le client a voulu laisser telles
+  quelles sur `/bureau`. À confirmer avec lui s'il souhaite les aligner aussi.
