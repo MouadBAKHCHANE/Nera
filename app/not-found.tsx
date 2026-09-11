@@ -45,9 +45,14 @@ export default function NotFound() {
             <div className="grid gap-14 lg:grid-cols-[6fr_5fr] lg:items-center lg:gap-20">
               {/* Colonne de gauche : le nombre, le titre, le chapô, le retour à l'accueil. */}
               <Reveal {...aosBlock}>
+                {/*
+                  Crème à 30 % sur le marine foncé virait au bleu-gris à 2,5:1 de contraste :
+                  le nombre devenait illisible. À 75 %, il reste en retrait du H1 tout en se
+                  lisant sans effort (8,5:1).
+                */}
                 <p
                   aria-hidden
-                  className="flex items-center gap-4 font-display text-[4.5rem] font-light leading-none text-nera-cream/30 md:text-[6.5rem]"
+                  className="flex items-center gap-4 font-display text-[4.5rem] font-light leading-none text-nera-cream/75 md:text-[6.5rem]"
                 >
                   <span>4</span>
                   <DiamondOutline className="size-[0.62em] text-accent" strokeWidth={1.5} />
