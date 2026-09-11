@@ -14,8 +14,11 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Accueil, version PC (demandes du client) : logo d'en-tête à 52 px dès `lg` (40 px ailleurs),
   et les paragraphes des sections passent à `lg:text-body-lg` — 18 px sur grand écran au lieu
   de 16. Les étiquettes et les titres sont inchangés.
-- Bandeau « Certifications et partenaires » du pied de page : **fond blanc**, et les tuiles
-  blanches derrière chaque logo ont disparu, les logos posant directement dessus. Conséquence
+- Bandeau « Certifications et partenaires » : **fond blanc**, et les tuiles blanches derrière
+  chaque logo ont disparu, les logos posant directement dessus. Il a aussi quitté le pied de
+  page pour devenir une section de l'accueil (`components/home2/PartnerStrip.tsx`), placée
+  juste après « Territoire ». Il ne figure donc plus au pied des autres pages : `/bureau` a les
+  mêmes logos dans « Nos qualifications » et `/references` dans son propre bandeau. Conséquence
   à retenir : `PartnerLogos` n'a plus de fond à lui, **tous ses emplacements doivent rester sur
   fond clair** — sur du marine, ces logos en quadrichromie deviendraient illisibles. Les quatre
   emplacements actuels (deux pieds de page, qualifications, références) sont conformes.
@@ -262,6 +265,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   porte l'information. À droite, les quatre destinations du menu principal en lignes à filet,
   pour repartir sans passer par l'accueil. `noindex, follow` et titre absolu.
   Les textes sont d'interface, pas du client : le document source n'en prévoit pas.
+- Toutes les puces des pages prestation (`content/prestation-pages.ts`, 216 items) suivent la
+  règle de `/bureau` : capitale initiale, sans point-virgule ni point final. Les paragraphes
+  n'ont pas bougé. Un script parcourt les seuls blocs `t: "ul"` ; ne pas appliquer la règle aux
+  `p`, dont la ponctuation est celle du client.
+- Version PC des prestations : le bandeau blanc des six prestations passe en 16 px puis 18 px
+  (numéros 15 puis 17), et les paragraphes, puces et réponses de FAQ passent à
+  `lg:text-body-lg`. Le sommaire collant et les liens passent de 14 à 16 px.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -358,6 +368,14 @@ nom littéral échoue en `FileNotFoundError`. Comparer sur `unicodedata.normaliz
 Les logos partenaires de `public/logos/partenaires/` restent en PNG : ce sont les fichiers
 officiels de leurs propriétaires, ils pèsent moins de 30 Ko et `next/image` les sert déjà
 ré-encodés. Les logos NERA sont en SVG.
+
+## Serveur de développement
+
+**Ne jamais lancer `next build` pendant que `next dev` tourne** : les deux écrivent dans `.next`
+et le serveur de développement finit par répondre 500 avec « Jest worker encountered 2 child
+process exceptions ». Le code n'est pas en cause. Remède : arrêter le serveur, supprimer
+`.next/dev`, relancer `npm run dev`. Pour vérifier une modification, interroger le serveur de
+développement ; ne construire qu'après l'avoir arrêté.
 
 ## Défilement entre pages
 

@@ -12,7 +12,7 @@ export function Blocks({ blocks }: { blocks: PrestationBlock[] }) {
         switch (b.t) {
           case "p":
             return (
-              <p key={i} className="mt-4 text-body-md leading-[1.8] text-body first:mt-0">
+              <p key={i} className="mt-4 text-body-md leading-[1.8] text-body first:mt-0 lg:text-body-lg">
                 {b.text}
               </p>
             );
@@ -21,7 +21,7 @@ export function Blocks({ blocks }: { blocks: PrestationBlock[] }) {
               // Une puce par ligne : le texte client ne doit jamais se couper en deux.
               <ul key={i} className="mt-5 space-y-2.5 first:mt-0">
                 {b.items.map((item, j) => (
-                  <li key={j} className="flex gap-3 text-body-md leading-[1.6] text-body">
+                  <li key={j} className="flex gap-3 text-body-md leading-[1.6] text-body lg:text-body-lg">
                     <span className="mt-[0.65em] size-1.5 shrink-0 bg-accent" aria-hidden />
                     <span>{item}</span>
                   </li>
@@ -41,7 +41,7 @@ export function Blocks({ blocks }: { blocks: PrestationBlock[] }) {
                     </span>
                     <div className="pt-1">
                       <p className="font-display text-[1.0625rem] font-medium leading-[1.3] text-nera-navy">{s.title}</p>
-                      <p className="mt-1.5 text-body-md leading-[1.7] text-body">{s.text}</p>
+                      <p className="mt-1.5 text-body-md leading-[1.7] text-body lg:text-body-lg">{s.text}</p>
                     </div>
                   </li>
                 ))}
@@ -53,7 +53,7 @@ export function Blocks({ blocks }: { blocks: PrestationBlock[] }) {
                 {b.items.map((c, j) => (
                   <div key={j} className="clip-notch border-t-2 border-accent bg-nera-white p-6">
                     <p className="font-display text-[1.0625rem] font-medium leading-[1.3] text-nera-navy">{c.title}</p>
-                    <p className="mt-3 text-body-sm leading-[1.7] text-body">{c.text}</p>
+                    <p className="mt-3 text-body-sm leading-[1.7] text-body md:text-body-md">{c.text}</p>
                   </div>
                 ))}
               </div>

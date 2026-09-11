@@ -6,7 +6,6 @@ import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref }
 import { prestationsIndexRoute } from "@/content/prestation-pages";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
-import { PartnerLogos } from "@/components/ui/PartnerLogos";
 
 const link = "text-body-sm font-light text-nera-cream/80 transition-colors hover:text-accent";
 const head = "text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream";
@@ -77,17 +76,6 @@ export function FooterDark() {
         <div className="flex justify-center md:hidden">
           <SocialLinks tone="light" />
         </div>
-      </div>
-
-      {/*
-        Bandeau sur fond blanc : les logos officiels y posent directement, sans la tuile
-        blanche qu'il fallait leur mettre sur le marine pour respecter leurs couleurs.
-      */}
-      <div className="bg-nera-white px-6 py-8 md:px-10 lg:px-[120px]">
-        <p className="text-center text-[12px] font-medium uppercase tracking-[0.3em] text-mute">
-          Certifications et partenaires
-        </p>
-        <PartnerLogos className="mt-5" />
       </div>
 
       <div className="flex flex-col items-center gap-4 border-t border-nera-cream/15 px-6 py-6 text-center text-[12px] font-light text-nera-cream/60 md:px-10 lg:flex-row lg:justify-between lg:px-[120px] lg:text-left">

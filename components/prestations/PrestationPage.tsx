@@ -123,14 +123,14 @@ export function PrestationPage({ page }: { page: Page }) {
                     <li key={s.id}>
                       <a
                         href={`#${s.id}`}
-                        className="text-body-sm leading-[1.5] text-body transition-colors hover:text-accent-deep"
+                        className="text-body-md leading-[1.5] text-body transition-colors hover:text-accent-deep"
                       >
                         {s.title}
                       </a>
                     </li>
                   ))}
                   <li>
-                    <a href="#faq" className="text-body-sm text-body transition-colors hover:text-accent-deep">
+                    <a href="#faq" className="text-body-md text-body transition-colors hover:text-accent-deep">
                       Questions fréquentes
                     </a>
                   </li>
@@ -176,7 +176,7 @@ export function PrestationPage({ page }: { page: Page }) {
                       aria-hidden
                     />
                   </summary>
-                  <p className="mt-3 max-w-[62ch] text-body-md leading-[1.75] text-body">{f.a}</p>
+                  <p className="mt-3 max-w-[62ch] text-body-md leading-[1.75] text-body lg:text-body-lg">{f.a}</p>
                 </details>
               ))}
             </div>

@@ -102,16 +102,16 @@ export function PrestationsIndexPage() {
         </header>
 
         {/* Sommaire des six domaines, pour atteindre une prestation sans défiler. */}
-        <nav aria-label="Les six prestations" className="border-b border-hairline bg-canvas-alt py-8">
+        <nav aria-label="Les six prestations" className="border-b border-hairline bg-canvas-alt py-8 lg:py-10">
           <Container>
-            <ol className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="grid gap-x-8 gap-y-3.5 sm:grid-cols-2 lg:grid-cols-3">
               {index.entries.map((e, i) => (
                 <li key={e.slug}>
                   <a
                     href={`#${e.slug}`}
-                    className="group flex items-baseline gap-3 text-body-sm text-body transition-colors hover:text-accent-deep"
+                    className="group flex items-baseline gap-3 text-body-md text-body transition-colors hover:text-accent-deep lg:text-body-lg"
                   >
-                    <span className="font-display text-[13px] text-mute">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-display text-[15px] text-mute lg:text-[17px]">{String(i + 1).padStart(2, "0")}</span>
                     <span>{e.title}</span>
                   </a>
                 </li>

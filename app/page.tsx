@@ -8,6 +8,7 @@ import { Audience2 } from "@/components/home2/Audience2";
 import { Approach } from "@/components/home2/Approach";
 import { Stats } from "@/components/home2/Stats";
 import { Territory } from "@/components/home2/Territory";
+import { PartnerStrip } from "@/components/home2/PartnerStrip";
 import { ContactDark } from "@/components/home2/ContactDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 
@@ -31,6 +32,7 @@ export default function Home() {
         <Approach />
         <Stats />
         <Territory />
+        <PartnerStrip />
         <ContactDark />
       </main>
       <FooterDark />
