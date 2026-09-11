@@ -41,7 +41,7 @@ export default function NotFound() {
             strokeWidth={1}
           />
 
-          <Container className="relative">
+          <Container wide className="relative">
             <div className="grid gap-14 lg:grid-cols-[6fr_5fr] lg:items-center lg:gap-20">
               {/* Colonne de gauche : le nombre, le titre, le chapô, le retour à l'accueil. */}
               <Reveal {...aosBlock}>

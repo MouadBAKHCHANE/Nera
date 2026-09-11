@@ -47,7 +47,7 @@ export function ReferencesPage() {
           />
           <div className="absolute inset-0 bg-blueprint opacity-60" aria-hidden />
 
-          <Container className="relative">
+          <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -80,7 +80,7 @@ export function ReferencesPage() {
         {/* Projets du client : la grille n'apparaît que lorsqu'ils ont été fournis. */}
         {references.projects.length > 0 && (
           <section className="bg-canvas py-section-sm lg:py-section">
-            <Container>
+            <Container wide>
               <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {references.projects.map((p) => (
                   <Reveal
@@ -108,7 +108,7 @@ export function ReferencesPage() {
 
         {/* Logos officiels, seuls éléments de référence disponibles en attendant les projets. */}
         <section className="border-b border-hairline bg-canvas py-14 lg:py-20">
-          <Container>
+          <Container wide>
             <Reveal {...aosItem}>
               <PartnerLogos />
             </Reveal>
@@ -116,7 +116,7 @@ export function ReferencesPage() {
         </section>
 
         <section className="bg-canvas-alt py-section-sm lg:py-section">
-          <Container>
+          <Container wide>
             <Reveal className="max-w-3xl">
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-navy md:text-[2.5rem]">
                 {references.closing.title}

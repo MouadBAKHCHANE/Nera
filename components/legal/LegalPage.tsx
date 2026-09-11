@@ -112,7 +112,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
       <HeaderDark />
       <main>
         <header className="bg-nera-navy-deep bg-blueprint pb-14 pt-[120px] text-nera-cream lg:pb-20 lg:pt-[180px]">
-          <Container className="max-w-3xl">
+          <Container wide className="mx-auto max-w-3xl">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -147,7 +147,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
         </header>
 
         <div className="py-section-sm lg:py-section">
-          <Container className="max-w-3xl">
+          <Container wide className="mx-auto max-w-3xl">
             <nav aria-labelledby="sommaire" className="border-y border-hairline py-6">
               <h2 id="sommaire" className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">
                 Sommaire

@@ -64,7 +64,7 @@ export function PrestationPage({ page }: { page: Page }) {
           />
           <div className="absolute inset-0 bg-blueprint opacity-60" aria-hidden />
 
-          <Container className="relative">
+          <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -112,7 +112,7 @@ export function PrestationPage({ page }: { page: Page }) {
 
         {/* Corps : sommaire collant à gauche, sections du client à droite. */}
         <div className="py-section-sm lg:py-section">
-          <Container>
+          <Container wide>
             <div className="grid gap-12 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-20">
               <nav aria-labelledby="sommaire" className="lg:sticky lg:top-28 lg:self-start">
                 <h2 id="sommaire" className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">
@@ -157,7 +157,7 @@ export function PrestationPage({ page }: { page: Page }) {
 
         {/* FAQ du document client, dépliable sans JavaScript. */}
         <section id="faq" className="scroll-mt-28 bg-canvas-alt py-section-sm lg:py-section">
-          <Container className="max-w-3xl">
+          <Container wide className="mx-auto max-w-3xl">
             <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-accent-deep">
               <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
               FAQ
@@ -185,7 +185,7 @@ export function PrestationPage({ page }: { page: Page }) {
 
         {/* Dernier H2 du document client et CTA devis. */}
         <section className="bg-nera-navy-deep bg-blueprint py-section-sm text-nera-cream lg:py-section">
-          <Container>
+          <Container wide>
             <div className="max-w-3xl">
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {page.closing}

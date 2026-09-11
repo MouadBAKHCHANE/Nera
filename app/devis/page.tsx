@@ -15,7 +15,7 @@ export default function DevisPage() {
     <>
       <Header />
       <main className="py-section-sm lg:py-section">
-        <Container className="max-w-3xl">
+        <Container wide className="mx-auto max-w-3xl">
           <p className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.2em] text-accent-deep">
             <span className="h-2 w-7 bg-accent" aria-hidden />
             Devis gratuit

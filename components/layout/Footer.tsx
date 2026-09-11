@@ -21,7 +21,7 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
 export function Footer() {
   return (
     <footer className="border-t border-hairline bg-canvas">
-      <Container className="grid gap-10 py-14 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 lg:grid-cols-[6fr_3fr_3fr] lg:py-20 lg:text-left">
+      <Container wide className="grid gap-10 py-14 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 lg:grid-cols-[6fr_3fr_3fr] lg:py-20 lg:text-left">
         <div className="flex flex-col items-center md:col-span-2 lg:col-span-1 lg:items-start">
           <Image src="/logos/nera-tagline-navy-green.svg" alt={company.shortName} width={220} height={57} style={{ height: 52, width: "auto" }} />
           <p className="mt-6 max-w-xs text-body-sm text-body">{footerTagline}</p>
@@ -78,14 +78,14 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-hairline">
-        <Container className="py-8">
+        <Container wide className="py-8">
           <p className="text-center text-eyebrow font-medium uppercase text-mute">Certifications et partenaires</p>
           <PartnerLogos className="mt-5" />
         </Container>
       </div>
 
       <div className="border-t border-hairline">
-        <Container className="flex flex-col items-center gap-3 py-5 text-center text-body-sm text-mute lg:flex-row lg:justify-between lg:text-left">
+        <Container wide className="flex flex-col items-center gap-3 py-5 text-center text-body-sm text-mute lg:flex-row lg:justify-between lg:text-left">
           <ul className="order-1 flex flex-wrap justify-center gap-x-5 gap-y-2 lg:order-2">
             {footerLegal.map((l) => (
               <li key={l.href}>

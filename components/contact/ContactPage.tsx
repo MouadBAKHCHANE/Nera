@@ -64,7 +64,7 @@ export function ContactPage() {
       <main>
         {/* En-tête sombre : fil d'Ariane, H1 et les trois paragraphes du client. */}
         <header className="relative overflow-hidden bg-nera-navy-deep bg-blueprint pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
-          <Container className="relative">
+          <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>
@@ -167,7 +167,7 @@ export function ContactPage() {
 
         {/* Formulaire a gauche, photo a droite. */}
         <section className="bg-canvas py-section-sm lg:py-section">
-          <Container>
+          <Container wide>
             <div className="grid gap-12 lg:grid-cols-[7fr_5fr] lg:gap-20">
               <Reveal {...aosBlock}>
                 <h2 className="font-display text-[1.5rem] font-light leading-[1.2] text-nera-navy md:text-[2rem]">
