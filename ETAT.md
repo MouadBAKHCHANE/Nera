@@ -125,6 +125,23 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   `title`, `place`, `text`, `image?`) et s'affiche dès qu'elle est remplie. **Tant qu'elle est
   vide, la page est en `noindex, follow` et absente du plan de site** : une page sans contenu
   nuirait au référencement. Remplir le tableau suffit à lever les deux.
+- Mise en page de `/bureau` inspirée de hestera.ch/a-propos, relevée dans leur HTML et leur
+  feuille de style, hors en-tête, « NERA en chiffres », « Territoire » et « Rencontrons-nous » :
+  - **Titre de section** : leur `header.title-w-hr` — H2 puis un filet qui file jusqu'au bord de
+    la colonne, alignés au centre. Repris dans `SectionHeading`, l'étiquette verte conservée
+    au-dessus. Le filet disparaît sous `md`, où il n'a plus de place utile.
+  - **Filigrane** : leur `.fili-right` sort une icône à moitié hors du cadre droit. Le logomark
+    au trait déborde de même en haut à droite de « Notre mission », à 6 % d'opacité.
+  - **Découverte des images** : leur `.img-onscroll` élargit le cadre de 0 à 100 % en 1 s
+    (`cubic-bezier(.5, 0, 0, 1)`). `components/ui/ImageWipe.tsx` fait de même, mais avec un
+    rideau à la couleur du fond qui se retire vers la droite : l'image ne se déforme pas.
+    Passer au rideau la couleur de la section (`curtain="bg-canvas"`…). Posé par `data-shown`
+    depuis l'observateur, pas par un état React. Utilisé sur la photo de l'équipe et des valeurs.
+  - **« Nos valeurs »** : leur bloc `#values` — titre puis photo carrée à gauche, valeurs en
+    panneaux pleine largeur à droite, texte centré, fond qui fonce à chaque rang. Ils en ont
+    trois, il y en a cinq ici : progression blanc → crème foncé → marine clair → marine →
+    marine foncé (`valeurPanels`), texte en crème sur les deux derniers. Photo
+    `bureau-valeurs-nature-suisse.webp`, carré centré de `Assets/Visuels/Nature Suisse.jpg`.
 - Apparitions calées sur hestera.ch/a-propos, la direction validée avec le client. Les réglages
   relevés dans leur HTML (`data-aos` / `data-aos-duration`, `AOS.init({ once: true })`, aucun
   `data-aos-delay`) vivent dans `components/ui/aos.ts` : `aosBlock` (fade 1000 ms, bloc de

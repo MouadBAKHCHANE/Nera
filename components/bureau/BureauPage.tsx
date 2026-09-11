@@ -24,6 +24,7 @@ import { Territory } from "@/components/home2/Territory";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
+import { ImageWipe } from "@/components/ui/ImageWipe";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
 import { bureau, bureauRoute } from "@/content/bureau";
@@ -40,9 +41,27 @@ const qualificationIcons = [BadgeCheck, Sparkles, Award, ShieldCheck];
  */
 const equilibreIcons = [Scale, Zap, Coins, Thermometer, Building2, Leaf];
 
+/**
+ * Les cinq panneaux de « Nos valeurs », du plus clair au plus foncé — la progression des
+ * `value-item` de hestera, portée sur la palette NERA. Uniquement des tons de la charte :
+ * ni vert en aplat, ni teinte inventée.
+ */
+const valeurPanels = [
+  { bg: "bg-nera-white", title: "text-nera-navy", text: "text-body" },
+  { bg: "bg-nera-cream-deep", title: "text-nera-navy", text: "text-body" },
+  { bg: "bg-nera-navy-soft", title: "text-nera-navy", text: "text-body" },
+  { bg: "bg-nera-navy", title: "text-nera-cream", text: "text-nera-cream/85" },
+  { bg: "bg-nera-navy-deep", title: "text-nera-cream", text: "text-nera-cream/85" },
+];
+
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/** Bandeau de section : filet vert + libellé, puis H2. Reprend le style des autres pages. */
+/**
+ * Bandeau de section : étiquette verte, puis H2 suivi d'un filet qui file jusqu'au bord de la
+ * colonne — le `header.title-w-hr` de hestera.ch/a-propos (H2 à gauche, `<hr>` sur toute la
+ * largeur restante, alignés au centre). Le filet est masqué sous `md`, où il ne reste plus
+ * assez de place pour qu'il veuille dire quelque chose.
+ */
 function SectionHeading({
   eyebrow,
   title,
@@ -65,13 +84,19 @@ function SectionHeading({
         <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
         {eyebrow}
       </p>
-      <Tag
-        className={`mt-6 font-display text-[1.75rem] font-light leading-[1.15] md:text-[2.5rem] ${
-          light ? "text-nera-cream" : "text-nera-navy"
-        }`}
-      >
-        {title}
-      </Tag>
+      <div className="mt-6 flex items-center gap-8">
+        <Tag
+          className={`font-display text-[1.75rem] font-light leading-[1.15] md:text-[2.5rem] ${
+            light ? "text-nera-cream" : "text-nera-navy"
+          }`}
+        >
+          {title}
+        </Tag>
+        <hr
+          className={`hidden h-px flex-1 border-0 md:block ${light ? "bg-nera-cream/25" : "bg-hairline"}`}
+          aria-hidden
+        />
+      </div>
     </>
   );
 }
@@ -220,9 +245,20 @@ export function BureauPage() {
           </Container>
         </section>
 
-        {/* 2. Notre mission — blanc. Phrase de mission, puis les sept verbes en cartes à numéro. */}
-        <section id={bureau.mission.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
-          <Container>
+        {/*
+          2. Notre mission — blanc. Phrase de mission, puis les sept verbes en cartes à numéro.
+          Filigrane du logomark débordant du bord droit, comme le `.fili-right` de hestera
+          (leur icône en filigrane sort de 50 % hors du cadre).
+        */}
+        <section
+          id={bureau.mission.id}
+          className="relative scroll-mt-24 overflow-hidden border-t border-hairline bg-canvas-alt py-section-sm lg:py-section"
+        >
+          <LogomarkOutline
+            className="pointer-events-none absolute -right-[12vw] top-0 hidden w-[38vw] text-nera-navy/[0.06] lg:block"
+            strokeWidth={1}
+          />
+          <Container className="relative">
             <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Mission" title={bureau.mission.title} />
               <p className="mt-8 font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
@@ -302,7 +338,7 @@ export function BureauPage() {
         <section id={bureau.equipe.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
           <Container>
             <div className="grid gap-12 lg:grid-cols-[5fr_7fr] lg:items-center lg:gap-20">
-              <Reveal {...aosCard} className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[4/5]">
+              <ImageWipe curtain="bg-canvas" className="aspect-[4/3] rounded-md lg:aspect-[4/5]">
                 <Image
                   src={bureau.equipe.image}
                   alt="Trois personnes réunies autour d’un plan d’étage lors d’une séance de travail"
@@ -311,7 +347,7 @@ export function BureauPage() {
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover saturate-[0.85]"
                 />
-              </Reveal>
+              </ImageWipe>
               <Reveal {...aosBlock}>
                 <SectionHeading eyebrow="Équipe" title={bureau.equipe.title} />
                 <p className="mt-6 text-body-md font-light leading-[1.75] text-body md:text-body-lg">{bureau.equipe.intro}</p>
@@ -388,21 +424,51 @@ export function BureauPage() {
           </Container>
         </section>
 
-        {/* 7. Les valeurs — blanc. Cinq colonnes, un filet vert en tête de chacune. */}
+        {/*
+          7. Les valeurs — direction du bloc « Nos valeurs » de hestera : à gauche le titre puis
+          une photo carrée découverte au défilement, à droite les valeurs en panneaux pleine
+          largeur, texte centré, dont le fond fonce à chaque rang. Hestera en a trois (blanc,
+          marine, marine foncé) ; il y en a cinq ici, d'où une progression en cinq tons de la
+          palette. Le texte passe en crème sur les deux derniers.
+        */}
         <section id={bureau.valeurs.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
-            <Reveal {...aosBlock} className="max-w-3xl">
-              <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
-            </Reveal>
-            <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-hairline">
-              {bureau.valeurs.items.map((v) => (
-                <Reveal as="li" key={v.title} {...aosItem} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
-                  <span className="block h-6 w-px bg-accent" aria-hidden />
-                  <h3 className="mt-5 font-display text-[1.25rem] font-medium leading-[1.25] text-nera-navy">{v.title}</h3>
-                  <p className="mt-3 text-body-sm leading-[1.7] text-body">{v.text}</p>
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <Reveal {...aosBlock}>
+                  <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
                 </Reveal>
-              ))}
-            </ul>
+                <ImageWipe curtain="bg-canvas-alt" className="mt-10 aspect-square rounded-md">
+                  <Image
+                    src="/img/bureau-valeurs-nature-suisse.webp"
+                    alt="Lac de montagne suisse et hameau au pied de la forêt"
+                    fill
+                    quality={90}
+                    sizes="(min-width: 1024px) 46vw, 100vw"
+                    className="object-cover saturate-[0.9]"
+                  />
+                </ImageWipe>
+              </div>
+
+              <ul className="flex flex-col lg:pt-2">
+                {bureau.valeurs.items.map((v, i) => {
+                  const panel = valeurPanels[i];
+                  return (
+                    <Reveal
+                      as="li"
+                      key={v.title}
+                      {...aosItem}
+                      className={`flex flex-1 flex-col justify-center px-8 py-10 text-center lg:px-12 ${panel.bg}`}
+                    >
+                      <h3 className={`font-display text-[1.25rem] font-medium leading-[1.25] tracking-[0.08em] ${panel.title}`}>
+                        {v.title}
+                      </h3>
+                      <p className={`mx-auto mt-3 max-w-[34ch] text-body-sm leading-[1.7] ${panel.text}`}>{v.text}</p>
+                    </Reveal>
+                  );
+                })}
+              </ul>
+            </div>
           </Container>
         </section>
 
