@@ -276,11 +276,22 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   (la clé du formulaire est passée de `commune` à `codePostal`, dans `content/devis.ts`,
   `QuoteForm` et `app/api/devis/route.ts`, e-mails compris), « Nom et prénom » remplace
   « Nom », et le sous-titre du pop-up ne mentionne plus Genève.
-  **Bug corrigé** : la demande partait toute seule depuis l'étape « Coordonnées », affichant
-  l'écran de confirmation sans clic. En cause, la soumission implicite du formulaire : la
-  touche Entrée dans un champ soumet le `<form>` même quand le bouton visible est « Suivant ».
-  `submit()` s'arrête maintenant si l'on n'est pas à la dernière étape et se contente d'avancer
-  d'un pas.
+  **Bug corrigé — envoi automatique sans clic.** La vraie cause n'était pas la touche Entrée
+  mais la réconciliation de React : « Suivant » et « Envoyer ma demande » occupaient la même
+  position dans le même ternaire, sans `key`. React réutilisait donc le nœud du DOM et se
+  contentait d'en changer le `type`. Le clic sur « Suivant » à l'étape « Coordonnées » faisait
+  passer à « Synthèse », le bouton sous le curseur devenait `type="submit"`, et l'action par
+  défaut du clic en cours soumettait le formulaire : la demande partait et l'écran de
+  confirmation s'affichait sans que personne n'ait cliqué sur « Envoyer ma demande ».
+  Trois barrières désormais, dans `components/quote/QuoteForm.tsx` :
+  1. des `key` distinctes (`"next"` / `"send"`) — React démonte un bouton et en monte un autre,
+     le clic ne trouve plus de bouton d'envoi sous lui ; **ne pas les retirer** ;
+  2. `submit()` ne fait qu'avancer d'un pas tant qu'on n'est pas à la dernière étape, ce qui
+     neutralise aussi la soumission implicite par la touche Entrée ;
+  3. un drapeau `sendIntent`, posé par le seul `onClick` du bouton d'envoi : sans lui, rien ne
+     part.
+  Vérifié par relecture et par `tsc` / `eslint` / `next build` ; pas de test au clic, faute de
+  navigateur disponible (le serveur Playwright ne se connecte pas).
   À signaler au client : la politique de confidentialité annonce encore la collecte de la
   « commune et canton » (`content/legal-pages.ts`), alors que le formulaire demande un code
   postal.

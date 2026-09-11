@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check, Paperclip, X } from "lucide-react";
 import {
   devisPrestations,
@@ -50,6 +50,12 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
   const [files, setFiles] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  /**
+   * Vrai uniquement pendant le clic sur « Envoyer ma demande ». Sans cette intention
+   * explicite, rien ne part : c'est la seconde barrière contre un envoi déclenché par la
+   * soumission implicite du formulaire.
+   */
+  const sendIntent = useRef(false);
 
   const set = (k: keyof DevisPayload) => (e: { target: { value: string } }) => setData((d) => ({ ...d, [k]: e.target.value }));
 
@@ -94,13 +100,14 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     // Entrée dans un champ vaut soumission implicite du formulaire, quel que soit le bouton
-    // affiché : sans ce garde-fou, valider un champ de l'étape « Coordonnées » envoyait la
-    // demande et affichait l'écran de confirmation sans que l'utilisateur ait cliqué.
-    // Hors de la dernière étape, la touche Entrée fait donc simplement avancer d'une étape.
+    // affiché : hors de la dernière étape, la touche Entrée se contente d'avancer d'un pas.
     if (step < steps.length - 1) {
       next();
       return;
     }
+    // Et même à la dernière étape, on n'envoie que si le bouton d'envoi a bien été actionné.
+    if (!sendIntent.current) return;
+    sendIntent.current = false;
     for (let s = 0; s < 3; s++) {
       const err = validate(s);
       if (err) {
@@ -316,13 +323,31 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         ) : (
           <span />
         )}
+        {/*
+          Les deux `key` ne sont pas décoratives. Sans elles, React voit un `<button>` au même
+          endroit de l'arbre d'un rendu à l'autre : il réutilise le nœud du DOM et se contente
+          d'en changer le `type`. Le clic sur « Suivant » passait donc à l'étape « Synthèse »,
+          le même bouton devenait `type="submit"`, et l'action par défaut du clic en cours
+          soumettait le formulaire — la demande partait et l'écran de confirmation s'affichait
+          sans que l'utilisateur ait cliqué sur « Envoyer ma demande ». Avec des `key`
+          distinctes, React démonte un bouton et en monte un autre : le clic ne trouve plus de
+          bouton d'envoi sous lui.
+        */}
         {step < steps.length - 1 ? (
-          <button type="button" onClick={next} className={btnPrimary}>
+          <button key="next" type="button" onClick={next} className={btnPrimary}>
             Suivant
             <ArrowRight className="size-4" strokeWidth={1.75} />
           </button>
         ) : (
-          <button type="submit" disabled={status === "sending"} className={btnPrimary}>
+          <button
+            key="send"
+            type="submit"
+            disabled={status === "sending"}
+            onClick={() => {
+              sendIntent.current = true;
+            }}
+            className={btnPrimary}
+          >
             {status === "sending" ? "Envoi…" : "Envoyer ma demande"}
           </button>
         )}
