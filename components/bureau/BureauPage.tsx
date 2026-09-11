@@ -42,16 +42,16 @@ const qualificationIcons = [BadgeCheck, Sparkles, Award, ShieldCheck];
 const equilibreIcons = [Scale, Zap, Coins, Thermometer, Building2, Leaf];
 
 /**
- * Les cinq panneaux de « Nos valeurs », du plus clair au plus foncé — la progression des
+ * Les cinq rectangles de « Nos valeurs », du plus foncé au plus clair — la progression des
  * `value-item` de hestera, portée sur la palette NERA. Uniquement des tons de la charte :
- * ni vert en aplat, ni teinte inventée.
+ * ni vert en aplat, ni teinte inventée. Le texte est en crème sur les deux premiers.
  */
 const valeurPanels = [
-  { bg: "bg-nera-white", title: "text-nera-navy", text: "text-body" },
-  { bg: "bg-nera-cream-deep", title: "text-nera-navy", text: "text-body" },
-  { bg: "bg-nera-navy-soft", title: "text-nera-navy", text: "text-body" },
-  { bg: "bg-nera-navy", title: "text-nera-cream", text: "text-nera-cream/85" },
   { bg: "bg-nera-navy-deep", title: "text-nera-cream", text: "text-nera-cream/85" },
+  { bg: "bg-nera-navy", title: "text-nera-cream", text: "text-nera-cream/85" },
+  { bg: "bg-nera-navy-soft", title: "text-nera-navy", text: "text-body" },
+  { bg: "bg-nera-cream-deep", title: "text-nera-navy", text: "text-body" },
+  { bg: "bg-nera-white", title: "text-nera-navy", text: "text-body" },
 ];
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -425,50 +425,35 @@ export function BureauPage() {
         </section>
 
         {/*
-          7. Les valeurs — direction du bloc « Nos valeurs » de hestera : à gauche le titre puis
-          une photo carrée découverte au défilement, à droite les valeurs en panneaux pleine
-          largeur, texte centré, dont le fond fonce à chaque rang. Hestera en a trois (blanc,
-          marine, marine foncé) ; il y en a cinq ici, d'où une progression en cinq tons de la
-          palette. Le texte passe en crème sur les deux derniers.
+          7. Les valeurs — pleine largeur, sous le titre : les cinq valeurs forment une bande
+          continue de cinq rectangles, sans gouttière, dont le fond s'éclaircit de gauche à
+          droite (marine foncé → blanc). Reprise de la progression des `value-item` de hestera,
+          mais en une seule ligne plutôt qu'en colonne. Les cellules d'une grille s'étirent à la
+          hauteur de la plus haute : les cinq rectangles restent donc de même hauteur.
         */}
         <section id={bureau.valeurs.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <Reveal {...aosBlock}>
-                  <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
-                </Reveal>
-                <ImageWipe curtain="bg-canvas-alt" className="mt-10 aspect-square rounded-md">
-                  <Image
-                    src="/img/bureau-valeurs-nature-suisse.webp"
-                    alt="Lac de montagne suisse et hameau au pied de la forêt"
-                    fill
-                    quality={90}
-                    sizes="(min-width: 1024px) 46vw, 100vw"
-                    className="object-cover saturate-[0.9]"
-                  />
-                </ImageWipe>
-              </div>
-
-              <ul className="flex flex-col lg:pt-2">
-                {bureau.valeurs.items.map((v, i) => {
-                  const panel = valeurPanels[i];
-                  return (
-                    <Reveal
-                      as="li"
-                      key={v.title}
-                      {...aosItem}
-                      className={`flex flex-1 flex-col justify-center px-8 py-10 text-center lg:px-12 ${panel.bg}`}
-                    >
-                      <h3 className={`font-display text-[1.25rem] font-medium leading-[1.25] tracking-[0.08em] ${panel.title}`}>
-                        {v.title}
-                      </h3>
-                      <p className={`mx-auto mt-3 max-w-[34ch] text-body-sm leading-[1.7] ${panel.text}`}>{v.text}</p>
-                    </Reveal>
-                  );
-                })}
-              </ul>
-            </div>
+            <Reveal {...aosBlock} className="max-w-3xl">
+              <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
+            </Reveal>
+            <ul className="mt-12 grid overflow-hidden rounded-md border border-hairline lg:grid-cols-5">
+              {bureau.valeurs.items.map((v, i) => {
+                const panel = valeurPanels[i];
+                return (
+                  <Reveal
+                    as="li"
+                    key={v.title}
+                    {...aosItem}
+                    className={`flex min-h-[13rem] flex-col justify-center px-6 py-10 text-center lg:px-7 ${panel.bg}`}
+                  >
+                    <h3 className={`font-display text-[1.25rem] font-medium leading-[1.25] tracking-[0.08em] ${panel.title}`}>
+                      {v.title}
+                    </h3>
+                    <p className={`mx-auto mt-3 max-w-[30ch] text-body-sm leading-[1.7] ${panel.text}`}>{v.text}</p>
+                  </Reveal>
+                );
+              })}
+            </ul>
           </Container>
         </section>
 

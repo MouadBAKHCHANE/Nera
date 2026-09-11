@@ -137,11 +137,14 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
     rideau à la couleur du fond qui se retire vers la droite : l'image ne se déforme pas.
     Passer au rideau la couleur de la section (`curtain="bg-canvas"`…). Posé par `data-shown`
     depuis l'observateur, pas par un état React. Utilisé sur la photo de l'équipe et des valeurs.
-  - **« Nos valeurs »** : leur bloc `#values` — titre puis photo carrée à gauche, valeurs en
-    panneaux pleine largeur à droite, texte centré, fond qui fonce à chaque rang. Ils en ont
-    trois, il y en a cinq ici : progression blanc → crème foncé → marine clair → marine →
-    marine foncé (`valeurPanels`), texte en crème sur les deux derniers. Photo
-    `bureau-valeurs-nature-suisse.webp`, carré centré de `Assets/Visuels/Nature Suisse.jpg`.
+  - **« Nos valeurs »** : la progression de fond des `value-item` de hestera, mais sur une seule
+    ligne pleine largeur sous le titre. Les cinq valeurs forment une bande continue de cinq
+    rectangles sans gouttière, du marine foncé au blanc (`valeurPanels`), texte centré, en crème
+    sur les deux premiers. Les cellules d'une grille s'étirent à la hauteur de la plus haute,
+    donc les cinq rectangles restent de même hauteur sans hauteur fixe. Sous `lg`, ils
+    s'empilent. La première version reprenait leur bloc `#values` à deux colonnes avec une photo
+    carrée à gauche ; le client a préféré la pleine largeur, la photo
+    `bureau-valeurs-nature-suisse.webp` a donc été supprimée (récupérable dans l'historique).
 - Apparitions calées sur hestera.ch/a-propos, la direction validée avec le client. Les réglages
   relevés dans leur HTML (`data-aos` / `data-aos-duration`, `AOS.init({ once: true })`, aucun
   `data-aos-delay`) vivent dans `components/ui/aos.ts` : `aosBlock` (fade 1000 ms, bloc de
