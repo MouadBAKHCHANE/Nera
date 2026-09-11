@@ -12,9 +12,23 @@ const partners = [
   { src: "/logos/partenaires/epiqr.png", alt: "EPIQR", w: 377, href: "https://www.epiqr.ch" },
 ];
 
-export function PartnerLogos({ className = "" }: { className?: string }) {
+/**
+ * `align` plutôt qu'une classe `justify-*` passée dans `className` : deux utilitaires
+ * `justify-*` dans la même chaîne se départagent par l'ordre de la feuille de style, pas par
+ * celui de la chaîne — le résultat serait imprévisible.
+ */
+export function PartnerLogos({
+  className = "",
+  align = "center",
+}: {
+  className?: string;
+  align?: "center" | "start";
+}) {
   return (
-    <ul className={`flex flex-wrap items-center justify-center gap-3 md:gap-7 ${className}`} aria-label="Certifications et partenaires">
+    <ul
+      className={`flex flex-wrap items-center gap-3 md:gap-7 ${align === "start" ? "justify-start" : "justify-center"} ${className}`}
+      aria-label="Certifications et partenaires"
+    >
       {partners.map((p) => (
         <li key={p.src}>
           <a

@@ -141,6 +141,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
     rideau à la couleur du fond qui se retire vers la droite : l'image ne se déforme pas.
     Passer au rideau la couleur de la section (`curtain="bg-canvas"`…). Posé par `data-shown`
     depuis l'observateur, pas par un état React. Utilisé sur la photo de l'équipe et des valeurs.
+  - **« Nos qualifications »** : titre et logos officiels épinglés à gauche (`lg:sticky`),
+    les quatre cartes défilent à droite, une par ligne. `position: sticky` suffit, contrairement
+    au panneau de `/prestations` qui demandait un calcul en JS : ici rien n'est mesuré, le bloc
+    se décroche seul en fin de colonne. Sous `lg`, tout s'empile dans l'ordre de lecture.
+    L'icône est passée en haut à droite de chaque carte, à 36 puis 40 px.
+    `PartnerLogos` prend un `align` (`center` par défaut, `start` ici) : deux utilitaires
+    `justify-*` dans la même chaîne de classes se départagent par l'ordre de la feuille de
+    style, pas par celui de la chaîne, donc passer `justify-start` en `className` n'était pas
+    fiable.
   - **« Nos valeurs »** : la progression de fond des `value-item` de hestera, sur une seule
     bande qui touche les deux bords de l'écran et le bas de la section. Le titre reste dans le
     conteneur, mais la liste en sort : ni gouttière, ni bordure, ni arrondi, et la section n'a

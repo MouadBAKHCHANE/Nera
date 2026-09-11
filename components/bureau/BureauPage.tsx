@@ -391,36 +391,54 @@ export function BureauPage() {
           </Container>
         </section>
 
-        {/* 6. Les qualifications — crème. Quatre cartes blanches à filet, puis les logos officiels. */}
+        {/*
+          6. Les qualifications — creme. Le titre et les logos officiels restent epingles a
+          gauche pendant que les quatre cartes defilent a droite, comme le panneau collant de
+          `/prestations`. `position: sticky` suffit ici : rien a calculer en JS, le bloc se
+          decroche tout seul quand la colonne de droite est epuisee. Sous `lg`, pas de colonne
+          collante : tout s'empile dans l'ordre de lecture.
+          L'icone passe en haut a droite de chaque carte, a la taille d'un reperage, pas d'une
+          puce.
+        */}
         <section id={bureau.qualifications.id} className="scroll-mt-24 bg-canvas py-section-sm lg:py-section">
           <Container>
-            <Reveal {...aosBlock} className="max-w-3xl">
-              <SectionHeading eyebrow="Qualifications" title={bureau.qualifications.title} />
-            </Reveal>
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-              {bureau.qualifications.items.map((q, i) => {
-                const Icon = qualificationIcons[i % qualificationIcons.length];
-                return (
-                  <Reveal
-                    as="li"
-                    key={q.title}
-                    {...aosItem}
-                    className="flex flex-col rounded-md border border-hairline bg-canvas-alt p-7 transition-colors hover:border-accent"
-                  >
-                    <Icon className="size-6 text-accent-deep" strokeWidth={1.5} aria-hidden />
-                    <h3 className="mt-6 font-display text-[1.1875rem] font-medium leading-[1.25] text-nera-navy">{q.title}</h3>
-                    {q.text.map((t) => (
-                      <p key={t} className="mt-3 text-body-sm leading-[1.7] text-body">
-                        {t}
-                      </p>
-                    ))}
-                  </Reveal>
-                );
-              })}
-            </ul>
-            <Reveal {...aosItem} className="mt-12 border-t border-hairline pt-10">
-              <PartnerLogos />
-            </Reveal>
+            <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-16">
+              <div className="lg:sticky lg:top-28">
+                <Reveal {...aosBlock}>
+                  <SectionHeading eyebrow="Qualifications" title={bureau.qualifications.title} />
+                </Reveal>
+                {/* Les logos officiels accompagnent le titre : ils restent en vue pendant le defile. */}
+                <Reveal {...aosItem} className="mt-10 border-t border-hairline pt-10">
+                  <PartnerLogos align="start" />
+                </Reveal>
+              </div>
+
+              <ul className="grid gap-4 lg:gap-5">
+                {bureau.qualifications.items.map((q, i) => {
+                  const Icon = qualificationIcons[i % qualificationIcons.length];
+                  return (
+                    <Reveal
+                      as="li"
+                      key={q.title}
+                      {...aosItem}
+                      className="flex items-start justify-between gap-6 rounded-md border border-hairline bg-canvas-alt p-7 transition-colors hover:border-accent lg:p-8"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-display text-[1.1875rem] font-medium leading-[1.25] text-nera-navy">
+                          {q.title}
+                        </h3>
+                        {q.text.map((t) => (
+                          <p key={t} className="mt-3 text-body-sm leading-[1.7] text-body">
+                            {t}
+                          </p>
+                        ))}
+                      </div>
+                      <Icon className="size-9 shrink-0 text-accent-deep lg:size-10" strokeWidth={1.25} aria-hidden />
+                    </Reveal>
+                  );
+                })}
+              </ul>
+            </div>
           </Container>
         </section>
 
