@@ -208,26 +208,45 @@ export function HumainEnvironnementIcon({ className = "size-12" }: IconProps) {
       {/* Pastille de fond douce */}
       <rect x="4" y="4" width="40" height="40" rx="8" className="fill-nera-green-soft/50" />
 
-      {/* Habitat humain (silhouettes de vie & bâtiment) */}
-      <path d="M10 38V24L22 14L34 24V38H10Z" className="stroke-nera-navy fill-nera-white" strokeWidth="1.75" strokeLinejoin="round" />
-      
-      {/* Silhouette humaine centrale */}
-      <circle cx="22" cy="23" r="2.5" className="fill-nera-navy" />
-      <path d="M17 33C17 29.5 19 28 22 28C25 28 27 29.5 27 33" className="stroke-nera-navy" strokeWidth="1.5" strokeLinecap="round" />
-
-      {/* Grande feuille protectrice environnementale englobant la structure */}
-      <path
-        d="M22 10C32 10 40 18 40 30C36 30 28 28 22 38"
-        className="stroke-accent"
-        strokeWidth="2"
-        strokeLinecap="round"
+      {/* Silhouette humaine de gauche (l'Humain) */}
+      <circle
+        cx="17"
+        cy="17"
+        r="3.5"
+        className="stroke-nera-navy fill-nera-white"
+        strokeWidth="1.75"
       />
       <path
-        d="M34 18C28 22 26 28 26 34"
-        className="stroke-accent"
+        d="M10 36C10 29.5 13.5 26.5 17 26.5C20.5 26.5 24 29.5 24 36"
+        className="stroke-nera-navy"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+
+      {/* Grande feuille environnementale de droite (l'Environnement) */}
+      <path
+        d="M25 35C25 24 37 13 37 13C37 13 40 26 29.5 35C27.5 36.5 25 35 25 35Z"
+        className="fill-accent stroke-accent"
+        strokeWidth="1.25"
+        strokeLinejoin="round"
+      />
+      {/* Nervure centrale blanche de la feuille */}
+      <path
+        d="M27 33C31 27 34.5 20 34.5 20"
+        className="stroke-nera-white"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
+
+      {/* Arc d'harmonie / soleil éco-systémique supérieur */}
+      <path
+        d="M20 9C25 7 32 7.5 37 11"
+        className="stroke-accent"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeDasharray="2 2.5"
+      />
+      <circle cx="19" cy="9.5" r="1.5" className="fill-accent" />
     </svg>
   );
 }
