@@ -1,8 +1,14 @@
 import Image from "next/image";
 
 /**
- * Logos officiels (Assets/Logos officiels), posés sur des tuiles blanches pour respecter
- * leurs couleurs d'origine sur fond sombre. Largeurs proportionnelles aux fichiers exportés (hauteur 160 px).
+ * Logos officiels (Assets/Logos officiels). Largeurs proportionnelles aux fichiers exportés
+ * (hauteur 160 px).
+ *
+ * Ils étaient posés sur des tuiles blanches, seul moyen de respecter leurs couleurs d'origine
+ * sur le marine du pied de page. Le bandeau de pied de page est passé sur fond blanc, à la
+ * demande du client : les tuiles n'ont plus lieu d'être et les logos posent directement.
+ * **Tous les emplacements doivent donc rester sur fond clair** — sur du marine, les logos
+ * en quadrichromie deviendraient illisibles.
  */
 const partners = [
   { src: "/logos/partenaires/cecb-expert.png", alt: "CECB Expert", w: 873, href: "https://www.cecb.ch" },
@@ -37,7 +43,7 @@ export function PartnerLogos({
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-10 items-center rounded-sm bg-white px-2.5 transition-opacity hover:opacity-90 md:h-14 md:px-4"
+            className="flex h-10 items-center transition-opacity hover:opacity-80 md:h-14"
             title={p.alt}
           >
             <Image src={p.src} alt={p.alt} width={p.w} height={160} className="h-5 w-auto md:h-8" />

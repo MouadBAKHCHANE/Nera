@@ -44,8 +44,8 @@ export function Audience2() {
             <Reveal as="li" key={a.title} delay={i * 0.08} className="relative px-0 py-10 md:px-10 md:py-14 md:first:pl-0 md:last:pr-0">
               <span className="font-display text-[13px] font-medium tracking-[0.2em] text-accent">{a.n}</span>
               <h3 className="mt-5 font-display text-[1.5rem] font-medium leading-[1.2] text-nera-navy md:text-[1.75rem]">{a.title}</h3>
-              <p className="mt-6 text-body-sm font-light leading-[1.7] text-body md:text-body-md">{a.p1}</p>
-              <p className="mt-4 text-body-sm font-light leading-[1.7] text-body md:text-body-md">{a.p2}</p>
+              <p className="mt-6 text-body-sm font-light leading-[1.7] text-body md:text-body-md lg:text-body-lg">{a.p1}</p>
+              <p className="mt-4 text-body-sm font-light leading-[1.7] text-body md:text-body-md lg:text-body-lg">{a.p2}</p>
             </Reveal>
           ))}
         </ol>

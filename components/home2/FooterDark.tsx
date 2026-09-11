@@ -79,8 +79,14 @@ export function FooterDark() {
         </div>
       </div>
 
-      <div className="border-t border-nera-cream/15 px-6 py-8 md:px-10 lg:px-[120px]">
-        <p className="text-center text-[11px] font-medium uppercase tracking-[0.3em] text-nera-cream/60">Certifications et partenaires</p>
+      {/*
+        Bandeau sur fond blanc : les logos officiels y posent directement, sans la tuile
+        blanche qu'il fallait leur mettre sur le marine pour respecter leurs couleurs.
+      */}
+      <div className="bg-nera-white px-6 py-8 md:px-10 lg:px-[120px]">
+        <p className="text-center text-[12px] font-medium uppercase tracking-[0.3em] text-mute">
+          Certifications et partenaires
+        </p>
         <PartnerLogos className="mt-5" />
       </div>
 

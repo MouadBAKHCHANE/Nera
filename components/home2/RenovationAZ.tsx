@@ -42,11 +42,11 @@ export function RenovationAZ() {
           <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
             Votre rénovation énergétique, <span className="font-medium text-accent">de A à Z</span>
           </h2>
-          <p className="mt-8 text-body-md font-light leading-[1.75] text-nera-cream/85">
+          <p className="mt-8 text-body-md font-light leading-[1.75] text-nera-cream/85 lg:text-body-lg">
             Vous souhaitez rénover sans devoir coordonner vous-même les experts, l&apos;ingénieur, l&apos;administration et
             les entreprises ?
           </p>
-          <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85">
+          <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 lg:text-body-lg">
             NERA prend en charge l&apos;ensemble du projet et intervient comme interlocuteur technique unique, du premier
             diagnostic à la réception des travaux.
           </p>

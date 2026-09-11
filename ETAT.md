@@ -11,6 +11,19 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - Pages légales `/mentions-legales`, `/confidentialite`, `/cookies` : gabarit partagé
   `components/legal/LegalPage.tsx`, contenu dans `content/legal-pages.ts` (texte client mot pour
   mot). Les liens du pied de page et des mentions sous formulaires ne sont plus en 404.
+- Accueil, version PC (demandes du client) : logo d'en-tête à 52 px dès `lg` (40 px ailleurs),
+  et les paragraphes des sections passent à `lg:text-body-lg` — 18 px sur grand écran au lieu
+  de 16. Les étiquettes et les titres sont inchangés.
+- Bandeau « Certifications et partenaires » du pied de page : **fond blanc**, et les tuiles
+  blanches derrière chaque logo ont disparu, les logos posant directement dessus. Conséquence
+  à retenir : `PartnerLogos` n'a plus de fond à lui, **tous ses emplacements doivent rester sur
+  fond clair** — sur du marine, ces logos en quadrichromie deviendraient illisibles. Les quatre
+  emplacements actuels (deux pieds de page, qualifications, références) sont conformes.
+- Méga-menu Prestations : la carte de gauche (logo vertical et lien « Toutes les prestations »)
+  a été retirée à la demande du client. Le panneau ne contient plus que les six prestations sur
+  deux colonnes, avec des textes plus grands (intitulés 16 px, descriptions 14 px) et un cadre
+  d'icône de 44 px. Le lien vers `/prestations` reste dans le menu sandwich et dans les deux
+  pieds de page.
 - Méga-menu Prestations élargi, une icône Lucide par prestation (`components/ui/PrestationIcon.tsx`,
   table unique alimentée par `content/prestations.ts`), reprise dans le sous-menu mobile.
 - Écran de chargement des routes : le logomark se dessine en boucle (`app/loading.tsx`,

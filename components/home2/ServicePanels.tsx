@@ -71,7 +71,7 @@ export function ServicePanels() {
               Une expertise complète pour la <span className="text-accent">performance</span> de vos bâtiments
             </h2>
           </div>
-          <div className="space-y-3 text-body-sm font-light leading-[1.7] text-nera-cream/85 md:text-body-md">
+          <div className="space-y-3 text-body-sm font-light leading-[1.7] text-nera-cream/85 md:text-body-md lg:text-body-lg">
             <p>
               Chaque bâtiment présente des caractéristiques constructives, techniques, énergétiques et réglementaires qui
               lui sont propres.
@@ -103,7 +103,7 @@ export function ServicePanels() {
                 </span>
                 <div className="relative p-8">
                   <h3 className="font-display text-[1.375rem] font-medium leading-[1.25] text-nera-cream md:text-[1.5rem]">{p.title}</h3>
-                  <p className="mt-4 text-body-sm font-light leading-[1.7] text-nera-cream/80">{p.text}</p>
+                  <p className="mt-4 text-body-sm font-light leading-[1.7] text-nera-cream/80 md:text-body-md">{p.text}</p>
                   <ArrowLink href={p.href} className="mt-6 min-w-0 w-full">
                     {p.cta}
                   </ArrowLink>

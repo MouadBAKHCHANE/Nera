@@ -62,7 +62,9 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
               width={220}
               height={57}
               priority
-              style={{ height: 40, width: "auto" }}
+              // 40 px sur mobile, 52 px des `lg` : le logo etait juge trop petit sur ecran.
+              // Classe plutot que `style`, qui ne connait pas les points de rupture.
+              className="h-10 w-auto lg:h-[52px]"
             />
           </Link>
 
