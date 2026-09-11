@@ -141,12 +141,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
     rideau à la couleur du fond qui se retire vers la droite : l'image ne se déforme pas.
     Passer au rideau la couleur de la section (`curtain="bg-canvas"`…). Posé par `data-shown`
     depuis l'observateur, pas par un état React. Utilisé sur la photo de l'équipe et des valeurs.
-  - **« Nos valeurs »** : la progression de fond des `value-item` de hestera, mais sur une seule
-    ligne pleine largeur sous le titre. Les cinq valeurs forment une bande continue de cinq
-    rectangles sans gouttière, du marine foncé au blanc (`valeurPanels`), texte centré, en crème
-    sur les deux premiers. Les cellules d'une grille s'étirent à la hauteur de la plus haute,
-    donc les cinq rectangles restent de même hauteur sans hauteur fixe. Sous `lg`, ils
-    s'empilent. La première version reprenait leur bloc `#values` à deux colonnes avec une photo
+  - **« Nos valeurs »** : la progression de fond des `value-item` de hestera, sur une seule
+    bande qui touche les deux bords de l'écran et le bas de la section. Le titre reste dans le
+    conteneur, mais la liste en sort : ni gouttière, ni bordure, ni arrondi, et la section n'a
+    plus de padding bas. Cinq rectangles du marine foncé au blanc (`valeurPanels`), texte
+    centré, en crème sur les deux premiers. Les cellules d'une grille s'étirent à la hauteur de
+    la plus haute, donc les cinq restent de même hauteur sans hauteur fixe. Sous `lg`, ils
+    s'empilent. Les intitulés sont en **capitales espacées** (`tracking-[0.2em]`), comme la
+    référence : c'est le seul endroit du site où un titre est en capitales, ce que `DESIGN.md`
+    proscrit ailleurs — dérogation demandée par le client. La première version reprenait leur bloc `#values` à deux colonnes avec une photo
     carrée à gauche ; le client a préféré la pleine largeur, la photo
     `bureau-valeurs-nature-suisse.webp` a donc été supprimée (récupérable dans l'historique).
 - Apparitions calées sur hestera.ch/a-propos, la direction validée avec le client. Les réglages

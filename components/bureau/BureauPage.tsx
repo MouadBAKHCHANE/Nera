@@ -425,36 +425,44 @@ export function BureauPage() {
         </section>
 
         {/*
-          7. Les valeurs — pleine largeur, sous le titre : les cinq valeurs forment une bande
-          continue de cinq rectangles, sans gouttière, dont le fond s'éclaircit de gauche à
-          droite (marine foncé → blanc). Reprise de la progression des `value-item` de hestera,
-          mais en une seule ligne plutôt qu'en colonne. Les cellules d'une grille s'étirent à la
-          hauteur de la plus haute : les cinq rectangles restent donc de même hauteur.
+          7. Les valeurs — la bande touche les deux bords de l'ecran et le bas de la section :
+          le titre reste dans le conteneur, mais la liste en sort et ne porte ni gouttiere, ni
+          bordure, ni arrondi. Le fond s'eclaircit de gauche a droite, du marine fonce au blanc.
+          Les cellules d'une grille s'etirent a la hauteur de la plus haute : les cinq
+          rectangles restent donc de meme hauteur sans hauteur fixe. Sous `lg`, ils s'empilent.
+          Les intitules sont en capitales espacees, comme la reference — seul endroit du site
+          ou un titre est en capitales, ce que `DESIGN.md` proscrit ailleurs.
         */}
-        <section id={bureau.valeurs.id} className="scroll-mt-24 border-t border-hairline bg-canvas-alt py-section-sm lg:py-section">
+        <section
+          id={bureau.valeurs.id}
+          className="scroll-mt-24 border-t border-hairline bg-canvas-alt pt-section-sm lg:pt-section"
+        >
           <Container>
             <Reveal {...aosBlock} className="max-w-3xl">
               <SectionHeading eyebrow="Valeurs" title={bureau.valeurs.title} />
             </Reveal>
-            <ul className="mt-12 grid overflow-hidden rounded-md border border-hairline lg:grid-cols-5">
-              {bureau.valeurs.items.map((v, i) => {
-                const panel = valeurPanels[i];
-                return (
-                  <Reveal
-                    as="li"
-                    key={v.title}
-                    {...aosItem}
-                    className={`flex min-h-[13rem] flex-col justify-center px-6 py-10 text-center lg:px-7 ${panel.bg}`}
-                  >
-                    <h3 className={`font-display text-[1.25rem] font-medium leading-[1.25] tracking-[0.08em] ${panel.title}`}>
-                      {v.title}
-                    </h3>
-                    <p className={`mx-auto mt-3 max-w-[30ch] text-body-sm leading-[1.7] ${panel.text}`}>{v.text}</p>
-                  </Reveal>
-                );
-              })}
-            </ul>
           </Container>
+
+          <ul className="mt-12 grid lg:mt-16 lg:grid-cols-5">
+            {bureau.valeurs.items.map((v, i) => {
+              const panel = valeurPanels[i];
+              return (
+                <Reveal
+                  as="li"
+                  key={v.title}
+                  {...aosItem}
+                  className={`flex min-h-[15rem] flex-col justify-center px-6 py-14 text-center lg:min-h-[19rem] lg:px-8 ${panel.bg}`}
+                >
+                  <h3
+                    className={`font-display text-[1.0625rem] font-medium uppercase leading-[1.25] tracking-[0.2em] ${panel.title}`}
+                  >
+                    {v.title}
+                  </h3>
+                  <p className={`mx-auto mt-6 max-w-[28ch] text-body-sm leading-[1.8] ${panel.text}`}>{v.text}</p>
+                </Reveal>
+              );
+            })}
+          </ul>
         </section>
 
         {/* 8. NERA en chiffres — marine, section de l'accueil avec les libellés de cette page. */}
