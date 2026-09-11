@@ -536,8 +536,8 @@ export function PrestationIllustration({ active, className = "" }: PrestationIll
         <AnimatePresence>
           {renovated && (
             <Layer key="global" reduce={reduce}>
-              <Tag reduce={reduce} delay={0.06} x={40} y={96} w={244} title="État des lieux" lines={["CECB Plus, audit, EPIQR+"]} to={iso(60, D, 2 * F + 30)} accent />
-              <Tag reduce={reduce} delay={0.12} x={548} y={80} w={222} title="Concept de rénovation" lines={["Mesures dans un ordre cohérent"]} to={iso(90, 60, TOP + 8)} accent />
+              <Tag reduce={reduce} delay={0.06} x={40} y={96} w={204} title="État des lieux" lines={["Audits CECB+ et EPIQR+"]} to={iso(60, D, 2 * F + 30)} accent />
+              <Tag reduce={reduce} delay={0.12} x={548} y={80} w={222} title="Concept de rénovation" lines={["Priorisation des mesures", "de rénovation"]} to={iso(90, 60, TOP + 8)} accent />
               <Tag reduce={reduce} delay={0.18} x={548} y={500} w={222} title="AMO énergie" lines={["Interlocuteur technique", "du maître d’ouvrage"]} to={iso(PAC.x1, 32, 14)} accent />
               {/* Les étapes coordonnées par NERA, dans l'ordre du texte client. */}
               <g transform="translate(40 604)">
