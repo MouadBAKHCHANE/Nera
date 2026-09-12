@@ -427,6 +427,21 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
   **a disparu de `Assets/Visuels`** en cours de projet. Le dossier compte 69 fichiers au lieu
   de 70.
+- **Bandes photo des pages prestation** (champ `band` de `content/prestation-pages.ts`) : une
+  bande pleine largeur en 21:9, entre le corps de page et la FAQ, comme respiration dans un long
+  texte. Purement décorative : aucun texte dessus, aucun voile, `alt` vide.
+  **Seulement sur les quatre pages les plus longues** — `/audit-cecb`, `/modelisation-thermique`,
+  `/subventions`, `/renovation-energetique`. `/installations-cvc` et
+  `/autorisation-de-construire`, les deux plus courtes, n'en ont pas : au-delà de quatre, la
+  bande cesse d'être un accent et devient un motif, au détriment du dessin isométrique de
+  `/prestations`. Ne pas généraliser sans raison.
+  Visuels choisis parmi ceux du client : quatre cadrages serrés de façade, abstraits, sans
+  personnage ni couleur dominante. Écartés : `Green building.png`, dont le verre vert-turquoise
+  entre en conflit avec le vert de la charte, et les paysages (lac, forêt), qui évoquent le
+  tourisme plutôt que l'ingénierie du bâtiment.
+  **Recadrées en 21:9 avant export**, et non laissées en pleine image : une source en portrait
+  servie dans une bande serait rognée par le navigateur et téléchargée pour rien. Le fichier le
+  plus lourd est ainsi passé de 1377 à 747 Ko.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -514,6 +529,10 @@ ré-export) :
 | `bureau-batiment-clair-moderne.webp`      | Batiment clair moderne.jpg        |
 | `bureau-equipe-etude.webp`                | Etude plans 2.jpg                 |
 | `accompagnement-suivi-chantier.webp`      | Suivi de chantier.png             |
+| `bande-mur-clair.webp`                    | mur gris.jpg                      |
+| `bande-facade-rythmee.webp`               | Bâtiment beige ciel bleu.jpg      |
+| `bande-beton-verre.webp`                  | Batiment moderne.jpg              |
+| `bande-balcons-beton.webp`                | Batiment sombre gris.jpg          |
 | `contact-conseil.webp`                    | Etude famille maison.jpg          |
 | `references-immeubles-modernes.webp`      | Immeubles modernes ciel bleu.jpg  |
 | `process-panneaux-solaires-immeuble.webp` | Panneaux solaires immeuble 2.png  |

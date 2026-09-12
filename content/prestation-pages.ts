@@ -33,6 +33,16 @@ export type PrestationPage = {
    * Deux pages n'en emploient aucun : le champ y est absent et rien ne s'affiche.
    */
   acronyms?: { short: string; long: string }[];
+  /**
+   * Bande photo pleine largeur, entre le corps de page et la FAQ : une respiration dans un
+   * long texte, rien de plus. Purement décorative, donc servie avec un `alt` vide.
+   *
+   * **Seulement sur les quatre pages les plus longues.** `/installations-cvc` et
+   * `/subventions` n'en ont pas : au-delà, la bande cesse d'être un accent et devient un
+   * motif, au détriment du dessin isométrique de `/prestations`.
+   * Images recadrées en 21:9 avant export (voir la section « Photos »).
+   */
+  band?: string;
   /** Libellé court : fil d'Ariane, sommaire et blocs de maillage. */
   shortTitle: string;
   h1: string;
@@ -61,6 +71,7 @@ export type PrestationPage = {
 export const prestationPages: PrestationPage[] = [
   {
     slug: "audit-cecb",
+    band: "/img/bande-mur-clair.webp",
     acronyms: [{ short: "IDC", long: "Indice de dépense de chaleur" }],
     shortTitle: "CECB et CECB Plus",
     h1: "CECB, CECB Plus et diagnostic énergétique du bâtiment",
@@ -307,6 +318,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "modelisation-thermique",
+    band: "/img/bande-facade-rythmee.webp",
     acronyms: [
       { short: "HPE", long: "Haute performance énergétique" },
       { short: "THPE", long: "Très haute performance énergétique" },
@@ -825,6 +837,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "subventions",
+    band: "/img/bande-beton-verre.webp",
     shortTitle: "Subventions",
     h1: "Subventions pour la rénovation énergétique",
     lead: [
@@ -984,6 +997,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "renovation-energetique",
+    band: "/img/bande-balcons-beton.webp",
     acronyms: [{ short: "AMO", long: "Assistant au maître d’ouvrage" }],
     shortTitle: "Rénovation énergétique globale",
     h1: "Rénovation énergétique globale et AMO énergie",

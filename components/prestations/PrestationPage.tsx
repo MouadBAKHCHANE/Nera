@@ -195,6 +195,17 @@ export function PrestationPage({ page }: { page: Page }) {
           </Container>
         </div>
 
+        {/*
+          Bande photo pleine largeur, sur les pages les plus longues seulement : une respiration
+          entre le corps de texte et la FAQ. Aucun texte par-dessus, donc aucun voile — et un
+          `alt` vide, l'image n'apportant pas d'information.
+        */}
+        {page.band && (
+          <div className="relative aspect-[21/9] max-h-[420px] w-full overflow-hidden">
+            <Image src={page.band} alt="" fill quality={88} sizes="100vw" className="object-cover" />
+          </div>
+        )}
+
         {/* FAQ du document client, dépliable sans JavaScript. */}
         <section id="faq" className="scroll-mt-28 bg-canvas-alt py-section-sm lg:py-section">
           <Container wide className="mx-auto max-w-3xl">
