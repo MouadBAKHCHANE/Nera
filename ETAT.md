@@ -427,15 +427,16 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
   **a disparu de `Assets/Visuels`** en cours de projet. Le dossier compte 69 fichiers au lieu
   de 70.
-- **Visuel des pages prestation** (champ `band` de `content/prestation-pages.ts`) : une image
-  en 4:5 dans la **colonne de droite de la FAQ**, les questions occupant la gauche. Purement
-  décorative : aucun texte dessus, aucun voile, `alt` vide. Collante sous `lg`, pour rester en
-  vue pendant qu'on déplie les questions ; sous ce seuil elle passe après la FAQ.
-  Elle occupait d'abord une bande pleine largeur de 420 px entre le corps de page et la FAQ.
-  Déplacée à droite des questions, à la demande du client : elle tient désormais dans une
-  hauteur déjà occupée et ne coûte plus rien en défilement. Les six fichiers ont été
-  **ré-exportés en 4:5 depuis les originaux**, et non recadrés depuis le 21:9 : un recadrage du
-  recadrage aurait perdu l'essentiel de l'image.
+- **Visuel des pages prestation** (champ `band` de `content/prestation-pages.ts`) : la section
+  FAQ est **coupée en deux moitiés d'écran**, les questions à gauche, le visuel à droite et à
+  fond perdu, sur toute la hauteur de la section. Purement décoratif : aucun texte dessus, aucun
+  voile, `alt` vide. Sous `lg`, le visuel passe après la FAQ, à hauteur fixe.
+  Pas de `Container` dans cette section : la moitié droite doit toucher le bord de l'écran, donc
+  la gouttière de gauche est reprise à la main (24 / 40 / 120 px, comme partout ailleurs).
+  Deux étapes avant d'y arriver : une bande pleine largeur de 420 px au-dessus de la FAQ, puis
+  une colonne de 24 rem à droite des questions. Les six fichiers ont été **ré-exportés en 4:5
+  depuis les originaux** à chaque changement de cadre, jamais recadrés depuis l'export
+  précédent : un recadrage du recadrage aurait perdu l'essentiel de l'image.
   **Les six pages en ont une**, à la demande du client. Posée d'abord sur les quatre pages les
   plus longues, elle a été étendue aux deux autres. Ce qui empêche la bande de devenir un motif,
   c'est qu'aucune image ne se répète : une par page, toutes différentes.

@@ -196,58 +196,58 @@ export function PrestationPage({ page }: { page: Page }) {
         </div>
 
         {/*
-          FAQ du document client, dépliable sans JavaScript. Les questions à gauche, le visuel de
-          la page à droite : il occupait auparavant une bande pleine largeur de 420 px au-dessus,
-          pour la seule décoration. À droite, il tient dans la hauteur des questions et ne coûte
-          plus rien en défilement.
+          FAQ du document client, dépliable sans JavaScript. La section est coupée en deux
+          moitiés d'écran : les questions à gauche, le visuel de la page à droite, à fond perdu.
+          Il occupait auparavant une bande pleine largeur au-dessus de la FAQ, pour la seule
+          décoration ; il tient désormais dans une hauteur déjà occupée.
+          Pas de `Container` ici : la moitié droite doit toucher le bord de l'écran. La gouttière
+          de gauche est donc reprise à la main, aux mêmes valeurs que le reste du site.
         */}
-        <section id="faq" className="scroll-mt-28 bg-canvas-alt py-section-sm lg:py-section">
-          <Container wide>
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-16">
-              <div className="max-w-3xl">
-            <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-accent-deep">
-              <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
-              FAQ
-            </p>
-            <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.2] text-nera-navy md:text-[2.25rem]">
-              Questions fréquentes
-            </h2>
-            <div className="mt-10 border-t border-hairline">
-              {page.faq.map((f) => (
-                <details key={f.q} className="group border-b border-hairline py-5">
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-body-md font-medium text-nera-navy transition-colors hover:text-accent-deep">
-                    {f.q}
-                    <ChevronRight
-                      className="mt-1 size-4 shrink-0 text-accent-deep transition-transform duration-300 group-open:rotate-90"
-                      strokeWidth={1.75}
-                      aria-hidden
-                    />
-                  </summary>
-                  <p className="mt-3 max-w-[62ch] text-body-md leading-[1.75] text-body lg:text-body-lg">{f.a}</p>
-                </details>
-              ))}
-            </div>
+        <section id="faq" className="scroll-mt-28 bg-canvas-alt">
+          <div className="grid lg:grid-cols-2">
+            <div className="px-6 py-section-sm md:px-10 lg:py-section lg:pl-[120px] lg:pr-16">
+              <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-accent-deep">
+                <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
+                FAQ
+              </p>
+              <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.2] text-nera-navy md:text-[2.25rem]">
+                Questions fréquentes
+              </h2>
+              <div className="mt-10 border-t border-hairline">
+                {page.faq.map((f) => (
+                  <details key={f.q} className="group border-b border-hairline py-5">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-body-md font-medium text-nera-navy transition-colors hover:text-accent-deep">
+                      {f.q}
+                      <ChevronRight
+                        className="mt-1 size-4 shrink-0 text-accent-deep transition-transform duration-300 group-open:rotate-90"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
+                    </summary>
+                    <p className="mt-3 text-body-md leading-[1.75] text-body lg:text-body-lg">{f.a}</p>
+                  </details>
+                ))}
               </div>
-
-              {/*
-                Visuel de la page, purement décoratif : `alt` vide, aucun texte dessus. Collant
-                sous `lg` pour rester en vue pendant qu'on déplie les questions ; sous ce seuil,
-                il passe simplement après la FAQ.
-              */}
-              {page.band && (
-                <div className="relative aspect-[4/5] overflow-hidden rounded-md lg:sticky lg:top-28">
-                  <Image
-                    src={page.band}
-                    alt=""
-                    fill
-                    quality={90}
-                    sizes="(min-width: 1024px) 24rem, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              )}
             </div>
-          </Container>
+
+            {/*
+              Visuel de la page, purement décoratif : `alt` vide, aucun texte dessus. Il occupe
+              toute la hauteur de la moitié droite — les cellules d'une grille s'étirent — et
+              file jusqu'au bord de l'écran. Sous `lg`, il passe après la FAQ, à hauteur fixe.
+            */}
+            {page.band && (
+              <div className="relative min-h-[320px] md:min-h-[420px] lg:min-h-full">
+                <Image
+                  src={page.band}
+                  alt=""
+                  fill
+                  quality={90}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Dernier H2 du document client et CTA devis. */}
