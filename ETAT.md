@@ -427,9 +427,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
   **a disparu de `Assets/Visuels`** en cours de projet. Le dossier compte 69 fichiers au lieu
   de 70.
-- **Bandes photo des pages prestation** (champ `band` de `content/prestation-pages.ts`) : une
-  bande pleine largeur en 21:9, entre le corps de page et la FAQ, comme respiration dans un long
-  texte. Purement décorative : aucun texte dessus, aucun voile, `alt` vide.
+- **Visuel des pages prestation** (champ `band` de `content/prestation-pages.ts`) : une image
+  en 4:5 dans la **colonne de droite de la FAQ**, les questions occupant la gauche. Purement
+  décorative : aucun texte dessus, aucun voile, `alt` vide. Collante sous `lg`, pour rester en
+  vue pendant qu'on déplie les questions ; sous ce seuil elle passe après la FAQ.
+  Elle occupait d'abord une bande pleine largeur de 420 px entre le corps de page et la FAQ.
+  Déplacée à droite des questions, à la demande du client : elle tient désormais dans une
+  hauteur déjà occupée et ne coûte plus rien en défilement. Les six fichiers ont été
+  **ré-exportés en 4:5 depuis les originaux**, et non recadrés depuis le 21:9 : un recadrage du
+  recadrage aurait perdu l'essentiel de l'image.
   **Les six pages en ont une**, à la demande du client. Posée d'abord sur les quatre pages les
   plus longues, elle a été étendue aux deux autres. Ce qui empêche la bande de devenir un motif,
   c'est qu'aucune image ne se répète : une par page, toutes différentes.
@@ -438,9 +444,8 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   seule image qui sorte du registre façade, et qui dit le chantier sans montrer de visage. Écartés : `Green building.png`, dont le verre vert-turquoise
   entre en conflit avec le vert de la charte, et les paysages (lac, forêt), qui évoquent le
   tourisme plutôt que l'ingénierie du bâtiment.
-  **Recadrées en 21:9 avant export**, et non laissées en pleine image : une source en portrait
-  servie dans une bande serait rognée par le navigateur et téléchargée pour rien. Le fichier le
-  plus lourd est ainsi passé de 1377 à 747 Ko.
+  **Recadrées au format d'affichage avant export**, et non laissées en pleine image : une source
+  servie dans un cadre plus étroit serait rognée par le navigateur et téléchargée pour rien.
   Servies en `quality={90}`, comme toutes les images du site : `next.config.ts` n'autorise que
   `[75, 80, 85, 90]` et refuse toute autre valeur en le signalant dans la console.
 - Déployé sur Vercel : https://nera-roan.vercel.app/

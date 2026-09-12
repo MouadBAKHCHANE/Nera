@@ -196,19 +196,15 @@ export function PrestationPage({ page }: { page: Page }) {
         </div>
 
         {/*
-          Bande photo pleine largeur, sur les pages les plus longues seulement : une respiration
-          entre le corps de texte et la FAQ. Aucun texte par-dessus, donc aucun voile — et un
-          `alt` vide, l'image n'apportant pas d'information.
+          FAQ du document client, dépliable sans JavaScript. Les questions à gauche, le visuel de
+          la page à droite : il occupait auparavant une bande pleine largeur de 420 px au-dessus,
+          pour la seule décoration. À droite, il tient dans la hauteur des questions et ne coûte
+          plus rien en défilement.
         */}
-        {page.band && (
-          <div className="relative aspect-[21/9] max-h-[420px] w-full overflow-hidden">
-            <Image src={page.band} alt="" fill quality={90} sizes="100vw" className="object-cover" />
-          </div>
-        )}
-
-        {/* FAQ du document client, dépliable sans JavaScript. */}
         <section id="faq" className="scroll-mt-28 bg-canvas-alt py-section-sm lg:py-section">
-          <Container wide className="mx-auto max-w-3xl">
+          <Container wide>
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-16">
+              <div className="max-w-3xl">
             <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-accent-deep">
               <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
               FAQ
@@ -230,6 +226,26 @@ export function PrestationPage({ page }: { page: Page }) {
                   <p className="mt-3 max-w-[62ch] text-body-md leading-[1.75] text-body lg:text-body-lg">{f.a}</p>
                 </details>
               ))}
+            </div>
+              </div>
+
+              {/*
+                Visuel de la page, purement décoratif : `alt` vide, aucun texte dessus. Collant
+                sous `lg` pour rester en vue pendant qu'on déplie les questions ; sous ce seuil,
+                il passe simplement après la FAQ.
+              */}
+              {page.band && (
+                <div className="relative aspect-[4/5] overflow-hidden rounded-md lg:sticky lg:top-28">
+                  <Image
+                    src={page.band}
+                    alt=""
+                    fill
+                    quality={90}
+                    sizes="(min-width: 1024px) 24rem, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
             </div>
           </Container>
         </section>
