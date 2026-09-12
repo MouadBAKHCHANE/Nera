@@ -22,8 +22,6 @@ export function RenovationAZ() {
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
-            {/* Voile bleu clair permanent */}
-            <div className="absolute inset-0 bg-nera-navy/25" aria-hidden />
           </div>
           <div className="absolute -bottom-6 right-2 flex size-28 items-center justify-center text-accent lg:size-36">
             <DiamondOutline className="absolute inset-0 animate-spin-slow drop-shadow-[0_1px_3px_rgba(10,36,64,0.7)]" strokeWidth={1} />
