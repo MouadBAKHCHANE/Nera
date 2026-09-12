@@ -15,8 +15,8 @@ export function RenovationAZ() {
           <div className="absolute inset-y-6 left-6 right-0 border border-accent/60" aria-hidden />
           <div className="absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
             <Image
-              src="/img/bureau-batiment-clair-moderne.webp"
-              alt="Façade d'un immeuble contemporain rénové"
+              src="/img/accompagnement-suivi-chantier.webp"
+              alt="Un ingénieur et un conducteur de travaux consultent les plans sur le chantier"
               fill
               quality={90}
               sizes="(min-width: 1024px) 45vw, 100vw"

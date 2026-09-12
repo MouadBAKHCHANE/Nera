@@ -420,6 +420,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   s'allège plus au survol non plus, sinon le texte deviendrait illisible ; il ne reste du survol
   que l'agrandissement de la photo. Le numéro, qui n'a plus de voile derrière lui, est passé à
   70 % d'opacité avec une ombre portée pour se détacher de l'image.
+- Section « Votre rénovation énergétique, de A à Z » de l'accueil : la photo de façade a laissé
+  la place à une scène de travail en équipe (`accompagnement-suivi-chantier.webp`, tirée de
+  `Assets/Visuels/Suivi de chantier.png`) — un ingénieur et un conducteur de travaux sur les
+  plans, ce que décrit précisément le texte de la section.
+  À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
+  **a disparu de `Assets/Visuels`** en cours de projet. Le dossier compte 69 fichiers au lieu
+  de 70.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -506,6 +513,8 @@ ré-export) :
 | `hero-immeuble-geneve-soleil.webp`        | Immeuble ville soleil.jpg         |
 | `bureau-batiment-clair-moderne.webp`      | Batiment clair moderne.jpg        |
 | `bureau-equipe-etude.webp`                | Etude plans 2.jpg                 |
+| `accompagnement-suivi-chantier.webp`      | Suivi de chantier.png             |
+| `contact-conseil.webp`                    | Etude famille maison.jpg          |
 | `references-immeubles-modernes.webp`      | Immeubles modernes ciel bleu.jpg  |
 | `process-panneaux-solaires-immeuble.webp` | Panneaux solaires immeuble 2.png  |
 | `prestation-diagnostic-energetique.webp`  | Diagnostic énergétique.jpg        |
