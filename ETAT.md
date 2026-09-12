@@ -319,6 +319,26 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   À signaler au client : la politique de confidentialité annonce encore la collecte de la
   « commune et canton » (`content/legal-pages.ts`), alors que le formulaire demande un code
   postal.
+- Page `/bureau`, série de corrections client : « Fondé à Genève en 2025 » retiré du chapô ;
+  point plutôt que deux-points après « d'aborder les projets » ; « Notre mission » perd
+  « Traduire leurs objectifs dans un projet cohérent » et « Intégrer les exigences
+  réglementaires » remonte avant « Comparer les variantes » ; le portrait du fondateur reçoit le
+  texte enrichi fourni (Bachelor HES-SO à HEPIA, REG B, Prix OCEN 2022) en lieu et place de
+  « Son parcours… ». Sa première phrase et sa dernière disent toutes deux la fondation de NERA :
+  le client a demandé de garder les deux.
+- « NERA en chiffres » de `/bureau` reprend les chiffres **et** les libellés de l'accueil :
+  `<Stats id={bureau.chiffres.id} />` sans `items`. Les libellés plus longs propres à la page
+  ont été supprimés de `content/bureau.ts`.
+- Deux relais « Demander un devis gratuit » ont été posés dans le corps de `/bureau`, sous
+  « Notre mission » et sous « Nos qualifications » : le bouton « Devis gratuit » de l'en-tête
+  disparaît dès que la page défile, et il n'y avait plus aucun moyen de demander une offre
+  depuis cette page avant son pied.
+- Sélection du texte dans le bloc « fondateur » : signalée comme impossible par le client,
+  **non reproduite** — rien dans le code ne la bloque (`select-none` n'est utilisé que sur
+  l'illustration des prestations, aucune surcouche sans `pointer-events-none`). Par précaution,
+  les deux logomarks décoratifs de la page passent en `-z-10` : ils ne peuvent plus passer
+  devant le texte. Le correctif de `Reveal` (plus de `transform` sur un simple fondu) pourrait
+  aussi y contribuer. À revérifier sur le site déployé.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire

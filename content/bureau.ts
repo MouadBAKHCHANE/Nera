@@ -25,14 +25,13 @@ export const bureau = {
   h1: "NERA Ingénieurs Conseils",
   lead: [
     "NERA est un bureau d’ingénieurs spécialisé en énergétique, physique du bâtiment, installations CVC et rénovation énergétique.",
-    "Fondé à Genève en 2025, le bureau accompagne les projets de construction, de transformation et de rénovation, de l’étude initiale au suivi de la réalisation.",
     "NERA est née de la volonté de proposer une ingénierie indépendante, claire et pragmatique, fondée sur la précision technique, la proximité et la durabilité.",
   ],
 
   equilibre: {
     id: "equilibre",
     title: "L’équilibre comme principe",
-    intro: "Le nom NERA évoque l’équilibre, la mesure et la justesse. Cette idée traduit notre manière d’aborder les projets :",
+    intro: "Le nom NERA évoque l’équilibre, la mesure et la justesse. Cette idée traduit notre manière d’aborder les projets.",
     /**
      * Les six lignes « entre A et B » du client. Le document les écrit en énumération
      * (minuscule initiale, point-virgule final) ; présentées ici en cartes autonomes, elles
@@ -58,10 +57,9 @@ export const bureau = {
     items: [
       "Comprendre leur bâtiment",
       "Identifier les priorités",
+      "Intégrer les exigences réglementaires",
       "Comparer les variantes",
       "Prendre des décisions documentées",
-      "Intégrer les exigences réglementaires",
-      "Traduire leurs objectifs dans un projet cohérent",
       "Accompagner sa mise en œuvre",
     ],
   },
@@ -76,9 +74,14 @@ export const bureau = {
       titles: "Ingénieur HES – REG B – MPQ",
       field: "Énergétique & Physique du Bâtiment",
     },
+    /**
+      * Texte enrichi fourni par le client. Sa première phrase et la dernière disent toutes deux
+      * la fondation de NERA ; il a demandé de garder les deux.
+      */
     paragraphs: [
       "Akram Draidj a fondé NERA avec la volonté de réunir expertise technique, proximité et indépendance au sein d’une structure à taille humaine.",
-      "Son parcours associe l’énergétique, la physique du bâtiment, les techniques du bâtiment et la connaissance des procédures entourant les projets de construction et de rénovation.",
+      "Akram Draidj a développé son expertise au fil de plusieurs années d’expérience dans les environnements techniques, l’énergétique et la rénovation du bâtiment. Diplômé d’un Bachelor HES-SO en Technique des bâtiments à HEPIA Genève et inscrit au REG B, il est également lauréat du Prix OCEN 2022 pour ses travaux sur le stockage de l’électricité photovoltaïque.",
+      "Il fonde NERA avec la volonté de mettre cette expertise au service de projets exigeants, avec une approche indépendante, rigoureuse et proche du terrain.",
     ],
     phoneLabel: "Téléphone direct",
     emailLabel: "E-mail",
@@ -149,20 +152,13 @@ export const bureau = {
     ],
   },
 
-  /** « NERA en chiffres », libellés propres à cette page (plus longs que sur l'accueil). */
+  /**
+   * « NERA en chiffres » reprend désormais les chiffres et les libellés de l'accueil, à la
+   * demande du client : la section est rendue par `components/home2/Stats.tsx` sans `items`.
+   * Seul l'ancrage reste ici. Les libellés plus longs propres à cette page ont été retirés.
+   */
   chiffres: {
     id: "chiffres",
-    items: [
-      {
-        value: 300,
-        prefix: "+",
-        label: "CECB et CECB Plus réalisés au cours des trois dernières années par les experts réunis au sein de NERA",
-      },
-      { value: 50, prefix: "+", label: "dossiers de subventions déposés" },
-      { value: 50, label: "projets réalisés par NERA en 2026" },
-      { value: 15, suffix: " ans", label: "d’expérience métier" },
-      { value: 7, label: "collaborateurs" },
-    ],
   },
 
   cantons: {

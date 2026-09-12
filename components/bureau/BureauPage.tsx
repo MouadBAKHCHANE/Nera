@@ -263,7 +263,7 @@ export function BureauPage() {
           className="relative scroll-mt-24 overflow-hidden border-t border-hairline bg-canvas-alt py-20 lg:py-28"
         >
           <LogomarkOutline
-            className="pointer-events-none absolute -right-[12vw] top-0 hidden w-[38vw] text-nera-navy/[0.06] lg:block"
+            className="pointer-events-none absolute -right-[12vw] top-0 -z-10 hidden w-[38vw] text-nera-navy/[0.06] lg:block"
             strokeWidth={1}
           />
           <Container wide className="relative">
@@ -296,7 +296,7 @@ export function BureauPage() {
         {/* 3. Le fondateur — marine. Cartouche client à gauche, texte et contact à droite. */}
         <section id={bureau.fondateur.id} className="relative scroll-mt-24 overflow-hidden bg-nera-navy bg-blueprint py-20 text-nera-cream lg:py-28">
           <LogomarkOutline
-            className="pointer-events-none absolute -right-[6vw] top-1/2 hidden w-[30vw] -translate-y-1/2 text-nera-cream/10 lg:block"
+            className="pointer-events-none absolute -right-[6vw] top-1/2 -z-10 hidden w-[30vw] -translate-y-1/2 text-nera-cream/10 lg:block"
             strokeWidth={1}
           />
           <Container wide className="relative">
@@ -452,6 +452,14 @@ export function BureauPage() {
                 })}
               </ul>
             </div>
+
+            {/*
+              Le bouton « Devis gratuit » de l'en-tête disparaît dès que la page défile : sans
+              relais dans le corps de page, on ne peut plus demander d'offre depuis ici.
+            */}
+            <Reveal {...aosBlock} className="mt-12 border-t border-hairline pt-8">
+              <ArrowQuoteButton tone="dark" />
+            </Reveal>
           </Container>
         </section>
 
@@ -501,8 +509,8 @@ export function BureauPage() {
           </ul>
         </section>
 
-        {/* 8. NERA en chiffres — marine, section de l'accueil avec les libellés de cette page. */}
-        <Stats id={bureau.chiffres.id} items={bureau.chiffres.items} />
+        {/* 8. NERA en chiffres — la section de l'accueil, avec ses chiffres et ses libellés. */}
+        <Stats id={bureau.chiffres.id} />
 
         {/* 9. Six cantons — crème, section de l'accueil avec le H2 de cette page. */}
         <Territory
