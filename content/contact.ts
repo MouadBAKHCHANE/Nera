@@ -11,18 +11,18 @@ export const contactRoute = "/contact";
 
 export const contact = {
   meta: {
-    title: "Contact NERA | Bureau d’ingénieurs basé à Genève",
+    title: "Contact NERA | Bureau d’ingénieurs à Genève",
     description:
-      "Contactez NERA pour un CECB, une étude CVC, un dossier énergétique, des subventions ou une rénovation globale en Suisse romande.",
+      "Contactez NERA à Genève pour un CECB, une étude CVC, un dossier énergétique, des subventions ou une rénovation globale.",
   },
   /** Expression principale en tête, puis expressions secondaires. */
   keywords: [
-    "contact bureau ingénieurs énergie Suisse romande",
-    "Devis CECB Suisse romande",
-    "Ingénieur bâtiment Suisse romande",
-    "bureau études CVC Suisse romande",
-    "rénovation énergétique devis",
-  ],
+      "contact bureau ingénieurs énergie Genève",
+      "Devis CECB Genève",
+      "Ingénieur bâtiment Genève",
+      "bureau études CVC Genève",
+      "rénovation énergétique devis",
+    ],
   h1: "Contactez NERA Ingénieurs Conseils",
   lead: [
     "Vous avez besoin d’un CECB, d’une étude énergétique, d’un dossier d’autorisation, d’un accompagnement pour les subventions ou d’un pilotage global de rénovation ?",

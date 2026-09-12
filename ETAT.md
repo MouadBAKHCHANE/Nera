@@ -343,16 +343,19 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   bureau est basé, jamais d'une façon qui laisse croire qu'il n'intervient qu'à Genève.
   Appliquée au héro de l'accueil (« …physique du bâtiment, basé à Genève » et « Bureau
   d'ingénierie indépendant basé à Genève ») et aux textes de remplacement des images de partage.
-  Étendue ensuite, sur confirmation du client, aux **titres, méta-descriptions et mots-clés** de
-  toutes les pages, qui venaient de son cahier SEO et nommaient Genève à presque chaque ligne.
+  **Annulée sur les champs SEO, puis restaurée depuis le document client.** Après avoir vu le
+  résultat, le client a tranché : son document « TEXTES SITE WEB NERA » (Google Docs) fait foi
+  pour les titres, méta-descriptions et mots-clés de chaque page. Ces champs sont donc revenus
+  mot pour mot au document, « Genève » compris, et **ne doivent pas être modifiés sans lui**.
+  La règle ne vaut plus que pour le **texte visible** des pages : héro de l'accueil, textes de
+  remplacement des images de partage. Pour mémoire, la version intermédiaire disait :
   Deux traitements selon ce que la phrase décrit :
   - le **bureau lui-même** garde la ville sous la forme « basé à Genève » — titres et
     descriptions de `/bureau` et `/contact`. Le signal de référencement local est conservé ;
   - une **zone d'intervention** passe à la Suisse romande — titre d'accueil, six titres de pages
     prestation (« … | NERA Suisse romande »), descriptions et les vingt-neuf mots-clés.
-  Le client a confirmé deux fois : NERA opère dans toute la Suisse romande et ne veut pas
-  paraître genevoise seulement. Contrepartie assumée : les pages ne visent plus les recherches
-  « … Genève », qui restent couvertes par `/bureau` et `/contact`.
+  Cette version n'est plus en vigueur sur les champs SEO ; elle est conservée ici au cas où le
+  client reviendrait sur sa décision.
   **Restent inchangées** les mentions factuellement genevoises, que retirer rendrait le texte
   faux et non plus large : calcul et dépôt de l'IDC, APA et DD, variantes HPE et THPE définies
   par le canton, cartouches correspondantes de l'illustration. De même l'adresse, les listes de
