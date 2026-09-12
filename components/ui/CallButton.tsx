@@ -7,8 +7,9 @@ import { company } from "@/content/prestations";
 
 /**
  * Éléments flottants :
- * - deux onglets empilés à mi-hauteur sur le bord droit, sur tous les formats, qui
- *   apparaissent une fois le héro passé : « Devis gratuit » puis le numéro de téléphone ;
+ * - deux onglets empilés à mi-hauteur sur le bord droit, qui apparaissent une fois le héro
+ *   passé : « Devis gratuit », téléphone et tablette seulement — l'en-tête desktop porte déjà
+ *   le bouton devis, épinglé —, puis le numéro de téléphone, sur tous les formats ;
  * - bouton « retour en haut » carré en bas à droite, en vert comme les onglets, sur tous
  *   les formats, visible après un défilement.
  */
@@ -26,7 +27,7 @@ function Tab({
   href,
   onClick,
   shown,
-  tone = "cream",
+  extra = "",
 }: {
   label: string;
   ariaLabel: string;
@@ -34,19 +35,17 @@ function Tab({
   href?: string;
   onClick?: () => void;
   shown: boolean;
-  /** Couleur du libellé déplié. L'icône reste blanche dans les deux cas. */
-  tone?: "cream" | "navy";
+  /** Classes supplémentaires : sert à masquer l'onglet devis en desktop. */
+  extra?: string;
 }) {
-  // Icône blanche partout ; seul le libellé du téléphone passe en marine, à la demande du client.
-  const labelTone = tone === "navy" ? "text-nera-navy-deep" : "";
-  const className = `group inline-flex h-11 items-center rounded-l-sm bg-accent px-3 text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:h-12 ${
+  const className = `group inline-flex h-11 items-center rounded-l-sm bg-accent px-3 text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:h-12 ${extra} ${
     shown ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-4 opacity-0"
   }`;
   const inner = (
     <>
       <Icon className="size-5 shrink-0" strokeWidth={1.75} />
       <span
-        className={`max-w-0 overflow-hidden whitespace-nowrap text-[14px] font-medium transition-all duration-300 group-hover:max-w-[12rem] group-hover:pl-2 group-focus-visible:max-w-[12rem] group-focus-visible:pl-2 ${labelTone}`}
+        className={`max-w-0 overflow-hidden whitespace-nowrap text-[14px] font-medium transition-all duration-300 group-hover:max-w-[12rem] group-hover:pl-2 group-focus-visible:max-w-[12rem] group-focus-visible:pl-2`}
       >
         {label}
       </span>
@@ -88,6 +87,7 @@ export function CallButton() {
           icon={FileText}
           onClick={() => open()}
           shown={shown}
+          extra="lg:hidden"
         />
         <Tab
           label={company.phone}
@@ -95,7 +95,6 @@ export function CallButton() {
           icon={Phone}
           href={company.phoneHref}
           shown={shown}
-          tone="navy"
         />
       </div>
 

@@ -106,14 +106,16 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - `HeaderDark` accepte `solidOnScroll` : sur les pages à corps clair, l'en-tête garde son
   fond marine une fois défilé, sinon le logo crème devient illisible. L'accueil est inchangé.
 - Boutons flottants (`components/ui/CallButton.tsx`), visibles sur tous les formats une fois le
-  héro passé : **deux onglets empilés** à mi-hauteur du bord droit, « Devis gratuit » puis le
-  numéro de téléphone, et le bouton « retour en haut » en bas à droite. Tous en vert.
-  Les onglets ne montrent que leur icône au repos, blanche dans les deux cas, et déplient leur
-  libellé au survol comme à la prise de focus clavier. Le libellé est animé en `max-width` :
-  `width: auto` ne se transitionne pas. Le numéro s'affiche en marine foncé, à la demande du
-  client — 5,4:1 de contraste sur le vert, contre 2,9:1 pour du blanc. Sur écran tactile, où le
-  survol n'existe pas, les onglets restent à l'icône seule : d'où l'`aria-label`, nom accessible
-  constant.
+  héro passé : **deux onglets empilés** à mi-hauteur du bord droit et le bouton « retour en
+  haut » en bas à droite, tous en vert.
+  L'onglet « Devis gratuit » est **masqué en desktop** (`lg:hidden`) : l'en-tête y porte déjà
+  le bouton devis, désormais épinglé. L'onglet téléphone reste sur tous les formats.
+  Les onglets ne montrent que leur icône au repos et déplient leur libellé au survol comme à la
+  prise de focus clavier ; icônes et libellés sont en blanc. Le libellé est animé en `max-width` :
+  `width: auto` ne se transitionne pas. Sur écran tactile, où le survol n'existe pas, les
+  onglets restent à l'icône seule : d'où l'`aria-label`, nom accessible constant.
+  **Attention au contraste** : le blanc sur ce vert ne donne que 2,9:1. C'est un choix du
+  client, accepté pour un libellé de survol, mais à ne pas reprendre pour du texte de lecture.
 - **En-tête desktop épinglé** : le menu centré et le bouton « Devis gratuit » restent affichés
   en permanence, au lieu de disparaître au défilement au profit de deux icônes et d'un burger.
   Conséquences : les icônes enveloppe et téléphone de l'en-tête ne sont plus jamais affichées
