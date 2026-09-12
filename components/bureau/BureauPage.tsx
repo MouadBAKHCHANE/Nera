@@ -237,7 +237,14 @@ export function BureauPage() {
                       as="li"
                       key={item}
                       {...aosItem}
-                      className="group relative flex items-center gap-5 overflow-hidden rounded-md border border-hairline bg-canvas-alt p-5 transition-all duration-300 hover:border-accent hover:shadow-md lg:p-6"
+                      /*
+                        Pas d'apparition sous `lg` : le client la trouvait accrocheuse sur mobile.
+                        `desktopOnly` coupe l'animation après l'hydratation ; `max-lg:opacity-100!`
+                        neutralise dès le premier rendu l'`opacity: 0` que le serveur pose — sans
+                        lui, les cartes resteraient invisibles jusqu'à l'hydratation.
+                      */
+                      desktopOnly
+                      className="group relative flex items-center gap-5 overflow-hidden rounded-md border border-hairline bg-canvas-alt p-5 transition-all duration-300 hover:border-accent hover:shadow-md max-lg:opacity-100! lg:p-6"
                     >
                       <div className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-115 group-hover:-translate-y-1 group-hover:rotate-2">
                         <Icon className="size-13 lg:size-14" />

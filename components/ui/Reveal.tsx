@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -20,11 +21,21 @@ const effects: Record<Effect, { from: Record<string, number>; duration: number; 
   "slide-up": { from: { opacity: 0, y: 80 }, duration: 900, ease: [0, 0, 0, 1] },
 };
 
+/** Sous `lg` : le point de rupture de Tailwind, 1024 px. */
+const MOBILE = "(max-width: 1023.98px)";
+
+const subscribeMobile = (onChange: () => void) => {
+  const mq = window.matchMedia(MOBILE);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+};
+
 export function Reveal({
   children,
   delay = 0,
   duration,
   effect = "fade",
+  desktopOnly = false,
   className = "",
   as = "div",
 }: {
@@ -32,10 +43,20 @@ export function Reveal({
   delay?: number;
   duration?: number;
   effect?: Effect;
+  /** N'anime qu'à partir de `lg` : sous ce seuil, le contenu est posé sans apparition. */
+  desktopOnly?: boolean;
   className?: string;
   as?: "div" | "li" | "section" | "p" | "h1" | "h2";
 }) {
   const reduce = useReducedMotion();
+  // Le serveur ne connaît pas la largeur de l'écran : il rend comme un desktop, et
+  // l'hydratation retire l'apparition sur mobile. L'inverse ferait clignoter le desktop.
+  const isMobile = useSyncExternalStore(
+    subscribeMobile,
+    () => window.matchMedia(MOBILE).matches,
+    () => false,
+  );
+  const off = reduce || (desktopOnly && isMobile);
   const Tag = motion[as];
   const e = effects[effect];
   /**
@@ -48,8 +69,8 @@ export function Reveal({
   return (
     <Tag
       className={className}
-      initial={reduce ? false : e.from}
-      whileInView={to}
+      initial={off ? false : e.from}
+      whileInView={off ? undefined : to}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: (duration ?? e.duration) / 1000, delay, ease: e.ease }}
     >
