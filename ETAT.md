@@ -189,11 +189,21 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
     plus de padding bas. Cinq rectangles du marine foncé au blanc (`valeurPanels`), texte
     centré, en crème sur les deux premiers. Les cellules d'une grille s'étirent à la hauteur de
     la plus haute, donc les cinq restent de même hauteur sans hauteur fixe. Sous `lg`, ils
-    s'empilent. Les intitulés sont en **capitales espacées** (`tracking-[0.2em]`), comme la
+    s'empilent. Le premier panneau, « Indépendance », est **en vert** à la demande du client :
+    `DESIGN.md` proscrit le vert en grand aplat, c'est la seule entorse, et elle impose le
+    marine foncé pour le texte (5,4:1 de contraste, contre 2,9:1 pour du blanc et 2,6:1 pour du
+    crème, tous deux illisibles sur ce vert). L'apparition a été ralentie à 900 ms, avec 180 ms
+    entre panneaux. Les intitulés sont en **capitales espacées** (`tracking-[0.2em]`), comme la
     référence : c'est le seul endroit du site où un titre est en capitales, ce que `DESIGN.md`
     proscrit ailleurs — dérogation demandée par le client. La première version reprenait leur bloc `#values` à deux colonnes avec une photo
     carrée à gauche ; le client a préféré la pleine largeur, la photo
     `bureau-valeurs-nature-suisse.webp` a donc été supprimée (récupérable dans l'historique).
+- `components/ui/Reveal.tsx` : l'état d'arrivée ne reprend que les propriétés réellement
+  décalées au départ. Il valait `{ opacity: 1, x: 0, y: 0 }` pour tous les effets, si bien qu'un
+  simple fondu posait un `transform` sur l'élément — donc un calque de composition et un
+  re-tramage du texte. Sur mobile, les cartes de « L'équilibre comme principe » sautaient à
+  l'apparition pour cette raison. Un fondu est désormais servi avec `opacity` seule ; les effets
+  `fade-right` et `fade-up` gardent leur translation.
 - Apparitions calées sur hestera.ch/a-propos, la direction validée avec le client. Les réglages
   relevés dans leur HTML (`data-aos` / `data-aos-duration`, `AOS.init({ once: true })`, aucun
   `data-aos-delay`) vivent dans `components/ui/aos.ts` : `aosBlock` (fade 1000 ms, bloc de

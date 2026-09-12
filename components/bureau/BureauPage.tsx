@@ -30,12 +30,15 @@ const qualificationIcons = QualificationIconsList;
 const equilibreIcons = PrincipeIconsList;
 
 /**
- * Les cinq rectangles de « Nos valeurs », du plus foncé au plus clair — la progression des
- * `value-item` de hestera, portée sur la palette NERA. Uniquement des tons de la charte :
- * ni vert en aplat, ni teinte inventée. Le texte est en crème sur les deux premiers.
+ * Les cinq rectangles de « Nos valeurs », du plus soutenu au plus clair.
+ *
+ * Le premier est en vert à la demande du client. `DESIGN.md` proscrit le vert en grand aplat :
+ * c'est la seule entorse, et elle impose le marine foncé pour le texte (5,4:1 de contraste,
+ * contre 2,9:1 pour du blanc et 2,6:1 pour du crème, tous deux illisibles sur ce vert).
+ * Les quatre suivants restent des tons de la charte, du marine au blanc.
  */
 const valeurPanels = [
-  { bg: "bg-nera-navy-deep", title: "text-nera-cream", text: "text-nera-cream/85" },
+  { bg: "bg-accent", title: "text-nera-navy-deep", text: "text-nera-navy-deep/85" },
   { bg: "bg-nera-navy", title: "text-nera-cream", text: "text-nera-cream/85" },
   { bg: "bg-nera-navy-soft", title: "text-nera-navy", text: "text-body" },
   { bg: "bg-nera-cream-deep", title: "text-nera-navy", text: "text-body" },
@@ -474,7 +477,8 @@ export function BureauPage() {
                   as="li"
                   key={v.title}
                   {...aosItem}
-                  delay={i * 0.12}
+                  duration={900}
+                  delay={i * 0.18}
                   className={`flex min-h-[15rem] flex-col justify-center px-6 py-14 text-center lg:min-h-[19rem] lg:px-8 ${panel.bg}`}
                 >
                   <h3

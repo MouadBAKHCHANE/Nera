@@ -38,11 +38,18 @@ export function Reveal({
   const reduce = useReducedMotion();
   const Tag = motion[as];
   const e = effects[effect];
+  /**
+   * L'état d'arrivée ne reprend que les propriétés réellement décalées au départ. Il valait
+   * auparavant `{ opacity: 1, x: 0, y: 0 }` pour tous les effets : même un simple fondu posait
+   * donc un `transform` sur l'élément, ce qui le promeut en calque et fait re-tramer le texte.
+   * Sur mobile, cela se voyait — les cartes du principe d'équilibre sautaient à l'apparition.
+   */
+  const to = Object.fromEntries(Object.keys(e.from).map((k) => [k, k === "opacity" ? 1 : 0]));
   return (
     <Tag
       className={className}
       initial={reduce ? false : e.from}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      whileInView={to}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: (duration ?? e.duration) / 1000, delay, ease: e.ease }}
     >
