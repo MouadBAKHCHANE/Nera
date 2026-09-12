@@ -26,12 +26,17 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** Desktop : menu centré et bouton visibles seulement en haut de page, menu fermé. */
-  const showNav = !scrolled && !open;
   /**
-   * Desktop, page défilée : fond transparent sur l'accueil (direction hestera), logo +
-   * icônes e-mail / téléphone + burger. `solidOnScroll` garde le fond marine sur les pages
-   * à corps clair, où le logo crème serait illisible.
+   * Desktop : le menu centré et le bouton devis restent affichés en permanence — le client
+   * les voulait épinglés. Ils ne disparaissaient auparavant qu'au défilement, remplacés par
+   * deux icônes et un burger ; ces icônes ne sont donc plus jamais affichées.
+   * Le menu plein écran ouvert reste la seule chose qui les masque.
+   */
+  const showNav = !open;
+  /**
+   * Page défilée : fond marine plein, à tous les formats. Il était transparent sur l'accueil
+   * en desktop, ce qui n'était tenable que sans menu visible ; avec un menu épinglé, il faut
+   * un fond derrière lui.
    */
   const collapsed = scrolled && !open;
   const link =
@@ -46,7 +51,7 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
             : collapsed
               ? solidOnScroll
                 ? "bg-nera-navy border-b border-nera-cream/10"
-                : "bg-nera-navy border-b border-nera-cream/10 lg:border-0 lg:bg-transparent"
+                : "bg-nera-navy border-b border-nera-cream/10"
               : "bg-gradient-to-b from-nera-navy/80 to-transparent"
         }`}
       >

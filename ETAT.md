@@ -105,12 +105,21 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   Alternance des fonds : crème (corps), blanc (FAQ), marine (CTA).
 - `HeaderDark` accepte `solidOnScroll` : sur les pages à corps clair, l'en-tête garde son
   fond marine une fois défilé, sinon le logo crème devient illisible. L'accueil est inchangé.
-- Boutons flottants (`components/ui/CallButton.tsx`) : « retour en haut » et onglet
-  « Devis gratuit » à mi-hauteur du bord droit sont désormais visibles sur tous les formats,
-  desktop compris, une fois le héro passé. L'onglet devis passe à 48 px sous `lg`.
-- L'enveloppe de l'en-tête (`HeaderDark`) mène à `/contact` et non plus à un `mailto:` : le
-  visiteur choisit entre le formulaire, le téléphone et l'e-mail. Le lien `mailto:` direct
-  reste offert sur la page contact et dans le pied de page.
+- Boutons flottants (`components/ui/CallButton.tsx`), visibles sur tous les formats une fois le
+  héro passé : **deux onglets empilés** à mi-hauteur du bord droit, « Devis gratuit » puis le
+  numéro de téléphone, et le bouton « retour en haut » en bas à droite. Tous en vert.
+  Les onglets ne montrent que leur icône au repos, blanche dans les deux cas, et déplient leur
+  libellé au survol comme à la prise de focus clavier. Le libellé est animé en `max-width` :
+  `width: auto` ne se transitionne pas. Le numéro s'affiche en marine foncé, à la demande du
+  client — 5,4:1 de contraste sur le vert, contre 2,9:1 pour du blanc. Sur écran tactile, où le
+  survol n'existe pas, les onglets restent à l'icône seule : d'où l'`aria-label`, nom accessible
+  constant.
+- **En-tête desktop épinglé** : le menu centré et le bouton « Devis gratuit » restent affichés
+  en permanence, au lieu de disparaître au défilement au profit de deux icônes et d'un burger.
+  Conséquences : les icônes enveloppe et téléphone de l'en-tête ne sont plus jamais affichées
+  (le menu porte déjà « Contact »), et le fond de l'en-tête défilé est marine plein à tous les
+  formats — il était transparent en desktop sur l'accueil, ce qui n'était tenable que sans menu
+  visible. Le menu plein écran ouvert reste la seule chose qui masque la barre.
 - SEO accueil, `sitemap.ts`, `robots.ts`, images OG/Twitter, JSON-LD `ProfessionalService`.
   Le plan du site tire les six routes prestation de `content/prestation-pages.ts`.
 - `PrestationsScrolly.tsx` : les sur-titres inventés (« Diagnostic & Audit », « Ingénierie
