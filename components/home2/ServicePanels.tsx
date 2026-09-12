@@ -95,10 +95,20 @@ export function ServicePanels() {
                   fill
                   quality={90}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className={`object-cover opacity-55 transition-all duration-700 ease-out-quart group-hover:scale-[1.06] group-hover:opacity-100 group-data-active:scale-[1.06] group-data-active:opacity-100 ${p.pos ?? ""}`}
+                  className={`object-cover transition-transform duration-700 ease-out-quart group-hover:scale-[1.06] group-data-active:scale-[1.06] ${p.pos ?? ""}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-nera-navy via-nera-navy/60 to-nera-navy/10 transition-opacity duration-700 group-hover:opacity-60 group-data-active:opacity-60" aria-hidden />
-                <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/40 transition-colors duration-base group-hover:text-accent group-data-active:text-accent">
+                {/*
+                  Voile cantonné au bas de la carte : la photo se voit en entier, le titre, le
+                  texte et le lien restent lisibles. Il couvrait auparavant toute la carte et
+                  s'allégeait au survol, si bien que l'image n'apparaissait vraiment qu'à ce
+                  moment-là. Il ne s'allège plus : le texte repose dessus en permanence.
+                */}
+                <div
+                  className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-nera-navy via-nera-navy/85 to-transparent"
+                  aria-hidden
+                />
+                {/* Le numéro n'a plus de voile derrière lui : une ombre portée le détache de la photo. */}
+                <span className="absolute left-7 top-7 font-display text-[3rem] font-light leading-none text-nera-cream/70 transition-colors duration-base [text-shadow:0_2px_14px_rgba(10,36,64,0.85)] group-hover:text-accent group-data-active:text-accent">
                   {p.n}
                 </span>
                 <div className="relative p-8">

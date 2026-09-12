@@ -413,6 +413,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   Remplace `ArrowQuoteButton`, supprimé, qui reprenait l'apparence du lien fléché : la demande
   de devis ne se distinguait pas des liens de navigation. Les autres appels à l'action
   (« Découvrir… », « Contacter NERA ») restent des `ArrowLink` — le contour est réservé au devis.
+- Cartes des six prestations de l'accueil (`components/home2/ServicePanels.tsx`) : la photo
+  s'affiche en entier et le voile marine est **cantonné aux trois cinquièmes du bas**, là où
+  reposent le titre, le texte et le lien. Il couvrait auparavant toute la carte et la photo était
+  à 55 % d'opacité, si bien que l'image n'apparaissait vraiment qu'au survol. Le voile ne
+  s'allège plus au survol non plus, sinon le texte deviendrait illisible ; il ne reste du survol
+  que l'agrandissement de la photo. Le numéro, qui n'a plus de voile derrière lui, est passé à
+  70 % d'opacité avec une ombre portée pour se détacher de l'image.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
