@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight, ClipboardCheck, Layers, Target } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
-import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
+import { QuoteCta } from "@/components/home2/QuoteCta";
 import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { PrestationsScrolly } from "./PrestationsScrolly";
@@ -109,7 +109,7 @@ export function PrestationsIndexPage() {
                   {text}
                 </p>
               ))}
-              <ArrowQuoteButton className="mt-10">{index.heroCta}</ArrowQuoteButton>
+              <QuoteCta className="mt-10">{index.heroCta}</QuoteCta>
               <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
             </div>
           </Container>
@@ -185,7 +185,7 @@ export function PrestationsIndexPage() {
               <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
                 {index.closing.text}
               </p>
-              <ArrowQuoteButton className="mt-10">Demander un devis gratuit</ArrowQuoteButton>
+              <QuoteCta className="mt-10">Demander un devis gratuit</QuoteCta>
             </div>
           </Container>
         </section>

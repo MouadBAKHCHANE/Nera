@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
-import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
+import { QuoteCta } from "@/components/home2/QuoteCta";
 import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -116,9 +116,9 @@ export function PrestationPage({ page }: { page: Page }) {
                   {text}
                 </p>
               ))}
-              <ArrowQuoteButton prestation={page.shortTitle} className="mt-10">
+              <QuoteCta prestation={page.shortTitle} className="mt-10">
                 {page.heroCta}
-              </ArrowQuoteButton>
+              </QuoteCta>
               <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
             </div>
           </Container>
@@ -230,9 +230,9 @@ export function PrestationPage({ page }: { page: Page }) {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {page.closing}
               </h2>
-              <ArrowQuoteButton prestation={page.shortTitle} className="mt-10">
+              <QuoteCta prestation={page.shortTitle} className="mt-10">
                 Demander un devis gratuit
-              </ArrowQuoteButton>
+              </QuoteCta>
             </div>
           </Container>
         </section>

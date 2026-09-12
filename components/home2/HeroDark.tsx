@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitReveal } from "@/components/ui/SplitReveal";
-import { ArrowQuoteButton } from "./ArrowQuoteButton";
+import { QuoteCta } from "./QuoteCta";
 import { DiamondOutline, LogomarkOutline, Ruler } from "./Logomark";
 import { company } from "@/content/prestations";
 
@@ -63,7 +63,7 @@ export function HeroDark() {
         </Reveal>
         <Reveal delay={2.4} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />
-          <ArrowQuoteButton />
+          <QuoteCta />
         </Reveal>
       </div>
 

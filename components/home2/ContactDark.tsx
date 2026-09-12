@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/content/prestations";
 import { mapsHref } from "@/content/footer";
-import { ArrowQuoteButton } from "./ArrowQuoteButton";
+import { QuoteCta } from "./QuoteCta";
 import { ContactForm } from "@/components/contact/ContactForm";
 
 /**
@@ -26,7 +26,7 @@ export function ContactDark() {
               Décrivez-nous votre bâtiment et votre objectif. NERA vous aidera à identifier la prestation et le niveau
               d’accompagnement adaptés.
             </p>
-            <ArrowQuoteButton className="mt-6" />
+            <QuoteCta className="mt-6" />
           </Reveal>
           <Reveal delay={0.08}>
             <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">Coordonnées</h3>

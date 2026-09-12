@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
-import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
+import { QuoteCta } from "@/components/home2/QuoteCta";
 import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { PartnerLogos } from "@/components/ui/PartnerLogos";
@@ -135,7 +135,7 @@ export function ReferencesPage() {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {references.closing.title}
               </h2>
-              <ArrowQuoteButton className="mt-10">{references.closing.cta}</ArrowQuoteButton>
+              <QuoteCta className="mt-10">{references.closing.cta}</QuoteCta>
             </Reveal>
           </Container>
         </section>

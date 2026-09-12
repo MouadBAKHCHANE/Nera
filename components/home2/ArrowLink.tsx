@@ -9,8 +9,8 @@ const tones = {
 export type ArrowTone = keyof typeof tones;
 
 /**
- * Classes du lien fléché, partagées par `ArrowLink` (navigation) et `ArrowQuoteButton`
- * (ouverture du pop-up devis) pour que les deux soient visuellement identiques.
+ * Classes du lien fléché. Le bouton de devis ne les partage plus : il a son propre contour
+ * (`QuoteCta`), pour que l'action principale se distingue des liens de navigation.
  */
 export const arrowLinkClass = (tone: ArrowTone = "light", className = "") =>
   `arrow-link group relative inline-flex min-w-[220px] items-center justify-between gap-6 pt-4 text-[15px] font-medium transition-[color,padding] duration-300 hover:pr-3 ${tones[tone]} ${className}`;

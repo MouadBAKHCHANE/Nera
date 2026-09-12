@@ -405,6 +405,14 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   elle qui tient la lisibilité là où le voile a été allégé. Ne pas la retirer sans réaugmenter
   le voile. L'ancien réglage montait à 100 % de marine sur toute la moitié gauche : la photo,
   déjà à 30 %, y était invisible — le client trouvait ces en-têtes tristes.
+- **Bouton « Devis gratuit », action principale du site** : `components/home2/QuoteCta.tsx`,
+  un contour qui se remplit de vert au survol. C'est le bouton de l'en-tête, et l'en-tête s'en
+  sert désormais lui aussi : une seule définition pour tous les appels à l'action de devis, de
+  l'accueil au 404. `tone` selon le fond — `light` sur marine (contour et texte crème), `dark`
+  sur crème ou blanc (contour et texte marine).
+  Remplace `ArrowQuoteButton`, supprimé, qui reprenait l'apparence du lien fléché : la demande
+  de devis ne se distinguait pas des liens de navigation. Les autres appels à l'action
+  (« Découvrir… », « Contacter NERA ») restent des `ArrowLink` — le contour est réservé au devis.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire

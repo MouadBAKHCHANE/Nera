@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { ArrowLink } from "@/components/home2/ArrowLink";
-import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
+import { QuoteCta } from "@/components/home2/QuoteCta";
 import { DiamondOutline, LogomarkOutline, Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -76,7 +76,7 @@ export default function NotFound() {
 
                 <div className="mt-8 flex flex-wrap items-center gap-x-12 gap-y-4">
                   <ArrowLink href="/">{notFound.homeCta}</ArrowLink>
-                  <ArrowQuoteButton />
+                  <QuoteCta />
                 </div>
               </Reveal>
 

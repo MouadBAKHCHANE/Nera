@@ -7,7 +7,7 @@ import { ChevronDown, Mail, Phone } from "lucide-react";
 import { navigation, contactCta } from "@/content/navigation";
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
-import { QuoteButton } from "@/components/quote/QuoteModal";
+import { QuoteCta } from "./QuoteCta";
 import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
 
 /**
@@ -97,9 +97,7 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
           </nav>
 
           <div className={`ml-auto hidden lg:w-[220px] lg:justify-end ${showNav ? "lg:flex" : ""}`}>
-            <QuoteButton className="inline-flex h-12 items-center rounded-sm border border-nera-cream/60 px-6 text-[15px] font-medium text-nera-cream transition-colors duration-base hover:border-accent hover:bg-accent hover:text-white">
-              {contactCta.label}
-            </QuoteButton>
+            <QuoteCta>{contactCta.label}</QuoteCta>
           </div>
 
           <div className="ml-auto flex items-center gap-1 text-nera-cream drop-shadow-[0_1px_8px_rgba(10,36,64,0.7)] lg:gap-3">

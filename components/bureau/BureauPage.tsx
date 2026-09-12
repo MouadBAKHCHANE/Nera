@@ -4,7 +4,7 @@ import { ChevronRight, Mail, Phone } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { ArrowLink } from "@/components/home2/ArrowLink";
-import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
+import { QuoteCta } from "@/components/home2/QuoteCta";
 import { DiamondOutline, LogomarkOutline, Ruler } from "@/components/home2/Logomark";
 import { Stats } from "@/components/home2/Stats";
 import { Territory } from "@/components/home2/Territory";
@@ -479,7 +479,7 @@ export function BureauPage() {
               relais dans le corps de page, on ne peut plus demander d'offre depuis ici.
             */}
             <Reveal {...aosBlock} className="mt-12 border-t border-hairline pt-8">
-              <ArrowQuoteButton tone="dark" />
+              <QuoteCta tone="dark" />
             </Reveal>
           </Container>
         </section>
@@ -551,7 +551,7 @@ export function BureauPage() {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {bureau.closing.title}
               </h2>
-              <ArrowQuoteButton className="mt-10">{bureau.closing.secondary}</ArrowQuoteButton>
+              <QuoteCta className="mt-10">{bureau.closing.secondary}</QuoteCta>
             </Reveal>
           </Container>
         </section>
