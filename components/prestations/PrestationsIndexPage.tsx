@@ -57,15 +57,29 @@ export function PrestationsIndexPage() {
             priority
             quality={90}
             sizes="100vw"
-            className="object-cover opacity-30"
+            className="object-cover opacity-70"
           />
+          {/*
+            Trois voiles au lieu d'un seul aplat. L'ancien montait à 100 % de marine sur toute
+            la moitié gauche : la photo, déjà à 30 % d'opacité, disparaissait complètement.
+            - vertical, en haut : garde le logo et le menu lisibles sur la photo ;
+            - latéral, bien plus léger qu'avant et transparent à droite : le texte reste lisible
+              à gauche, la photo se découvre vers la droite ;
+            - grille de plan, discrète.
+            Le texte porte en plus une ombre portée (voir le conteneur), comme le héro de
+            l'accueil : c'est elle qui tient la lisibilité là où le voile a été allégé.
+          */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-nera-navy-deep via-nera-navy-deep/90 to-nera-navy-deep/40"
+            className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-nera-navy-deep/80 to-transparent"
             aria-hidden
           />
-          <div className="absolute inset-0 bg-blueprint opacity-60" aria-hidden />
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-nera-navy-deep/70 via-nera-navy-deep/30 to-transparent"
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-blueprint opacity-30" aria-hidden />
 
-          <Container wide className="relative">
+          <Container wide className="relative [text-shadow:0_1px_18px_rgba(10,36,64,0.55)]">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
                 <li>

@@ -382,6 +382,18 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   le sigle a été mis entre parenthèses. Pour APA et DD, une phrase de définition a été ajoutée
   avant celle du client, qui reste intacte. Le client écrivait « assistant au maître d'ouvrage » ;
   la page conserve « assistance à maîtrise d'ouvrage », sa propre formulation.
+- Héros des pages intérieures (`/prestations`, les six pages prestation, `/bureau`,
+  `/references`) : la photo passe de 30 % à **70 % d'opacité** et l'aplat marine unique est
+  remplacé par trois voiles :
+  1. vertical en haut (`from-nera-navy-deep/80` sur deux cinquièmes de hauteur), pour que le
+     logo et le menu restent lisibles sur la photo ;
+  2. latéral, `from-nera-navy-deep/70 via-…/30 to-transparent` — bien plus léger qu'avant, et
+     transparent à droite : le texte reste lisible à gauche, la photo se découvre à droite ;
+  3. grille de plan ramenée de 60 % à 30 %.
+  Le conteneur du héro porte une ombre portée sur le texte, comme le héro de l'accueil : c'est
+  elle qui tient la lisibilité là où le voile a été allégé. Ne pas la retirer sans réaugmenter
+  le voile. L'ancien réglage montait à 100 % de marine sur toute la moitié gauche : la photo,
+  déjà à 30 %, y était invisible — le client trouvait ces en-têtes tristes.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
