@@ -274,7 +274,7 @@ export function BureauPage() {
               </p>
               <p className="mt-8 text-body-md text-body">{bureau.mission.lead}</p>
             </Reveal>
-            <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {bureau.mission.items.map((item, i) => (
                 <Reveal
                   as="li"

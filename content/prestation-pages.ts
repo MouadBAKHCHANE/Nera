@@ -284,12 +284,12 @@ export const prestationPages: PrestationPage[] = [
     faq: [
       {
         q: "Quelle est la différence entre un CECB et un CECB Plus ?",
-        a: "Le CECB évalue la performance actuelle du bâtiment. Le CECB Plus ajoute un rapport de conseil avec des mesures et variantes de rénovation.",
+        a: "Le CECB évalue l’état initial et la performance actuelle du bâtiment. Le CECB Plus ajoute un rapport de conseil plus complet avec des mesures et variantes de rénovation.",
       },
       { q: "Le CECB est-il obligatoire lors d’une vente ?", a: "Cela dépend du canton et de la situation du bâtiment." },
       {
         q: "Le CECB Plus remplace-t-il les devis des entreprises ?",
-        a: "Non. Il constitue une base d’aide à la décision. Les offres détaillées interviennent ensuite.",
+        a: "Non, il ne remplace pas une étude complète réalisée par un architecte et/ou un ingénieur.",
       },
       {
         q: "Peut-on associer un CECB Plus et un diagnostic EPIQR+ ?",
