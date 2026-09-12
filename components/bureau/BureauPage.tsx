@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight, Mail, Phone } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
+import { ArrowLink } from "@/components/home2/ArrowLink";
 import { ArrowQuoteButton } from "@/components/home2/ArrowQuoteButton";
 import { DiamondOutline, LogomarkOutline, Ruler } from "@/components/home2/Logomark";
 import { Stats } from "@/components/home2/Stats";
@@ -206,6 +207,13 @@ export function BureauPage() {
               </Reveal>
               <Reveal delay={2.4}>
                 <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
+                {/*
+                  Le héro de `/bureau` n'offrait aucune action. « Contacter NERA » est le libellé
+                  du document client, celui du CTA qu'il a fait retirer du bas de page.
+                */}
+                <ArrowLink href="/contact" className="mt-6">
+                  Contacter NERA
+                </ArrowLink>
               </Reveal>
             </div>
           </Container>
