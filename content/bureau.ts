@@ -10,17 +10,17 @@ export const bureauRoute = "/bureau";
 
 export const bureau = {
   meta: {
-    title: "NERA Ingénieurs Conseils | Bureau à Genève",
+    title: "NERA Ingénieurs Conseils | Bureau basé à Genève",
     description:
-      "Découvrez NERA, bureau d’ingénieurs indépendant à Genève, spécialisé dans l’énergétique, la physique du bâtiment et les techniques CVC.",
+      "Découvrez NERA, bureau d’ingénieurs indépendant basé à Genève, spécialisé dans l’énergétique, la physique du bâtiment et les techniques CVC.",
   },
   /** Expression principale en tête, puis expressions secondaires. */
   keywords: [
-    "NERA Ingénieurs Conseils Genève",
-    "bureau d’ingénieurs indépendant Genève",
+    "NERA Ingénieurs Conseils Suisse romande",
+    "bureau d’ingénieurs indépendant Suisse romande",
     "Akram Draidj",
-    "physique du bâtiment Genève",
-    "ingénieur énergie Genève",
+    "physique du bâtiment Suisse romande",
+    "ingénieur énergie Suisse romande",
   ],
   h1: "NERA Ingénieurs Conseils",
   lead: [

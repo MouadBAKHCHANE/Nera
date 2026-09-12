@@ -65,17 +65,17 @@ export const prestationPages: PrestationPage[] = [
     heroCta: "Demander un devis CECB",
     image: "/img/prestation-diagnostic-energetique.webp",
     meta: {
-      title: "CECB et CECB Plus à Genève | NERA",
+      title: "CECB et CECB Plus en Suisse romande | NERA",
       description:
-        "Les experts CECB de NERA réalisent CECB, CECB Plus, IDC, audits et diagnostics EPIQR+ à Genève et en Suisse romande.",
+        "Les experts CECB de NERA réalisent CECB, CECB Plus, IDC, audits et diagnostics EPIQR+ dans toute la Suisse romande.",
     },
     keywords: [
-      "expert CECB Genève",
-      "CECB Plus Genève",
+      "expert CECB Suisse romande",
+      "CECB Plus Suisse romande",
       "CECB+ Suisse romande",
       "diagnostic énergétique bâtiment",
       "EPIQR+",
-      "IDC Genève",
+      "IDC Suisse romande",
     ],
     sections: [
       {
@@ -310,15 +310,15 @@ export const prestationPages: PrestationPage[] = [
     heroCta: "Demander une étude",
     image: "/img/prestation-enveloppe-facade-vitree.webp",
     meta: {
-      title: "Physique du bâtiment et labels à Genève | NERA",
+      title: "Physique du bâtiment et labels en Suisse romande | NERA",
       description:
         "Bilans thermiques, confort d’été, humidité, Minergie, HPE et THPE pour vos projets de construction et de rénovation en Suisse romande.",
     },
     keywords: [
-      "physique du bâtiment Genève",
+      "physique du bâtiment Suisse romande",
       "bilan thermique SIA 380/1",
       "ingénieur thermique bâtiment",
-      "Minergie Genève",
+      "Minergie Suisse romande",
       "HPE THPE",
       "humidité bâtiment",
       "confort d’été",
@@ -507,8 +507,8 @@ export const prestationPages: PrestationPage[] = [
         "NERA étudie et planifie vos installations CVC, pompes à chaleur, ventilation, réseaux de chaleur et solutions solaires en Suisse romande.",
     },
     keywords: [
-      "ingénierie CVC Genève",
-      "bureau d’études CVC Genève",
+      "ingénierie CVC Suisse romande",
+      "bureau d’études CVC Suisse romande",
       "pompe à chaleur",
       "ventilation",
       "réseau de chaleur",
@@ -663,13 +663,13 @@ export const prestationPages: PrestationPage[] = [
     heroCta: "Faire analyser mon projet",
     image: "/img/prestation-plans-autorisation.webp",
     meta: {
-      title: "Dossier énergétique et autorisations | NERA Genève",
+      title: "Dossier énergétique et autorisations | NERA Suisse romande",
       description:
         "NERA prépare le volet énergétique de vos autorisations de construire et accompagne les échanges techniques avec les autorités en Suisse romande.",
     },
     keywords: [
-      "dossier énergétique autorisation de construire Genève",
-      "justificatif énergie Genève",
+      "dossier énergétique autorisation de construire Suisse romande",
+      "justificatif énergie Suisse romande",
       "permis de construire énergie",
       "CAMAC énergie Vaud",
       "autorisation pompe à chaleur",
@@ -824,13 +824,13 @@ export const prestationPages: PrestationPage[] = [
     heroCta: "Étudier mes subventions",
     image: "/img/prestation-subventions-plans.webp",
     meta: {
-      title: "Subventions rénovation énergétique | NERA Genève",
+      title: "Subventions rénovation énergétique | NERA Suisse romande",
       description:
-        "NERA identifie, prépare et suit vos demandes de subventions pour la rénovation énergétique à Genève et en Suisse romande.",
+        "NERA identifie, prépare et suit vos demandes de subventions pour la rénovation énergétique dans toute la Suisse romande.",
     },
     keywords: [
       "subventions rénovation énergétique Suisse romande",
-      "subventions Genève",
+      "subventions Suisse romande",
       "aides financières rénovation bâtiment",
       "Programme Bâtiments",
       "subventions pompe à chaleur",
@@ -985,13 +985,13 @@ export const prestationPages: PrestationPage[] = [
     image: "/img/prestation-renovation-batiment.webp",
     imagePosition: "object-[50%_70%]",
     meta: {
-      title: "Rénovation énergétique et AMO | NERA Genève",
+      title: "Rénovation énergétique et AMO | NERA Suisse romande",
       description:
         "Diagnostic, études, autorisations, subventions, appels d’offres et suivi : NERA accompagne votre rénovation énergétique globale.",
     },
     keywords: [
-      "rénovation énergétique bâtiment Genève",
-      "AMO énergie Genève",
+      "rénovation énergétique bâtiment Suisse romande",
+      "AMO énergie Suisse romande",
       "rénovation globale",
       "assistance maîtrise d’ouvrage énergie",
       "pilotage rénovation",
@@ -1188,14 +1188,14 @@ export const prestationsIndex: PrestationsIndex = {
   ],
   heroCta: "Demander un devis gratuit",
   meta: {
-    title: "Ingénierie énergétique du bâtiment | NERA Genève",
+    title: "Ingénierie énergétique du bâtiment | NERA Suisse romande",
     description:
       "CECB, physique du bâtiment, CVC, autorisations, subventions et rénovation globale : découvrez les prestations de NERA en Suisse romande.",
   },
   keywords: [
     "ingénierie énergétique bâtiment Suisse romande",
-    "bureau d’études énergie Genève",
-    "ingénierie bâtiment Genève",
+    "bureau d’études énergie Suisse romande",
+    "ingénierie bâtiment Suisse romande",
     "physique du bâtiment",
     "ingénierie CVC",
     "rénovation énergétique Suisse romande",

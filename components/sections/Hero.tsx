@@ -18,7 +18,7 @@ export function Hero() {
           Ingénierie énergétique et physique du bâtiment, guidées par l&apos;équilibre
         </Reveal>
         <Reveal as="p" delay={0.06} className="mt-6 max-w-xl text-body-md text-body md:text-body-lg">
-          Bureau d&apos;ingénieurs conseils indépendant à Genève, de l&apos;audit CECB au suivi de réalisation, sur
+          Bureau d&apos;ingénieurs conseils indépendant basé à Genève, de l&apos;audit CECB au suivi de réalisation, sur
           toute la Suisse romande.
         </Reveal>
         <Reveal delay={0.12} className="mt-8 flex flex-wrap justify-center gap-3">
