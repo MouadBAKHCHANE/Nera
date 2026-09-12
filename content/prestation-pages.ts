@@ -37,9 +37,8 @@ export type PrestationPage = {
    * Bande photo pleine largeur, entre le corps de page et la FAQ : une respiration dans un
    * long texte, rien de plus. Purement décorative, donc servie avec un `alt` vide.
    *
-   * **Seulement sur les quatre pages les plus longues.** `/installations-cvc` et
-   * `/subventions` n'en ont pas : au-delà, la bande cesse d'être un accent et devient un
-   * motif, au détriment du dessin isométrique de `/prestations`.
+   * Les six pages en ont une, à la demande du client. Une image différente par page : c'est
+   * ce qui empêche la bande de devenir un motif.
    * Images recadrées en 21:9 avant export (voir la section « Photos »).
    */
   band?: string;
@@ -515,6 +514,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "installations-cvc",
+    band: "/img/bande-angle-ciel.webp",
     shortTitle: "Ingénierie CVC et énergies renouvelables",
     h1: "Ingénierie CVC et énergies renouvelables",
     lead: [
@@ -676,6 +676,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "autorisation-de-construire",
+    band: "/img/bande-grues-chantier.webp",
     acronyms: [
       { short: "APA", long: "Autorisation par procédure accélérée" },
       { short: "DD", long: "Demande définitive" },

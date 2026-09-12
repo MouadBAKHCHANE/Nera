@@ -430,13 +430,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
 - **Bandes photo des pages prestation** (champ `band` de `content/prestation-pages.ts`) : une
   bande pleine largeur en 21:9, entre le corps de page et la FAQ, comme respiration dans un long
   texte. Purement décorative : aucun texte dessus, aucun voile, `alt` vide.
-  **Seulement sur les quatre pages les plus longues** — `/audit-cecb`, `/modelisation-thermique`,
-  `/subventions`, `/renovation-energetique`. `/installations-cvc` et
-  `/autorisation-de-construire`, les deux plus courtes, n'en ont pas : au-delà de quatre, la
-  bande cesse d'être un accent et devient un motif, au détriment du dessin isométrique de
-  `/prestations`. Ne pas généraliser sans raison.
-  Visuels choisis parmi ceux du client : quatre cadrages serrés de façade, abstraits, sans
-  personnage ni couleur dominante. Écartés : `Green building.png`, dont le verre vert-turquoise
+  **Les six pages en ont une**, à la demande du client. Posée d'abord sur les quatre pages les
+  plus longues, elle a été étendue aux deux autres. Ce qui empêche la bande de devenir un motif,
+  c'est qu'aucune image ne se répète : une par page, toutes différentes.
+  Visuels choisis parmi ceux du client : cinq cadrages de façade, abstraits, sans personnage ni
+  couleur dominante, et une vue de grues en noir et blanc pour les autorisations de construire —
+  seule image qui sorte du registre façade, et qui dit le chantier sans montrer de visage. Écartés : `Green building.png`, dont le verre vert-turquoise
   entre en conflit avec le vert de la charte, et les paysages (lac, forêt), qui évoquent le
   tourisme plutôt que l'ingénierie du bâtiment.
   **Recadrées en 21:9 avant export**, et non laissées en pleine image : une source en portrait
@@ -535,6 +534,8 @@ ré-export) :
 | `bande-facade-rythmee.webp`               | Bâtiment beige ciel bleu.jpg      |
 | `bande-beton-verre.webp`                  | Batiment moderne.jpg              |
 | `bande-balcons-beton.webp`                | Batiment sombre gris.jpg          |
+| `bande-angle-ciel.webp`                   | Bâtiment moderne ciel.jpg         |
+| `bande-grues-chantier.webp`               | Construction.png                  |
 | `contact-conseil.webp`                    | Etude famille maison.jpg          |
 | `references-immeubles-modernes.webp`      | Immeubles modernes ciel bleu.jpg  |
 | `process-panneaux-solaires-immeuble.webp` | Panneaux solaires immeuble 2.png  |
