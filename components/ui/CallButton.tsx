@@ -6,8 +6,8 @@ import { useQuote } from "@/components/quote/QuoteModal";
 
 /**
  * Éléments flottants :
- * - petit bouton icône « Devis gratuit » à mi-hauteur sur le bord droit, sur tous les
- *   formats, qui apparaît une fois le héro passé ;
+ * - onglet « Devis gratuit » à mi-hauteur sur le bord droit, sur tous les formats, qui
+ *   apparaît une fois le héro passé et déplie son libellé au survol ;
  * - bouton « retour en haut » carré en bas à droite, sur tous les formats, visible après
  *   un défilement.
  */
@@ -30,16 +30,25 @@ export function CallButton() {
 
   return (
     <>
+      {/*
+        L'onglet ne montre que son icône au repos et déplie « Devis gratuit » au survol ou à la
+        prise de focus au clavier. Le libellé est animé en largeur maximale plutôt qu'en
+        largeur : `max-width` se transitionne, `width: auto` non. Sur un écran tactile, où le
+        survol n'existe pas, l'onglet reste à l'icône seule — d'où l'`aria-label`, qui sert
+        aussi de nom accessible constant.
+      */}
       <button
         type="button"
         onClick={() => open()}
         aria-label="Demander un devis gratuit"
-        title="Devis gratuit"
-        className={`fixed right-0 top-1/2 z-[80] inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-l-sm bg-accent text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:size-12 ${
+        className={`group fixed right-0 top-1/2 z-[80] inline-flex h-11 -translate-y-1/2 items-center rounded-l-sm bg-accent px-3 text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:h-12 ${
           showQuote ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-4 opacity-0"
         }`}
       >
-        <FileText className="size-5" strokeWidth={1.75} />
+        <FileText className="size-5 shrink-0" strokeWidth={1.75} />
+        <span className="max-w-0 overflow-hidden whitespace-nowrap text-[14px] font-medium transition-all duration-300 group-hover:max-w-[10rem] group-hover:pl-2 group-focus-visible:max-w-[10rem] group-focus-visible:pl-2">
+          Devis gratuit
+        </span>
       </button>
 
       <button
