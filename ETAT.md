@@ -357,9 +357,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   faux et non plus large : calcul et dépôt de l'IDC, APA et DD, variantes HPE et THPE définies
   par le canton, cartouches correspondantes de l'illustration. De même l'adresse, les listes de
   cantons, le registre du commerce, le for juridique et le diplôme HEPIA.
-- Sigles expliqués **en tête** de chaque page prestation concernée, sous le chapô du héro :
+- Sigles expliqués dans la **colonne de gauche** des pages prestation, sous le sommaire :
   champ `acronyms` de `content/prestation-pages.ts`, rendu en liste de définitions par
-  `PrestationPage`. Libellés donnés par le client : IDC (indice de dépense de chaleur) sur
+  `PrestationPage`. La colonne est collante : la liste reste sous les yeux pendant la lecture.
+  Sommaire et sigles sont réunis dans un seul enfant de la grille, qui n'a que deux colonnes —
+  deux enfants séparés passeraient à la ligne. Le bloc a d'abord été posé sous le chapô du
+  héro ; le client l'a voulu dans la colonne. Libellés donnés par le client : IDC (indice de dépense de chaleur) sur
   `/audit-cecb`, HPE et THPE sur `/modelisation-thermique`, APA et DD sur
   `/autorisation-de-construire`, AMO (assistant au maître d'ouvrage) sur
   `/renovation-energetique`. `/installations-cvc` et `/subventions` n'emploient aucun de ces

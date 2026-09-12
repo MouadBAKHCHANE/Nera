@@ -102,21 +102,6 @@ export function PrestationPage({ page }: { page: Page }) {
                   {text}
                 </p>
               ))}
-              {/*
-                Sigles expliqués d'entrée de jeu : le visiteur ne doit pas avoir à deviner ce que
-                recouvrent IDC, HPE, APA ou AMO pour lire la page.
-              */}
-              {page.acronyms && (
-                <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-nera-cream/15 pt-6 text-body-sm font-light text-nera-cream/75">
-                  {page.acronyms.map((a) => (
-                    <div key={a.short} className="flex gap-2">
-                      <dt className="font-medium text-nera-cream">{a.short}</dt>
-                      <dd>: {a.long}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
-
               <ArrowQuoteButton prestation={page.shortTitle} className="mt-10">
                 {page.heroCta}
               </ArrowQuoteButton>
@@ -129,7 +114,13 @@ export function PrestationPage({ page }: { page: Page }) {
         <div className="py-section-sm lg:py-section">
           <Container wide>
             <div className="grid gap-12 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-20">
-              <nav aria-labelledby="sommaire" className="lg:sticky lg:top-28 lg:self-start">
+              {/*
+                Colonne de gauche : sommaire puis sigles, réunis dans un seul enfant de la
+                grille, qui n'a que deux colonnes — deux enfants séparés passeraient à la ligne.
+                C'est ce bloc qui colle, et non le sommaire seul.
+              */}
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <nav aria-labelledby="sommaire">
                 <h2 id="sommaire" className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">
                   Sur cette page
                 </h2>
@@ -150,7 +141,27 @@ export function PrestationPage({ page }: { page: Page }) {
                     </a>
                   </li>
                 </ol>
-              </nav>
+                </nav>
+
+                {/*
+                  Sigles de la page, sous le sommaire : la colonne étant collante, la liste
+                  reste sous les yeux pendant toute la lecture. Hors du `<nav>`, une liste de
+                  définitions n'étant pas de la navigation.
+                */}
+                {page.acronyms && (
+                  <div className="mt-10">
+                    <h2 className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">Sigles</h2>
+                    <dl className="mt-4 space-y-2 border-l border-hairline pl-4 text-body-sm leading-[1.5]">
+                      {page.acronyms.map((a) => (
+                        <div key={a.short}>
+                          <dt className="inline font-medium text-nera-navy">{a.short}</dt>
+                          <dd className="inline text-body"> : {a.long}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                )}
+              </div>
 
               <div className="max-w-3xl">
                 {page.sections.map((s) => (
