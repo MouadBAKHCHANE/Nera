@@ -357,7 +357,19 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   faux et non plus large : calcul et dépôt de l'IDC, APA et DD, variantes HPE et THPE définies
   par le canton, cartouches correspondantes de l'illustration. De même l'adresse, les listes de
   cantons, le registre du commerce, le for juridique et le diplôme HEPIA.
-- Sigles développés à leur première occurrence dans le corps de chaque page prestation :
+- Sigles expliqués **en tête** de chaque page prestation concernée, sous le chapô du héro :
+  champ `acronyms` de `content/prestation-pages.ts`, rendu en liste de définitions par
+  `PrestationPage`. Libellés donnés par le client : IDC (indice de dépense de chaleur) sur
+  `/audit-cecb`, HPE et THPE sur `/modelisation-thermique`, APA et DD sur
+  `/autorisation-de-construire`, AMO (assistant au maître d'ouvrage) sur
+  `/renovation-energetique`. `/installations-cvc` et `/subventions` n'emploient aucun de ces
+  sigles : le champ y est absent et rien ne s'affiche.
+  Une première version les développait à leur première occurrence en cours de page ; le client
+  les voulait au début. Les ajouts correspondants ont donc été retirés du corps de texte, qui
+  a retrouvé la phrase d'origine pour HPE et THPE comme pour APA et DD. Restent les deux
+  parenthèses qui tombaient juste dans la phrase du client : « L'indice de dépense de chaleur
+  (IDC) » et « L'assistance à maîtrise d'ouvrage énergétique (AMO) ».
+- (Historique) Sigles développés à leur première occurrence dans le corps de chaque page :
   IDC (indice de dépense de chaleur), HPE et THPE (haute et très haute performance énergétique),
   APA (autorisation par procédure accélérée) et DD (demande définitive), AMO (assistance à
   maîtrise d'ouvrage). Pour l'IDC et l'AMO, le texte client donnait déjà le développement : seul

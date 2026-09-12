@@ -102,6 +102,21 @@ export function PrestationPage({ page }: { page: Page }) {
                   {text}
                 </p>
               ))}
+              {/*
+                Sigles expliqués d'entrée de jeu : le visiteur ne doit pas avoir à deviner ce que
+                recouvrent IDC, HPE, APA ou AMO pour lire la page.
+              */}
+              {page.acronyms && (
+                <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-nera-cream/15 pt-6 text-body-sm font-light text-nera-cream/75">
+                  {page.acronyms.map((a) => (
+                    <div key={a.short} className="flex gap-2">
+                      <dt className="font-medium text-nera-cream">{a.short}</dt>
+                      <dd>: {a.long}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
               <ArrowQuoteButton prestation={page.shortTitle} className="mt-10">
                 {page.heroCta}
               </ArrowQuoteButton>

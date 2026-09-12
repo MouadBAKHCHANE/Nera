@@ -28,6 +28,11 @@ export type PrestationSection = {
 export type PrestationPage = {
   /** Segment de route, identique à `content/footer.ts`. */
   slug: string;
+  /**
+   * Sigles employés dans la page, expliqués sous le chapô. Libellés donnés par le client.
+   * Deux pages n'en emploient aucun : le champ y est absent et rien ne s'affiche.
+   */
+  acronyms?: { short: string; long: string }[];
   /** Libellé court : fil d'Ariane, sommaire et blocs de maillage. */
   shortTitle: string;
   h1: string;
@@ -56,6 +61,7 @@ export type PrestationPage = {
 export const prestationPages: PrestationPage[] = [
   {
     slug: "audit-cecb",
+    acronyms: [{ short: "IDC", long: "Indice de dépense de chaleur" }],
     shortTitle: "CECB et CECB Plus",
     h1: "CECB, CECB Plus et diagnostic énergétique du bâtiment",
     lead: [
@@ -301,6 +307,10 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "modelisation-thermique",
+    acronyms: [
+      { short: "HPE", long: "Haute performance énergétique" },
+      { short: "THPE", long: "Très haute performance énergétique" },
+    ],
     shortTitle: "Physique du bâtiment et labels énergétiques",
     h1: "Physique du bâtiment et labels énergétiques",
     lead: [
@@ -417,7 +427,7 @@ export const prestationPages: PrestationPage[] = [
             blocks: [
               {
                 t: "p",
-                text: "À Genève, NERA accompagne également les démarches liées aux standards HPE (haute performance énergétique) et THPE (très haute performance énergétique), en construction comme en rénovation.",
+                text: "À Genève, NERA accompagne également les démarches liées aux standards HPE et THPE, en construction comme en rénovation.",
               },
               {
                 t: "p",
@@ -654,6 +664,10 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "autorisation-de-construire",
+    acronyms: [
+      { short: "APA", long: "Autorisation par procédure accélérée" },
+      { short: "DD", long: "Demande définitive" },
+    ],
     shortTitle: "Autorisations de construire",
     h1: "Autorisations de construire et dossiers énergétiques",
     lead: [
@@ -707,10 +721,6 @@ export const prestationPages: PrestationPage[] = [
             t: "sub",
             title: "APA et DD",
             blocks: [
-              {
-                t: "p",
-                text: "L’APA (autorisation par procédure accélérée) et la DD (demande définitive) sont les deux voies de la demande d’autorisation de construire.",
-              },
               { t: "p", text: "NERA intervient notamment pour :" },
               {
                 t: "ul",
@@ -974,6 +984,7 @@ export const prestationPages: PrestationPage[] = [
 
   {
     slug: "renovation-energetique",
+    acronyms: [{ short: "AMO", long: "Assistant au maître d’ouvrage" }],
     shortTitle: "Rénovation énergétique globale",
     h1: "Rénovation énergétique globale et AMO énergie",
     lead: [
