@@ -202,7 +202,7 @@ export function PrestationPage({ page }: { page: Page }) {
         */}
         {page.band && (
           <div className="relative aspect-[21/9] max-h-[420px] w-full overflow-hidden">
-            <Image src={page.band} alt="" fill quality={88} sizes="100vw" className="object-cover" />
+            <Image src={page.band} alt="" fill quality={90} sizes="100vw" className="object-cover" />
           </div>
         )}
 

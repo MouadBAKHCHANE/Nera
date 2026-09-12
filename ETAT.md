@@ -442,6 +442,8 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   **Recadrées en 21:9 avant export**, et non laissées en pleine image : une source en portrait
   servie dans une bande serait rognée par le navigateur et téléchargée pour rien. Le fichier le
   plus lourd est ainsi passé de 1377 à 747 Ko.
+  Servies en `quality={90}`, comme toutes les images du site : `next.config.ts` n'autorise que
+  `[75, 80, 85, 90]` et refuse toute autre valeur en le signalant dans la console.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
