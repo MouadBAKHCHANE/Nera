@@ -41,7 +41,7 @@ export function HeroDark() {
       <div className="relative flex flex-1 flex-col justify-center px-6 pb-10 pt-24 md:px-10 lg:px-[120px] lg:pt-[110px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
         <Reveal as="p" effect="fade" className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
           <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
-          Bureau d&apos;ingénieurs en énergie et physique du bâtiment à Genève
+          Bureau d&apos;ingénieurs en énergie et physique du bâtiment, basé à Genève
         </Reveal>
         <SplitReveal
           as="h1"
@@ -52,7 +52,7 @@ export function HeroDark() {
         />
         <Reveal delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
           <p>
-            Bureau d&apos;ingénierie indépendant à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
+            Bureau d&apos;ingénierie indépendant basé à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
             subventions et suivi de rénovation.
           </p>

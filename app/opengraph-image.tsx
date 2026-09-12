@@ -8,7 +8,7 @@ import { join } from "node:path";
  * Convention de fichier Next.js : s'applique à toutes les pages.
  */
 export const runtime = "nodejs";
-export const alt = "NERA Ingénieurs Conseils, bureau d'ingénieurs en énergie et physique du bâtiment à Genève";
+export const alt = "NERA Ingénieurs Conseils, bureau d'ingénieurs en énergie et physique du bâtiment, basé à Genève";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

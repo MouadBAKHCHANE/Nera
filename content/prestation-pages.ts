@@ -153,7 +153,7 @@ export const prestationPages: PrestationPage[] = [
         blocks: [
           {
             t: "p",
-            text: "L’indice de dépense de chaleur permet de suivre la consommation énergétique d’un bâtiment pour le chauffage et la production d’eau chaude sanitaire.",
+            text: "L’indice de dépense de chaleur (IDC) permet de suivre la consommation énergétique d’un bâtiment pour le chauffage et la production d’eau chaude sanitaire.",
           },
           {
             t: "p",
@@ -417,7 +417,7 @@ export const prestationPages: PrestationPage[] = [
             blocks: [
               {
                 t: "p",
-                text: "À Genève, NERA accompagne également les démarches liées aux standards HPE et THPE, en construction comme en rénovation.",
+                text: "À Genève, NERA accompagne également les démarches liées aux standards HPE (haute performance énergétique) et THPE (très haute performance énergétique), en construction comme en rénovation.",
               },
               {
                 t: "p",
@@ -707,6 +707,10 @@ export const prestationPages: PrestationPage[] = [
             t: "sub",
             title: "APA et DD",
             blocks: [
+              {
+                t: "p",
+                text: "L’APA (autorisation par procédure accélérée) et la DD (demande définitive) sont les deux voies de la demande d’autorisation de construire.",
+              },
               { t: "p", text: "NERA intervient notamment pour :" },
               {
                 t: "ul",
@@ -1021,7 +1025,7 @@ export const prestationPages: PrestationPage[] = [
         blocks: [
           {
             t: "p",
-            text: "L’assistance à maîtrise d’ouvrage énergétique aide le propriétaire ou le gestionnaire à définir, organiser et suivre son projet.",
+            text: "L’assistance à maîtrise d’ouvrage énergétique (AMO) aide le propriétaire ou le gestionnaire à définir, organiser et suivre son projet.",
           },
           { t: "p", text: "NERA apporte une expertise indépendante pour :" },
           {

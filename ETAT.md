@@ -339,6 +339,23 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   les deux logomarks décoratifs de la page passent en `-z-10` : ils ne peuvent plus passer
   devant le texte. Le correctif de `Reveal` (plus de `transform` sur un simple fondu) pourrait
   aussi y contribuer. À revérifier sur le site déployé.
+- **Règle « Genève »** (demande client) : la ville ne doit apparaître que pour dire où le
+  bureau est basé, jamais d'une façon qui laisse croire qu'il n'intervient qu'à Genève.
+  Appliquée au héro de l'accueil (« …physique du bâtiment, basé à Genève » et « Bureau
+  d'ingénierie indépendant basé à Genève ») et aux textes de remplacement des images de partage.
+  **Laissés tels quels, à trancher avec le client** : les titres, méta-descriptions et mots-clés
+  des pages, qui viennent de son propre cahier SEO et contiennent « Genève » à presque chaque
+  ligne (`content/seo.ts`, `content/bureau.ts`, `content/contact.ts`, `content/prestation-pages.ts`).
+  Les retirer contredirait son brief et coûterait du référencement local. Restent également les
+  mentions factuellement genevoises : IDC, APA et DD, HPE et THPE cantonaux, adresse, liste des
+  cantons.
+- Sigles développés à leur première occurrence dans le corps de chaque page prestation :
+  IDC (indice de dépense de chaleur), HPE et THPE (haute et très haute performance énergétique),
+  APA (autorisation par procédure accélérée) et DD (demande définitive), AMO (assistance à
+  maîtrise d'ouvrage). Pour l'IDC et l'AMO, le texte client donnait déjà le développement : seul
+  le sigle a été mis entre parenthèses. Pour APA et DD, une phrase de définition a été ajoutée
+  avant celle du client, qui reste intacte. Le client écrivait « assistant au maître d'ouvrage » ;
+  la page conserve « assistance à maîtrise d'ouvrage », sa propre formulation.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
