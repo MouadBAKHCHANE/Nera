@@ -15,8 +15,8 @@ export function RenovationAZ() {
           <div className="absolute inset-y-6 left-6 right-0 border border-accent/60" aria-hidden />
           <div className="absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
             <Image
-              src="/img/accompagnement-maison-renovee.webp"
-              alt="Maison rénovée, terrasse et pompe à chaleur extérieure"
+              src="/img/accompagnement-facade-vegetale.webp"
+              alt="Façade vitrée reflétant la végétation, vue en contre-plongée"
               fill
               quality={90}
               sizes="(min-width: 1024px) 45vw, 100vw"

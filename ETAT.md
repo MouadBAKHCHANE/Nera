@@ -423,10 +423,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   s'allège plus au survol non plus, sinon le texte deviendrait illisible ; il ne reste du survol
   que l'agrandissement de la photo. Le numéro, qui n'a plus de voile derrière lui, est passé à
   70 % d'opacité avec une ombre portée pour se détacher de l'image.
-- Section « Votre rénovation énergétique, de A à Z » de l'accueil : photo d'une maison rénovée
-  avec terrasse et pompe à chaleur (`accompagnement-maison-renovee.webp`), **sans personnage**,
-  à la demande du client. Deux images l'ont précédée : une façade, puis une scène de chantier à
-  deux personnes. Écartée au passage, `Panneaux solaires immeuble.png` : trop proche du héro de
+- Section « Votre rénovation énergétique, de A à Z » de l'accueil :
+  `accompagnement-facade-vegetale.webp`, tirée de `Assets/Visuels/Green building.png` — façade
+  vitrée reflétant la végétation, sans personnage. **Choix explicite du client.**
+  Réserve exprimée deux fois avant de la poser, et laissée ici pour mémoire : le verre
+  vert-turquoise occupe toute l'image et entre en concurrence avec le vert de la charte, que
+  `DESIGN.md` réserve aux accents (eyebrows, icônes, boutons). C'est la seule grande surface
+  verte du site avec le panneau « Indépendance » de `/bureau`. Le client a tranché.
+  Trois images l'ont précédée : une façade, une scène de chantier à deux personnes, puis une
+  maison rénovée. Écartée au passage, `Panneaux solaires immeuble.png` : trop proche du héro de
   `/prestations`, qui montre déjà un immeuble à panneaux solaires.
   Recadrée en 1:1 avant export, le cadre d'affichage étant proche du carré.
   À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
@@ -540,7 +545,7 @@ ré-export) :
 | `hero-immeuble-geneve-soleil.webp`        | Immeuble ville soleil.jpg         |
 | `bureau-batiment-clair-moderne.webp`      | Batiment clair moderne.jpg        |
 | `bureau-equipe-etude.webp`                | Etude plans 2.jpg                 |
-| `accompagnement-maison-renovee.webp`      | Pompe à chaleur maison moderne.jpg|
+| `accompagnement-facade-vegetale.webp`     | Green building.png                |
 | `bande-mur-clair.webp`                    | mur gris.jpg                      |
 | `bande-facade-rythmee.webp`               | Bâtiment beige ciel bleu.jpg      |
 | `bande-beton-verre.webp`                  | Batiment moderne.jpg              |
