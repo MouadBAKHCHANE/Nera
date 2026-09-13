@@ -20,7 +20,8 @@ export function ContactMap() {
   const query = encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`);
 
   return (
-    <div className="relative h-[340px] overflow-hidden bg-nera-navy-soft md:h-[420px] lg:h-[500px]">
+    // La hauteur vient du conteneur : la carte occupe une moitié d'écran à côté du formulaire.
+    <div className="relative size-full overflow-hidden bg-nera-navy-soft">
       <iframe
         src={`https://www.google.com/maps?q=${query}&z=${contact.map.zoom}&output=embed&hl=fr`}
         title={`${company.shortName} — ${company.street}, ${company.zip} ${company.city}`}

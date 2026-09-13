@@ -245,10 +245,13 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   à gauche, la carte « Nos coordonnées » à droite, en marine translucide sur le fond du héro
   (adresse cliquable vers Google Maps, les deux boutons et le lien LinkedIn du document). Le
   lien fléché vers le pop-up devis a été retiré de cette carte à la demande du client.
-  Vient ensuite le formulaire à gauche et une photo à droite (`contact-conseil.webp`, découverte
-  par `ImageWipe`). Le client a demandé une photo de quelqu'un au téléphone : il n'en existe
-  aucune dans `Assets/Visuels`, c'est donc la scène de conseil la plus proche qui a été retenue,
-  à remplacer dès qu'il en fournit une.
+  Vient ensuite une section **coupée en deux moitiés d'écran** : le formulaire à gauche, la
+  **carte à droite**, à fond perdu et sur toute la hauteur. Pas de `Container` dans cette
+  section — la moitié droite doit toucher le bord de l'écran, donc la gouttière de gauche est
+  reprise à la main (24 / 40 / 120 px). `ContactMap` n'impose plus sa hauteur : elle vient du
+  conteneur.
+  La carte occupait auparavant une bande sous le formulaire, et une photo tenait cette moitié
+  droite (`contact-conseil.webp`, supprimée, récupérable dans l'historique).
   Le titre de ce bloc est passé de « Demandez un devis gratuit » (texte client) à
   « Envoyez-nous un message », à sa demande : le formulaire de cette page est le formulaire de
   contact simple, la demande d'offre détaillée passant par le pop-up. À la demande du client, les boutons portent le numéro et l'adresse e-mail au
@@ -542,7 +545,6 @@ ré-export) :
 | `bande-balcons-beton.webp`                | Batiment sombre gris.jpg          |
 | `bande-angle-ciel.webp`                   | Bâtiment moderne ciel.jpg         |
 | `bande-grues-chantier.webp`               | Construction.png                  |
-| `contact-conseil.webp`                    | Etude famille maison.jpg          |
 | `references-immeubles-modernes.webp`      | Immeubles modernes ciel bleu.jpg  |
 | `process-panneaux-solaires-immeuble.webp` | Panneaux solaires immeuble 2.png  |
 | `prestation-diagnostic-energetique.webp`  | Diagnostic énergétique.jpg        |

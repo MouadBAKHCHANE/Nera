@@ -38,8 +38,6 @@ export const contact = {
   form: {
     title: "Envoyez-nous un message",
     text: "Décrivez votre bâtiment, la prestation recherchée et le stade d’avancement du projet.",
-    image: "/img/contact-conseil.webp",
-    imageAlt: "Une conseillère présente un dossier à deux clients autour d’une table basse",
   },
   coordonnees: {
     title: "Nos coordonnées",

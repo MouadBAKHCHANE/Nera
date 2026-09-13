@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
@@ -7,7 +6,6 @@ import { Ruler } from "@/components/home2/Logomark";
 import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { ImageWipe } from "@/components/ui/ImageWipe";
 import { aosBlock, aosCard } from "@/components/ui/aos";
 import { ContactForm } from "./ContactForm";
 import { ContactMap } from "./ContactMap";
@@ -165,39 +163,28 @@ export function ContactPage() {
           </Container>
         </header>
 
-        {/* Formulaire a gauche, photo a droite. */}
-        <section className="bg-canvas py-section-sm lg:py-section">
-          <Container wide>
-            <div className="grid gap-12 lg:grid-cols-[7fr_5fr] lg:gap-20">
-              <Reveal {...aosBlock}>
-                <h2 className="font-display text-[1.5rem] font-light leading-[1.2] text-nera-navy md:text-[2rem]">
-                  {contact.form.title}
-                </h2>
-                <p className="mt-5 max-w-[52ch] text-body-md font-light leading-[1.75] text-body">{contact.form.text}</p>
-                <ContactForm tone="light" className="mt-10" />
-              </Reveal>
-
-              <ImageWipe curtain="bg-canvas" className="aspect-[4/3] rounded-md lg:aspect-auto lg:h-full lg:min-h-[32rem]">
-                <Image
-                  src={contact.form.image}
-                  alt={contact.form.imageAlt}
-                  fill
-                  quality={90}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover saturate-[0.9]"
-                />
-              </ImageWipe>
-            </div>
-          </Container>
-        </section>
-
         {/*
-          « Carte localisation » : pleine largeur, sans titre visible ni marge — le titre du
-          client devient le nom accessible de la section. Chargée seulement si les cookies de
-          cartographie sont acceptés.
+          Section coupée en deux moitiés d'écran : le formulaire à gauche, la carte à droite et
+          à fond perdu, sur toute la hauteur. La carte occupait auparavant une bande sous le
+          formulaire, et une photo tenait cette moitié droite : la carte y est plus utile.
+          Pas de `Container` ici — la moitié droite doit toucher le bord de l'écran, donc la
+          gouttière de gauche est reprise à la main, aux valeurs du reste du site.
+          « Carte localisation », le titre du client, sert de nom accessible à la moitié droite.
         */}
-        <section aria-label={contact.map.title} className="border-t border-hairline">
-          <ContactMap />
+        <section className="bg-canvas">
+          <div className="grid lg:grid-cols-2">
+            <Reveal {...aosBlock} className="px-6 py-section-sm md:px-10 lg:py-section lg:pl-[120px] lg:pr-16">
+              <h2 className="font-display text-[1.5rem] font-light leading-[1.2] text-nera-navy md:text-[2rem]">
+                {contact.form.title}
+              </h2>
+              <p className="mt-5 max-w-[52ch] text-body-md font-light leading-[1.75] text-body">{contact.form.text}</p>
+              <ContactForm tone="light" className="mt-10" />
+            </Reveal>
+
+            <div aria-label={contact.map.title} className="min-h-[360px] md:min-h-[440px] lg:min-h-full">
+              <ContactMap />
+            </div>
+          </div>
         </section>
       </main>
       <FooterDark />
