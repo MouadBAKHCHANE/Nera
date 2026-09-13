@@ -423,10 +423,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   s'allège plus au survol non plus, sinon le texte deviendrait illisible ; il ne reste du survol
   que l'agrandissement de la photo. Le numéro, qui n'a plus de voile derrière lui, est passé à
   70 % d'opacité avec une ombre portée pour se détacher de l'image.
-- Section « Votre rénovation énergétique, de A à Z » de l'accueil : la photo de façade a laissé
-  la place à une scène de travail en équipe (`accompagnement-suivi-chantier.webp`, tirée de
-  `Assets/Visuels/Suivi de chantier.png`) — un ingénieur et un conducteur de travaux sur les
-  plans, ce que décrit précisément le texte de la section.
+- Section « Votre rénovation énergétique, de A à Z » de l'accueil : photo d'une maison rénovée
+  avec terrasse et pompe à chaleur (`accompagnement-maison-renovee.webp`), **sans personnage**,
+  à la demande du client. Deux images l'ont précédée : une façade, puis une scène de chantier à
+  deux personnes. Écartée au passage, `Panneaux solaires immeuble.png` : trop proche du héro de
+  `/prestations`, qui montre déjà un immeuble à panneaux solaires.
+  Recadrée en 1:1 avant export, le cadre d'affichage étant proche du carré.
   À noter : `people-having-debate-while-looking-computer.jpg`, qui servait de premier candidat,
   **a disparu de `Assets/Visuels`** en cours de projet. Le dossier compte 69 fichiers au lieu
   de 70.
@@ -538,7 +540,7 @@ ré-export) :
 | `hero-immeuble-geneve-soleil.webp`        | Immeuble ville soleil.jpg         |
 | `bureau-batiment-clair-moderne.webp`      | Batiment clair moderne.jpg        |
 | `bureau-equipe-etude.webp`                | Etude plans 2.jpg                 |
-| `accompagnement-suivi-chantier.webp`      | Suivi de chantier.png             |
+| `accompagnement-maison-renovee.webp`      | Pompe à chaleur maison moderne.jpg|
 | `bande-mur-clair.webp`                    | mur gris.jpg                      |
 | `bande-facade-rythmee.webp`               | Bâtiment beige ciel bleu.jpg      |
 | `bande-beton-verre.webp`                  | Batiment moderne.jpg              |
