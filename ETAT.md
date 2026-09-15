@@ -469,6 +469,17 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   pied de page (`SocialLinks`). La section formulaire et carte a été resserrée : 64 px de
   padding au lieu de 72, 80 au lieu de 112 en desktop, et la carte descend à 300 px de haut
   minimum sur mobile.
+- **Cartes des six prestations de l'accueil : visuels dédiés, en portrait** (`card-*.webp`).
+  Elles reprenaient les images des en-têtes de pages prestation, en paysage jusqu'à 1,9:1, alors
+  que la carte mesure environ 475 × 560 px. Servie à `33vw`, une telle image arrivait en
+  640 × 337 : le navigateur l'étirait sur 560 px de haut, soit un agrandissement de 1,66×, d'où
+  le flou. **Augmenter `quality` n'y pouvait rien** — le problème était la hauteur disponible,
+  pas la compression.
+  Cadrage 4:5 à 1200 × 1500 : l'optimiseur sert désormais 640 × 800, soit 1,43 fois la hauteur
+  demandée, pour 20 Ko au lieu de 12. Le `object-[50%_70%]` de la carte rénovation a disparu :
+  le cadrage se fait à l'export.
+  **À retenir** : un visuel doit être exporté au format de son cadre. Les pages prestation
+  gardent les versions paysage pour leurs en-têtes pleine largeur.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire
@@ -562,6 +573,12 @@ ré-export) :
 | `bande-balcons-beton.webp`                | Batiment sombre gris.jpg          |
 | `bande-angle-ciel.webp`                   | Bâtiment moderne ciel.jpg         |
 | `bande-grues-chantier.webp`               | Construction.png                  |
+| `card-diagnostic-energetique.webp`        | Diagnostic énergétique.jpg        |
+| `card-enveloppe-facade-vitree.webp`       | Batiment vitré moderne.jpg        |
+| `card-pompe-a-chaleur.webp`               | Pompe à chaleur.jpg               |
+| `card-plans-autorisation.webp`            | Plans construction.png            |
+| `card-subventions-plans.webp`             | Plans maison écologie.jpg         |
+| `card-renovation-batiment.webp`           | Rénovation bâtiment.jpg           |
 | `references-immeubles-modernes.webp`      | Immeubles modernes ciel bleu.jpg  |
 | `process-panneaux-solaires-immeuble.webp` | Panneaux solaires immeuble 2.png  |
 | `prestation-diagnostic-energetique.webp`  | Diagnostic énergétique.jpg        |
