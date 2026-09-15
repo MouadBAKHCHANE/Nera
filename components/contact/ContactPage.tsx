@@ -3,7 +3,7 @@ import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { Ruler } from "@/components/home2/Logomark";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { aosBlock, aosCard } from "@/components/ui/aos";
@@ -107,28 +107,21 @@ export function ContactPage() {
                     <p className="font-display text-[1.0625rem] font-medium leading-[1.35] text-nera-cream">
                       {company.name}
                     </p>
-                    <a
-                      href={mapsHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 flex gap-3 text-body-md font-light leading-[1.7] text-nera-cream/85 transition-colors hover:text-accent"
-                    >
-                      <MapPin className="mt-1 size-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
-                      <span>
-                        {company.street}
-                        <br />
-                        {company.zip} {company.city}
-                        <br />
-                        Suisse
-                      </span>
-                    </a>
+                    <p className="mt-3 text-body-md font-light leading-[1.7] text-nera-cream/85">
+                      {company.street}
+                      <br />
+                      {company.zip} {company.city}
+                      <br />
+                      Suisse
+                    </p>
                   </address>
 
                   {/*
-                    Les deux boutons et le lien LinkedIn du document client. Le numero et
-                    l'adresse s'affichent sur les boutons eux-memes, a la demande du client ;
-                    les libelles du document restent en `aria-label`, sinon un lecteur d'ecran
-                    n'annoncerait qu'une suite de chiffres.
+                    Trois boutons de même facture : appeler, écrire, situer. Le numéro et
+                    l'adresse e-mail s'affichent sur les boutons eux-mêmes, à la demande du
+                    client ; les libellés du document restent en `aria-label`, sinon un lecteur
+                    d'écran n'annoncerait qu'une suite de chiffres.
+                    Le lien LinkedIn seul a laissé la place aux trois réseaux du pied de page.
                   */}
                   <div className="mt-8 flex flex-col gap-3 border-t border-nera-cream/20 pt-8">
                     <a
@@ -148,14 +141,16 @@ export function ContactPage() {
                       {company.email}
                     </a>
                     <a
-                      href={company.linkedin}
+                      href={mapsHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 pt-1 text-body-sm font-medium text-nera-cream/85 transition-colors hover:text-accent"
+                      aria-label={`${contact.coordonnees.mapCta} : ${company.street}, ${company.zip} ${company.city}`}
+                      className="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-nera-cream/60 px-[22px] text-[15px] font-medium text-nera-cream transition-colors hover:border-nera-cream hover:bg-nera-cream/10"
                     >
-                      <LinkedInIcon className="size-4" />
-                      {contact.coordonnees.linkedinCta}
+                      <MapPin className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
+                      {contact.coordonnees.mapCta}
                     </a>
+                    <SocialLinks tone="light" className="mt-1 justify-center" />
                   </div>
                 </div>
               </Reveal>
@@ -173,7 +168,7 @@ export function ContactPage() {
         */}
         <section className="bg-canvas">
           <div className="grid lg:grid-cols-2">
-            <Reveal {...aosBlock} className="px-6 py-section-sm md:px-10 lg:py-section lg:pl-[120px] lg:pr-16">
+            <Reveal {...aosBlock} className="px-6 py-16 md:px-10 lg:py-20 lg:pl-[120px] lg:pr-16">
               <h2 className="font-display text-[1.5rem] font-light leading-[1.2] text-nera-navy md:text-[2rem]">
                 {contact.form.title}
               </h2>
@@ -181,7 +176,7 @@ export function ContactPage() {
               <ContactForm tone="light" className="mt-10" />
             </Reveal>
 
-            <div aria-label={contact.map.title} className="min-h-[360px] md:min-h-[440px] lg:min-h-full">
+            <div aria-label={contact.map.title} className="min-h-[300px] md:min-h-[380px] lg:min-h-full">
               <ContactMap />
             </div>
           </div>

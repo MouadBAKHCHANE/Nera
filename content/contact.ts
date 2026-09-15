@@ -47,6 +47,8 @@ export const contact = {
      */
     callCta: "Appeler NERA",
     mailCta: "Envoyer un e-mail",
+    /** Troisième bouton, ajouté à la demande du client : ouvre la fiche Google Maps. */
+    mapCta: "Localisation",
     linkedinCta: "LinkedIn",
   },
   map: {

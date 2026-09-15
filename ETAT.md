@@ -459,6 +459,16 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   servie dans un cadre plus étroit serait rognée par le navigateur et téléchargée pour rien.
   Servies en `quality={90}`, comme toutes les images du site : `next.config.ts` n'autorise que
   `[75, 80, 85, 90]` et refuse toute autre valeur en le signalant dans la console.
+- `/bureau` : un « Demander un devis gratuit » dans trois sections — sous le chapô du
+  Principe, à droite du chapô de la Mission, et sous les logos de certification des
+  Qualifications, où il a remplacé celui qui fermait la section. Avec celui du bloc de clôture,
+  la page en compte quatre : le bouton de l'en-tête disparaît au défilement, il faut des relais.
+- `/contact` : l'adresse devient un **troisième bouton** « Localisation », de même facture que
+  « Appeler » et « Envoyer un e-mail », qui ouvre la fiche Google Maps. L'adresse reste écrite
+  en clair au-dessus. Le lien LinkedIn seul a laissé la place aux **trois icônes sociales** du
+  pied de page (`SocialLinks`). La section formulaire et carte a été resserrée : 64 px de
+  padding au lieu de 72, 80 au lieu de 112 en desktop, et la carte descend à 300 px de haut
+  minimum sur mobile.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
 ## À faire

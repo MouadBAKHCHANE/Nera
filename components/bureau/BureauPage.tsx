@@ -242,6 +242,7 @@ export function BureauPage() {
                 <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body md:text-body-lg">
                   {bureau.equilibre.intro}
                 </p>
+                <QuoteCta tone="dark" className="mt-8" />
               </Reveal>
               <ul className="grid gap-4 sm:grid-cols-2 lg:pt-2">
                 {bureau.equilibre.items.map((item, i) => {
@@ -288,12 +289,18 @@ export function BureauPage() {
             strokeWidth={1}
           />
           <Container wide className="relative">
-            <Reveal {...aosBlock} className="max-w-3xl">
-              <SectionHeading eyebrow="Mission" title={bureau.mission.title} />
-              <p className="mt-8 font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
-                {bureau.mission.intro}
-              </p>
-              <p className="mt-8 text-body-md text-body">{bureau.mission.lead}</p>
+            <Reveal {...aosBlock}>
+              <div className="max-w-3xl">
+                <SectionHeading eyebrow="Mission" title={bureau.mission.title} />
+              </div>
+              {/* Le chapô à gauche, le bouton devis à sa droite, au bord de la colonne. */}
+              <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+                <p className="max-w-3xl font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
+                  {bureau.mission.intro}
+                </p>
+                <QuoteCta tone="dark" className="shrink-0" />
+              </div>
+              <p className="mt-8 max-w-3xl text-body-md text-body">{bureau.mission.lead}</p>
             </Reveal>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {bureau.mission.items.map((item, i) => (
@@ -440,6 +447,11 @@ export function BureauPage() {
                 <Reveal {...aosItem} className="mt-10 border-t border-hairline pt-10">
                   {/* Centrés tant que la colonne occupe toute la largeur ; alignés sur le titre dès que la colonne devient collante. */}
                   <PartnerLogos justify="justify-center lg:justify-start" />
+                  {/*
+                    Le bouton « Devis gratuit » de l'en-tête disparaît dès que la page défile :
+                    sans relais dans le corps de page, on ne peut plus demander d'offre depuis ici.
+                  */}
+                  <QuoteCta tone="dark" className="mt-8 max-lg:mx-auto max-lg:flex" />
                 </Reveal>
               </div>
 
@@ -473,14 +485,6 @@ export function BureauPage() {
                 })}
               </ul>
             </div>
-
-            {/*
-              Le bouton « Devis gratuit » de l'en-tête disparaît dès que la page défile : sans
-              relais dans le corps de page, on ne peut plus demander d'offre depuis ici.
-            */}
-            <Reveal {...aosBlock} className="mt-12 border-t border-hairline pt-8">
-              <QuoteCta tone="dark" />
-            </Reveal>
           </Container>
         </section>
 
