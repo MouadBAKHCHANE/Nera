@@ -242,7 +242,7 @@ export function BureauPage() {
                 <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body md:text-body-lg">
                   {bureau.equilibre.intro}
                 </p>
-                <QuoteCta tone="dark" className="mt-8" />
+                <QuoteCta tone="dark" className="mt-8 max-lg:hidden" />
               </Reveal>
               <ul className="grid gap-4 sm:grid-cols-2 lg:pt-2">
                 {bureau.equilibre.items.map((item, i) => {
@@ -272,6 +272,11 @@ export function BureauPage() {
                 })}
               </ul>
             </div>
+
+            {/* Sur mobile, le bouton ferme la section plutôt que de la couper en deux. */}
+            <Reveal {...aosItem} className="mt-12 flex justify-center lg:hidden">
+              <QuoteCta tone="dark" />
+            </Reveal>
           </Container>
         </section>
 
@@ -298,7 +303,7 @@ export function BureauPage() {
                 <p className="max-w-3xl font-display text-[1.25rem] font-light leading-[1.4] text-nera-navy md:text-[1.625rem]">
                   {bureau.mission.intro}
                 </p>
-                <QuoteCta tone="dark" className="shrink-0" />
+                <QuoteCta tone="dark" className="shrink-0 max-lg:hidden" />
               </div>
               <p className="mt-8 max-w-3xl text-body-md text-body">{bureau.mission.lead}</p>
             </Reveal>
@@ -318,6 +323,11 @@ export function BureauPage() {
                 </Reveal>
               ))}
             </ol>
+
+            {/* Sur mobile, le bouton ferme la section plutôt que de la couper en deux. */}
+            <Reveal {...aosItem} className="mt-12 flex justify-center lg:hidden">
+              <QuoteCta tone="dark" />
+            </Reveal>
           </Container>
         </section>
 
@@ -451,7 +461,7 @@ export function BureauPage() {
                     Le bouton « Devis gratuit » de l'en-tête disparaît dès que la page défile :
                     sans relais dans le corps de page, on ne peut plus demander d'offre depuis ici.
                   */}
-                  <QuoteCta tone="dark" className="mt-8 max-lg:mx-auto max-lg:flex" />
+                  <QuoteCta tone="dark" className="mt-8 max-lg:hidden" />
                 </Reveal>
               </div>
 
@@ -485,6 +495,11 @@ export function BureauPage() {
                 })}
               </ul>
             </div>
+
+            {/* Sur mobile, le bouton ferme la section plutôt que de la couper en deux. */}
+            <Reveal {...aosItem} className="mt-12 flex justify-center lg:hidden">
+              <QuoteCta tone="dark" />
+            </Reveal>
           </Container>
         </section>
 

@@ -461,7 +461,12 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   `[75, 80, 85, 90]` et refuse toute autre valeur en le signalant dans la console.
 - `/bureau` : un « Demander un devis gratuit » dans trois sections — sous le chapô du
   Principe, à droite du chapô de la Mission, et sous les logos de certification des
-  Qualifications, où il a remplacé celui qui fermait la section. Avec celui du bloc de clôture,
+  Qualifications, où il a remplacé celui qui fermait la section.
+  **Sur mobile, ces trois boutons ferment leur section** au lieu de la couper en deux. Ils
+  vivent dans la première colonne de leur grille : en desktop c'est la bonne place, en mobile
+  tout s'empile et ils tombaient avant les cartes. Chaque section porte donc deux boutons, un
+  par point de rupture (`max-lg:hidden` sur celui d'origine, `lg:hidden` sur celui de fin).
+  `display: none` sort l'élément de l'arbre d'accessibilité : un seul des deux est annoncé. Avec celui du bloc de clôture,
   la page en compte quatre : le bouton de l'en-tête disparaît au défilement, il faut des relais.
 - `/contact` : l'adresse devient un **troisième bouton** « Localisation », de même facture que
   « Appeler » et « Envoyer un e-mail », qui ouvre la fiche Google Maps. L'adresse reste écrite
