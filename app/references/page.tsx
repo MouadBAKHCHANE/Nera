@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ReferencesPage } from "@/components/references/ReferencesPage";
-import { references, referencesRoute } from "@/content/references";
+import { references, referencesRoute, referencesVisible } from "@/content/references";
 
 /**
  * Page « Nos références », texte client (lignes 686 à 693 de `content/source/textes-client.md`).
@@ -19,5 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  // Masquée tant que le client n'a pas fourni ses projets. Le vrai 404 vient de `proxy.ts` ;
+  // ceci n'est qu'un filet, car servi depuis cette page le 404 partirait avec un statut 200.
+  if (!referencesVisible) notFound();
   return <ReferencesPage />;
 }

@@ -1,6 +1,6 @@
 # État du projet
 
-Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
+Mis à jour le 24 septembre 2026. Tenir ce fichier à jour en fin de session.
 
 ## Fait
 
@@ -487,6 +487,15 @@ Mis à jour le 10 septembre 2026. Tenir ce fichier à jour en fin de session.
   gardent les versions paysage pour leurs en-têtes pleine largeur.
 - Déployé sur Vercel : https://nera-roan.vercel.app/
 
+- Chiffres de l'accueil et du bureau : en mobile, la grille à deux colonnes n'avait **aucun
+  écart horizontal**, si bien que « CECB et CECB Plus réalisés » touchait « dossiers de
+  subventions » sur certains téléphones. Ajout de `gap-x-6` (`md:gap-x-10`, remis à zéro en
+  `lg` où les séparateurs verticaux font l'espacement). Mesuré à 320, 360 et 390 px : chaque
+  libellé reste dans sa colonne, sans débordement horizontal.
+- Page `/references` masquée en attendant la liste des projets (voir « À faire », point 2).
+  Une page statique qui appelle `notFound()` part avec un **statut 200**, car `app/loading.tsx`
+  ouvre une frontière de streaming avant le rendu : d'où la réécriture en 404 dans `proxy.ts`.
+
 ## À faire
 
 Par ordre de priorité.
@@ -496,7 +505,11 @@ Par ordre de priorité.
    désormais d'emblée et que la catégorie a quitté le bandeau. À défaut, rétablir le blocage.
    Tant que ce n'est pas tranché, le site contredit sa propre politique de cookies.
 2. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
-   pour remplir `references.projects` ; vérifier ensuite que `/references` sort du noindex.
+   pour remplir `references.projects`. **La page est masquée** à la demande du client
+   (24 septembre) : plus de lien dans le menu, le pied de page ni la page 404, et `proxy.ts`
+   renvoie un vrai 404. Tout tient au drapeau `referencesVisible` de `content/references.ts` :
+   dès qu'un projet est ajouté, la page réapparaît partout, sort du noindex et entre au plan
+   de site. `proxy.ts` pourra alors être supprimé.
    Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
 3. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
    tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.

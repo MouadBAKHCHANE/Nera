@@ -1,4 +1,5 @@
 import { footerPrestations } from "./footer";
+import { referencesVisible } from "@/content/references";
 
 export type NavChild = { label: string; href: string; external?: boolean };
 export type NavItem = {
@@ -22,7 +23,7 @@ export const navigation: NavItem[] = [
   { label: "Accueil", href: "/" },
   { label: "Prestations", href: "/prestations", children: footerPrestations },
   { label: "Le bureau", href: "/bureau" },
-  { label: "Nos références", href: "/references" },
+  ...(referencesVisible ? [{ label: "Nos références", href: "/references" }] : []),
   { label: "Contact", href: "/contact" },
 ];
 

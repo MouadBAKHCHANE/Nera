@@ -64,9 +64,9 @@ export function Stats({ items = homeStats, id }: { items?: readonly Stat[]; id?:
             NERA <span className="font-medium text-accent">en chiffres</span>
           </h2>
         </Reveal>
-        <ul className="grid grid-cols-2 gap-y-12 pt-12 md:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-nera-cream/15">
+        <ul className="grid grid-cols-2 gap-x-6 gap-y-12 pt-12 md:grid-cols-3 md:gap-x-10 lg:gap-x-0 lg:grid-cols-5 lg:divide-x lg:divide-nera-cream/15">
           {stats.map((s, i) => (
-            <Reveal as="li" key={s.label} delay={i * 0.08} className="lg:px-8 lg:first:pl-0 lg:last:pr-0">
+            <Reveal as="li" key={s.label} delay={i * 0.08} className="min-w-0 lg:px-8 lg:first:pl-0 lg:last:pr-0">
               <span className="block h-6 w-px bg-accent" aria-hidden />
               <p className="mt-5 font-display text-[2.75rem] font-light leading-none text-nera-cream md:text-[3.5rem]">
                 <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />

@@ -1,4 +1,5 @@
 import { company } from "./prestations";
+import { referencesVisible } from "@/content/references";
 
 /** Contenu du pied de page, partagé par les deux variantes d'accueil. */
 export const footerTagline =
@@ -15,7 +16,7 @@ export const footerPrestations = [
 
 export const footerBureau: { label: string; href: string; external?: boolean }[] = [
   { label: "À propos", href: "/bureau" },
-  { label: "Nos références", href: "/references" },
+  ...(referencesVisible ? [{ label: "Nos références", href: "/references" }] : []),
   { label: "Contact", href: "/contact" },
 ];
 
