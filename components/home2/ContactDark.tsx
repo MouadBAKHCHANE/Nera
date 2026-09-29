@@ -1,7 +1,7 @@
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import { company } from "@/content/prestations";
-import { mapsHref } from "@/content/footer";
+import { getSiteSettings } from "@/lib/sanity/settings";
+import { mapsHrefFor } from "@/lib/site-company";
 import { QuoteCta } from "./QuoteCta";
 import { ContactForm } from "@/components/contact/ContactForm";
 
@@ -10,7 +10,9 @@ import { ContactForm } from "@/components/contact/ContactForm";
  * à champs soulignés sur fond marine. Les champs vivent dans `components/contact/ContactForm.tsx`,
  * partagés avec la page `/contact` pour que les deux ne divergent pas.
  */
-export function ContactDark() {
+export async function ContactDark() {
+  const { company } = await getSiteSettings();
+  const mapsHref = mapsHrefFor(company);
   return (
     <section id="contact" className="bg-nera-navy-deep bg-blueprint py-16 text-nera-cream lg:py-20">
       <div className="px-6 md:px-10 lg:px-[120px]">

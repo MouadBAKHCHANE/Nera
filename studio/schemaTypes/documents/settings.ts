@@ -116,14 +116,6 @@ export const settings = defineType({
       group: 'seo',
       validation: (rule) => rule.max(170).warning('Google coupe les descriptions au-delà d’environ 160 caractères.'),
     }),
-    defineField({
-      name: 'defaultShareImage',
-      title: 'Image de partage par défaut',
-      description: 'Format conseillé : 1200 × 630.',
-      type: 'image',
-      group: 'seo',
-      options: {hotspot: true},
-    }),
   ],
   preview: {prepare: () => ({title: 'Réglages du site'})},
 })

@@ -6,6 +6,7 @@ import { CookieBanner } from "@/components/ui/CookieBanner";
 import { CallButton } from "@/components/ui/CallButton";
 import { SiteProvider } from "@/components/site/SiteProvider";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { seo } from "@/content/seo";
 
@@ -34,13 +35,19 @@ const satoshi = localFont({
 
 const SITE_URL = seo.siteUrl;
 
-export const metadata: Metadata = {
+/**
+ * Titre et description par défaut : ceux saisis dans le Studio (« Réglages du site », onglet
+ * SEO par défaut), sinon ceux du document SEO du client. Chaque page garde les siens.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo: defaults } = await getSiteSettings();
+  return {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: seo.title,
+    default: defaults.title ?? seo.title,
     template: "%s | NERA",
   },
-  description: seo.description,
+  description: defaults.description ?? seo.description,
   keywords: seo.keywords,
   alternates: { canonical: "/" },
   openGraph: {
@@ -50,11 +57,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
   },
   robots: { index: true, follow: true },
-};
+  };
+}
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  // Lu une fois ici, puis transmis aux composants client (menus) par le contexte du site.
-  const site = { showReferences: (await getRealisationsCount()) > 0 };
+  // Lu une fois ici, puis transmis aux composants client (menus, onglets, formulaires) par le
+  // contexte du site. Les composants serveur relisent Sanity eux-mêmes, sans coût : même cache.
+  const [count, settings] = await Promise.all([getRealisationsCount(), getSiteSettings()]);
+  const site = { showReferences: count > 0, company: settings.company };
   return (
     // data-scroll-behavior : Next 16 ne neutralise plus `scroll-behavior: smooth` pendant les
     // transitions de route sans cet attribut. Sans lui, un lien du pied de page fait défiler

@@ -11,6 +11,7 @@ import { Territory } from "@/components/home2/Territory";
 import { PartnerStrip } from "@/components/home2/PartnerStrip";
 import { ContactDark } from "@/components/home2/ContactDark";
 import { FooterDark } from "@/components/home2/FooterDark";
+import { getSiteSettings } from "@/lib/sanity/settings";
 
 /** Accueil officiel : direction sombre et cinématographique, géométrie NERA. Sections et textes du client. */
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
   openGraph: { title: seo.title, description: seo.description, url: "/" },
 };
 
-export default function Home() {
+export default async function Home() {
+  // Chiffres saisis dans le Studio ; sans saisie, `Stats` garde ses valeurs par défaut.
+  const { stats } = await getSiteSettings();
   return (
     <>
       <HeaderDark />
@@ -30,7 +33,7 @@ export default function Home() {
         <RenovationAZ />
         <Audience2 />
         <Approach />
-        <Stats />
+        <Stats items={stats.length ? stats : undefined} />
         <Territory />
         <PartnerStrip />
         <ContactDark />

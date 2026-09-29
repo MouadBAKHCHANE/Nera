@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { company } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { devisNote, devisMaxFiles, devisMaxTotalMb } from "@/content/devis";
 import { sendMail, mailTo, mailDevFallback, escapeHtml as esc, isEmail, signature } from "@/lib/mail";
 
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
 
   const ack = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#222"><p>Bonjour ${esc(data.nom)},</p><p>Nous avons bien reçu votre demande de devis concernant « ${esc(
     data.prestation,
-  )} » pour votre bien à ${esc(data.codePostal)} (${esc(data.canton)}).</p><p>${devisNote}</p>${signature(company)}</div>`;
+  )} » pour votre bien à ${esc(data.codePostal)} (${esc(data.canton)}).</p><p>${devisNote}</p>${signature((await getSiteSettings()).company)}</div>`;
 
   if (mailDevFallback()) {
     console.info("[devis] (dev, Graph non configuré)", { ...data, fichiers: files.map((f) => f.name) });

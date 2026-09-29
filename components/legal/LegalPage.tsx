@@ -7,7 +7,7 @@ import { RichText } from "./RichText";
 import { CookieChoice } from "./CookieChoice";
 import type { LegalBlock, LegalDoc } from "@/content/legal-pages";
 import { seo } from "@/content/seo";
-import { company } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 
 /** Numéro du document source, formaté pour le titre de section. */
 const label = (num: number | undefined, title: string) => (num ? `${num}. ${title}` : title);
@@ -97,7 +97,8 @@ function Blocks({ blocks }: { blocks: LegalBlock[] }) {
  * mise à jour), sommaire, puis prose sur fond crème. Le contenu vient de
  * `content/legal-pages.ts` et n'est jamais reformulé ici.
  */
-export function LegalPage({ doc }: { doc: LegalDoc }) {
+export async function LegalPage({ doc }: { doc: LegalDoc }) {
+  const { company } = await getSiteSettings();
   const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

@@ -1,4 +1,3 @@
-import { company } from "./prestations";
 
 /** Contenu du pied de page, partagé par les deux variantes d'accueil. */
 export const footerTagline =
@@ -24,8 +23,3 @@ export const footerLegal = [
   { label: "Politique de confidentialité", href: "/confidentialite" },
   { label: "Politique relative aux cookies", href: "/cookies" },
 ];
-
-/** Lien Google Maps vers l'adresse (recherche par adresse, sans clé API). */
-export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  `${company.name}, ${company.street}, ${company.zip} ${company.city}`,
-)}`;

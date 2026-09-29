@@ -15,7 +15,7 @@ import { ImageWipe } from "@/components/ui/ImageWipe";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
 import { bureau, bureauRoute } from "@/content/bureau";
-import { company } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { seo } from "@/content/seo";
 import { QualificationIconsList } from "@/components/bureau/QualificationIcons";
 import { PrincipeIconsList } from "@/components/bureau/PrincipeIcons";
@@ -98,7 +98,8 @@ function SectionHeading({
  * en alternant les fonds (crème, blanc, marine) sans deux sections marine consécutives.
  * Le contenu vient de `content/bureau.ts` et n'est jamais reformulé ici.
  */
-export function BureauPage() {
+export async function BureauPage() {
+  const { company, stats } = await getSiteSettings();
   const founder = company.founder;
   const jsonLd = [
     {
@@ -550,7 +551,7 @@ export function BureauPage() {
         </section>
 
         {/* 8. NERA en chiffres — la section de l'accueil, avec ses chiffres et ses libellés. */}
-        <Stats id={bureau.chiffres.id} />
+        <Stats id={bureau.chiffres.id} items={stats.length ? stats : undefined} />
 
         {/* 9. Six cantons — crème, section de l'accueil avec le H2 de cette page. */}
         <Territory

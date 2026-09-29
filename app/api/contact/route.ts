@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { company, prestations } from "@/content/prestations";
+import { prestations } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { sendMail, mailTo, mailDevFallback, escapeHtml as esc, isEmail, signature } from "@/lib/mail";
 
 export const runtime = "nodejs";
@@ -66,7 +67,7 @@ export async function POST(req: Request) {
 
   const ack = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#222"><p>Bonjour ${esc(
     data.nom,
-  )},</p><p>Nous avons bien reçu votre message concernant « ${esc(data.sujet)} ». Nous revenons vers vous rapidement.</p>${signature(company)}</div>`;
+  )},</p><p>Nous avons bien reçu votre message concernant « ${esc(data.sujet)} ». Nous revenons vers vous rapidement.</p>${signature((await getSiteSettings()).company)}</div>`;
   try {
     await sendMail({ to: data.email, subject: "Votre message · NERA Ingénieurs Conseils", html: ack });
   } catch (err) {

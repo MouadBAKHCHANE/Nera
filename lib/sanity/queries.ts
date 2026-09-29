@@ -22,3 +22,24 @@ export const REALISATIONS_QUERY = /* groq */ `
 `;
 
 export const REALISATIONS_COUNT_QUERY = /* groq */ `count(*[_type == "realisation" && defined(title)])`;
+
+/** Document unique « settings » : lu par son ID fixe, le plus rapide (règle Sanity). */
+export const SETTINGS_QUERY = /* groq */ `
+  *[_id == "settings"][0] {
+    companyName,
+    shortName,
+    phone,
+    email,
+    street,
+    zip,
+    city,
+    canton,
+    linkedin,
+    facebook,
+    instagram,
+    googleBusiness,
+    stats[] { _key, prefix, value, suffix, label },
+    defaultSeoTitle,
+    defaultSeoDescription
+  }
+`;

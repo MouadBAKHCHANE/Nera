@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { navigation } from "@/content/navigation";
 import { useSite } from "@/components/site/SiteProvider";
 import { withReferences } from "@/lib/nav";
-import { company } from "@/content/prestations";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 export function MobileMenu({
@@ -18,7 +17,7 @@ export function MobileMenu({
   /** true : menu plein écran à toutes les tailles (variante hestera, burger seul). */
   allSizes?: boolean;
 }) {
-  const { showReferences } = useSite();
+  const { showReferences, company } = useSite();
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {

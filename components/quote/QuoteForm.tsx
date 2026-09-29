@@ -14,7 +14,7 @@ import {
   type DevisPayload,
 } from "@/content/devis";
 import { FormNotice } from "@/components/ui/FormNotice";
-import { company } from "@/content/prestations";
+import { useSite } from "@/components/site/SiteProvider";
 import { Select } from "@/components/ui/Select";
 
 const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
@@ -60,6 +60,7 @@ export function QuoteForm({
   onDone?: () => void;
   fit?: boolean;
 }) {
+  const { company } = useSite();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<DevisPayload>({ ...empty, prestation: initialPrestation });
   const [files, setFiles] = useState<File[]>([]);

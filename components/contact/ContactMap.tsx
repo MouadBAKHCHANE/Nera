@@ -1,4 +1,4 @@
-import { company } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { contact } from "@/content/contact";
 
 /**
@@ -16,7 +16,8 @@ import { contact } from "@/content/contact";
  * « Impossible de charger les informations sur le lieu ». Avec la raison sociale, Google
  * retrouve l'établissement et le clic ouvre sa fiche, avec l'itinéraire.
  */
-export function ContactMap() {
+export async function ContactMap() {
+  const { company } = await getSiteSettings();
   const query = encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`);
 
   return (

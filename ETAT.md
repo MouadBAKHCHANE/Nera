@@ -570,6 +570,20 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   Neuf erreurs ESLint préexistantes, hors Sanity (SplitReveal, RichText, CookieBanner…), à
   traiter à part.
 
+- **Sanity, réglages du site branchés (29 septembre 2026).** Coordonnées, réseaux et chiffres
+  « NERA en chiffres » viennent du document « settings » partout : en-têtes, menus, onglet
+  d'appel, formulaires, pieds de page, page contact, carte, JSON-LD, signature des accusés de
+  réception, accueil et bureau. Composants serveur : `getSiteSettings()` ; composants client :
+  `useSite()` (contexte posé par la mise en page racine). Les valeurs de Sanity se posent sur
+  celles du code (`lib/site-company.ts`) : champ vide ou Sanity en panne, le site garde les
+  coordonnées connues. Titre et description SEO par défaut lus dans les réglages.
+  Vérifié sur un build de production : numéro et libellé modifiés dans Sanity, webhook,
+  nouvelles valeurs sur cinq pages et dans le JSON-LD, puis valeurs réelles restaurées.
+  Restent en dur : le fondateur et les certifications (code), et le numéro écrit dans le texte
+  des mentions légales (texte client, à passer dans Sanity avec les pages légales).
+  Champ « image de partage par défaut » retiré : `app/opengraph-image` l'emporterait toujours,
+  il n'aurait rien fait. À reprendre en phase 2 avec le SEO par page.
+
 ## À faire
 
 Par ordre de priorité.

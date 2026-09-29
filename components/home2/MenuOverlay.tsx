@@ -4,12 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
-import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
 import { useSite } from "@/components/site/SiteProvider";
 import { withReferences } from "@/lib/nav";
 import { PrestationIcon } from "@/components/ui/PrestationIcon";
-import { mapsHref } from "@/content/footer";
+import { mapsHrefFor } from "@/lib/site-company";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 
@@ -20,7 +19,8 @@ import { SocialLinks } from "@/components/ui/SocialLinks";
  * sur les mêmes sous-menus que le header et le pied de page.
  */
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { showReferences } = useSite();
+  const { showReferences, company } = useSite();
+  const mapsHref = mapsHrefFor(company);
   const items: NavItem[] = withReferences(navigation, showReferences);
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);

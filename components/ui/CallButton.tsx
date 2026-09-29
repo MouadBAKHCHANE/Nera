@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUp, FileText, Phone } from "lucide-react";
 import { useQuote } from "@/components/quote/QuoteModal";
-import { company } from "@/content/prestations";
+import { useSite } from "@/components/site/SiteProvider";
 
 /**
  * Éléments flottants :
@@ -64,6 +64,7 @@ function Tab({
 }
 
 export function CallButton() {
+  const { company } = useSite();
   const { open } = useQuote();
   const [shown, setShown] = useState(false);
 

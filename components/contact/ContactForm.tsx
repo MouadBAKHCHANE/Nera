@@ -3,7 +3,8 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { FormNotice } from "@/components/ui/FormNotice";
-import { company, prestations } from "@/content/prestations";
+import { prestations } from "@/content/prestations";
+import { useSite } from "@/components/site/SiteProvider";
 
 /**
  * Formulaire de contact simple, partagé par la section contact de l'accueil
@@ -38,6 +39,7 @@ const tones = {
 } as const;
 
 export function ContactForm({ tone = "dark", className = "" }: { tone?: "dark" | "light"; className?: string }) {
+  const { company } = useSite();
   const t = tones[tone];
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState<string | null>(null);

@@ -3,7 +3,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { QuoteCta } from "./QuoteCta";
 import { DiamondOutline, LogomarkOutline, Ruler } from "./Logomark";
-import { company } from "@/content/prestations";
 
 /**
  * Héro plein écran, ton sombre et cinématographique, mais construit sur la

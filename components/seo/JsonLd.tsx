@@ -1,4 +1,5 @@
-import { company, cantons } from "@/content/prestations";
+import { cantons } from "@/content/prestations";
+import { getSiteSettings } from "@/lib/sanity/settings";
 import { footerPrestations } from "@/content/footer";
 import { seo } from "@/content/seo";
 
@@ -6,7 +7,8 @@ import { seo } from "@/content/seo";
  * Données structurées ProfessionalService pour l'organisation (adresse, contact,
  * fondateur, zone desservie, prestations). Injectées une fois dans le layout racine.
  */
-export function JsonLd() {
+export async function JsonLd() {
+  const { company } = await getSiteSettings();
   const data = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",

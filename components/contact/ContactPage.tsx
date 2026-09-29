@@ -10,8 +10,8 @@ import { aosBlock, aosCard } from "@/components/ui/aos";
 import { ContactForm } from "./ContactForm";
 import { ContactMap } from "./ContactMap";
 import { contact, contactRoute } from "@/content/contact";
-import { company } from "@/content/prestations";
-import { mapsHref } from "@/content/footer";
+import { getSiteSettings } from "@/lib/sanity/settings";
+import { mapsHrefFor } from "@/lib/site-company";
 import { seo } from "@/content/seo";
 
 /**
@@ -20,7 +20,9 @@ import { seo } from "@/content/seo";
  * `content/contact.ts` et n'est jamais reformulé ici. Apparitions calées sur hestera.ch
  * (`components/ui/aos.ts`).
  */
-export function ContactPage() {
+export async function ContactPage() {
+  const { company } = await getSiteSettings();
+  const mapsHref = mapsHrefFor(company);
   const jsonLd = [
     {
       "@context": "https://schema.org",

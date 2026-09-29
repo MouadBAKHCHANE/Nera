@@ -1,4 +1,6 @@
-import { company } from "@/content/prestations";
+"use client";
+
+import { useSite } from "@/components/site/SiteProvider";
 import { LinkedInIcon } from "./LinkedInIcon";
 
 function FacebookIcon({ className = "size-5" }: { className?: string }) {
@@ -21,9 +23,10 @@ function InstagramIcon({ className = "size-5" }: { className?: string }) {
 
 /**
  * Icônes sociales du pied de page, sans cadre : LinkedIn, Facebook, Instagram.
- * Les URL Facebook et Instagram sont à renseigner dans content/prestations.ts (company.socials).
+ * Les adresses des trois réseaux se saisissent dans le Studio, « Réglages du site ».
  */
 export function SocialLinks({ tone = "dark", className = "" }: { tone?: "dark" | "light"; className?: string }) {
+  const { company } = useSite();
   const base = `inline-flex size-10 items-center justify-center transition-colors ${
     tone === "light" ? "text-nera-cream/80 hover:text-accent" : "text-nera-navy hover:text-accent-deep"
   }`;

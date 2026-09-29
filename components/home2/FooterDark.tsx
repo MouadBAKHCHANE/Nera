@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { company } from "@/content/prestations";
-import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
+import { getSiteSettings } from "@/lib/sanity/settings";
+import { mapsHrefFor } from "@/lib/site-company";
+import { footerTagline, footerPrestations, footerBureau, footerLegal } from "@/content/footer";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { withReferences } from "@/lib/nav";
 import { prestationsIndexRoute } from "@/content/prestation-pages";
@@ -19,6 +20,8 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
  * icônes sociales centrées, liens légaux puis copyright. Desktop : trois colonnes, icônes sous Contact.
  */
 export async function FooterDark() {
+  const { company } = await getSiteSettings();
+  const mapsHref = mapsHrefFor(company);
   const bureauLinks = withReferences(footerBureau, (await getRealisationsCount()) > 0);
   return (
     <footer className="border-t border-nera-cream/15 bg-nera-navy-deep text-nera-cream">
