@@ -23,7 +23,13 @@ export const devisNote = "Réponse sous 48 heures ouvrées. Le devis est gratuit
 /** Types de fichiers acceptés en pièce jointe (plans, factures d'énergie, photos). */
 export const devisAccept = ".pdf,.jpg,.jpeg,.png,.heic,.webp";
 export const devisMaxFiles = 5;
-export const devisMaxFileMb = 8;
+/**
+ * Plafond **total** des pièces jointes, en Mo. Ce n'est pas un choix : Microsoft Graph refuse un
+ * e-mail de plus de 4 Mo, et le base64 gonfle les fichiers d'un tiers (voir `lib/mail.ts`).
+ * L'ancien plafond, 5 fichiers de 8 Mo, dépassait aussi la limite de 4,5 Mo que Vercel impose
+ * au corps de chaque requête : un envoi lourd aurait échoué avant même d'atteindre la route.
+ */
+export const devisMaxTotalMb = 3;
 
 export type DevisPayload = {
   prestation: string;

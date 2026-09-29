@@ -1,21 +1,16 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { company } from "@/content/prestations";
-import { devisNote, devisMaxFiles, devisMaxFileMb } from "@/content/devis";
+import { devisNote, devisMaxFiles, devisMaxTotalMb } from "@/content/devis";
+import { sendMail, mailTo, mailDevFallback, escapeHtml as esc, isEmail, signature } from "@/lib/mail";
 
 export const runtime = "nodejs";
-
-const TO = process.env.CONTACT_TO ?? company.email;
-const FROM = process.env.CONTACT_FROM ?? "NERA Ingénieurs Conseils <noreply@nera-ing.ch>";
-
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
 /**
  * Réception du formulaire « Devis gratuit » (multipart) :
  * 1. anti-spam par honeypot, validation minimale ;
- * 2. e-mail à info@nera-ing.ch avec les pièces jointes ;
+ * 2. e-mail à info@nera-ing.ch avec les pièces jointes, par Microsoft Graph (`lib/mail.ts`) ;
  * 3. accusé de réception automatique au demandeur.
- * Sans RESEND_API_KEY (développement), la demande est journalisée et considérée envoyée.
+ * Sans configuration Graph, en développement seulement, la demande est journalisée.
  */
 export async function POST(req: Request) {
   const fd = await req.formData();
@@ -40,13 +35,15 @@ export async function POST(req: Request) {
   if (!data.prestation || !data.batiment || !data.codePostal || !data.canton || !data.nom || !data.telephone) {
     return new NextResponse("Champs obligatoires manquants.", { status: 400 });
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+  if (!isEmail(data.email)) {
     return new NextResponse("Adresse e-mail invalide.", { status: 400 });
   }
 
   const files = fd.getAll("fichiers").filter((f): f is File => f instanceof File && f.size > 0).slice(0, devisMaxFiles);
-  for (const f of files) {
-    if (f.size > devisMaxFileMb * 1024 * 1024) return new NextResponse(`Fichier trop volumineux : ${f.name}`, { status: 400 });
+  // Plafond sur le total, pas par fichier : c'est la taille de l'e-mail que Graph limite.
+  const total = files.reduce((n, f) => n + f.size, 0);
+  if (total > devisMaxTotalMb * 1024 * 1024) {
+    return new NextResponse(`Pièces jointes trop volumineuses : ${devisMaxTotalMb} Mo au total.`, { status: 413 });
   }
 
   const rows = [
@@ -68,36 +65,37 @@ export async function POST(req: Request) {
 
   const ack = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#222"><p>Bonjour ${esc(data.nom)},</p><p>Nous avons bien reçu votre demande de devis concernant « ${esc(
     data.prestation,
-  )} » pour votre bien à ${esc(data.codePostal)} (${esc(data.canton)}).</p><p>${devisNote}</p><p>Cordialement,<br><strong>${company.shortName}</strong><br>${company.street}, ${company.zip} ${company.city}<br>${company.phone} · ${company.email}</p></div>`;
+  )} » pour votre bien à ${esc(data.codePostal)} (${esc(data.canton)}).</p><p>${devisNote}</p>${signature(company)}</div>`;
 
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
-    console.info("[devis] (dev, sans RESEND_API_KEY)", { ...data, fichiers: files.map((f) => f.name) });
+  if (mailDevFallback()) {
+    console.info("[devis] (dev, Graph non configuré)", { ...data, fichiers: files.map((f) => f.name) });
     return NextResponse.json({ ok: true, dev: true });
   }
 
-  const resend = new Resend(key);
-  const attachments = await Promise.all(files.map(async (f) => ({ filename: f.name, content: Buffer.from(await f.arrayBuffer()) })));
+  const attachments = await Promise.all(
+    files.map(async (f) => ({ name: f.name, contentType: f.type, content: Buffer.from(await f.arrayBuffer()) })),
+  );
 
-  const [toNera, toClient] = await Promise.all([
-    resend.emails.send({
-      from: FROM,
-      to: TO,
+  // La demande à NERA est l'envoi qui compte : s'il échoue, le visiteur doit le savoir.
+  try {
+    await sendMail({
+      to: mailTo(),
       replyTo: data.email,
       subject: `Devis gratuit : ${data.prestation} · ${data.codePostal} (${data.canton})`,
       html,
       attachments,
-    }),
-    resend.emails.send({
-      from: FROM,
-      to: data.email,
-      subject: "Votre demande de devis · NERA Ingénieurs Conseils",
-      html: ack,
-    }),
-  ]);
-  if (toNera.error || toClient.error) {
-    console.error("[devis] envoi", toNera.error ?? toClient.error);
+    });
+  } catch (err) {
+    console.error("[devis] envoi à NERA", err);
     return new NextResponse("Envoi impossible.", { status: 502 });
+  }
+
+  // L'accusé de réception est un confort : son échec ne doit pas faire croire au visiteur que
+  // sa demande est perdue, puisqu'elle est arrivée.
+  try {
+    await sendMail({ to: data.email, subject: "Votre demande de devis · NERA Ingénieurs Conseils", html: ack });
+  } catch (err) {
+    console.error("[devis] accusé de réception", err);
   }
   return NextResponse.json({ ok: true });
 }

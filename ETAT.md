@@ -1,6 +1,6 @@
 # État du projet
 
-Mis à jour le 24 septembre 2026. Tenir ce fichier à jour en fin de session.
+Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
 
 ## Fait
 
@@ -496,6 +496,18 @@ Mis à jour le 24 septembre 2026. Tenir ce fichier à jour en fin de session.
   Une page statique qui appelle `notFound()` part avec un **statut 200**, car `app/loading.tsx`
   ouvre une frontière de streaming avant le rendu : d'où la réécriture en 404 dans `proxy.ts`.
 
+- **Envoi des e-mails par Microsoft Graph** (`lib/mail.ts`), Resend retiré. Le pop-up devis
+  (`/api/devis`) et le formulaire de contact (`/api/contact`, nouvelle route) écrivent tous
+  deux à info@nera-ing.ch, adresse validée par le client le 29 septembre, depuis
+  noreply@nera-ing.ch, avec « Répondre » vers le visiteur et un accusé de réception. L'envoi à
+  NERA est bloquant, l'accusé non. Sans configuration, la route journalise en développement et
+  **échoue en production**, pour que le visiteur soit renvoyé vers le téléphone plutôt que de
+  perdre sa demande. Tenant et application vérifiés auprès de Microsoft sans le secret.
+- Pièces jointes du devis : plafond **total de 3 Mo** au lieu de 5 fichiers de 8 Mo. Graph
+  refuse un e-mail de plus de 4 Mo et le base64 ajoute un tiers ; l'ancien plafond dépassait
+  aussi les 4,5 Mo que Vercel accepte par requête. Pour aller au-delà, il faudrait déposer les
+  fichiers ailleurs (Vercel Blob) et n'envoyer que des liens.
+
 ## À faire
 
 Par ordre de priorité.
@@ -511,8 +523,17 @@ Par ordre de priorité.
    dès qu'un projet est ajouté, la page réapparaît partout, sort du noindex et entre au plan
    de site. `proxy.ts` pourra alors être supprimé.
    Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
-3. **Envoi des e-mails** — passer de Resend à Microsoft Graph (`sendMail`). En attente du
-   tenant ID, client ID et client secret ; à recevoir par canal sécurisé, pas par e-mail.
+3. **Envoi des e-mails** — l'intégration Microsoft Graph est **écrite et testée**, il ne
+   manque que le secret, attendu par WhatsApp. Reste à faire :
+   - poser le secret dans Vercel (Production) et dans `.env.local`, avec `MS_TENANT_ID`,
+     `MS_CLIENT_ID`, `MAIL_FROM`, `MAIL_TO` (valeurs dans `.env.local`, ignoré par git). Bien
+     prendre la **valeur** du secret, pas son identifiant : Microsoft renvoie AADSTS7000215
+     dans les deux cas, ce qui prête à confusion ;
+   - redéployer, puis envoyer un devis et un message de contact réels, avec une pièce jointe ;
+   - confirmer auprès de l'informatique de NERA : consentement `Mail.Send` retiré côté Entra ID
+     (sinon il s'ajoute au périmètre RBAC et ouvre toutes les boîtes du tenant), boîte
+     noreply@nera-ing.ch réelle (une boîte partagée suffit), nom d'affichage de cette boîte.
+   Le secret expire le **24 septembre 2027** : rappel à prévoir un mois avant.
 4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
 5. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
@@ -641,8 +662,6 @@ catégorie a été retirée ; GA4, Google Ads et Meta Pixel restent à brancher 
 
 - Le plan de site client ne mentionne aucune page Actualités, alors que le module CMS
   (Sanity) est au devis. À trancher avec le client.
-- Le formulaire de contact (accueil et `/contact`, même composant) n'est pas encore relié
-  (`action="#"`) ; il le sera avec le point 2 de « À faire », l'envoi des e-mails.
 - Sur `/references` et `/contact`, le CTA de fin et l'en-tête gardent leurs apparitions
   d'origine, par cohérence avec les quatre sections que le client a voulu laisser telles
   quelles sur `/bureau`. À confirmer avec lui s'il souhaite les aligner aussi.

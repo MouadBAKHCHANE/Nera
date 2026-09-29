@@ -10,7 +10,7 @@ import {
   devisNote,
   devisAccept,
   devisMaxFiles,
-  devisMaxFileMb,
+  devisMaxTotalMb,
   type DevisPayload,
 } from "@/content/devis";
 import { FormNotice } from "@/components/ui/FormNotice";
@@ -86,12 +86,18 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
   const addFiles = (list: FileList | null) => {
     if (!list) return;
     const next = [...files];
+    const limit = devisMaxTotalMb * 1024 * 1024;
+    let total = next.reduce((n, f) => n + f.size, 0);
+    setError(null);
     for (const f of Array.from(list)) {
       if (next.length >= devisMaxFiles) break;
-      if (f.size > devisMaxFileMb * 1024 * 1024) {
-        setError(`« ${f.name} » dépasse ${devisMaxFileMb} Mo.`);
+      // Plafond cumulé : un fichier qui ferait dépasser le total est écarté, les suivants
+      // restent candidats s'ils sont plus petits.
+      if (total + f.size > limit) {
+        setError(`« ${f.name} » ferait dépasser ${devisMaxTotalMb} Mo au total. Envoyez les plus gros fichiers par e-mail à info@nera-ing.ch.`);
         continue;
       }
+      total += f.size;
       next.push(f);
     }
     setFiles(next);
@@ -262,7 +268,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
             <span className={label}>Pièces jointes (facultatif)</span>
             <label className="flex cursor-pointer items-center gap-3 rounded-sm border border-dashed border-hairline px-3.5 py-3 text-body-sm text-body transition-colors hover:border-accent">
               <Paperclip className="size-4 text-accent" strokeWidth={1.75} />
-              Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxFileMb} Mo chacun)
+              Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxTotalMb} Mo au total)
               <input type="file" multiple accept={devisAccept} className="sr-only" onChange={(e) => addFiles(e.target.files)} />
             </label>
             {files.length > 0 && (
