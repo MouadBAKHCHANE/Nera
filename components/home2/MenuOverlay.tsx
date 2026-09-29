@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { company } from "@/content/prestations";
 import { navigation, type NavItem } from "@/content/navigation";
+import { useSite } from "@/components/site/SiteProvider";
+import { withReferences } from "@/lib/nav";
 import { PrestationIcon } from "@/components/ui/PrestationIcon";
 import { mapsHref } from "@/content/footer";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
-const items: NavItem[] = navigation;
 
 /**
  * Menu plein écran (tablette, mobile, et desktop une fois la page défilée), direction hestera.ch.
@@ -19,6 +20,8 @@ const items: NavItem[] = navigation;
  * sur les mêmes sous-menus que le header et le pied de page.
  */
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { showReferences } = useSite();
+  const items: NavItem[] = withReferences(navigation, showReferences);
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);
 

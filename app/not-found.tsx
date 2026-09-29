@@ -10,6 +10,8 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { aosBlock, aosItem } from "@/components/ui/aos";
 import { notFound } from "@/content/not-found";
+import { getRealisationsCount } from "@/lib/sanity/realisations";
+import { withReferences } from "@/lib/nav";
 
 /** Page 404 : jamais indexée, et `title` absolu pour ne pas hériter du gabarit « … | NERA ». */
 export const metadata: Metadata = {
@@ -30,7 +32,8 @@ export const metadata: Metadata = {
  * À droite, les quatre destinations du menu principal, pour repartir en un clic plutôt que de
  * renvoyer le visiteur vers le seul accueil.
  */
-export default function NotFound() {
+export default async function NotFound() {
+  const links = withReferences(notFound.links, (await getRealisationsCount()) > 0);
   return (
     <>
       <HeaderDark solidOnScroll />
@@ -88,7 +91,7 @@ export default function NotFound() {
                   </h2>
                 </Reveal>
                 <ul className="mt-6 border-t border-nera-cream/15">
-                  {notFound.links.map((l) => (
+                  {links.map((l) => (
                     <Reveal as="li" key={l.href} {...aosItem} className="border-b border-nera-cream/15">
                       <Link
                         href={l.href}

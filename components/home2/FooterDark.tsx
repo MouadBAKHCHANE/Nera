@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
+import { getRealisationsCount } from "@/lib/sanity/realisations";
+import { withReferences } from "@/lib/nav";
 import { prestationsIndexRoute } from "@/content/prestation-pages";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
@@ -16,7 +18,8 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
  * Mobile : tout centré. Tablette : marque + coordonnées centrées, menus à gauche et à droite,
  * icônes sociales centrées, liens légaux puis copyright. Desktop : trois colonnes, icônes sous Contact.
  */
-export function FooterDark() {
+export async function FooterDark() {
+  const bureauLinks = withReferences(footerBureau, (await getRealisationsCount()) > 0);
   return (
     <footer className="border-t border-nera-cream/15 bg-nera-navy-deep text-nera-cream">
       <div className="grid gap-12 px-6 py-16 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 md:px-10 lg:grid-cols-[6fr_3fr_3fr] lg:px-[120px] lg:py-20 lg:text-left">
@@ -63,7 +66,7 @@ export function FooterDark() {
         <div className="md:text-right lg:text-left">
           <h3 className={head}>Le bureau</h3>
           <ul className="mt-6 space-y-2.5">
-            {footerBureau.map((b) => (
+            {bureauLinks.map((b) => (
               <li key={b.href}>
                 <Link href={b.href} className={link}>{b.label}</Link>
               </li>

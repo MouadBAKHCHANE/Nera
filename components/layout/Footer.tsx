@@ -4,6 +4,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/content/prestations";
 import { footerTagline, footerPrestations, footerBureau, footerLegal, mapsHref } from "@/content/footer";
+import { getRealisationsCount } from "@/lib/sanity/realisations";
+import { withReferences } from "@/lib/nav";
 import { prestationsIndexRoute } from "@/content/prestation-pages";
 import { CookiePrefsButton } from "@/components/ui/CookiePrefsButton";
 import { SocialLinks } from "@/components/ui/SocialLinks";
@@ -18,7 +20,8 @@ const row = "flex items-center justify-center gap-3 transition-colors hover:text
  * Mobile : tout centré. Tablette : marque + coordonnées centrées, menus à gauche et à droite,
  * icônes sociales centrées, liens légaux puis copyright. Desktop : trois colonnes, icônes sous Contact.
  */
-export function Footer() {
+export async function Footer() {
+  const bureauLinks = withReferences(footerBureau, (await getRealisationsCount()) > 0);
   return (
     <footer className="border-t border-hairline bg-canvas">
       <Container wide className="grid gap-10 py-14 text-center md:grid-cols-[auto_auto] md:justify-center md:gap-x-24 lg:grid-cols-[6fr_3fr_3fr] lg:py-20 lg:text-left">
@@ -63,7 +66,7 @@ export function Footer() {
         <div className="md:text-right lg:text-left">
           <p className={head}>Le bureau</p>
           <ul className="mt-4 space-y-2.5">
-            {footerBureau.map((b) => (
+            {bureauLinks.map((b) => (
               <li key={b.href}>
                 <Link href={b.href} className={link}>{b.label}</Link>
               </li>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { navigation } from "@/content/navigation";
+import { useSite } from "@/components/site/SiteProvider";
+import { withReferences } from "@/lib/nav";
 import { company } from "@/content/prestations";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
@@ -16,6 +18,7 @@ export function MobileMenu({
   /** true : menu plein écran à toutes les tailles (variante hestera, burger seul). */
   allSizes?: boolean;
 }) {
+  const { showReferences } = useSite();
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {
@@ -31,7 +34,7 @@ export function MobileMenu({
     >
       <nav aria-label="Navigation mobile" className="px-6 py-6">
         <ul className="divide-y divide-hairline">
-          {navigation.map((item) => (
+          {withReferences(navigation, showReferences).map((item) => (
             <li key={item.href} className="py-1">
               <Link
                 href={item.href}

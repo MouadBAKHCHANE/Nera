@@ -10,14 +10,25 @@ import { PartnerLogos } from "@/components/ui/PartnerLogos";
 import { Reveal } from "@/components/ui/Reveal";
 import { aosItem } from "@/components/ui/aos";
 import { references, referencesRoute } from "@/content/references";
+import { prestations } from "@/content/prestations";
+import { prestationPages, prestationRoute } from "@/content/prestation-pages";
+import { urlFor } from "@/lib/sanity/image";
+import type { Realisation } from "@/lib/sanity/realisations";
 import { seo } from "@/content/seo";
 
+/** Intitulé d'une prestation, et son adresse si elle a sa propre page. */
+const prestationLabel = (slug: string) => {
+  const p = prestations.find((x) => x.slug === slug);
+  const hasPage = prestationPages.some((x) => x.slug === slug);
+  return p ? { title: p.title, href: hasPage ? prestationRoute(slug) : undefined } : null;
+};
+
 /**
- * Page « Nos références » : en-tête sombre, la grille des projets quand le client les aura
- * fournis (`references.projects`, vide pour l'instant), puis le H2 de fin et son CTA.
- * Aucun texte n'est ajouté au-delà du document client.
+ * Page « Nos références » : en-tête sombre, la grille des projets saisis par NERA dans le
+ * Studio Sanity, puis le H2 de fin et son CTA. Aucun texte n'est ajouté au-delà du document
+ * client : titres, lieux et descriptions viennent de NERA.
  */
-export function ReferencesPage() {
+export function ReferencesPage({ items }: { items: Realisation[] }) {
   const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -91,36 +102,68 @@ export function ReferencesPage() {
           </Container>
         </header>
 
-        {/* Projets du client : la grille n'apparaît que lorsqu'ils ont été fournis. */}
-        {references.projects.length > 0 && (
-          <section className="bg-canvas py-section-sm lg:py-section">
-            <Container wide>
-              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {references.projects.map((p) => (
+        {/* Projets saisis dans le Studio Sanity, les plus récents d'abord. */}
+        <section className="bg-canvas py-section-sm lg:py-section">
+          <Container wide>
+            <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {items.map((p) => {
+                const tags = (p.prestations ?? []).map(prestationLabel).filter((t) => t !== null);
+                return (
                   <Reveal
                     as="li"
-                    key={p.title}
+                    key={p._id}
                     {...aosItem}
                     className="flex flex-col overflow-hidden rounded-md border border-hairline bg-canvas-alt transition-colors hover:border-accent"
                   >
-                    {p.image && (
-                      <div className="relative aspect-[4/3]">
-                        <Image src={p.image} alt={p.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover" />
+                    {p.image?.asset && (
+                      <div className="relative aspect-[4/3] bg-canvas">
+                        <Image
+                          // Recadrage 4:3 côté Sanity, qui respecte le point focal choisi dans le Studio.
+                          src={urlFor(p.image).width(1200).height(900).fit("crop").url()}
+                          alt={p.image.alt ?? ""}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                          placeholder={p.image.asset.metadata?.lqip ? "blur" : "empty"}
+                          blurDataURL={p.image.asset.metadata?.lqip}
+                          className="object-cover"
+                        />
                       </div>
                     )}
-                    <div className="p-7">
-                      <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-mute">{p.place}</p>
+                    <div className="flex flex-1 flex-col p-7">
+                      <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-mute">
+                        {[p.place, p.year].filter(Boolean).join(" · ")}
+                      </p>
                       <h2 className="mt-3 font-display text-[1.1875rem] font-medium leading-[1.25] text-nera-navy">{p.title}</h2>
                       <p className="mt-3 text-body-sm leading-[1.7] text-body">{p.text}</p>
+                      {tags.length > 0 && (
+                        <ul className="mt-auto flex flex-wrap gap-2 pt-6" aria-label="Prestations réalisées">
+                          {tags.map((t) => (
+                            <li key={t.title}>
+                              {t.href ? (
+                                <Link
+                                  href={t.href}
+                                  className="inline-block rounded-sm border border-hairline px-2.5 py-1 text-[12px] text-nera-navy transition-colors hover:border-accent hover:text-accent"
+                                >
+                                  {t.title}
+                                </Link>
+                              ) : (
+                                <span className="inline-block rounded-sm border border-hairline px-2.5 py-1 text-[12px] text-nera-navy">
+                                  {t.title}
+                                </span>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </Reveal>
-                ))}
-              </ul>
-            </Container>
-          </section>
-        )}
+                );
+              })}
+            </ul>
+          </Container>
+        </section>
 
-        {/* Logos officiels, seuls éléments de référence disponibles en attendant les projets. */}
+        {/* Logos officiels des certifications et partenaires. */}
         <section className="border-b border-hairline bg-canvas py-14 lg:py-20">
           <Container wide>
             <Reveal {...aosItem}>

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, Phone } from "lucide-react";
 import { navigation, contactCta } from "@/content/navigation";
+import { useSite } from "@/components/site/SiteProvider";
+import { withReferences } from "@/lib/nav";
 import { company } from "@/content/prestations";
 import { MenuOverlay } from "./MenuOverlay";
 import { QuoteCta } from "./QuoteCta";
@@ -16,6 +18,7 @@ import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
  * Tablette et mobile : logo + burger, qui ouvre le menu plein écran (MenuOverlay).
  */
 export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean } = {}) {
+  const { showReferences } = useSite();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -77,7 +80,7 @@ export function HeaderDark({ solidOnScroll = false }: { solidOnScroll?: boolean 
             aria-label="Navigation principale"
             className={`hidden flex-1 items-center justify-center ${showNav ? "lg:flex" : ""}`}
           >
-            {navigation.map((item) =>
+            {withReferences(navigation, showReferences).map((item) =>
               item.children ? (
                 <div key={item.href} className="group relative">
                   <Link href={item.href} className={link}>

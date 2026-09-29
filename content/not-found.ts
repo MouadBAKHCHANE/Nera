@@ -1,4 +1,3 @@
-import { referencesVisible } from "@/content/references";
 
 /**
  * Textes de la page 404. Ce sont des textes d'interface, pas du contenu client : le document
@@ -25,9 +24,7 @@ export const notFound = {
   links: [
     { label: "Nos prestations", href: "/prestations", desc: "Les six domaines d’intervention du bureau." },
     { label: "Le bureau", href: "/bureau", desc: "L’équipe, les qualifications et la manière de travailler." },
-    ...(referencesVisible
-      ? [{ label: "Nos références", href: "/references", desc: "Les projets accompagnés par NERA." }]
-      : []),
+    { label: "Nos références", href: "/references", desc: "Les projets accompagnés par NERA." },
     { label: "Contact", href: "/contact", desc: "Nous écrire, nous appeler ou demander une offre." },
   ],
 } as const;

@@ -4,6 +4,8 @@ import "./globals.css";
 import { QuoteProvider } from "@/components/quote/QuoteModal";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { CallButton } from "@/components/ui/CallButton";
+import { SiteProvider } from "@/components/site/SiteProvider";
+import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { seo } from "@/content/seo";
 
@@ -50,7 +52,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // Lu une fois ici, puis transmis aux composants client (menus) par le contexte du site.
+  const site = { showReferences: (await getRealisationsCount()) > 0 };
   return (
     // data-scroll-behavior : Next 16 ne neutralise plus `scroll-behavior: smooth` pendant les
     // transitions de route sans cet attribut. Sans lui, un lien du pied de page fait défiler
@@ -58,11 +62,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="fr-CH" data-scroll-behavior="smooth" className={`${clash.variable} ${satoshi.variable} h-full`}>
       <body className="min-h-full flex flex-col">
         <JsonLd />
-        <QuoteProvider>
-          {children}
-          <CookieBanner />
-          <CallButton />
-        </QuoteProvider>
+        <SiteProvider value={site}>
+          <QuoteProvider>
+            {children}
+            <CookieBanner />
+            <CallButton />
+          </QuoteProvider>
+        </SiteProvider>
       </body>
     </html>
   );

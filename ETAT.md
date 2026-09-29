@@ -554,6 +554,22 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   moins de 4 Mo et pièces jointes jusqu'à 25 Mo, qui demande Mail.ReadWrite restreint à
   noreply@ côté Microsoft (la limite de 4,5 Mo par requête de Vercel reste, d'où le découpage).
 
+- **Sanity, phase 1 (29 septembre 2026).** Studio dans `studio/` (Sanity 6, interface en
+  français) : Réglages du site (document unique, prérempli et publié avec les valeurs
+  actuelles), Références, Redirections, bloc SEO réutilisable. Côté site : `lib/sanity/`
+  (client sans jeton, lecture étiquetée et mise en cache, URL d'images, requêtes), route
+  `/api/revalidate` appelée par le webhook Sanity (signature vérifiée sur le corps brut),
+  page Références lue dans Sanity, visibilité des liens par `SiteProvider` et `lib/nav.ts`.
+  Lectures sur l'API en direct et non sur le CDN : testé, le CDN retardait de plus de trois
+  secondes après le webhook et Next remettait l'ancienne version en cache pour une heure.
+  Cycle complet vérifié sur un build de production avec une référence de test, supprimée
+  ensuite : publication, webhook, page en 200 avec étiquettes et liens, puis suppression,
+  webhook, 404 et liens retirés.
+  `next-sanity` volontairement écarté pour l'instant : il impose tout le paquet `sanity` au
+  site. À reconsidérer pour l'aperçu en direct (Presentation).
+  Neuf erreurs ESLint préexistantes, hors Sanity (SplitReveal, RichText, CookieBanner…), à
+  traiter à part.
+
 ## À faire
 
 Par ordre de priorité.
@@ -562,13 +578,11 @@ Par ordre de priorité.
    promettent le blocage de Google Maps jusqu'au consentement, puisque la carte s'affiche
    désormais d'emblée et que la catégorie a quitté le bandeau. À défaut, rétablir le blocage.
    Tant que ce n'est pas tranché, le site contredit sa propre politique de cookies.
-2. **Références** — obtenir du client la liste des projets (titre, lieu, une phrase, photo)
-   pour remplir `references.projects`. **La page est masquée** à la demande du client
-   (24 septembre) : plus de lien dans le menu, le pied de page ni la page 404, et `proxy.ts`
-   renvoie un vrai 404. Tout tient au drapeau `referencesVisible` de `content/references.ts` :
-   dès qu'un projet est ajouté, la page réapparaît partout, sort du noindex et entre au plan
-   de site. `proxy.ts` pourra alors être supprimé.
-   Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
+2. **Références** — la page est désormais **pilotée par Sanity** (type « realisation ») :
+   elle n'existe, avec ses liens (menu, pied de page, page 404) et son entrée au plan du site,
+   que si au moins une référence est publiée. Reste à obtenir de NERA ses projets (titre,
+   lieu, phrase, photo), qu'elle pourra saisir elle-même dans le Studio. Un portrait du
+   fondateur, s'il existe, pour `#fondateur` de `/bureau`.
 3. **Envoi des e-mails** — **en service depuis le 29 septembre 2026.** Secret posé dans Vercel
    (Production, Sensitive) et dans `.env.local`. Vérifié : envoi accepté depuis noreply@,
    refusé depuis info@ (restriction RBAC effective), jeton sans permission Entra à l'échelle

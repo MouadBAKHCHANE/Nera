@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { navigation, contactCta } from "@/content/navigation";
+import { useSite } from "@/components/site/SiteProvider";
+import { withReferences } from "@/lib/nav";
 import { company } from "@/content/prestations";
 import { MobileMenu } from "./MobileMenu";
 import { QuoteButton } from "@/components/quote/QuoteModal";
@@ -15,6 +17,7 @@ import { PrestationsMenu } from "@/components/layout/PrestationsMenu";
  * marque | navigation | CTA. Fond crème, 82px, sticky.
  */
 export function Header() {
+  const { showReferences } = useSite();
   const [open, setOpen] = useState(false);
 
   const link =
@@ -38,7 +41,7 @@ export function Header() {
           </div>
 
           <nav aria-label="Navigation principale" className="hidden flex-1 items-center justify-center lg:flex">
-            {navigation.map((item) =>
+            {withReferences(navigation, showReferences).map((item) =>
               item.children ? (
                 <div key={item.href} className="group relative">
                   <Link href={item.href} className={link}>
