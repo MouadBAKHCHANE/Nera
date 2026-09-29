@@ -704,7 +704,16 @@ catégorie a été retirée ; GA4, Google Ads et Meta Pixel restent à brancher 
 ## Décisions ouvertes
 
 - Le plan de site client ne mentionne aucune page Actualités, alors que le module CMS
-  (Sanity) est au devis. À trancher avec le client.
+  (Sanity) est au devis. À trancher avec le client : actualités, références, ou les deux.
+- **Sanity** : projet « Nera-ing » créé le 29 septembre 2026, ID `dpjlojol`, organisation
+  NAOENERGY (ID `o1RtA620K`), dataset `production`. Essai Growth de 30 jours, puis passage
+  automatique au forfait gratuit : garder le dataset **public** et ne donner aucun rôle
+  Éditeur, car à la fin de l'essai un dataset privé redevient public et les rôles non admin
+  deviennent Lecteur. Ne pas suivre le guide « Building from scratch » de Sanity, qui crée un
+  second site Next.js dans `web/` : le Studio ira dans `studio/`, autonome, hébergé par
+  Sanity. Dans Vercel, `NEXT_PUBLIC_SANITY_PROJECT_ID` doit valoir `dpjlojol`.
+  Serveur MCP Sanity ajouté à Claude Code (`https://mcp.sanity.io`, portée utilisateur,
+  connexion OAuth via `/mcp`).
 - Sur `/references` et `/contact`, le CTA de fin et l'en-tête gardent leurs apparitions
   d'origine, par cohérence avec les quatre sections que le client a voulu laisser telles
   quelles sur `/bureau`. À confirmer avec lui s'il souhaite les aligner aussi.
