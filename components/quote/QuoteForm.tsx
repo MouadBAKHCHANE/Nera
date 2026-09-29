@@ -44,8 +44,21 @@ const btnGhost =
  * Formulaire de devis gratuit en quatre étapes (direction i-neea.ch) avec les champs
  * du document « Instructions formulaires ». Envoi vers /api/devis en multipart.
  * `initialPrestation` permet de pré-remplir depuis une page prestation.
+ *
+ * `fit` : dans la modale, le formulaire remplit une boîte à hauteur fixe. La barre d'étapes et
+ * les boutons restent en place, seuls les champs défilent si l'écran est trop court. Sans
+ * cela, l'étape « Coordonnées », la plus haute, faisait grandir la modale au-delà de l'écran
+ * et en masquait le haut et le bas (signalé par le client, septembre 2026).
  */
-export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestation?: string; onDone?: () => void }) {
+export function QuoteForm({
+  initialPrestation = "",
+  onDone,
+  fit = false,
+}: {
+  initialPrestation?: string;
+  onDone?: () => void;
+  fit?: boolean;
+}) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<DevisPayload>({ ...empty, prestation: initialPrestation });
   const [files, setFiles] = useState<File[]>([]);
@@ -160,13 +173,13 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
   }
 
   return (
-    <form onSubmit={submit} noValidate>
+    <form onSubmit={submit} noValidate className={fit ? "flex min-h-0 flex-1 flex-col" : undefined}>
       {/* Étapes */}
       {/* Mobile : étape courante en toutes lettres ; dès sm : les quatre libellés */}
-      <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.14em] text-nera-navy sm:hidden">
+      <p className="mb-2 shrink-0 text-[11px] font-medium uppercase tracking-[0.14em] text-nera-navy sm:hidden">
         Étape {step + 1}/{steps.length} · {steps[step]}
       </p>
-      <ol className="mb-6 grid grid-cols-4 gap-1.5 sm:mb-8 sm:gap-2" aria-label="Étapes">
+      <ol className="mb-5 grid shrink-0 grid-cols-4 gap-1.5 sm:mb-6 sm:gap-2" aria-label="Étapes">
         {steps.map((s, i) => (
           <li key={s} className="text-center">
             <span className={`hidden text-[11px] font-medium uppercase tracking-[0.1em] sm:block ${i <= step ? "text-nera-navy" : "text-mute"}`}>{s}</span>
@@ -175,8 +188,10 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         ))}
       </ol>
 
+      {/* `-mx-1 px-1` : l'anneau de focus des champs n'est pas rogné par la zone qui défile. */}
+      <div className={fit ? "-mx-1 min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1" : undefined}>
       {step === 0 && (
-        <div className="space-y-4 sm:space-y-5">
+        <div className="space-y-4">
           <div>
             <label htmlFor="q-prestation" className={label}>Prestation souhaitée*</label>
             <Select id="q-prestation" value={data.prestation} onChange={pick("prestation")} options={devisPrestations} placeholder="Choisir une prestation" className={field} />
@@ -189,12 +204,12 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       )}
 
       {step === 1 && (
-        <div className="space-y-4 sm:space-y-5">
+        <div className="space-y-4">
           <div>
             <label htmlFor="q-batiment" className={label}>Type de bâtiment*</label>
             <Select id="q-batiment" value={data.batiment} onChange={pick("batiment")} options={devisBatiments} placeholder="Choisir un type" className={field} />
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="q-code-postal" className={label}>Code postal*</label>
               <input
@@ -213,7 +228,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
               <Select id="q-canton" value={data.canton} onChange={pick("canton")} options={devisCantons} placeholder="Choisir un canton" className={field} />
             </div>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="q-annee" className={label}>Année de construction</label>
               <input id="q-annee" value={data.annee} onChange={set("annee")} className={field} inputMode="numeric" placeholder="Ex. 1975" />
@@ -227,12 +242,12 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
       )}
 
       {step === 2 && (
-        <div className="space-y-4 sm:space-y-5">
+        <div className="space-y-4">
           <div>
             <label htmlFor="q-nom" className={label}>Nom et prénom*</label>
             <input id="q-nom" value={data.nom} onChange={set("nom")} className={field} autoComplete="name" required />
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="q-email" className={label}>E-mail*</label>
               <input id="q-email" type="email" value={data.email} onChange={set("email")} className={field} autoComplete="email" required />
@@ -244,11 +259,11 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
           </div>
           <div>
             <label htmlFor="q-message" className={label}>Message</label>
-            <textarea id="q-message" value={data.message} onChange={set("message")} className={`${field} min-h-[110px] resize-y`} placeholder="Décrivez votre projet, vos délais, vos questions." />
+            <textarea id="q-message" value={data.message} onChange={set("message")} className={`${field} min-h-[76px] resize-y`} placeholder="Décrivez votre projet, vos délais, vos questions." />
           </div>
           <div>
             <span className={label}>Pièces jointes (facultatif)</span>
-            <label className="flex cursor-pointer items-center gap-3 rounded-sm border border-dashed border-hairline px-3.5 py-3 text-body-sm text-body transition-colors hover:border-accent">
+            <label className="flex cursor-pointer items-center gap-3 rounded-sm border border-dashed border-hairline px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent">
               <Paperclip className="size-4 text-accent" strokeWidth={1.75} />
               Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxTotalMb} Mo au total)
               <input type="file" multiple accept={devisAccept} className="sr-only" onChange={(e) => addFiles(e.target.files)} />
@@ -296,13 +311,22 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         </dl>
       )}
 
+      {/*
+        Dans la modale, la mention légale n'apparaît qu'à la dernière étape, juste au-dessus
+        d'« Envoyer ma demande » : c'est là que les données partent, et rien n'est transmis
+        avant. Répétée à chaque étape, elle prenait 74 px de la zone des champs et faisait
+        défiler l'étape « Coordonnées ». Hors modale, elle reste sous les boutons.
+      */}
+      {fit && step === steps.length - 1 && <FormNotice variant="devis" className="mt-5 text-mute" />}
+      </div>
+
       {error && (
-        <p role="alert" className="mt-4 text-body-sm text-red-700">
+        <p role="alert" className="mt-4 shrink-0 text-body-sm text-red-700">
           {error}
         </p>
       )}
 
-      <div className="mt-6 flex items-center justify-between gap-3 sm:mt-8">
+      <div className="mt-5 flex shrink-0 items-center justify-between gap-3 sm:mt-6">
         {step > 0 ? (
           <button type="button" onClick={back} className={btnGhost}>
             <ArrowLeft className="size-4" strokeWidth={1.75} />
@@ -341,8 +365,8 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         )}
       </div>
 
-      <p className="mt-4 text-center text-[12px] text-mute sm:mt-6 sm:text-body-sm">{devisNote}</p>
-      <FormNotice variant="devis" className="mt-3 text-mute" />
+      <p className="mt-3 shrink-0 text-center text-[12px] text-mute sm:mt-4 sm:text-body-sm">{devisNote}</p>
+      {!fit && <FormNotice variant="devis" className="mt-3 text-mute" />}
     </form>
   );
 }

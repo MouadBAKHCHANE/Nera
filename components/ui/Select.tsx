@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
+import { createPortal } from "react-dom";
 import { Check, ChevronDown } from "lucide-react";
 
 /**
@@ -11,6 +12,11 @@ import { Check, ChevronDown } from "lucide-react";
  * dessinée par le système, par-dessus le voile flouté plein écran de la modale : Chrome sous
  * Windows la compose mal. Une liste à nous s'ouvre instantanément, toujours sur fond blanc, et
  * ressemble au reste du formulaire sur tous les navigateurs.
+ *
+ * La liste est rendue dans `document.body` (portail) et placée en `position: fixed` sous son
+ * champ. Dans la modale devis, les champs défilent dans une zone à hauteur fixe : une liste
+ * rendue sur place y serait coupée. Elle se ferme dès que la page ou cette zone défile, pour ne
+ * jamais flotter loin de son champ.
  *
  * Accessibilité (motif « select-only combobox » de l'APG du W3C) : le bouton porte
  * `role="combobox"`, la liste `role="listbox"`, l'option active est annoncée par
@@ -39,31 +45,69 @@ export function Select({
 }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
-  const [upward, setUpward] = useState(false);
+  const [pos, setPos] = useState<{ left: number; width: number; top?: number; bottom?: number; maxHeight: number } | null>(null);
   const wrap = useRef<HTMLDivElement>(null);
+  const list = useRef<HTMLUListElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
   const listId = useId();
   const optId = (i: number) => `${listId}-o${i}`;
 
   const show = (index: number) => {
-    // Ouvre vers le haut si la place manque en dessous : la liste reste entière à l'écran.
     const r = wrap.current?.getBoundingClientRect();
-    if (r) setUpward(window.innerHeight - r.bottom < 370 && r.top > window.innerHeight - r.bottom);
+    if (!r) return;
+    // Sous le champ, sauf si la place y manque et qu'il y en a davantage au-dessus.
+    // 352 px : les sept prestations tiennent sans défiler.
+    const below = window.innerHeight - r.bottom - 12;
+    const above = r.top - 12;
+    const upward = below < 240 && above > below;
+    const maxHeight = Math.min(352, upward ? above : below);
+    setPos(
+      upward
+        ? { left: r.left, width: r.width, bottom: window.innerHeight - r.top + 4, maxHeight }
+        : { left: r.left, width: r.width, top: r.bottom + 4, maxHeight },
+    );
     setActive(index);
     setOpen(true);
+    // Safari ne donne pas le focus à un bouton cliqué : sans cela, les flèches et Échap
+    // n'arriveraient pas jusqu'à la liste après une ouverture à la souris.
+    button.current?.focus();
   };
   const choose = (i: number) => {
     onChange(options[i]);
     setOpen(false);
   };
 
-  // Clic ou toucher hors du champ : la liste se ferme.
+  // Clic ou toucher hors du champ et de la liste, défilement ailleurs que dans la liste,
+  // redimensionnement : la liste se ferme.
   useEffect(() => {
     if (!open) return;
+    const inside = (t: EventTarget | null) =>
+      t instanceof Node && (wrap.current?.contains(t) || list.current?.contains(t));
     const onDown = (e: PointerEvent) => {
-      if (!wrap.current?.contains(e.target as Node)) setOpen(false);
+      if (!inside(e.target)) setOpen(false);
     };
+    const onScroll = (e: Event) => {
+      if (!inside(e.target)) setOpen(false);
+    };
+    const onResize = () => setOpen(false);
+    // Échap ferme la liste, et seulement elle. Écouté sur la fenêtre en phase de capture, donc
+    // avant l'écouteur de la modale : Échap ne ferme plus tout le formulaire, où que soit le focus.
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+    };
+    window.addEventListener("keydown", onKey, true);
     document.addEventListener("pointerdown", onDown);
-    return () => document.removeEventListener("pointerdown", onDown);
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("keydown", onKey, true);
+    };
   }, [open]);
 
   // L'option active reste visible quand on la déplace au clavier dans une liste qui défile.
@@ -106,12 +150,6 @@ export function Select({
         e.preventDefault();
         if (active >= 0) choose(active);
         return;
-      case "Escape":
-        // Sans ceci, Échap remonterait jusqu'à la modale et fermerait tout le formulaire.
-        e.preventDefault();
-        e.stopPropagation();
-        setOpen(false);
-        return;
       case "Tab":
         setOpen(false);
         return;
@@ -126,6 +164,7 @@ export function Select({
   return (
     <div ref={wrap} className="relative">
       <button
+        ref={button}
         id={id}
         type="button"
         role="combobox"
@@ -146,37 +185,42 @@ export function Select({
         />
       </button>
 
-      <ul
-        id={listId}
-        role="listbox"
-        aria-labelledby={id}
-        hidden={!open}
-        className={`absolute inset-x-0 z-30 max-h-[22rem] overflow-y-auto rounded-sm border border-hairline bg-white py-1 shadow-[0_12px_32px_rgba(10,36,64,0.16)] ${
-          upward ? "bottom-full mb-1" : "top-full mt-1"
-        }`}
-      >
-        {options.map((o, i) => {
-          const selected = o === value;
-          return (
-            <li
-              key={o}
-              id={optId(i)}
-              role="option"
-              aria-selected={selected}
-              // pointerdown évite que le bouton perde le focus avant le choix.
-              onPointerDown={(e) => e.preventDefault()}
-              onClick={() => choose(i)}
-              onPointerMove={() => setActive(i)}
-              className={`flex cursor-pointer items-center justify-between gap-3 px-3 py-2.5 text-body-sm sm:px-3.5 sm:text-body-md ${
-                i === active ? "bg-accent/10 text-nera-navy" : "text-nera-ink"
-              } ${selected ? "font-medium" : ""}`}
-            >
-              <span>{o}</span>
-              {selected && <Check className="size-4 shrink-0 text-accent" strokeWidth={2} aria-hidden />}
-            </li>
-          );
-        })}
-      </ul>
+      {open &&
+        pos &&
+        createPortal(
+        <ul
+          ref={list}
+          id={listId}
+          role="listbox"
+          aria-labelledby={id}
+          style={{ left: pos.left, width: pos.width, top: pos.top, bottom: pos.bottom, maxHeight: pos.maxHeight }}
+          // Au-dessus de la modale (z-[100]).
+          className="fixed z-[120] overflow-y-auto rounded-sm border border-hairline bg-white py-1 shadow-[0_12px_32px_rgba(10,36,64,0.16)]"
+        >
+          {options.map((o, i) => {
+            const selected = o === value;
+            return (
+              <li
+                key={o}
+                id={optId(i)}
+                role="option"
+                aria-selected={selected}
+                // pointerdown évite que le bouton perde le focus avant le choix.
+                onPointerDown={(e) => e.preventDefault()}
+                onClick={() => choose(i)}
+                onPointerMove={() => setActive(i)}
+                className={`flex cursor-pointer items-center justify-between gap-3 px-3 py-2.5 text-body-sm sm:px-3.5 sm:text-body-md ${
+                  i === active ? "bg-accent/10 text-nera-navy" : "text-nera-ink"
+                } ${selected ? "font-medium" : ""}`}
+              >
+                <span>{o}</span>
+                {selected && <Check className="size-4 shrink-0 text-accent" strokeWidth={2} aria-hidden />}
+              </li>
+            );
+          })}
+        </ul>,
+          document.body,
+        )}
     </div>
   );
 }

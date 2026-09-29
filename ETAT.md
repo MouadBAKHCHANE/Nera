@@ -515,6 +515,19 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   affiche les sept prestations sans défiler, s'ouvre vers le haut si la place manque, et suit
   le motif combobox du W3C (flèches, Entrée, lettre, Échap sans fermer la modale).
 
+- Pop-up devis à **hauteur fixe** : 740 px au plus, l'écran moins une marge sinon, identique
+  aux quatre étapes. Signalé par le client : l'étape « Coordonnées » agrandissait la modale
+  au-delà de l'écran, qui en perdait le haut et le bas. La barre d'étapes et les boutons
+  restent en place, seuls les champs défilent si l'écran est trop court (`fit` sur
+  `QuoteForm`, la page `/devis` garde sa mise en page). Mesuré sans aucun défilement à
+  1440 × 900 et 1366 × 768 ; sur téléphone, les boutons restent toujours visibles. Dans la
+  modale, la mention légale n'apparaît plus qu'à l'étape « Synthèse », au-dessus d'« Envoyer
+  ma demande », là où les données partent. Sur les écrans de moins de 820 px de haut, le
+  sous-titre de la modale est masqué.
+- `Select` : la liste est rendue dans `document.body` et placée sous son champ, pour ne pas
+  être coupée par la zone qui défile. Échap est écouté sur la fenêtre en capture : il ferme
+  la liste et non la modale, même si le bouton n'a pas le focus (cas de Safari).
+
 ## À faire
 
 Par ordre de priorité.
