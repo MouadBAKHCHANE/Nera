@@ -538,6 +538,15 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   l'attribut `accept`. Un fichier lâché à côté de la zone n'est plus ouvert par le navigateur,
   ce qui aurait fait perdre le formulaire. Sur téléphone, le libellé reste celui d'avant.
 
+- Pop-up devis, desktop resserré pour les écrans à affichage agrandi (portable 1920 × 1080 à
+  150 % : environ 650 px de hauteur utile). Champs à 46 px, boutons à 44, marges réduites,
+  titre et marges intérieures plus petits sous 820 px de haut. À l'étape « Coordonnées »,
+  **message et pièces jointes côte à côte** dès `sm` : une rangée de moins, et une zone de
+  dépôt aussi haute que le message (icône, « Glissez-déposez vos fichiers ou parcourez »,
+  formats). Les fichiers ajoutés s'affichent en étiquettes sous les deux champs. Mesuré sans
+  aucun défilement aux quatre étapes à 1280 × 650, 1366 × 768, 1920 × 1080 et 820 × 1180.
+  Sur téléphone, rien ne change.
+
 ## À faire
 
 Par ordre de priorité.

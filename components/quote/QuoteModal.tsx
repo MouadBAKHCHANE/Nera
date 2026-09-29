@@ -39,7 +39,7 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
     <QuoteContext.Provider value={{ open, close }}>
       {children}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-nera-navy-deep/70 p-4 backdrop-blur-sm sm:items-center sm:overflow-hidden" onClick={close}>
+        <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-nera-navy-deep/70 p-4 backdrop-blur-sm sm:items-center sm:overflow-hidden [@media(max-height:820px)]:sm:p-3" onClick={close}>
           <div
             role="dialog"
             aria-modal="true"
@@ -52,7 +52,7 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
               et c'est la page qui défile : les boutons viennent après les champs, ce qui invite à
               faire défiler pour tout voir avant de continuer.
             */
-            className="relative my-4 flex w-full scroll-mt-4 max-w-[576px] flex-col rounded-md border border-hairline bg-canvas p-4 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:my-0 sm:h-[min(740px,calc(100dvh-4rem))] sm:p-8"
+            className="relative my-4 flex w-full scroll-mt-4 max-w-[576px] flex-col rounded-md border border-hairline bg-canvas p-4 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:my-0 sm:h-[min(740px,calc(100dvh-4rem))] [@media(max-height:820px)]:sm:h-[min(740px,calc(100dvh-1.5rem))] sm:p-8 [@media(max-height:820px)]:sm:p-6"
           >
             <button type="button" onClick={close} aria-label="Fermer" className="absolute right-3 top-3 inline-flex size-10 items-center justify-center rounded-sm text-mute transition-colors hover:bg-canvas-alt hover:text-nera-navy">
               <X className="size-5" strokeWidth={1.75} />
@@ -61,7 +61,7 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
               <span className="h-2 w-7 bg-accent" aria-hidden />
               Devis gratuit
             </p>
-            <h2 id="quote-title" className="mt-2 shrink-0 font-display text-[1.25rem] text-nera-navy sm:mt-3 sm:text-display-sm md:text-display-md">
+            <h2 id="quote-title" className="mt-2 shrink-0 font-display text-[1.25rem] text-nera-navy sm:mt-3 sm:text-display-sm md:text-display-md [@media(max-height:820px)]:md:text-display-sm">
               Votre devis gratuit
             </h2>
             {/* Sous-titre masqué sur les écrans bas (portables 768 px) : la place va aux champs. */}

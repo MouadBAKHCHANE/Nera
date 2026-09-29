@@ -33,12 +33,12 @@ const empty: DevisPayload = {
 };
 
 const field =
-  "w-full rounded-sm border border-hairline bg-canvas-alt px-3 py-2.5 text-body-sm sm:px-3.5 sm:py-3 sm:text-body-md text-nera-ink placeholder:text-mute focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+  "w-full rounded-sm border border-hairline bg-canvas-alt px-3 py-2.5 text-body-sm sm:px-3.5 sm:py-2.5 sm:text-body-md text-nera-ink placeholder:text-mute focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
 const label = "mb-1.5 block text-body-sm font-medium text-nera-navy";
 const btnPrimary =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-accent px-5 text-[14px] sm:h-12 sm:px-6 sm:text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-accent px-5 text-[14px] sm:px-6 sm:text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60";
 const btnGhost =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-hairline px-4 text-[14px] sm:h-12 sm:px-5 sm:text-[15px] font-medium text-nera-navy transition-colors duration-base hover:border-nera-navy";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-hairline px-4 text-[14px] sm:px-5 sm:text-[15px] font-medium text-nera-navy transition-colors duration-base hover:border-nera-navy";
 
 /**
  * Formulaire de devis gratuit en quatre étapes (direction i-neea.ch) avec les champs
@@ -251,7 +251,7 @@ export function QuoteForm({
       <p className="mb-2 shrink-0 text-[11px] font-medium uppercase tracking-[0.14em] text-nera-navy sm:hidden">
         Étape {step + 1}/{steps.length} · {steps[step]}
       </p>
-      <ol className="mb-5 grid shrink-0 grid-cols-4 gap-1.5 sm:mb-6 sm:gap-2" aria-label="Étapes">
+      <ol className="mb-5 grid shrink-0 grid-cols-4 gap-1.5 sm:gap-2" aria-label="Étapes">
         {steps.map((s, i) => (
           <li key={s} className="text-center">
             <span className={`hidden text-[11px] font-medium uppercase tracking-[0.1em] sm:block ${i <= step ? "text-nera-navy" : "text-mute"}`}>{s}</span>
@@ -329,72 +329,91 @@ export function QuoteForm({
               <input id="q-tel" type="tel" value={data.telephone} onChange={set("telephone")} className={field} autoComplete="tel" required />
             </div>
           </div>
-          <div>
-            <label htmlFor="q-message" className={label}>Message</label>
-            <textarea id="q-message" value={data.message} onChange={set("message")} className={`${field} min-h-[76px] resize-y`} placeholder="Décrivez votre projet, vos délais, vos questions." />
-          </div>
-          <div>
-            {/* Desktop : les formats et limites passent à droite du libellé, la zone reste sur une ligne. */}
-            <div className="flex items-baseline justify-between gap-3">
-              <span className={label}>Pièces jointes (facultatif)</span>
-              <span className="mb-1.5 hidden text-[12px] text-mute lg:inline">
-                PDF, JPG, PNG, HEIC, WebP · {devisMaxFiles} max, {devisMaxTotalMb} Mo au total
-              </span>
+          {/*
+            Dès `sm`, message et pièces jointes côte à côte : une rangée de moins, ce qui fait
+            tenir l'étape sur un écran de portable à affichage agrandi (environ 650 px utiles),
+            et une zone de dépôt aussi haute que le champ message, donc facile à viser.
+            Sur téléphone, ils restent l'un sous l'autre.
+          */}
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            <div className="flex flex-col">
+              <label htmlFor="q-message" className={label}>Message</label>
+              <textarea
+                id="q-message"
+                value={data.message}
+                onChange={set("message")}
+                className={`${field} min-h-[76px] flex-1 resize-none sm:min-h-[128px]`}
+                placeholder="Décrivez votre projet, vos délais, vos questions."
+              />
             </div>
-            <label
-              {...dropHandlers}
-              className={`flex cursor-pointer items-center gap-3 rounded-sm border border-dashed px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent ${
-                dragging ? "border-accent bg-accent/10" : "border-hairline"
-              }`}
-            >
-              {/* Téléphone : trombone et formats. Desktop : on invite au glisser-déposer. */}
-              <Paperclip className="size-4 shrink-0 text-accent lg:hidden" strokeWidth={1.75} aria-hidden />
-              <Upload className="hidden size-4 shrink-0 text-accent lg:block" strokeWidth={1.75} aria-hidden />
-              <span className="min-w-0">
-                <span className="lg:hidden">
+            <div className="flex flex-col">
+              <span className={label}>Pièces jointes (facultatif)</span>
+              <label
+                {...dropHandlers}
+                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-sm border border-dashed px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent hover:bg-accent/5 sm:min-h-[128px] sm:flex-col sm:justify-center sm:gap-1.5 sm:px-4 sm:py-4 sm:text-center ${
+                  dragging ? "border-accent bg-accent/10" : "border-nera-navy/25 bg-canvas-alt"
+                }`}
+              >
+                {/* Téléphone : une ligne, trombone et formats. Dès sm : zone de dépôt en colonne. */}
+                <Paperclip className="size-4 shrink-0 text-accent sm:hidden" strokeWidth={1.75} aria-hidden />
+                <Upload className="hidden size-6 shrink-0 text-accent sm:block" strokeWidth={1.5} aria-hidden />
+                <span className="min-w-0 sm:hidden">
                   Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxTotalMb} Mo au total)
                 </span>
-                <span className="hidden lg:inline">
+                <span className="hidden sm:block">
                   {dragging ? (
                     <span className="font-medium text-nera-navy">Déposez vos fichiers ici</span>
                   ) : (
                     <>
-                      Glissez-déposez vos plans, factures ou photos, ou{" "}
-                      <span className="font-medium text-nera-navy underline underline-offset-2">parcourez</span>
+                      {/* Le glisser-déposer suppose une souris : sur tablette, on ne le propose pas. */}
+                      <span className="hidden lg:inline">
+                        Glissez-déposez vos fichiers
+                        <br />
+                        ou <span className="font-medium text-nera-navy underline underline-offset-2">parcourez</span>
+                      </span>
+                      <span className="font-medium text-nera-navy underline underline-offset-2 lg:hidden">
+                        Ajouter des fichiers
+                      </span>
                     </>
                   )}
                 </span>
-              </span>
-              <input
-                type="file"
-                multiple
-                accept={devisAccept}
-                className="sr-only"
-                onChange={(e) => {
-                  addFiles(e.target.files);
-                  // Sans cela, re-choisir un fichier qu'on vient de retirer ne déclencherait rien.
-                  e.target.value = "";
-                }}
-              />
-            </label>
-            {files.length > 0 && (
-              <ul className="mt-2 space-y-1">
-                {files.map((f, i) => (
-                  <li key={`${f.name}-${i}`} className="flex items-center justify-between rounded-sm bg-canvas px-3 py-1.5 text-body-sm text-nera-ink">
-                    <span className="truncate">{f.name}</span>
-                    <button type="button" aria-label={`Retirer ${f.name}`} onClick={() => setFiles(files.filter((_, j) => j !== i))} className="ml-3 text-mute hover:text-nera-navy">
-                      <X className="size-4" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
+                <span className="hidden text-[12px] leading-snug text-mute sm:block">
+                  PDF, JPG, PNG, HEIC, WebP
+                  <br />
+                  {devisMaxFiles} max, {devisMaxTotalMb} Mo au total
+                </span>
+                <input
+                  type="file"
+                  multiple
+                  accept={devisAccept}
+                  className="sr-only"
+                  onChange={(e) => {
+                    addFiles(e.target.files);
+                    // Sans cela, re-choisir un fichier qu'on vient de retirer ne déclencherait rien.
+                    e.target.value = "";
+                  }}
+                />
+              </label>
+            </div>
           </div>
+          {files.length > 0 && (
+            <ul className="flex flex-wrap gap-2">
+              {files.map((f, i) => (
+                <li key={`${f.name}-${i}`} className="flex max-w-full items-center gap-2 rounded-sm border border-hairline bg-canvas-alt py-1 pl-3 pr-1.5 text-body-sm text-nera-ink">
+                  <Paperclip className="size-3.5 shrink-0 text-accent" strokeWidth={1.75} aria-hidden />
+                  <span className="truncate">{f.name}</span>
+                  <button type="button" aria-label={`Retirer ${f.name}`} onClick={() => setFiles(files.filter((_, j) => j !== i))} className="inline-flex size-6 shrink-0 items-center justify-center rounded-sm text-mute hover:bg-canvas hover:text-nera-navy">
+                    <X className="size-4" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 
       {step === 3 && (
-        <dl className="grid gap-x-6 gap-y-3 text-body-sm sm:grid-cols-2">
+        <dl className="grid gap-x-6 gap-y-2 text-body-sm sm:grid-cols-2">
           {[
             ["Prestation", data.prestation],
             ["Objectif", data.objectif || "—"],
@@ -406,13 +425,13 @@ export function QuoteForm({
             ["Téléphone", data.telephone],
             ["Pièces jointes", files.length ? `${files.length} fichier(s)` : "—"],
           ].map(([k, v]) => (
-            <div key={k} className="border-b border-hairline pb-2">
+            <div key={k} className="border-b border-hairline pb-1.5">
               <dt className="text-[11px] font-medium uppercase tracking-[0.14em] text-mute">{k}</dt>
               <dd className="mt-0.5 text-nera-ink">{v}</dd>
             </div>
           ))}
           {data.message && (
-            <div className="border-b border-hairline pb-2 sm:col-span-2">
+            <div className="border-b border-hairline pb-1.5 sm:col-span-2">
               <dt className="text-[11px] font-medium uppercase tracking-[0.14em] text-mute">Message</dt>
               <dd className="mt-0.5 whitespace-pre-line text-nera-ink">{data.message}</dd>
             </div>
@@ -427,7 +446,7 @@ export function QuoteForm({
         défiler l'étape « Coordonnées ». Sur téléphone et hors modale, elle reste sous les
         boutons, à chaque étape, comme avant.
       */}
-      {fit && step === steps.length - 1 && <FormNotice variant="devis" className="mt-5 text-mute max-sm:hidden" />}
+      {fit && step === steps.length - 1 && <FormNotice variant="devis" className="mt-4 text-mute max-sm:hidden" />}
       </div>
 
       {error && (
@@ -436,7 +455,7 @@ export function QuoteForm({
         </p>
       )}
 
-      <div className="mt-5 flex shrink-0 items-center justify-between gap-3 sm:mt-6">
+      <div className="mt-5 flex shrink-0 items-center justify-between gap-3">
         {step > 0 ? (
           <button type="button" onClick={back} className={btnGhost}>
             <ArrowLeft className="size-4" strokeWidth={1.75} />
@@ -475,7 +494,7 @@ export function QuoteForm({
         )}
       </div>
 
-      <p className="mt-3 shrink-0 text-center text-[12px] text-mute sm:mt-4 sm:text-body-sm">{devisNote}</p>
+      <p className="mt-3 shrink-0 text-center text-[12px] text-mute">{devisNote}</p>
       <FormNotice variant="devis" className={`mt-3 text-mute ${fit ? "sm:hidden" : ""}`} />
     </form>
   );
