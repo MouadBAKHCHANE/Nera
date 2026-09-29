@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check, Paperclip, X } from "lucide-react";
 import {
   devisPrestations,
@@ -45,7 +45,7 @@ const btnGhost =
  * du document « Instructions formulaires ». Envoi vers /api/devis en multipart.
  * `initialPrestation` permet de pré-remplir depuis une page prestation.
  *
- * `fit` : dans la modale, le formulaire remplit une boîte à hauteur fixe. La barre d'étapes et
+ * `fit` : dans la modale, dès `sm`, le formulaire remplit une boîte à hauteur fixe. La barre d'étapes et
  * les boutons restent en place, seuls les champs défilent si l'écran est trop court. Sans
  * cela, l'étape « Coordonnées », la plus haute, faisait grandir la modale au-delà de l'écran
  * et en masquait le haut et le bas (signalé par le client, septembre 2026).
@@ -70,6 +70,24 @@ export function QuoteForm({
    * soumission implicite du formulaire.
    */
   const sendIntent = useRef(false);
+
+  /**
+   * Sur téléphone, la page défile et les boutons sont sous les champs : on arrive sur
+   * « Suivant » en bas de l'étape. Sans ceci, l'étape suivante s'afficherait déjà défilée,
+   * son haut hors de l'écran. On remonte donc au haut de la modale, ou du formulaire hors
+   * modale, à chaque changement d'étape, et seulement s'il n'est plus visible.
+   */
+  const formRef = useRef<HTMLFormElement>(null);
+  const firstStep = useRef(true);
+  useEffect(() => {
+    if (firstStep.current) {
+      firstStep.current = false;
+      return;
+    }
+    const form = formRef.current;
+    const target = form?.closest<HTMLElement>("[role=dialog]") ?? form;
+    if (target && target.getBoundingClientRect().top < 0) target.scrollIntoView({ block: "start" });
+  }, [step]);
 
   const pick = (k: keyof DevisPayload) => (v: string) => setData((d) => ({ ...d, [k]: v }));
   const set = (k: keyof DevisPayload) => (e: { target: { value: string } }) => setData((d) => ({ ...d, [k]: e.target.value }));
@@ -173,7 +191,7 @@ export function QuoteForm({
   }
 
   return (
-    <form onSubmit={submit} noValidate className={fit ? "flex min-h-0 flex-1 flex-col" : undefined}>
+    <form ref={formRef} onSubmit={submit} noValidate className={fit ? "flex flex-col sm:min-h-0 sm:flex-1" : "scroll-mt-28"}>
       {/* Étapes */}
       {/* Mobile : étape courante en toutes lettres ; dès sm : les quatre libellés */}
       <p className="mb-2 shrink-0 text-[11px] font-medium uppercase tracking-[0.14em] text-nera-navy sm:hidden">
@@ -189,7 +207,7 @@ export function QuoteForm({
       </ol>
 
       {/* `-mx-1 px-1` : l'anneau de focus des champs n'est pas rogné par la zone qui défile. */}
-      <div className={fit ? "-mx-1 min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 pb-1" : undefined}>
+      <div className={fit ? "sm:-mx-1 sm:min-h-0 sm:flex-1 sm:overflow-y-auto sm:overscroll-contain sm:px-1 sm:pb-1" : undefined}>
       {step === 0 && (
         <div className="space-y-4">
           <div>
@@ -315,9 +333,10 @@ export function QuoteForm({
         Dans la modale, la mention légale n'apparaît qu'à la dernière étape, juste au-dessus
         d'« Envoyer ma demande » : c'est là que les données partent, et rien n'est transmis
         avant. Répétée à chaque étape, elle prenait 74 px de la zone des champs et faisait
-        défiler l'étape « Coordonnées ». Hors modale, elle reste sous les boutons.
+        défiler l'étape « Coordonnées ». Sur téléphone et hors modale, elle reste sous les
+        boutons, à chaque étape, comme avant.
       */}
-      {fit && step === steps.length - 1 && <FormNotice variant="devis" className="mt-5 text-mute" />}
+      {fit && step === steps.length - 1 && <FormNotice variant="devis" className="mt-5 text-mute max-sm:hidden" />}
       </div>
 
       {error && (
@@ -366,7 +385,7 @@ export function QuoteForm({
       </div>
 
       <p className="mt-3 shrink-0 text-center text-[12px] text-mute sm:mt-4 sm:text-body-sm">{devisNote}</p>
-      {!fit && <FormNotice variant="devis" className="mt-3 text-mute" />}
+      <FormNotice variant="devis" className={`mt-3 text-mute ${fit ? "sm:hidden" : ""}`} />
     </form>
   );
 }

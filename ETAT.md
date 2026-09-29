@@ -520,10 +520,13 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   au-delà de l'écran, qui en perdait le haut et le bas. La barre d'étapes et les boutons
   restent en place, seuls les champs défilent si l'écran est trop court (`fit` sur
   `QuoteForm`, la page `/devis` garde sa mise en page). Mesuré sans aucun défilement à
-  1440 × 900 et 1366 × 768 ; sur téléphone, les boutons restent toujours visibles. Dans la
-  modale, la mention légale n'apparaît plus qu'à l'étape « Synthèse », au-dessus d'« Envoyer
-  ma demande », là où les données partent. Sur les écrans de moins de 820 px de haut, le
-  sous-titre de la modale est masqué.
+  1440 × 900 et 1366 × 768. Dans la modale desktop, la mention légale n'apparaît plus qu'à
+  l'étape « Synthèse », au-dessus d'« Envoyer ma demande », là où les données partent. Sur
+  les écrans de moins de 820 px de haut, le sous-titre de la modale est masqué.
+  **Tout cela à partir de `sm` seulement.** Sur téléphone, à la demande du client, la modale
+  garde sa hauteur naturelle et la page défile : les boutons viennent après les champs, et la
+  mention légale reste sous les boutons à chaque étape. À chaque changement d'étape, la
+  modale remonte à son haut s'il est sorti de l'écran.
 - `Select` : la liste est rendue dans `document.body` et placée sous son champ, pour ne pas
   être coupée par la zone qui défile. Échap est écouté sur la fenêtre en capture : il ferme
   la liste et non la modale, même si le bouton n'a pas le focus (cas de Safari).

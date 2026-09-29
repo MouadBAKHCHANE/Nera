@@ -39,18 +39,20 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
     <QuoteContext.Provider value={{ open, close }}>
       {children}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-nera-navy-deep/70 p-4 backdrop-blur-sm" onClick={close}>
+        <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-nera-navy-deep/70 p-4 backdrop-blur-sm sm:items-center sm:overflow-hidden" onClick={close}>
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="quote-title"
             onClick={(e) => e.stopPropagation()}
             /*
-              Hauteur fixe, identique à toutes les étapes : la modale ne saute plus d'une étape à
-              l'autre et ne dépasse jamais l'écran. 740 px au plus, l'écran moins une marge sinon.
-              `dvh` suit la barre d'adresse mobile qui apparaît et disparaît.
+              Dès `sm`, hauteur fixe, identique à toutes les étapes : la modale ne saute plus d'une
+              étape à l'autre et ne dépasse jamais l'écran. 740 px au plus, l'écran moins une marge
+              sinon. Sur téléphone, à la demande du client, la modale reprend sa hauteur naturelle
+              et c'est la page qui défile : les boutons viennent après les champs, ce qui invite à
+              faire défiler pour tout voir avant de continuer.
             */
-            className="relative flex h-[calc(100dvh-2rem)] w-full max-w-[576px] flex-col rounded-md border border-hairline bg-canvas p-4 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:h-[min(740px,calc(100dvh-4rem))] sm:p-8"
+            className="relative my-4 flex w-full scroll-mt-4 max-w-[576px] flex-col rounded-md border border-hairline bg-canvas p-4 shadow-[0_24px_80px_rgba(10,36,64,0.35)] sm:my-0 sm:h-[min(740px,calc(100dvh-4rem))] sm:p-8"
           >
             <button type="button" onClick={close} aria-label="Fermer" className="absolute right-3 top-3 inline-flex size-10 items-center justify-center rounded-sm text-mute transition-colors hover:bg-canvas-alt hover:text-nera-navy">
               <X className="size-5" strokeWidth={1.75} />
@@ -64,7 +66,7 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
             </h2>
             {/* Sous-titre masqué sur les écrans bas (portables 768 px) : la place va aux champs. */}
             <p className="mt-1 hidden shrink-0 text-body-sm text-body sm:block [@media(max-height:820px)]:hidden">Bureau d&apos;ingénieurs en énergie et physique du bâtiment.</p>
-            <div className="mt-4 flex min-h-0 flex-1 flex-col sm:mt-6 [@media(max-height:820px)]:sm:mt-4">
+            <div className="mt-4 flex flex-col sm:mt-6 sm:min-h-0 sm:flex-1 [@media(max-height:820px)]:sm:mt-4">
               <QuoteForm key={prestation} initialPrestation={prestation} onDone={close} fit />
             </div>
           </div>
