@@ -523,17 +523,14 @@ Par ordre de priorité.
    dès qu'un projet est ajouté, la page réapparaît partout, sort du noindex et entre au plan
    de site. `proxy.ts` pourra alors être supprimé.
    Un portrait du fondateur, s'il existe, pour la section `#fondateur` de `/bureau`.
-3. **Envoi des e-mails** — l'intégration Microsoft Graph est **écrite et testée**, il ne
-   manque que le secret, attendu par WhatsApp. Reste à faire :
-   - poser le secret dans Vercel (Production) et dans `.env.local`, avec `MS_TENANT_ID`,
-     `MS_CLIENT_ID`, `MAIL_FROM`, `MAIL_TO` (valeurs dans `.env.local`, ignoré par git). Bien
-     prendre la **valeur** du secret, pas son identifiant : Microsoft renvoie AADSTS7000215
-     dans les deux cas, ce qui prête à confusion ;
-   - redéployer, puis envoyer un devis et un message de contact réels, avec une pièce jointe ;
-   - confirmer auprès de l'informatique de NERA : consentement `Mail.Send` retiré côté Entra ID
-     (sinon il s'ajoute au périmètre RBAC et ouvre toutes les boîtes du tenant), boîte
-     noreply@nera-ing.ch réelle (une boîte partagée suffit), nom d'affichage de cette boîte.
-   Le secret expire le **24 septembre 2027** : rappel à prévoir un mois avant.
+3. **Envoi des e-mails** — **en service depuis le 29 septembre 2026.** Secret posé dans Vercel
+   (Production, Sensitive) et dans `.env.local`. Vérifié : envoi accepté depuis noreply@,
+   refusé depuis info@ (restriction RBAC effective), jeton sans permission Entra à l'échelle
+   du tenant. Un devis avec pièce jointe et un message de contact réels envoyés depuis le site
+   en ligne, marqués « TEST TECHNIQUE ». Reste :
+   - supprimer dans Vercel `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, devenus inutiles,
+     une fois les deux messages de test confirmés dans info@ ;
+   - rappel fin août 2027 : faire générer un nouveau secret avant le **24 septembre 2027**.
 4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
 5. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
