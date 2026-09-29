@@ -14,6 +14,7 @@ import {
   type DevisPayload,
 } from "@/content/devis";
 import { FormNotice } from "@/components/ui/FormNotice";
+import { Select } from "@/components/ui/Select";
 
 const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
 
@@ -57,6 +58,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
    */
   const sendIntent = useRef(false);
 
+  const pick = (k: keyof DevisPayload) => (v: string) => setData((d) => ({ ...d, [k]: v }));
   const set = (k: keyof DevisPayload) => (e: { target: { value: string } }) => setData((d) => ({ ...d, [k]: e.target.value }));
 
   const validate = (s: number): string | null => {
@@ -177,21 +179,11 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         <div className="space-y-4 sm:space-y-5">
           <div>
             <label htmlFor="q-prestation" className={label}>Prestation souhaitée*</label>
-            <select id="q-prestation" value={data.prestation} onChange={set("prestation")} className={field} required>
-              <option value="" disabled>Choisir une prestation</option>
-              {devisPrestations.map((p) => (
-                <option key={p} value={p}>{p}</option>
-              ))}
-            </select>
+            <Select id="q-prestation" value={data.prestation} onChange={pick("prestation")} options={devisPrestations} placeholder="Choisir une prestation" className={field} />
           </div>
           <div>
             <label htmlFor="q-objectif" className={label}>Objectif</label>
-            <select id="q-objectif" value={data.objectif} onChange={set("objectif")} className={field}>
-              <option value="">Choisir un objectif</option>
-              {devisObjectifs.map((o) => (
-                <option key={o} value={o}>{o}</option>
-              ))}
-            </select>
+            <Select id="q-objectif" value={data.objectif} onChange={pick("objectif")} options={devisObjectifs} placeholder="Choisir un objectif" className={field} />
           </div>
         </div>
       )}
@@ -200,12 +192,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
         <div className="space-y-4 sm:space-y-5">
           <div>
             <label htmlFor="q-batiment" className={label}>Type de bâtiment*</label>
-            <select id="q-batiment" value={data.batiment} onChange={set("batiment")} className={field} required>
-              <option value="" disabled>Choisir un type</option>
-              {devisBatiments.map((b) => (
-                <option key={b} value={b}>{b}</option>
-              ))}
-            </select>
+            <Select id="q-batiment" value={data.batiment} onChange={pick("batiment")} options={devisBatiments} placeholder="Choisir un type" className={field} />
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
@@ -223,12 +210,7 @@ export function QuoteForm({ initialPrestation = "", onDone }: { initialPrestatio
             </div>
             <div>
               <label htmlFor="q-canton" className={label}>Canton*</label>
-              <select id="q-canton" value={data.canton} onChange={set("canton")} className={field} required>
-                <option value="" disabled>Choisir un canton</option>
-                {devisCantons.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
+              <Select id="q-canton" value={data.canton} onChange={pick("canton")} options={devisCantons} placeholder="Choisir un canton" className={field} />
             </div>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">

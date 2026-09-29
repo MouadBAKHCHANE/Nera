@@ -508,6 +508,13 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   aussi les 4,5 Mo que Vercel accepte par requête. Pour aller au-delà, il faudrait déposer les
   fichiers ailleurs (Vercel Blob) et n'envoyer que des liens.
 
+- Pop-up devis : les quatre listes déroulantes natives (prestation, objectif, type de bâtiment,
+  canton) sont remplacées par `components/ui/Select.tsx`. Signalé par le client : la liste native
+  s'ouvrait lentement et montrait un cadre sombre avant ses choix, car le système la dessine
+  par-dessus le voile flouté de la modale. La nouvelle liste s'ouvre sans délai, sur fond blanc,
+  affiche les sept prestations sans défiler, s'ouvre vers le haut si la place manque, et suit
+  le motif combobox du W3C (flèches, Entrée, lettre, Échap sans fermer la modale).
+
 ## À faire
 
 Par ordre de priorité.
