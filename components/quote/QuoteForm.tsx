@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, Check, Paperclip, X } from "lucide-react";
+import { useEffect, useRef, useState, type DragEvent, type FormEvent } from "react";
+import { ArrowLeft, ArrowRight, Check, Paperclip, Upload, X } from "lucide-react";
 import {
   devisPrestations,
   devisBatiments,
@@ -111,6 +111,53 @@ export function QuoteForm({
     setError(err);
     if (!err) setStep((s) => Math.min(s + 1, steps.length - 1));
   };
+  /**
+   * Glisser-déposer des pièces jointes (desktop). `dragDepth` compte les entrées et sorties :
+   * survoler un enfant de la zone déclenche un `dragleave` sur la zone elle-même, qui
+   * éteindrait la surbrillance à tort.
+   */
+  const [dragging, setDragging] = useState(false);
+  const dragDepth = useRef(0);
+  const hasFiles = (e: DragEvent<HTMLElement>) => e.dataTransfer.types.includes("Files");
+  const dropHandlers = {
+    onDragEnter: (e: DragEvent<HTMLLabelElement>) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      dragDepth.current += 1;
+      setDragging(true);
+    },
+    onDragOver: (e: DragEvent<HTMLLabelElement>) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "copy";
+    },
+    onDragLeave: () => {
+      dragDepth.current = Math.max(0, dragDepth.current - 1);
+      if (dragDepth.current === 0) setDragging(false);
+    },
+    onDrop: (e: DragEvent<HTMLLabelElement>) => {
+      e.preventDefault();
+      dragDepth.current = 0;
+      setDragging(false);
+      addFiles(e.dataTransfer.files);
+    },
+  };
+
+  // Un fichier lâché à côté de la zone ne doit pas faire ouvrir le fichier par le navigateur,
+  // ce qui quitterait la page et perdrait le formulaire en cours.
+  useEffect(() => {
+    if (step !== 2) return;
+    const block = (e: globalThis.DragEvent) => {
+      if (e.dataTransfer?.types.includes("Files")) e.preventDefault();
+    };
+    window.addEventListener("dragover", block);
+    window.addEventListener("drop", block);
+    return () => {
+      window.removeEventListener("dragover", block);
+      window.removeEventListener("drop", block);
+    };
+  }, [step]);
+
   const back = () => {
     setError(null);
     setStep((s) => Math.max(s - 1, 0));
@@ -121,9 +168,16 @@ export function QuoteForm({
     const next = [...files];
     const limit = devisMaxTotalMb * 1024 * 1024;
     let total = next.reduce((n, f) => n + f.size, 0);
+    // Le sélecteur filtre les types par son attribut `accept`, pas le glisser-déposer :
+    // le contrôle se fait donc ici, pour les deux chemins.
+    const allowed = devisAccept.split(",");
     setError(null);
     for (const f of Array.from(list)) {
       if (next.length >= devisMaxFiles) break;
+      if (!allowed.some((ext) => f.name.toLowerCase().endsWith(ext))) {
+        setError(`« ${f.name} » n'est pas accepté. Formats : PDF, JPG, PNG, HEIC, WebP.`);
+        continue;
+      }
       // Plafond cumulé : un fichier qui ferait dépasser le total est écarté, les suivants
       // restent candidats s'ils sont plus petits.
       if (total + f.size > limit) {
@@ -280,11 +334,48 @@ export function QuoteForm({
             <textarea id="q-message" value={data.message} onChange={set("message")} className={`${field} min-h-[76px] resize-y`} placeholder="Décrivez votre projet, vos délais, vos questions." />
           </div>
           <div>
-            <span className={label}>Pièces jointes (facultatif)</span>
-            <label className="flex cursor-pointer items-center gap-3 rounded-sm border border-dashed border-hairline px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent">
-              <Paperclip className="size-4 text-accent" strokeWidth={1.75} />
-              Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxTotalMb} Mo au total)
-              <input type="file" multiple accept={devisAccept} className="sr-only" onChange={(e) => addFiles(e.target.files)} />
+            {/* Desktop : les formats et limites passent à droite du libellé, la zone reste sur une ligne. */}
+            <div className="flex items-baseline justify-between gap-3">
+              <span className={label}>Pièces jointes (facultatif)</span>
+              <span className="mb-1.5 hidden text-[12px] text-mute lg:inline">
+                PDF, JPG, PNG, HEIC, WebP · {devisMaxFiles} max, {devisMaxTotalMb} Mo au total
+              </span>
+            </div>
+            <label
+              {...dropHandlers}
+              className={`flex cursor-pointer items-center gap-3 rounded-sm border border-dashed px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent ${
+                dragging ? "border-accent bg-accent/10" : "border-hairline"
+              }`}
+            >
+              {/* Téléphone : trombone et formats. Desktop : on invite au glisser-déposer. */}
+              <Paperclip className="size-4 shrink-0 text-accent lg:hidden" strokeWidth={1.75} aria-hidden />
+              <Upload className="hidden size-4 shrink-0 text-accent lg:block" strokeWidth={1.75} aria-hidden />
+              <span className="min-w-0">
+                <span className="lg:hidden">
+                  Plans, factures d&apos;énergie, photos ({devisMaxFiles} max, {devisMaxTotalMb} Mo au total)
+                </span>
+                <span className="hidden lg:inline">
+                  {dragging ? (
+                    <span className="font-medium text-nera-navy">Déposez vos fichiers ici</span>
+                  ) : (
+                    <>
+                      Glissez-déposez vos plans, factures ou photos, ou{" "}
+                      <span className="font-medium text-nera-navy underline underline-offset-2">parcourez</span>
+                    </>
+                  )}
+                </span>
+              </span>
+              <input
+                type="file"
+                multiple
+                accept={devisAccept}
+                className="sr-only"
+                onChange={(e) => {
+                  addFiles(e.target.files);
+                  // Sans cela, re-choisir un fichier qu'on vient de retirer ne déclencherait rien.
+                  e.target.value = "";
+                }}
+              />
             </label>
             {files.length > 0 && (
               <ul className="mt-2 space-y-1">

@@ -531,6 +531,13 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   être coupée par la zone qui défile. Échap est écouté sur la fenêtre en capture : il ferme
   la liste et non la modale, même si le bouton n'a pas le focus (cas de Safari).
 
+- Pop-up devis, pièces jointes : **glisser-déposer sur desktop** (`lg`). La zone invite à
+  « glisser-déposer ou parcourir », s'allume en vert au survol d'un fichier, et les formats et
+  limites passent à droite du libellé pour garder la zone sur une ligne (aucun défilement à
+  1366 × 768). Le type est désormais vérifié dans `addFiles`, car le glisser-déposer ignore
+  l'attribut `accept`. Un fichier lâché à côté de la zone n'est plus ouvert par le navigateur,
+  ce qui aurait fait perdre le formulaire. Sur téléphone, le libellé reste celui d'avant.
+
 ## À faire
 
 Par ordre de priorité.
