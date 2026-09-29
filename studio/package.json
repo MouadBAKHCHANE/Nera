@@ -1,0 +1,25 @@
+{
+  "name": "nera-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Back-office Sanity du site nera-ing.ch",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/icons": "^5.2.3",
+    "@sanity/locale-fr-fr": "^1.2.37",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sanity": "^6.17.0",
+    "styled-components": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
