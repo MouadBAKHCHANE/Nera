@@ -584,10 +584,32 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   Champ « image de partage par défaut » retiré : `app/opengraph-image` l'emporterait toujours,
   il n'aurait rien fait. À reprendre en phase 2 avec le SEO par page.
 
+- **Sanity, redirections (29 septembre 2026).** `next.config.ts` lit les redirections publiées
+  au moment du build (308 si définitive, 307 sinon). Vérifié avec une redirection de test,
+  supprimée ensuite. Une redirection ajoutée dans le Studio ne vaut qu'au déploiement suivant,
+  d'où le second webhook vers un Deploy Hook de Vercel (voir « À faire »).
+
 ## À faire
 
 Par ordre de priorité.
 
+0. **Mise en service de Sanity** (à faire par Mouad, dans l'ordre) :
+   1. Vercel, variables d'environnement : `SANITY_REVALIDATE_SECRET` (valeur dans
+      `.env.local`), Production, Sensitive. Supprimer les anciennes variables Sanity
+      (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`),
+      que le code ne lit plus.
+   2. Pousser, attendre le déploiement.
+   3. Sanity Manage > API > Webhooks, webhook « Site : rafraîchissement » : URL
+      `https://www.nera-ing.ch/api/revalidate`, dataset production, POST, création,
+      modification et suppression, filtre `_type in ["settings", "realisation", "redirect"]`,
+      projection `{_type}`, secret = `SANITY_REVALIDATE_SECRET`.
+   4. Vercel > Settings > Git > Deploy Hooks : hook « Sanity redirections » sur `main`. Puis
+      un second webhook Sanity vers cette URL, filtre `_type == "redirect"`, sans secret.
+   5. Studio : dans `studio/`, `npx sanity login` (compte Google NAOENERGY) puis
+      `npx sanity deploy`, nom d'hôte `nera-ing`. Reporter l'`appId` affiché dans
+      `studio/sanity.cli.ts` (`deployment.appId`).
+   6. Inviter l'interlocuteur de NERA au **projet** (pas à l'organisation), rôle
+      Administrateur, seul rôle d'écriture du forfait gratuit.
 1. **Textes juridiques et carte** — faire corriger par le client les trois passages qui
    promettent le blocage de Google Maps jusqu'au consentement, puisque la carte s'affiche
    désormais d'emblée et que la catégorie a quitté le bandeau. À défaut, rétablir le blocage.
