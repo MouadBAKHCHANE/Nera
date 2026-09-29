@@ -547,6 +547,13 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   aucun défilement aux quatre étapes à 1280 × 650, 1366 × 768, 1920 × 1080 et 820 × 1180.
   Sur téléphone, rien ne change.
 
+- Pop-up devis, sous les pièces jointes, note validée par le client : « Plus de 3 Mo ?
+  Envoyez vos plans à info@nera-ing.ch ou via SwissTransfer. » (liens vers la messagerie et
+  vers swisstransfer.com). Un 6e fichier affiche désormais un message au lieu d'être ignoré
+  sans rien dire. Piste retenue pour plus tard, non faite : envoi découpé en morceaux de
+  moins de 4 Mo et pièces jointes jusqu'à 25 Mo, qui demande Mail.ReadWrite restreint à
+  noreply@ côté Microsoft (la limite de 4,5 Mo par requête de Vercel reste, d'où le découpage).
+
 ## À faire
 
 Par ordre de priorité.

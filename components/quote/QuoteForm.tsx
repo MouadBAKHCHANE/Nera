@@ -14,6 +14,7 @@ import {
   type DevisPayload,
 } from "@/content/devis";
 import { FormNotice } from "@/components/ui/FormNotice";
+import { company } from "@/content/prestations";
 import { Select } from "@/components/ui/Select";
 
 const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
@@ -173,7 +174,10 @@ export function QuoteForm({
     const allowed = devisAccept.split(",");
     setError(null);
     for (const f of Array.from(list)) {
-      if (next.length >= devisMaxFiles) break;
+      if (next.length >= devisMaxFiles) {
+        setError(`${devisMaxFiles} fichiers au maximum. Envoyez les autres à info@nera-ing.ch.`);
+        break;
+      }
       if (!allowed.some((ext) => f.name.toLowerCase().endsWith(ext))) {
         setError(`« ${f.name} » n'est pas accepté. Formats : PDF, JPG, PNG, HEIC, WebP.`);
         continue;
@@ -335,6 +339,7 @@ export function QuoteForm({
             et une zone de dépôt aussi haute que le champ message, donc facile à viser.
             Sur téléphone, ils restent l'un sous l'autre.
           */}
+          <div>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div className="flex flex-col">
               <label htmlFor="q-message" className={label}>Message</label>
@@ -342,7 +347,7 @@ export function QuoteForm({
                 id="q-message"
                 value={data.message}
                 onChange={set("message")}
-                className={`${field} min-h-[76px] flex-1 resize-none sm:min-h-[128px]`}
+                className={`${field} min-h-[76px] flex-1 resize-none sm:min-h-[112px]`}
                 placeholder="Décrivez votre projet, vos délais, vos questions."
               />
             </div>
@@ -350,7 +355,7 @@ export function QuoteForm({
               <span className={label}>Pièces jointes (facultatif)</span>
               <label
                 {...dropHandlers}
-                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-sm border border-dashed px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent hover:bg-accent/5 sm:min-h-[128px] sm:flex-col sm:justify-center sm:gap-1.5 sm:px-4 sm:py-4 sm:text-center ${
+                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-sm border border-dashed px-3.5 py-2.5 text-body-sm text-body transition-colors hover:border-accent hover:bg-accent/5 sm:min-h-[112px] sm:flex-col sm:justify-center sm:gap-1.5 sm:px-4 sm:py-3 sm:text-center ${
                   dragging ? "border-accent bg-accent/10" : "border-nera-navy/25 bg-canvas-alt"
                 }`}
               >
@@ -378,9 +383,7 @@ export function QuoteForm({
                   )}
                 </span>
                 <span className="hidden text-[12px] leading-snug text-mute sm:block">
-                  PDF, JPG, PNG, HEIC, WebP
-                  <br />
-                  {devisMaxFiles} max, {devisMaxTotalMb} Mo au total
+                  PDF ou images, {devisMaxTotalMb} Mo max
                 </span>
                 <input
                   type="file"
@@ -395,6 +398,24 @@ export function QuoteForm({
                 />
               </label>
             </div>
+          </div>
+          {/* Texte validé par le client : la limite de 3 Mo vient de Microsoft et de Vercel. */}
+              <p className="mt-2 text-[12px] leading-snug text-mute">
+                Plus de 3 Mo ? Envoyez vos plans à{" "}
+                <a href={`mailto:${company.email}`} className="font-medium text-nera-navy underline underline-offset-2 hover:text-accent">
+                  {company.email}
+                </a>{" "}
+                ou via{" "}
+                <a
+                  href="https://www.swisstransfer.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-nera-navy underline underline-offset-2 hover:text-accent"
+                >
+                  SwissTransfer
+                </a>
+                .
+              </p>
           </div>
           {files.length > 0 && (
             <ul className="flex flex-wrap gap-2">
