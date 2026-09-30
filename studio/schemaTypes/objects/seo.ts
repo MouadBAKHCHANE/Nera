@@ -16,14 +16,13 @@ export const seo = defineType({
     defineField({
       name: 'title',
       title: 'Titre pour Google',
-      description: 'Affiché dans les résultats de recherche. Idéalement entre 30 et 60 caractères.',
+      description: 'Affiché dans les résultats de recherche. 60 caractères au plus, « | NERA » compris quand le site l’ajoute.',
       type: 'string',
       validation: (rule) =>
         rule
           .custom((value?: string) => {
             if (!value) return true
             if (value.length > 60) return `${value.length} caractères : Google coupera au-delà de 60.`
-            if (value.length < 30) return `${value.length} caractères : un titre plus descriptif aide le référencement.`
             return true
           })
           .warning(),

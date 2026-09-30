@@ -589,6 +589,20 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   supprimée ensuite. Une redirection ajoutée dans le Studio ne vaut qu'au déploiement suivant,
   d'où le second webhook vers un Deploy Hook de Vercel (voir « À faire »).
 
+- **Sanity, pages légales (30 septembre 2026).** Type « legalPage », trois documents à
+  identifiant fixe (`legal-mentions-legales`, `legal-confidentialite`, `legal-cookies`), ni
+  créables ni supprimables. Texte riche avec style « Bloc d'adresse », listes, liens, gras, et
+  trois blocs : tableau, encadré, rappel du choix de cookies. Migration mot pour mot par
+  `studio/scripts/import-legal.ts` (vérifiée caractère par caractère à la relecture), à ne
+  pas relancer : elle écraserait les modifications faites dans le Studio. Site :
+  `lib/sanity/legal.ts` (repli sur `content/legal-pages.ts` converti à la volée si Sanity ne
+  répond pas), rendu `@portabletext/react` aux classes d'avant ; `RichText.tsx` supprimé.
+  Comparé à la version en ligne : texte et liens identiques sur les trois pages, structure
+  identique (seuls les blocs d'adresse passent de `<span class="block">` à `<br>`).
+  Le convertisseur `lib/legal/portable.ts` sert aux deux usages. Studio redéployé.
+  **Webhook « Site : rafraîchissement » : vider le filtre** (sinon les pages légales ne se
+  rafraîchissent qu'au bout d'une heure) : chaque type invalide sa propre étiquette.
+
 ## À faire
 
 Par ordre de priorité.
@@ -627,10 +641,10 @@ Par ordre de priorité.
       `studio/sanity.cli.ts` (`deployment.appId`).
    6. Inviter l'interlocuteur de NERA au **projet** (pas à l'organisation), rôle
       Administrateur, seul rôle d'écriture du forfait gratuit.
-1. **Textes juridiques et carte** — faire corriger par le client les trois passages qui
-   promettent le blocage de Google Maps jusqu'au consentement, puisque la carte s'affiche
-   désormais d'emblée et que la catégorie a quitté le bandeau. À défaut, rétablir le blocage.
-   Tant que ce n'est pas tranché, le site contredit sa propre politique de cookies.
+1. **Textes juridiques et carte** — trois passages promettent encore le blocage de Google Maps
+   jusqu'au consentement, alors que la carte s'affiche d'emblée. Les pages légales sont
+   désormais dans le Studio (« Pages légales ») : **NERA peut corriger ces passages elle-même**,
+   et changer la date de mise à jour. À lui signaler. À défaut, rétablir le blocage.
 2. **Références** — la page est désormais **pilotée par Sanity** (type « realisation ») :
    elle n'existe, avec ses liens (menu, pied de page, page 404) et son entrée au plan du site,
    que si au moins une référence est publiée. Reste à obtenir de NERA ses projets (titre,

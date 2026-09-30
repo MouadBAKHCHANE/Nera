@@ -3,101 +3,111 @@ import { ChevronRight } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { Container } from "@/components/ui/Container";
-import { RichText } from "./RichText";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CookieChoice } from "./CookieChoice";
-import type { LegalBlock, LegalDoc } from "@/content/legal-pages";
+import type { LegalPortable, PtBlock, PtNote, PtTable } from "@/lib/legal/portable";
+import type { LegalPageView } from "@/lib/sanity/legal";
 import { seo } from "@/content/seo";
 import { getSiteSettings } from "@/lib/sanity/settings";
 
 /** Numéro du document source, formaté pour le titre de section. */
 const label = (num: number | undefined, title: string) => (num ? `${num}. ${title}` : title);
 
-function Blocks({ blocks }: { blocks: LegalBlock[] }) {
-  return (
-    <>
-      {blocks.map((b, i) => {
-        switch (b.t) {
-          case "p":
-            return (
-              <p key={i} className="mt-4 text-body-md leading-[1.75] text-body first:mt-0">
-                <RichText text={b.text} />
-              </p>
-            );
-          case "lines":
-            return (
-              <p key={i} className="mt-4 text-body-md leading-[1.9] text-body first:mt-0">
-                {b.lines.map((line, j) => (
-                  <span key={j} className="block">
-                    <RichText text={line} />
-                  </span>
+const linkStyle = "underline underline-offset-2 decoration-hairline transition-colors hover:text-accent-deep";
+
+/** Liens du texte : internes par `next/link`, e-mail, téléphone et externes par une ancre simple. */
+const marks: PortableTextComponents["marks"] = {
+  link: ({ value, children }) => {
+    const href: string = value?.href ?? "#";
+    return href.startsWith("/") ? (
+      <Link href={href} className={linkStyle}>
+        {children}
+      </Link>
+    ) : (
+      <a
+        href={href}
+        className={linkStyle}
+        {...(href.startsWith("https://") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {children}
+      </a>
+    );
+  },
+};
+
+/** Texte d'un encadré : paragraphes plus petits, comme dans le document source. */
+const noteComponents: PortableTextComponents = {
+  block: { normal: ({ children }) => <p className="mt-2 text-body-sm leading-[1.7] text-body">{children}</p> },
+  marks,
+};
+
+/**
+ * Rendu du texte riche de Sanity. Mêmes classes que l'ancien rendu du code, bloc pour bloc :
+ * la migration vers Sanity ne change rien à l'affichage.
+ */
+const components: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <p className="mt-4 text-body-md leading-[1.75] text-body first:mt-0">{children}</p>,
+    // Bloc d'adresse : les retours à la ligne du Studio deviennent des <br>.
+    lines: ({ children }) => <p className="mt-4 text-body-md leading-[1.9] text-body first:mt-0">{children}</p>,
+  },
+  list: { bullet: ({ children }) => <ul className="mt-4 space-y-2 first:mt-0">{children}</ul> },
+  listItem: {
+    bullet: ({ children }) => (
+      <li className="flex gap-3 text-body-md leading-[1.75] text-body">
+        <span className="mt-[0.7em] size-1.5 shrink-0 bg-accent" aria-hidden />
+        <span>{children}</span>
+      </li>
+    ),
+  },
+  marks,
+  types: {
+    legalTable: ({ value }: { value: PtTable }) => (
+      <div className="mt-6 overflow-x-auto">
+        <table className="w-full min-w-[32rem] border-collapse text-left text-body-sm">
+          <thead>
+            <tr className="border-b border-nera-navy/25">
+              {(value.head ?? []).map((h, k) => (
+                <th key={k} className="py-2.5 pr-6 text-[12px] font-medium uppercase tracking-[0.14em] text-nera-navy">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(value.rows ?? []).map((row) => (
+              <tr key={row._key} className="border-b border-hairline">
+                {(row.cells ?? []).map((cell, k) => (
+                  <td key={k} className="py-3 pr-6 align-top text-body">
+                    {k === 0 ? <code className="text-nera-navy">{cell}</code> : cell}
+                  </td>
                 ))}
-              </p>
-            );
-          case "ul":
-            return (
-              <ul key={i} className="mt-4 space-y-2 first:mt-0">
-                {b.items.map((item, j) => (
-                  <li key={j} className="flex gap-3 text-body-md leading-[1.75] text-body">
-                    <span className="mt-[0.7em] size-1.5 shrink-0 bg-accent" aria-hidden />
-                    <span>
-                      <RichText text={item} />
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            );
-          case "table":
-            return (
-              <div key={i} className="mt-6 overflow-x-auto">
-                <table className="w-full min-w-[32rem] border-collapse text-left text-body-sm">
-                  <thead>
-                    <tr className="border-b border-nera-navy/25">
-                      {b.head.map((h) => (
-                        <th key={h} className="py-2.5 pr-6 text-[12px] font-medium uppercase tracking-[0.14em] text-nera-navy">
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {b.rows.map((row, j) => (
-                      <tr key={j} className="border-b border-hairline">
-                        {row.map((cell, k) => (
-                          <td key={k} className="py-3 pr-6 align-top text-body">
-                            {k === 0 ? <code className="text-nera-navy">{cell}</code> : cell}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-          case "note":
-            return (
-              <div key={i} className="mt-6 border-l-2 border-accent bg-nera-green-soft/50 px-5 py-4">
-                <p className="text-body-sm font-medium text-nera-navy">{b.title}</p>
-                {b.body.map((text, j) => (
-                  <p key={j} className="mt-2 text-body-sm leading-[1.7] text-body">
-                    <RichText text={text} />
-                  </p>
-                ))}
-              </div>
-            );
-          case "consent":
-            return <CookieChoice key={i} />;
-        }
-      })}
-    </>
-  );
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ),
+    legalNote: ({ value }: { value: PtNote }) => (
+      <div className="mt-6 border-l-2 border-accent bg-nera-green-soft/50 px-5 py-4">
+        <p className="text-body-sm font-medium text-nera-navy">{value.title}</p>
+        <PortableText value={(value.body ?? []) as PtBlock[]} components={noteComponents} />
+      </div>
+    ),
+    consentReminder: () => <CookieChoice />,
+  },
+};
+
+function Body({ value }: { value: LegalPortable[] }) {
+  return <PortableText value={value} components={components} />;
 }
 
 /**
  * Gabarit partagé des trois pages légales : bandeau marine (fil d'Ariane, H1, date de
- * mise à jour), sommaire, puis prose sur fond crème. Le contenu vient de
- * `content/legal-pages.ts` et n'est jamais reformulé ici.
+ * mise à jour), sommaire, puis prose sur fond crème. Le contenu vient du Studio Sanity
+ * (`lib/sanity/legal.ts`) et n'est jamais reformulé ici.
  */
-export async function LegalPage({ doc }: { doc: LegalDoc }) {
+export async function LegalPage({ page: doc }: { page: LegalPageView }) {
   const { company } = await getSiteSettings();
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -142,7 +152,7 @@ export async function LegalPage({ doc }: { doc: LegalDoc }) {
             {doc.lead && <p className="mt-5 max-w-[52ch] text-body-md font-light text-nera-cream/80">{doc.lead}</p>}
 
             <p className="mt-6 text-body-sm font-light text-nera-cream/60">
-              Dernière mise à jour : <time dateTime={doc.updatedIso}>{doc.updated}</time>
+              Dernière mise à jour : <time dateTime={doc.updatedIso}>{doc.updatedLabel}</time>
             </p>
           </Container>
         </header>
@@ -155,7 +165,7 @@ export async function LegalPage({ doc }: { doc: LegalDoc }) {
               </h2>
               <ol className="mt-4 grid gap-x-8 gap-y-1.5 sm:grid-cols-2">
                 {doc.sections.map((s) => (
-                  <li key={s.id}>
+                  <li key={s.key}>
                     <a href={`#${s.id}`} className="text-body-sm text-body transition-colors hover:text-accent-deep">
                       {label(s.num, s.title)}
                     </a>
@@ -165,10 +175,10 @@ export async function LegalPage({ doc }: { doc: LegalDoc }) {
             </nav>
 
             {doc.sections.map((s) => (
-              <section key={s.id} id={s.id} className="mt-12 scroll-mt-28 first:mt-10">
+              <section key={s.key} id={s.id} className="mt-12 scroll-mt-28 first:mt-10">
                 <h2 className="font-display text-display-sm text-nera-navy">{label(s.num, s.title)}</h2>
                 <div className="mt-4">
-                  <Blocks blocks={s.blocks} />
+                  <Body value={s.body} />
                 </div>
               </section>
             ))}

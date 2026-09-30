@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { confidentialite as doc } from "@/content/legal-pages";
+import { getLegalPage } from "@/lib/sanity/legal";
 
-/** Politique de confidentialité, texte client du 3 septembre 2026. Page indexable : pas de noindex. */
-export const metadata: Metadata = {
-  title: doc.meta.title,
-  description: doc.meta.description,
-  alternates: { canonical: doc.route },
-  openGraph: { title: `${doc.meta.title} | NERA`, description: doc.meta.description, url: doc.route },
-};
+/** Politique de confidentialité, texte client du 3 septembre 2026, modifiable dans le Studio Sanity. Page indexable : pas de noindex. */
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getLegalPage("legal-confidentialite");
+  return {
+    title: page.seo.title,
+    description: page.seo.description,
+    alternates: { canonical: page.route },
+    openGraph: { title: `${page.seo.title} | NERA`, description: page.seo.description, url: page.route },
+  };
+}
 
-export default function Page() {
-  return <LegalPage doc={doc} />;
+export default async function Page() {
+  return <LegalPage page={await getLegalPage("legal-confidentialite")} />;
 }
