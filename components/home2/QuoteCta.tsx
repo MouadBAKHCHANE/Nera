@@ -16,8 +16,8 @@ import { useQuote } from "@/components/quote/QuoteModal";
  * Remplace `ArrowQuoteButton`, qui reprenait l'apparence du lien fléché.
  */
 const tones = {
-  light: "border-nera-cream/60 text-nera-cream hover:border-accent hover:bg-accent hover:text-white",
-  dark: "border-nera-navy text-nera-navy hover:border-accent hover:bg-accent hover:text-white",
+  light: "border-nera-cream/60 text-nera-cream hover:border-accent-deep hover:bg-accent-deep hover:text-white",
+  dark: "border-nera-navy text-nera-navy hover:border-accent-deep hover:bg-accent-deep hover:text-white",
 };
 
 export type QuoteTone = keyof typeof tones;

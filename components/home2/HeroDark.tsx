@@ -17,7 +17,11 @@ export function HeroDark() {
         src="/img/hero-immeuble-geneve-soleil.webp"
         alt=""
         fill
-        priority
+        // Chargée tout de suite, sans priorité haute ni préchargement : Chrome ne la compte pas
+        // comme plus grand élément (elle couvre tout l'écran, il la traite en fond), mais en
+        // priorité haute elle retardait la mesure de ce plus grand élément dans Lighthouse.
+        loading="eager"
+        fetchPriority="low"
         quality={90}
         sizes="100vw"
         className="object-cover object-center"
@@ -38,7 +42,7 @@ export function HeroDark() {
       </div>
 
       <div className="relative flex flex-1 flex-col justify-center px-6 pb-10 pt-24 md:px-10 lg:px-[120px] lg:pt-[110px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
-        <Reveal as="p" effect="fade" className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
+        <Reveal as="p" effect="fade" load className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
           <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
           Bureau d&apos;ingénieurs en énergie et physique du bâtiment, basé à Genève
         </Reveal>
@@ -49,7 +53,7 @@ export function HeroDark() {
           delay={0.2}
           className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
         />
-        <Reveal delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
+        <Reveal load delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
           <p>
             Bureau d&apos;ingénierie indépendant basé à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
@@ -60,7 +64,7 @@ export function HeroDark() {
             consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
           </p>
         </Reveal>
-        <Reveal delay={2.4} className="mt-8 max-w-xs">
+        <Reveal load delay={2.4} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />
           <QuoteCta />
         </Reveal>

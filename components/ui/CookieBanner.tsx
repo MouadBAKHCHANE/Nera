@@ -46,7 +46,13 @@ export function CookieBanner() {
     setCustom(false);
   };
 
-  const open = reopened || consent === null;
+  // Rendu aussi quand le choix n'est pas encore connu (`undefined` : rendu serveur et
+  // hydratation). Le bandeau figure ainsi dans le HTML initial et s'affiche dès la première
+  // peinture, au lieu d'attendre le JavaScript : c'était le plus grand élément de la page
+  // pour un premier visiteur, affiché 1,4 s trop tard (Lighthouse, 30 septembre 2026).
+  // Pour un visiteur qui a déjà choisi, le script de `<head>` (layout) le masque avant la
+  // peinture, puis l'hydratation le retire.
+  const open = reopened || consent === null || consent === undefined;
   if (!open) return null;
 
   const outline =
@@ -62,6 +68,7 @@ export function CookieBanner() {
 
   return (
     <div
+      data-cookie-banner={reopened ? "reopened" : ""}
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"

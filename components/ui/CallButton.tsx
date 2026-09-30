@@ -38,7 +38,7 @@ function Tab({
   /** Classes supplémentaires : sert à masquer l'onglet devis en desktop. */
   extra?: string;
 }) {
-  const className = `group inline-flex h-11 items-center rounded-l-sm bg-accent px-3 text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-deep lg:h-12 ${extra} ${
+  const className = `group inline-flex h-11 items-center rounded-l-sm bg-accent-deep px-3 text-white shadow-[0_8px_24px_rgba(10,36,64,0.35)] transition-all duration-300 hover:bg-accent-darker lg:h-12 ${extra} ${
     shown ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-4 opacity-0"
   }`;
   const inner = (

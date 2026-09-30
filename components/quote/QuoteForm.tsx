@@ -38,7 +38,7 @@ const field =
   "w-full rounded-sm border border-hairline bg-canvas-alt px-3 py-2.5 text-body-sm sm:px-3.5 sm:py-2.5 sm:text-body-md text-nera-ink placeholder:text-mute focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
 const label = "mb-1.5 block text-body-sm font-medium text-nera-navy";
 const btnPrimary =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-accent px-5 text-[14px] sm:px-6 sm:text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-accent-deep px-5 text-[14px] sm:px-6 sm:text-[15px] font-medium text-white transition-colors duration-base hover:bg-accent-darker disabled:cursor-not-allowed disabled:opacity-60";
 const btnGhost =
   "inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-hairline px-4 text-[14px] sm:px-5 sm:text-[15px] font-medium text-nera-navy transition-colors duration-base hover:border-nera-navy";
 

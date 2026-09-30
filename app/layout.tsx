@@ -79,7 +79,26 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     // data-scroll-behavior : Next 16 ne neutralise plus `scroll-behavior: smooth` pendant les
     // transitions de route sans cet attribut. Sans lui, un lien du pied de page fait défiler
     // en douceur jusqu'en haut de la nouvelle page au lieu de l'ouvrir directement en haut.
-    <html lang="fr-CH" data-scroll-behavior="smooth" className={`${clash.variable} ${satoshi.variable} h-full`}>
+    // suppressHydrationWarning : `data-consent` est posé par le script ci-dessous, avant React.
+    <html
+      lang="fr-CH"
+      data-scroll-behavior="smooth"
+      className={`${clash.variable} ${satoshi.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/*
+          Avant la première peinture : `data-js` autorise les apparitions (Reveal) à masquer le
+          contenu au départ, sans quoi tout reste visible ; si le visiteur a déjà fait son choix
+          de cookies, le bandeau (présent dans le HTML initial) est masqué, sans clignotement.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.setAttribute('data-js','');try{if(localStorage.getItem('nera-cookie-consent'))document.documentElement.setAttribute('data-consent','')}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <JsonLd />
         <SiteProvider value={site}>

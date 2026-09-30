@@ -12,7 +12,7 @@ import { PartnerLogos } from "@/components/ui/PartnerLogos";
 export function PartnerStrip() {
   return (
     <section className="bg-canvas px-6 py-10 md:px-10 lg:px-[120px] lg:py-12">
-      <p className="text-center text-[12px] font-medium uppercase tracking-[0.3em] text-mute">
+      <p className="text-center text-[12px] font-medium uppercase tracking-[0.3em] text-body">
         Certifications et partenaires
       </p>
       <PartnerLogos className="mt-6" />

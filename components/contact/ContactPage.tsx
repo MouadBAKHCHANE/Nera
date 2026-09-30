@@ -129,7 +129,7 @@ export async function ContactPage() {
                     <a
                       href={company.phoneHref}
                       aria-label={contact.coordonnees.callCta}
-                      className="inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-[22px] text-[15px] font-medium text-white transition-colors hover:bg-accent-deep"
+                      className="inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent-deep px-[22px] text-[15px] font-medium text-white transition-colors hover:bg-accent-darker"
                     >
                       <Phone className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
                       {company.phone}

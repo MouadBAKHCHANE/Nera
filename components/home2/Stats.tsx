@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/motion";
 import { Reveal } from "@/components/ui/Reveal";
 
 export type Stat = { value: number; prefix?: string; suffix?: string; label: string };
@@ -17,7 +17,7 @@ const homeStats: Stat[] = [
 
 function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   // Sans animation, on affiche la valeur finale d'emblée : pas de setState dans l'effet.
   const [n, setN] = useState(reduce ? value : 0);
 

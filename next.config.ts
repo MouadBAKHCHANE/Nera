@@ -37,6 +37,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/dpjlojol/**" }],
   },
   redirects: sanityRedirects,
+  // `experimental.inlineCss` essayé le 30 septembre 2026 puis retiré : la feuille de style
+  // intégrée alourdissait chaque page, et la note mobile tombait de 87 à 64 (Lighthouse).
 };
 
 export default nextConfig;

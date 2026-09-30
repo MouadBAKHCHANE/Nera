@@ -59,7 +59,7 @@ export function ConsentMap({
         <button
           type="button"
           onClick={() => setShown(true)}
-          className="mt-6 inline-flex h-11 items-center justify-center rounded-sm bg-accent px-5 text-[14px] font-medium text-white transition-colors hover:bg-accent-deep"
+          className="mt-6 inline-flex h-11 items-center justify-center rounded-sm bg-accent-deep px-5 text-[14px] font-medium text-white transition-colors hover:bg-accent-darker"
         >
           Afficher la carte
         </button>

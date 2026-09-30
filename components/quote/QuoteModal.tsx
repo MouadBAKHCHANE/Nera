@@ -2,7 +2,19 @@
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
-import { QuoteForm } from "./QuoteForm";
+import dynamic from "next/dynamic";
+
+/**
+ * Le formulaire (quatre étapes, listes, pièces jointes) n'est chargé qu'au besoin : il n'entre
+ * plus dans le JavaScript de chaque page, qui retardait le premier affichage (PageSpeed,
+ * 30 septembre 2026). Son fichier est préchargé à la première interaction du visiteur
+ * (voir plus bas) : la pop-up s'ouvre donc sans attente perceptible.
+ */
+const loadQuoteForm = () => import("./QuoteForm");
+const QuoteForm = dynamic(() => loadQuoteForm().then((m) => m.QuoteForm), {
+  ssr: false,
+  loading: () => <p className="py-10 text-center text-body-sm text-mute">Chargement du formulaire…</p>,
+});
 
 type Ctx = { open: (prestation?: string) => void; close: () => void };
 const QuoteContext = createContext<Ctx>({ open: () => {}, close: () => {} });
@@ -23,6 +35,18 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
     setOpen(true);
   }, []);
   const close = useCallback(() => setOpen(false), []);
+
+  // Précharge le formulaire à la première interaction (toucher, clic, touche, défilement),
+  // bien après le premier affichage : la pop-up n'attend plus son code à l'ouverture.
+  useEffect(() => {
+    const events = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
+    const preload = () => {
+      events.forEach((e) => window.removeEventListener(e, preload));
+      void loadQuoteForm();
+    };
+    events.forEach((e) => window.addEventListener(e, preload, { once: true, passive: true }));
+    return () => events.forEach((e) => window.removeEventListener(e, preload));
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;

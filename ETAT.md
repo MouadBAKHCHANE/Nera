@@ -663,6 +663,33 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   retirer du texte si NERA n'en a pas l'usage (la politique demande que la liste corresponde
   au site réel).
 
+- **Performance et accessibilité (30 septembre 2026).** Mesuré par Lighthouse 13 en local
+  (médiane de trois passages, build de production) : mobile de 83 à 86-90 selon les pages,
+  desktop 98-100, **accessibilité 100 partout** (97 et 96 avant). Changements :
+  - **framer-motion retiré** de toutes les pages sauf `/prestations` (illustrations) :
+    `Reveal` en animations CSS (`globals.css`, `rv-*`, remplissage `backwards`) avec un seul
+    IntersectionObserver ; `SplitReveal` en composant serveur, animation CSS dès la première
+    peinture, sans `will-change` par lettre ; espaces entre les mots sortis des blocs de mot
+    (le navigateur les supprimait en fin d'`inline-block`) ; `usePrefersReducedMotion`
+    (`lib/motion.ts`). JavaScript de l'accueil : 190 → 154 Ko compressés.
+  - Contenu masqué au départ seulement si le JavaScript tourne (`html[data-js]`, posé par le
+    script de `<head>`) ; `load` sur les apparitions du héro.
+  - **Bandeau cookies dans le HTML initial** (il était le plus grand élément mobile, affiché
+    après le JavaScript) ; masqué avant la peinture si un choix existe (`data-consent`).
+  - Photo du héro sans priorité haute (Chrome ne la compte pas, elle couvre l'écran).
+  - Formulaire de devis chargé à la demande (`next/dynamic`), préchargé à la première
+    interaction.
+  - Indicateur « Nos prestations » animé en `transform` (plus de mise en page à chaque image).
+  - **Couleurs pour 4,5:1** : gris « mute » #7a8087 → #6a7076, vert profond #1f8a5e →
+    #1c7c54, nouveau `accent-darker` #155f40 ; boutons pleins à texte blanc passés du vert
+    #28ac75 (2,9:1) au vert profond, survol plus sombre. Le vert #28ac75 reste pour les
+    filets, icônes, contours et le titre du héro.
+  Essayés et écartés : `experimental.inlineCss` (HTML 209 → 447 Ko, mobile 87 → 64) ; fonts
+  sans préchargement (FCP 0,9 → 2 s).
+  **Plafond mobile** : Lighthouse simule le plus grand élément en incluant tout script demandé
+  avant la première peinture ; React et le routeur de Next (~115 Ko) y restent, d'où un LCP
+  simulé vers 3,5 s. 100 sur mobile demanderait de ne plus hydrater la page (site statique).
+
 ## À faire
 
 Par ordre de priorité.

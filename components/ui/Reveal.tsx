@@ -1,34 +1,53 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
 
 type Effect = "fade" | "fade-right" | "fade-up" | "slide-up";
 
 /**
- * Reveal au scroll, calé sur hestera.ch (AOS) :
+ * Apparition, calée sur hestera.ch (AOS) :
  * - `fade` (défaut) : opacité seule, 1,4 s, easing « ease ».
- * - `fade-right` : arrive de la gauche (−100 px), 1 s.
- * - `fade-up` : arrive du bas (+100 px), 1 s.
- * - `slide-up` : cartes, 0,6 s, cubic-bezier(0,0,0,1) (panneaux prestations).
+ * - `fade-right` : arrive de la gauche (−100 px), 1,4 s.
+ * - `fade-up` : arrive du bas (+100 px), 1,4 s.
+ * - `slide-up` : cartes, 0,9 s, cubic-bezier(0,0,0,1) (panneaux prestations).
  * `delay` en secondes, `duration` en millisecondes.
+ *
+ * Réécrit le 30 septembre 2026 en CSS pur, sans framer-motion (38 Ko de JavaScript en moins
+ * sur chaque page, pour la note PageSpeed). Mêmes effets, mêmes durées :
+ * - animations CSS (`globals.css`, « Reveal »), avec remplissage `backwards` : l'état de départ
+ *   ne vaut que pendant le délai, puis l'élément retrouve ses propres styles, survols compris ;
+ * - un seul IntersectionObserver pour toute la page, qui pose `data-shown` à l'entrée dans
+ *   l'écran puis cesse d'observer (une seule fois, comme avant) ;
+ * - `load` : joue dès la première peinture, sans attendre le JavaScript (héro, au-dessus de la
+ *   ligne de flottaison) ;
+ * - le contenu n'est masqué au départ que si le JavaScript tourne (`html[data-js]`) : sans lui,
+ *   tout reste visible ;
+ * - « réduire les animations » et `desktopOnly` sont traités en CSS, sans calcul au rendu.
  */
-const effects: Record<Effect, { from: Record<string, number>; duration: number; ease: [number, number, number, number] }> = {
-  fade: { from: { opacity: 0 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
-  "fade-right": { from: { opacity: 0, x: -100 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
-  "fade-up": { from: { opacity: 0, y: 100 }, duration: 1400, ease: [0.25, 0.1, 0.25, 1] },
-  "slide-up": { from: { opacity: 0, y: 80 }, duration: 900, ease: [0, 0, 0, 1] },
+const effects: Record<Effect, { name: string; duration: number; ease: string }> = {
+  fade: { name: "rv-fade", duration: 1400, ease: "cubic-bezier(0.25, 0.1, 0.25, 1)" },
+  "fade-right": { name: "rv-fade-right", duration: 1400, ease: "cubic-bezier(0.25, 0.1, 0.25, 1)" },
+  "fade-up": { name: "rv-fade-up", duration: 1400, ease: "cubic-bezier(0.25, 0.1, 0.25, 1)" },
+  "slide-up": { name: "rv-slide-up", duration: 900, ease: "cubic-bezier(0, 0, 0, 1)" },
 };
 
-/** Sous `lg` : le point de rupture de Tailwind, 1024 px. */
-const MOBILE = "(max-width: 1023.98px)";
+let observer: IntersectionObserver | null = null;
 
-const subscribeMobile = (onChange: () => void) => {
-  const mq = window.matchMedia(MOBILE);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-};
+/** Observateur partagé : entrée dans l'écran à 8 % du bord, comme la marge d'avant. */
+function observe(el: Element) {
+  observer ??= new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.setAttribute("data-shown", "");
+        observer?.unobserve(entry.target);
+      }
+    },
+    { rootMargin: "-8% 0px" },
+  );
+  observer.observe(el);
+  return () => observer?.unobserve(el);
+}
 
 export function Reveal({
   children,
@@ -36,6 +55,7 @@ export function Reveal({
   duration,
   effect = "fade",
   desktopOnly = false,
+  load = false,
   className = "",
   as = "div",
 }: {
@@ -45,34 +65,34 @@ export function Reveal({
   effect?: Effect;
   /** N'anime qu'à partir de `lg` : sous ce seuil, le contenu est posé sans apparition. */
   desktopOnly?: boolean;
+  /** Joue dès le chargement, sans attendre d'entrer dans l'écran (haut de page). */
+  load?: boolean;
   className?: string;
   as?: "div" | "li" | "section" | "p" | "h1" | "h2";
 }) {
-  const reduce = useReducedMotion();
-  // Le serveur ne connaît pas la largeur de l'écran : il rend comme un desktop, et
-  // l'hydratation retire l'apparition sur mobile. L'inverse ferait clignoter le desktop.
-  const isMobile = useSyncExternalStore(
-    subscribeMobile,
-    () => window.matchMedia(MOBILE).matches,
-    () => false,
-  );
-  const off = reduce || (desktopOnly && isMobile);
-  const Tag = motion[as];
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (load || !ref.current) return;
+    return observe(ref.current);
+  }, [load]);
+
+  const Tag = as as ElementType;
   const e = effects[effect];
-  /**
-   * L'état d'arrivée ne reprend que les propriétés réellement décalées au départ. Il valait
-   * auparavant `{ opacity: 1, x: 0, y: 0 }` pour tous les effets : même un simple fondu posait
-   * donc un `transform` sur l'élément, ce qui le promeut en calque et fait re-tramer le texte.
-   * Sur mobile, cela se voyait — les cartes du principe d'équilibre sautaient à l'apparition.
-   */
-  const to = Object.fromEntries(Object.keys(e.from).map((k) => [k, k === "opacity" ? 1 : 0]));
+  const style = {
+    "--rv-name": e.name,
+    "--rv-dur": `${duration ?? e.duration}ms`,
+    "--rv-ease": e.ease,
+    "--rv-delay": `${delay}s`,
+  } as CSSProperties;
+
   return (
     <Tag
+      ref={ref}
       className={className}
-      initial={off ? false : e.from}
-      whileInView={off ? undefined : to}
-      viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ duration: (duration ?? e.duration) / 1000, delay, ease: e.ease }}
+      style={style}
+      data-reveal={load ? "load" : "scroll"}
+      data-reveal-desktop={desktopOnly ? "" : undefined}
     >
       {children}
     </Tag>
