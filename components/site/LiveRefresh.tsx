@@ -13,15 +13,18 @@ import { apiVersion, dataset, projectId } from "@/lib/sanity/env";
  * sans perdre le défilement ni l'état des composants client.
  *
  * Ce composant ne vide aucun cache : c'est le webhook `/api/revalidate` qui le fait, déclenché
- * par la même publication. D'où les deux rafraîchissements : le premier suffit presque
- * toujours, le second rattrape un webhook plus lent.
+ * par la même publication, mais livré par Sanity avec un temps variable. Mesuré en ligne le
+ * 30 septembre 2026 : l'événement arrive avant que le cache soit vidé, et la page n'était à
+ * jour qu'au rafraîchissement de 4 s (4,6 s et 4,4 s de bout en bout). D'où un
+ * rafraîchissement chaque seconde pendant quatre secondes, puis deux de rattrapage. Chacun
+ * n'est qu'une requête vers le cache du site, et seulement pour les pages ouvertes.
  *
  * Choisi plutôt que `<SanityLive>` de next-sanity : celui-ci impose tout le paquet `sanity` au
  * site, et ne garantit la mise à jour de tous les visiteurs qu'avec une Sanity Function en plus.
  * Ici, le webhook joue déjà ce rôle. L'origine du site doit figurer dans les CORS du projet.
  */
 const LIVE_URL = `https://${projectId}.api.sanity.io/v${apiVersion}/data/live/events/${dataset}`;
-const REFRESH_DELAYS_MS = [1200, 4000];
+const REFRESH_DELAYS_MS = [1000, 2000, 3000, 4000, 6000, 9000];
 
 export function LiveRefresh() {
   const router = useRouter();
