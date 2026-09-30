@@ -593,7 +593,14 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
 
 Par ordre de priorité.
 
-0. **Mise en service de Sanity** (à faire par Mouad, dans l'ordre) :
+0. **Mise en service de Sanity** (à faire par Mouad, dans l'ordre). **Étapes 1 à 3 faites le
+   30 septembre 2026** : variable posée dans Vercel (six variables en tout, Resend et anciennes
+   variables Sanity supprimées), code poussé, webhook « Site : rafraîchissement » créé. Testé
+   en ligne avec une référence de test, supprimée ensuite : la page et ses liens apparaissent
+   en moins de 5 secondes après publication, et disparaissent aussi vite après suppression.
+   Seul `sitemap.xml` reste servi par le cache de Vercel jusqu'à une heure : sans conséquence,
+   Google ne le relit pas plus souvent. Si besoin, ajouter `revalidatePath("/sitemap.xml")`
+   dans `/api/revalidate`.
    1. Vercel, variables d'environnement : `SANITY_REVALIDATE_SECRET` (valeur dans
       `.env.local`), Production, Sensitive. Supprimer les anciennes variables Sanity
       (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`),
