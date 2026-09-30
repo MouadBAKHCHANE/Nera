@@ -616,6 +616,10 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   impose le paquet `sanity` au site et ne garantit tous les visiteurs qu'avec une Sanity
   Function. En local, le flux arrive bien (deux rafraîchissements observés) mais le cache local
   n'est pas vidé, le webhook visant le site en ligne : tester en production.
+  **Mesuré en ligne** (libellé d'un chiffre modifié puis rétabli, page ouverte, sans
+  rechargement) : 3,9 s et 2,1 s après publication. Le webhook arrive ~1,9 s après la
+  publication et se traite en 0,2 s ; l'événement du flux arrive vers 3 s, d'où le
+  rafraîchissement immédiat (0 s, puis 1 ; 2,5 ; 5 s de rattrapage).
   Restent non instantanées : les redirections (≈ 45 s, elles exigent un déploiement).
 
 ## À faire
