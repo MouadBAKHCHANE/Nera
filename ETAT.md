@@ -601,6 +601,9 @@ Par ordre de priorité.
    Seul `sitemap.xml` reste servi par le cache de Vercel jusqu'à une heure : sans conséquence,
    Google ne le relit pas plus souvent. Si besoin, ajouter `revalidatePath("/sitemap.xml")`
    dans `/api/revalidate`.
+   **Étape 4 faite le 30 septembre 2026** : Deploy Hook Vercel « Sanity redirections » et
+   webhook Sanity « Redirections : redéploiement ». Testé en ligne : une redirection publiée
+   répond en 308 environ 45 secondes plus tard, et disparaît aussi vite une fois supprimée.
    1. Vercel, variables d'environnement : `SANITY_REVALIDATE_SECRET` (valeur dans
       `.env.local`), Production, Sensitive. Supprimer les anciennes variables Sanity
       (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`),
