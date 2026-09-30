@@ -778,8 +778,12 @@ Par ordre de priorité.
    5. Studio : dans `studio/`, `npx sanity login` (compte Google NAOENERGY) puis
       `npx sanity deploy`, nom d'hôte `nera-ing`. Reporter l'`appId` affiché dans
       `studio/sanity.cli.ts` (`deployment.appId`).
-   6. Inviter l'interlocuteur de NERA au **projet** (pas à l'organisation), rôle
-      Administrateur, seul rôle d'écriture du forfait gratuit.
+   6. **Fait le 1er octobre 2026** : Charline Fabbro ajoutée au **projet** Nera-ing (pas à
+      l'organisation), rôle **Editor** : lecture, écriture et publication de tout le contenu,
+      sans accès aux réglages techniques (webhooks, CORS, jetons, datasets). Vérifié par l'API
+      de gestion. Rôles du projet : Administrator, Editor, Developer, Contributor (brouillons
+      seulement, ne publie pas), Viewer. Si le projet repasse au forfait gratuit à la fin d'un
+      essai, vérifier dans Members qu'elle a gardé ce rôle.
 1. **Textes juridiques et carte** — **réglé le 30 septembre 2026**, voir « Fait » : la carte
    est de nouveau bloquée, conformément aux textes, sans les modifier.
 1b. **Sanity, suite de la phase 2** : guide client PDF pour NERA (sur le modèle de celui de
