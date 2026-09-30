@@ -53,7 +53,12 @@ export function HeroDark() {
           delay={0.2}
           className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
         />
-        <Reveal load delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
+        {/*
+          Sur mobile, ce texte est le plus grand élément de l'écran (LCP). Masqué pendant 1,6 s
+          puis en fondu, il n'était compté qu'à son apparition (4 s dans PageSpeed mobile) :
+          sous `lg`, il est donc posé dès la première peinture. Fondu inchangé sur ordinateur.
+        */}
+        <Reveal load desktopOnly delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
           <p>
             Bureau d&apos;ingénierie indépendant basé à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
             bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,

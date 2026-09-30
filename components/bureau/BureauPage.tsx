@@ -202,6 +202,7 @@ export async function BureauPage() {
               <Reveal
                 as="p"
                 effect="fade"
+                load
                 className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"
               >
                 <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
@@ -213,14 +214,19 @@ export async function BureauPage() {
                 delay={0.2}
                 className="mt-6 font-display text-[1.875rem] font-light leading-[1.15] text-nera-cream md:text-[3rem]"
               />
-              <Reveal delay={1.6}>
+              {/*
+                Haut de page : apparitions jouées dès la première peinture (`load`), sans attendre
+                le JavaScript. Le chapeau est le plus grand élément sur mobile (LCP) : sous `lg`, il
+                est posé tout de suite, comme sur l'accueil.
+              */}
+              <Reveal load desktopOnly delay={1.6}>
                 {bureau.lead.map((text, i) => (
                   <p key={i} className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
                     {text}
                   </p>
                 ))}
               </Reveal>
-              <Reveal delay={2.4}>
+              <Reveal load delay={2.4}>
                 <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
                 {/*
                   Le héro de `/bureau` n'offrait aucune action. « Contacter NERA » est le libellé
