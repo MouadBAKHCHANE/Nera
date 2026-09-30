@@ -723,6 +723,25 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   `VERCEL_OIDC_TOKEN` à `.env.local` et créé un jeton de contournement de la protection des
   prévisualisations (Vercel > Settings > Deployment Protection).
 
+- **Sanity phase 2, accueil, bureau et contact (1er octobre 2026).** Menu « Pages » du Studio :
+  documents uniques `homePage`, `bureauPage`, `contactPage`, un onglet par section dans l'ordre
+  de la page, SEO et expressions visées. Champ « Mot mis en avant » (partie du titre en vert)
+  vérifié dans le Studio contre le titre ; vidé, plus de mise en avant (`components/ui/Accent.tsx`).
+  Photos modifiables avec point focal : en-tête et cartes de l'accueil (portrait 4:5), photo
+  « De A à Z » avec sa description, en-tête et équipe du bureau. Restent dans le code : surtitres
+  de section, médaillon « De A à Z », numéros, cantons, ancres, icônes et logos ; coordonnées et
+  chiffres restent dans « Réglages du site ».
+  Les textes de l'accueil sont sortis des composants vers `content/home.ts` (deux espaces
+  insécables avant « ? » conservées), les composants reçoivent leurs textes en props ;
+  `Territory` n'a plus de texte par défaut. `content/bureau.ts` et `content/contact.ts` exportent
+  un type élargi (`BureauContent`, `ContactContent`). Lecture : `lib/sanity/pages.ts`, qui
+  reprend le document champ par champ et comble tout champ vide par le code (`fill`).
+  Migration `studio/scripts/import-pages.ts` (à ne pas relancer), relue ; 10 photos envoyées.
+  Vérifié sur un build de production : texte et balisage de `<main>` identiques au site en
+  ligne sur les trois pages, photos servies par Sanity. `sanity documents validate` : aucune
+  erreur sur les 14 documents ; un avertissement, la description Google de la politique de
+  confidentialité (172 caractères, coupée à 160 par Google), texte du client laissé tel quel.
+
 ## À faire
 
 Par ordre de priorité.
@@ -763,8 +782,8 @@ Par ordre de priorité.
       Administrateur, seul rôle d'écriture du forfait gratuit.
 1. **Textes juridiques et carte** — **réglé le 30 septembre 2026**, voir « Fait » : la carte
    est de nouveau bloquée, conformément aux textes, sans les modifier.
-1b. **Sanity, suite de la phase 2** : textes de l'accueil, du bureau et du contact dans le
-   Studio, avec leur SEO (même helper `pageMetadata`), puis guide client PDF.
+1b. **Sanity, suite de la phase 2** : guide client PDF pour NERA (sur le modèle de celui de
+   Zen Énergie). Contenus et SEO de toutes les pages faits le 30 septembre et le 1er octobre.
 2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
    références à publier. La page reste masquée (404, sans lien ni entrée au plan du site) et
    apparaîtra d'elle-même dès la première référence publiée dans le Studio. Un portrait du
