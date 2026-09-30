@@ -686,6 +686,10 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
     filets, icônes, contours et le titre du héro.
   Essayés et écartés : `experimental.inlineCss` (HTML 209 → 447 Ko, mobile 87 → 64) ; fonts
   sans préchargement (FCP 0,9 → 2 s).
+  - **Suite (même jour)** : sur mobile, le texte du héro (accueil, bureau) était le plus grand
+    élément ; masqué 1,6 s puis en fondu, il n'était compté qu'à son apparition (PageSpeed :
+    « délai de rendu » 4 140 ms). Posé dès la première peinture sous `lg` (`desktopOnly`),
+    apparitions du héro du bureau en `load`. Mesuré en ligne : accueil 95, bureau 89-96.
   **Plafond mobile** : Lighthouse simule le plus grand élément en incluant tout script demandé
   avant la première peinture ; React et le routeur de Next (~115 Ko) y restent, d'où un LCP
   simulé vers 3,5 s. 100 sur mobile demanderait de ne plus hydrater la page (site statique).
