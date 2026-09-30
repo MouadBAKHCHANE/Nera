@@ -6,6 +6,8 @@ import { CookieBanner } from "@/components/ui/CookieBanner";
 import { CallButton } from "@/components/ui/CallButton";
 import { SiteProvider } from "@/components/site/SiteProvider";
 import { LiveRefresh } from "@/components/site/LiveRefresh";
+import { Tracking } from "@/components/site/Tracking";
+import { getMarketingSettings } from "@/lib/sanity/marketing";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { getSiteSettings } from "@/lib/sanity/settings";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -41,7 +43,7 @@ const SITE_URL = seo.siteUrl;
  * SEO par défaut), sinon ceux du document SEO du client. Chaque page garde les siens.
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo: defaults } = await getSiteSettings();
+  const [{ seo: defaults }, marketing] = await Promise.all([getSiteSettings(), getMarketingSettings()]);
   return {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -58,13 +60,20 @@ export async function generateMetadata(): Promise<Metadata> {
     url: SITE_URL,
   },
   robots: { index: true, follow: true },
+  // Balises de vérification saisies dans le Studio (« Marketing & Analytics »).
+  verification: {
+    google: marketing.googleSiteVerification,
+    other: marketing.metaDomainVerification
+      ? { "facebook-domain-verification": marketing.metaDomainVerification }
+      : undefined,
+  },
   };
 }
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   // Lu une fois ici, puis transmis aux composants client (menus, onglets, formulaires) par le
   // contexte du site. Les composants serveur relisent Sanity eux-mêmes, sans coût : même cache.
-  const [count, settings] = await Promise.all([getRealisationsCount(), getSiteSettings()]);
+  const [count, settings, marketing] = await Promise.all([getRealisationsCount(), getSiteSettings(), getMarketingSettings()]);
   const site = { showReferences: count > 0, company: settings.company };
   return (
     // data-scroll-behavior : Next 16 ne neutralise plus `scroll-behavior: smooth` pendant les
@@ -81,6 +90,16 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </QuoteProvider>
           {/* Publications du Studio répercutées sur les pages ouvertes, sans rechargement. */}
           <LiveRefresh />
+          {/* Outils de mesure, chargés seulement après le consentement correspondant. */}
+          <Tracking
+            ids={{
+              googleAnalyticsId: marketing.googleAnalyticsId,
+              googleAdsId: marketing.googleAdsId,
+              googleAdsQuoteLabel: marketing.googleAdsQuoteLabel,
+              googleAdsContactLabel: marketing.googleAdsContactLabel,
+              metaPixelId: marketing.metaPixelId,
+            }}
+          />
         </SiteProvider>
       </body>
     </html>

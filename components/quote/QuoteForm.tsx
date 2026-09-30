@@ -15,6 +15,7 @@ import {
 } from "@/content/devis";
 import { FormNotice } from "@/components/ui/FormNotice";
 import { useSite } from "@/components/site/SiteProvider";
+import { trackEvent } from "@/lib/analytics";
 import { Select } from "@/components/ui/Select";
 
 const steps = ["Prestation", "Bâtiment", "Coordonnées", "Synthèse"] as const;
@@ -224,6 +225,8 @@ export function QuoteForm({
       const res = await fetch("/api/devis", { method: "POST", body: fd });
       if (!res.ok) throw new Error(await res.text());
       setStatus("sent");
+      // Conversion, relayée aux outils de mesure acceptés par le visiteur.
+      trackEvent("devis_envoye");
     } catch {
       setStatus("idle");
       setError("L'envoi a échoué. Réessayez ou écrivez-nous à info@nera-ing.ch.");

@@ -645,6 +645,24 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   requête Google ; clic ; acceptation ; ancien choix ; refus. Revient sur la demande antérieure
   du client d'une carte sans consentement : à lui expliquer.
 
+- **Sanity, Marketing & Analytics (30 septembre 2026).** Document unique « marketingSettings »
+  dans le Studio : Google Analytics 4, Google Ads (ID et libellés de conversion devis et
+  contact), Meta Pixel, codes de vérification Google Search Console et Meta (balise entière ou
+  valeur). Seuls les outils cités par la politique de cookies ; aucun champ de script libre, ni
+  Google Tag Manager. `lib/sanity/marketing.ts` revérifie chaque format côté serveur.
+  `components/site/Tracking.tsx` : GA4 après « Mesure d'audience », Google Ads et Meta après
+  « Publicité », mode de consentement Google « de base » (aucun script avant l'accord, tous les
+  stockages refusés par défaut) ; retrait en cours de visite : `ga-disable-<ID>`, stockages
+  refusés, `fbq('consent','revoke')`, cookies `_ga`, `_gid`, `_gcl`, `_fbp`, `_fbc` effacés.
+  Conversions par `trackEvent` (`lib/analytics.ts`) : devis envoyé, contact envoyé, clic
+  téléphone, clic e-mail ; relayées seulement aux outils acceptés. Vérification par
+  `metadata.verification`. Testé au navigateur avec des identifiants de test locaux (retirés) :
+  aucun chargement sans choix, chargement par catégorie, conversions et libellé Ads, retrait,
+  rechargement. Champs vides en ligne : rien n'est chargé tant que NERA ne les remplit pas.
+  **À signaler à NERA** : sa politique de cookies cite Google Tag Manager, non installé ; à
+  retirer du texte si NERA n'en a pas l'usage (la politique demande que la liste corresponde
+  au site réel).
+
 ## À faire
 
 Par ordre de priorité.

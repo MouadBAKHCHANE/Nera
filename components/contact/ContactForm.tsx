@@ -5,6 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { FormNotice } from "@/components/ui/FormNotice";
 import { prestations } from "@/content/prestations";
 import { useSite } from "@/components/site/SiteProvider";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Formulaire de contact simple, partagé par la section contact de l'accueil
@@ -52,6 +53,8 @@ export function ContactForm({ tone = "dark", className = "" }: { tone?: "dark" |
       const res = await fetch("/api/contact", { method: "POST", body: new FormData(e.currentTarget) });
       if (!res.ok) throw new Error(await res.text());
       setStatus("sent");
+      // Conversion, relayée aux outils de mesure acceptés par le visiteur.
+      trackEvent("contact_envoye");
     } catch {
       setStatus("idle");
       setError(`L'envoi a échoué. Réessayez, ou écrivez-nous à ${company.email} ou appelez le ${company.phone}.`);

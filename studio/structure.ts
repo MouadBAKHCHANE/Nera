@@ -1,4 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
+import {BarChartIcon} from '@sanity/icons/BarChart'
 import {CaseIcon} from '@sanity/icons/Case'
 import {CogIcon} from '@sanity/icons/Cog'
 import {DocumentTextIcon} from '@sanity/icons/DocumentText'
@@ -13,6 +14,12 @@ export const structure: StructureResolver = (S) =>
         .title('Réglages du site')
         .icon(CogIcon)
         .child(S.document().schemaType('settings').documentId('settings').title('Réglages du site')),
+      S.listItem()
+        .title('Marketing & Analytics')
+        .icon(BarChartIcon)
+        .child(
+          S.document().schemaType('marketingSettings').documentId('marketingSettings').title('Marketing & Analytics'),
+        ),
       S.divider(),
       S.documentTypeListItem('realisation').title('Références').icon(CaseIcon),
       // Trois documents à identifiant fixe, comme les réglages : une entrée chacun.
