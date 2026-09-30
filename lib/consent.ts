@@ -9,6 +9,11 @@ export type Consent = {
   necessary: true;
   analytics: boolean;
   marketing: boolean;
+  /**
+   * Contenus externes (Google Maps). Ajoutée le 30 septembre 2026 : absente des choix
+   * enregistrés avant, elle vaut alors « refusé ».
+   */
+  external?: boolean;
   /** ISO 8601, date à laquelle le choix a été enregistré. */
   date: string;
 };

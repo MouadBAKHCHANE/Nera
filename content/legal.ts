@@ -38,4 +38,6 @@ export const cookieCategories = [
   },
   { id: "analytics", label: "Mesure d'audience", desc: "Statistiques de fréquentation pour améliorer le site." },
   { id: "marketing", label: "Publicité", desc: "Contenus personnalisés et suivi des campagnes." },
+  // Nom repris de la politique de cookies (section « Contenus externes - Google Maps »).
+  { id: "external", label: "Contenus externes", desc: "Carte Google Maps de la page contact." },
 ] as const;

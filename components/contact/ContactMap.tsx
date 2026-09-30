@@ -1,15 +1,15 @@
 import { getSiteSettings } from "@/lib/sanity/settings";
+import { mapsHrefFor } from "@/lib/site-company";
 import { contact } from "@/content/contact";
+import { ConsentMap } from "./ConsentMap";
 
 /**
- * « Carte localisation » du document client, chargée sans condition.
- *
- * Elle était auparavant bloquée jusqu'à l'acceptation d'une catégorie « Google Maps » du
- * gestionnaire de cookies ; le client a demandé qu'elle s'affiche d'emblée et que la catégorie
- * disparaisse du bandeau. **Les textes juridiques du site n'ont pas suivi** : la politique de
- * cookies et les mentions légales promettent encore un emplacement neutre tant que le visiteur
- * n'a pas accepté (`content/legal-pages.ts`, sections « Google Maps » et « Contenus externes »).
- * À faire corriger par le client, ou revenir au blocage.
+ * « Carte localisation » du document client, **bloquée par défaut** (depuis le 30 septembre
+ * 2026), comme l'annoncent la politique de cookies (« Contenus externes - Google Maps ») et
+ * la politique de confidentialité (« Google Maps ») : emplacement neutre tant que le visiteur
+ * n'a pas accepté la catégorie « Contenus externes » ou cliqué sur « Afficher la carte ».
+ * Elle avait été affichée d'emblée à une demande antérieure du client, ce qui contredisait
+ * ces deux textes.
  *
  * La recherche porte sur la raison sociale et l'adresse, jamais sur des coordonnées : un
  * `q=<latitude>,<longitude>` pose une épingle sans fiche, et le clic répond alors
@@ -21,16 +21,11 @@ export async function ContactMap() {
   const query = encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`);
 
   return (
-    // La hauteur vient du conteneur : la carte occupe une moitié d'écran à côté du formulaire.
-    <div className="relative size-full overflow-hidden bg-nera-navy-soft">
-      <iframe
-        src={`https://www.google.com/maps?q=${query}&z=${contact.map.zoom}&output=embed&hl=fr`}
-        title={`${company.shortName} — ${company.street}, ${company.zip} ${company.city}`}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        allowFullScreen
-        className="absolute inset-0 size-full border-0"
-      />
-    </div>
+    <ConsentMap
+      src={`https://www.google.com/maps?q=${query}&z=${contact.map.zoom}&output=embed&hl=fr`}
+      title={`${company.shortName} — ${company.street}, ${company.zip} ${company.city}`}
+      address={`${company.street}, ${company.zip} ${company.city}`}
+      mapsHref={mapsHrefFor(company)}
+    />
   );
 }

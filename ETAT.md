@@ -633,6 +633,18 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   (`iconFor` retiré), positions du titre animé calculées d'avance, repli de « Gérer mes
   cookies » par `router.push`. Chaque comportement vérifié au navigateur.
 
+- **Carte Google Maps conforme aux textes (30 septembre 2026).** Choix de Mouad : bloquer en un
+  clic plutôt que réécrire les textes. Catégorie « Contenus externes » rétablie dans le bandeau
+  (nom repris de la politique de cookies) et dans le rappel de /cookies ; « Tout accepter » et
+  « Tout refuser » l'incluent ; champ `external` facultatif dans `Consent`, un choix enregistré
+  avant vaut « refusé ». `ConsentMap` (client) : emplacement neutre sans iframe, donc aucune
+  requête vers Google, avec « Afficher la carte » (pour la visite, sans enregistrer de choix :
+  l'« action explicite » de la politique de confidentialité), lien d'itinéraire et « Toujours
+  afficher les cartes » (ouvre le gestionnaire). La carte s'affiche d'office, sans
+  rechargement, dès que la catégorie est acceptée. Vérifié au navigateur : sans choix, zéro
+  requête Google ; clic ; acceptation ; ancien choix ; refus. Revient sur la demande antérieure
+  du client d'une carte sans consentement : à lui expliquer.
+
 ## À faire
 
 Par ordre de priorité.
@@ -671,10 +683,8 @@ Par ordre de priorité.
       `studio/sanity.cli.ts` (`deployment.appId`).
    6. Inviter l'interlocuteur de NERA au **projet** (pas à l'organisation), rôle
       Administrateur, seul rôle d'écriture du forfait gratuit.
-1. **Textes juridiques et carte** — trois passages promettent encore le blocage de Google Maps
-   jusqu'au consentement, alors que la carte s'affiche d'emblée. Les pages légales sont
-   désormais dans le Studio (« Pages légales ») : **NERA peut corriger ces passages elle-même**,
-   et changer la date de mise à jour. À lui signaler. À défaut, rétablir le blocage.
+1. **Textes juridiques et carte** — **réglé le 30 septembre 2026**, voir « Fait » : la carte
+   est de nouveau bloquée, conformément aux textes, sans les modifier.
 2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
    références à publier. La page reste masquée (404, sans lien ni entrée au plan du site) et
    apparaîtra d'elle-même dès la première référence publiée dans le Studio. Un portrait du
