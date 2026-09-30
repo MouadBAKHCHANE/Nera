@@ -42,6 +42,8 @@ export type PrestationPage = {
    * Images recadrées en 21:9 avant export (voir la section « Photos »).
    */
   band?: string;
+  /** Point focal de la bande (position CSS), choisi dans le Studio. */
+  bandPosition?: string;
   /** Libellé court : fil d'Ariane, sommaire et blocs de maillage. */
   shortTitle: string;
   h1: string;
@@ -50,7 +52,10 @@ export type PrestationPage = {
   /** Libellé du CTA d'en-tête, tel qu'écrit par le client. */
   heroCta: string;
   image: string;
-  /** Cadrage de l'image d'en-tête quand le centrage par défaut ne convient pas. */
+  /**
+   * Cadrage de l'image d'en-tête quand le centrage par défaut ne convient pas : position CSS
+   * (`object-position`), « 50% 70% ». Dans Sanity, c'est le point focal de la photo.
+   */
   imagePosition?: string;
   meta: { title: string; description: string };
   /** Expression principale en tête, puis expressions secondaires. */
@@ -1009,7 +1014,7 @@ export const prestationPages: PrestationPage[] = [
     ],
     heroCta: "Présenter mon projet de rénovation",
     image: "/img/prestation-renovation-batiment.webp",
-    imagePosition: "object-[50%_70%]",
+    imagePosition: "50% 70%",
     meta: {
       title: "Rénovation énergétique et AMO | NERA Genève",
       description:

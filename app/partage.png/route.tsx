@@ -3,16 +3,19 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 /**
- * Image de partage (Open Graph / Twitter) : logo NERA sur fond marine avec la grille de plan.
- * Utilisée par WhatsApp, LinkedIn, Facebook, iMessage… quand un lien du site est partagé.
- * Convention de fichier Next.js : s'applique à toutes les pages.
+ * Image de partage par défaut (Open Graph / Twitter) : logo NERA sur fond marine avec la grille
+ * de plan. Utilisée par WhatsApp, LinkedIn, Facebook, iMessage… quand un lien du site est
+ * partagé, sauf sur les pages qui ont leur propre image dans le Studio (onglet SEO).
+ *
+ * Route simple, générée au build, et non plus la convention `opengraph-image` de Next : celle-ci
+ * l'emporte sur toute image déclarée par une page, l'image du Studio n'aurait jamais servi.
+ * Déclarée dans les métadonnées par `lib/seo/metadata.ts`.
  */
-export const runtime = "nodejs";
-export const alt = "NERA Ingénieurs Conseils, bureau d'ingénieurs en énergie et physique du bâtiment, basé à Genève";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const dynamic = "force-static";
 
-export default async function OpenGraphImage() {
+const size = { width: 1200, height: 630 };
+
+export async function GET() {
   const svg = await readFile(join(process.cwd(), "public/logos/nera-tagline-cream-green.svg"), "utf8");
   const logo = `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 

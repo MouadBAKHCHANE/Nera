@@ -3,18 +3,17 @@ import { notFound } from "next/navigation";
 import { ReferencesPage } from "@/components/references/ReferencesPage";
 import { references, referencesRoute } from "@/content/references";
 import { getRealisations } from "@/lib/sanity/realisations";
+import { pageMetadata } from "@/lib/seo/metadata";
 
 /**
  * Page « Nos références ». Textes fixes du client (lignes 686 à 693 de
  * `content/source/textes-client.md`) ; les projets viennent du Studio Sanity.
  */
-export const metadata: Metadata = {
-  // Titre SEO du client, repris tel quel : pas de suffixe de gabarit.
-  title: { absolute: references.meta.title },
+export const metadata: Metadata = pageMetadata({
+  title: references.meta.title,
   description: references.meta.description,
-  alternates: { canonical: referencesRoute },
-  openGraph: { title: references.meta.title, description: references.meta.description, url: referencesRoute },
-};
+  route: referencesRoute,
+});
 
 export default async function Page() {
   const items = await getRealisations();

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrestationPage } from "@/components/prestations/PrestationPage";
-import { prestationPageBySlug, prestationPages, prestationRoute } from "@/content/prestation-pages";
+import { prestationPages, prestationRoute } from "@/content/prestation-pages";
+import { getPrestationPage } from "@/lib/sanity/prestations";
+import { pageMetadata } from "@/lib/seo/metadata";
 
 /**
- * Les six pages prestation, rendues par un gabarit unique à partir de
- * `content/prestation-pages.ts`. Les slugs sont ceux de `content/footer.ts`.
+ * Les six pages prestation, rendues par un gabarit unique. Contenu saisi dans le Studio Sanity
+ * (`lib/sanity/prestations.ts`). Les adresses restent celles du code (`content/footer.ts`) :
+ * les documents du Studio sont fixes, on n'en crée ni n'en supprime.
  */
 export function generateStaticParams() {
   return prestationPages.map((p) => ({ slug: p.slug }));
@@ -13,25 +16,21 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const page = prestationPageBySlug.get(slug);
+export async function generateMetadata({ params }: PageProps<"/prestations/[slug]">): Promise<Metadata> {
+  const page = await getPrestationPage((await params).slug);
   if (!page) return {};
-
-  const route = prestationRoute(page.slug);
-  return {
-    // Titre SEO du client, repris tel quel : pas de suffixe de gabarit.
-    title: { absolute: page.meta.title },
+  return pageMetadata({
+    title: page.meta.title,
     description: page.meta.description,
     keywords: page.keywords,
-    alternates: { canonical: route },
-    openGraph: { title: page.meta.title, description: page.meta.description, url: route },
-  };
+    route: prestationRoute(page.slug),
+    image: page.shareImage,
+    noIndex: page.noIndex,
+  });
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const page = prestationPageBySlug.get(slug);
+export default async function Page({ params }: PageProps<"/prestations/[slug]">) {
+  const page = await getPrestationPage((await params).slug);
   if (!page) notFound();
   return <PrestationPage page={page} />;
 }

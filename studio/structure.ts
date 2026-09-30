@@ -4,6 +4,18 @@ import {CaseIcon} from '@sanity/icons/Case'
 import {CogIcon} from '@sanity/icons/Cog'
 import {DocumentTextIcon} from '@sanity/icons/DocumentText'
 import {LinkIcon} from '@sanity/icons/Link'
+import {ThLargeIcon} from '@sanity/icons/ThLarge'
+import {WrenchIcon} from '@sanity/icons/Wrench'
+
+/** Les six pages prestation : identifiant `prestation-<slug>`, adresse `/prestations/<slug>`. */
+const PRESTATIONS = [
+  ['audit-cecb', 'CECB et CECB Plus'],
+  ['modelisation-thermique', 'Physique du bâtiment et labels'],
+  ['installations-cvc', 'Ingénierie CVC'],
+  ['autorisation-de-construire', 'Autorisations de construire'],
+  ['subventions', 'Subventions'],
+  ['renovation-energetique', 'Rénovation énergétique globale'],
+] as const
 
 /** Menu du Studio : réglages en tête, puis le contenu, puis les outils SEO. */
 export const structure: StructureResolver = (S) =>
@@ -21,6 +33,29 @@ export const structure: StructureResolver = (S) =>
           S.document().schemaType('marketingSettings').documentId('marketingSettings').title('Marketing & Analytics'),
         ),
       S.divider(),
+      // Index et six pages à identifiant fixe : l'ordre est celui du menu du site.
+      S.listItem()
+        .title('Prestations')
+        .icon(WrenchIcon)
+        .child(
+          S.list()
+            .title('Prestations')
+            .items([
+              S.listItem()
+                .id('prestationsPage')
+                .title('Page Nos prestations')
+                .icon(ThLargeIcon)
+                .child(S.document().schemaType('prestationsPage').documentId('prestationsPage').title('Nos prestations')),
+              S.divider(),
+              ...PRESTATIONS.map(([slug, title]) =>
+                S.listItem()
+                  .id(`prestation-${slug}`)
+                  .title(title)
+                  .icon(WrenchIcon)
+                  .child(S.document().schemaType('prestationPage').documentId(`prestation-${slug}`).title(title)),
+              ),
+            ]),
+        ),
       S.documentTypeListItem('realisation').title('Références').icon(CaseIcon),
       // Trois documents à identifiant fixe, comme les réglages : une entrée chacun.
       S.listItem()

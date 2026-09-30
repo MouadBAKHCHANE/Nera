@@ -9,19 +9,21 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Blocks } from "./Blocks";
 import { seo } from "@/content/seo";
-import {
-  prestationRoute,
-  prestationsIndexRoute,
-  type PrestationPage as Page,
-} from "@/content/prestation-pages";
+import { prestationPageBySlug, prestationRoute, prestationsIndexRoute } from "@/content/prestation-pages";
+import type { PrestationView as Page } from "@/lib/sanity/prestations";
 
 /**
  * Gabarit unique des six pages prestation : en-tête sombre avec image, corps sur crème
  * avec sommaire collant, FAQ dépliable, maillage interne et CTA devis final. Le contenu
- * vient de `content/prestation-pages.ts` et n'est jamais reformulé ici.
+ * vient du Studio Sanity (`lib/sanity/prestations.ts`, repli sur `content/prestation-pages.ts`)
+ * et n'est jamais reformulé ici.
  */
 export function PrestationPage({ page }: { page: Page }) {
   const route = prestationRoute(page.slug);
+  // Prestation pré-remplie dans le formulaire de devis : le libellé du code, qui est celui de la
+  // liste du formulaire. Le titre court du Studio peut changer sans casser ce lien.
+  const quotePrestation = prestationPageBySlug.get(page.slug)?.shortTitle ?? page.shortTitle;
+  const hasFaq = page.faq.length > 0;
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -32,15 +34,20 @@ export function PrestationPage({ page }: { page: Page }) {
         { "@type": "ListItem", position: 3, name: page.shortTitle, item: `${seo.siteUrl}${route}` },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: page.faq.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    },
+    // Sans question, pas de FAQPage : Google la signale en erreur si elle est vide.
+    ...(hasFaq
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: page.faq.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -56,7 +63,8 @@ export function PrestationPage({ page }: { page: Page }) {
             priority
             quality={90}
             sizes="100vw"
-            className={`object-cover opacity-70 ${page.imagePosition ?? ""}`}
+            className="object-cover opacity-70"
+            style={page.imagePosition ? { objectPosition: page.imagePosition } : undefined}
           />
           {/*
             Trois voiles au lieu d'un seul aplat. L'ancien montait à 100 % de marine sur toute
@@ -116,7 +124,7 @@ export function PrestationPage({ page }: { page: Page }) {
                   {text}
                 </p>
               ))}
-              <QuoteCta prestation={page.shortTitle} className="mt-10">
+              <QuoteCta prestation={quotePrestation} className="mt-10">
                 {page.heroCta}
               </QuoteCta>
               <Ruler className="mt-12 w-56 text-nera-cream" ticks={30} />
@@ -149,11 +157,13 @@ export function PrestationPage({ page }: { page: Page }) {
                       </a>
                     </li>
                   ))}
-                  <li>
-                    <a href="#faq" className="text-body-md text-body transition-colors hover:text-accent-deep">
-                      Questions fréquentes
-                    </a>
-                  </li>
+                  {hasFaq && (
+                    <li>
+                      <a href="#faq" className="text-body-md text-body transition-colors hover:text-accent-deep">
+                        Questions fréquentes
+                      </a>
+                    </li>
+                  )}
                 </ol>
                 </nav>
 
@@ -162,7 +172,7 @@ export function PrestationPage({ page }: { page: Page }) {
                   reste sous les yeux pendant toute la lecture. Hors du `<nav>`, une liste de
                   définitions n'étant pas de la navigation.
                 */}
-                {page.acronyms && (
+                {page.acronyms && page.acronyms.length > 0 && (
                   <div className="mt-10">
                     <h2 className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">Sigles</h2>
                     <dl className="mt-4 space-y-2 border-l border-hairline pl-4 text-body-sm leading-[1.5]">
@@ -203,6 +213,7 @@ export function PrestationPage({ page }: { page: Page }) {
           Pas de `Container` ici : la moitié droite doit toucher le bord de l'écran. La gouttière
           de gauche est donc reprise à la main, aux mêmes valeurs que le reste du site.
         */}
+        {hasFaq && (
         <section id="faq" className="scroll-mt-28 bg-canvas-alt">
           <div className="grid lg:grid-cols-2">
             <div className="px-6 py-section-sm md:px-10 lg:py-section lg:pl-[120px] lg:pr-16">
@@ -244,11 +255,13 @@ export function PrestationPage({ page }: { page: Page }) {
                   quality={90}
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
+                  style={page.bandPosition ? { objectPosition: page.bandPosition } : undefined}
                 />
               </div>
             )}
           </div>
         </section>
+        )}
 
         {/* Dernier H2 du document client et CTA devis. */}
         <section className="bg-nera-navy-deep bg-blueprint py-section-sm text-nera-cream lg:py-section">
@@ -257,7 +270,7 @@ export function PrestationPage({ page }: { page: Page }) {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {page.closing}
               </h2>
-              <QuoteCta prestation={page.shortTitle} className="mt-10">
+              <QuoteCta prestation={quotePrestation} className="mt-10">
                 Demander un devis gratuit
               </QuoteCta>
             </div>

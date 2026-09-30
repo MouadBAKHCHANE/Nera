@@ -17,7 +17,7 @@ export async function JsonLd() {
     alternateName: "NERA",
     url: seo.siteUrl,
     logo: `${seo.siteUrl}/logos/nera-horizontal-navy-green.svg`,
-    image: `${seo.siteUrl}/opengraph-image`,
+    image: `${seo.siteUrl}/partage.png`,
     description: seo.description,
     foundingDate: String(company.founded),
     founder: { "@type": "Person", name: company.founder.name, jobTitle: company.founder.role },

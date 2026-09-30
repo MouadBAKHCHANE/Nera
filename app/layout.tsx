@@ -12,6 +12,7 @@ import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { getSiteSettings } from "@/lib/sanity/settings";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { seo } from "@/content/seo";
+import { baseOpenGraph, DEFAULT_SHARE_IMAGE } from "@/lib/seo/metadata";
 
 const clash = localFont({
   src: [
@@ -53,12 +54,10 @@ export async function generateMetadata(): Promise<Metadata> {
   description: defaults.description ?? seo.description,
   keywords: seo.keywords,
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "fr_CH",
-    siteName: "NERA Ingénieurs Conseils",
-    url: SITE_URL,
-  },
+  // Pages sans métadonnées propres (devis, 404) : image de partage par défaut. Les autres passent
+  // par `pageMetadata` (lib/seo/metadata.ts).
+  openGraph: { ...baseOpenGraph, url: SITE_URL },
+  twitter: { card: "summary_large_image", images: [DEFAULT_SHARE_IMAGE] },
   robots: { index: true, follow: true },
   // Balises de vérification saisies dans le Studio (« Marketing & Analytics »).
   verification: {

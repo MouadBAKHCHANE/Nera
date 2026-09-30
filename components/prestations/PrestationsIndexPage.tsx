@@ -8,22 +8,19 @@ import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
 import { PrestationsScrolly } from "./PrestationsScrolly";
 import { seo } from "@/content/seo";
-import {
-  prestationPageBySlug,
-  prestationRoute,
-  prestationsIndex as index,
-  prestationsIndexRoute,
-} from "@/content/prestation-pages";
+import { prestationPageBySlug, prestationRoute, prestationsIndexRoute } from "@/content/prestation-pages";
+import type { PrestationsIndexView } from "@/lib/sanity/prestations";
 
 /**
  * Index « Nos prestations » : en-tête sombre, puis les six domaines en défilement à
- * visuel collant (`PrestationsScrolly`), les H2 de fin et le CTA devis final. Le contenu vient de
- * `content/prestation-pages.ts` et n'est jamais reformulé ici.
+ * visuel collant (`PrestationsScrolly`), les H2 de fin et le CTA devis final. Le contenu vient du
+ * Studio Sanity (`lib/sanity/prestations.ts`, repli sur `content/prestation-pages.ts`) et n'est
+ * jamais reformulé ici.
  */
 /** Une icône Lucide par carte de fin, dans l'ordre du contenu : ciblée, complète, périmètre. */
 const outroIcons = [Target, Layers, ClipboardCheck];
 
-export function PrestationsIndexPage() {
+export function PrestationsIndexPage({ index }: { index: PrestationsIndexView }) {
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -51,12 +48,13 @@ export function PrestationsIndexPage() {
       <main>
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
-            src="/img/process-panneaux-solaires-immeuble.webp"
+            src={index.image}
             alt=""
             fill
             priority
             quality={90}
             sizes="100vw"
+            style={index.imagePosition ? { objectPosition: index.imagePosition } : undefined}
             className="object-cover opacity-70"
           />
           {/*
@@ -182,9 +180,11 @@ export function PrestationsIndexPage() {
               <h2 className="font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
                 {index.closing.title}
               </h2>
-              <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
-                {index.closing.text}
-              </p>
+              {index.closing.text && (
+                <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 md:text-body-lg">
+                  {index.closing.text}
+                </p>
+              )}
               <QuoteCta className="mt-10">Demander un devis gratuit</QuoteCta>
             </div>
           </Container>

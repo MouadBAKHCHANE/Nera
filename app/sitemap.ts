@@ -6,6 +6,7 @@ import { getLegalPage } from "@/lib/sanity/legal";
 import { bureauRoute } from "@/content/bureau";
 import { referencesRoute } from "@/content/references";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
+import { getPrestationPage, getPrestationsIndex } from "@/lib/sanity/prestations";
 import { contactRoute } from "@/content/contact";
 
 /**
@@ -16,12 +17,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const hasReferences = (await getRealisationsCount()) > 0;
   const legal = await Promise.all(LEGAL_PAGES.map((p) => getLegalPage(p.id)));
+  // Pages cochées « Masquer cette page de Google » dans le Studio : hors du plan du site.
+  const index = await getPrestationsIndex();
+  const pages = (await Promise.all(prestationPages.map((p) => getPrestationPage(p.slug)))).filter(
+    (p) => p !== null && !p.noIndex,
+  );
   return [
     { url: `${seo.siteUrl}/`, lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: `${seo.siteUrl}/devis`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
-    { url: `${seo.siteUrl}${prestationsIndexRoute}`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    ...prestationPages.map((p) => ({
-      url: `${seo.siteUrl}${prestationRoute(p.slug)}`,
+    ...(index.noIndex
+      ? []
+      : [{ url: `${seo.siteUrl}${prestationsIndexRoute}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.9 }]),
+    ...pages.map((p) => ({
+      url: `${seo.siteUrl}${prestationRoute(p!.slug)}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
