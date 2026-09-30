@@ -5,6 +5,7 @@ import { QuoteProvider } from "@/components/quote/QuoteModal";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { CallButton } from "@/components/ui/CallButton";
 import { SiteProvider } from "@/components/site/SiteProvider";
+import { LiveRefresh } from "@/components/site/LiveRefresh";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { getSiteSettings } from "@/lib/sanity/settings";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -78,6 +79,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <CookieBanner />
             <CallButton />
           </QuoteProvider>
+          {/* Publications du Studio répercutées sur les pages ouvertes, sans rechargement. */}
+          <LiveRefresh />
         </SiteProvider>
       </body>
     </html>

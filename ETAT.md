@@ -606,6 +606,18 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   à venir compris. Secret, déclencheurs et projection `{_type}` inchangés. Mis en ligne et
   vérifié : les trois pages légales servies depuis Sanity, texte identique au caractère près.
 
+- **Sanity, mises à jour instantanées (30 septembre 2026).** Demande du client : ce qui est
+  publié dans le Studio doit se voir tout de suite sur le site. `LiveRefresh` (racine) écoute
+  le flux public de la Live Content API (EventSource, sans jeton, seulement onglet visible) et
+  recalcule la page par `router.refresh()` 1,2 s puis 4 s après chaque publication, sans
+  rechargement. Le cache est vidé par le webhook, dont le délai de 3 s a été retiré (le site lit
+  l'API en direct, pas le CDN) ; il rafraîchit aussi `sitemap.xml`. CORS ajoutés sans
+  identifiants : https://www.nera-ing.ch et http://localhost:3000. `<SanityLive>` écarté : il
+  impose le paquet `sanity` au site et ne garantit tous les visiteurs qu'avec une Sanity
+  Function. En local, le flux arrive bien (deux rafraîchissements observés) mais le cache local
+  n'est pas vidé, le webhook visant le site en ligne : tester en production.
+  Restent non instantanées : les redirections (≈ 45 s, elles exigent un déploiement).
+
 ## À faire
 
 Par ordre de priorité.

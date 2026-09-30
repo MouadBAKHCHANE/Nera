@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 
@@ -10,7 +10,7 @@ export const runtime = "nodejs";
  *
  * Configuration du webhook dans Sanity (Manage > API > Webhooks) :
  * - URL : https://www.nera-ing.ch/api/revalidate, méthode POST ;
- * - filtre : _type in ["settings", "realisation", "redirect"] ;
+ * - aucun filtre (retiré le 30 septembre 2026) : chaque type invalide sa propre étiquette ;
  * - projection : {_type} ;
  * - secret : la même valeur que SANITY_REVALIDATE_SECRET dans Vercel.
  *
@@ -35,13 +35,16 @@ export async function POST(req: Request) {
   }
   if (!type) return new NextResponse("Type de document manquant.", { status: 400 });
 
-  // Le webhook part avant que le CDN de Sanity ne soit à jour : sans ce délai, la page
-  // relirait l'ancienne version (règle Sanity « Stale Data After Webhook »).
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // Pas de délai d'attente : le site lit l'API de Sanity en direct, jamais son CDN (voir
+  // `lib/sanity/fetch.ts`), donc la version publiée est lisible dès l'appel du webhook.
+  // Retiré le 30 septembre 2026 : il retardait chaque mise à jour de trois secondes.
 
   // `expire: 0` : la visite suivante relit Sanity tout de suite. Avec le profil « max »
   // conseillé par Next, la première visite après publication montrerait encore l'ancienne
   // version, ce qui déroute qui vient de publier.
   revalidateTag(type, { expire: 0 });
+  // Le plan du site agrège plusieurs types : rafraîchi à chaque publication, sans attendre
+  // son expiration d'une heure dans le cache de Vercel.
+  revalidatePath("/sitemap.xml");
   return NextResponse.json({ revalidated: type });
 }
