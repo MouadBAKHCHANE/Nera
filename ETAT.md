@@ -624,8 +624,8 @@ Par ordre de priorité.
    refusé depuis info@ (restriction RBAC effective), jeton sans permission Entra à l'échelle
    du tenant. Un devis avec pièce jointe et un message de contact réels envoyés depuis le site
    en ligne, marqués « TEST TECHNIQUE ». Reste :
-   - supprimer dans Vercel `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, devenus inutiles,
-     une fois les deux messages de test confirmés dans info@ ;
+   - **réception confirmée par le client le 30 septembre 2026.** Supprimer dans Vercel
+     `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, devenus inutiles ;
    - rappel fin août 2027 : faire générer un nouveau secret avant le **24 septembre 2027**.
 4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
