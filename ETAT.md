@@ -694,6 +694,35 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   avant la première peinture ; React et le routeur de Next (~115 Ko) y restent, d'où un LCP
   simulé vers 3,5 s. 100 sur mobile demanderait de ne plus hydrater la page (site statique).
 
+- **Sanity phase 2, prestations (30 septembre 2026).** Les six pages prestation et la page
+  « Nos prestations » se modifient dans le Studio (menu « Prestations »). Types
+  `prestationPage` (six documents fixes `prestation-<slug>`, ni créables ni supprimables : menu,
+  icônes, illustrations et liste du formulaire de devis restent liés au code) et
+  `prestationsPage` (document unique). Texte riche `prestationBody` : paragraphes, puces,
+  « Sous-titre » (h3, regroupe ce qui le suit), frise numérotée, cartes ; texte simple, sans gras
+  ni liens, comme aujourd'hui. FAQ, sigles, photos d'en-tête et de FAQ avec point focal (remplace
+  `imagePosition`, désormais une position CSS), titre de fin, SEO et expressions visées.
+  Migration mot pour mot par `studio/scripts/import-prestations.ts`, à ne pas relancer (elle
+  écraserait le Studio) : 13 photos envoyées, chaque document relu, reconverti et comparé à la
+  source. Site : `lib/sanity/prestations.ts` (repli sur `content/prestation-pages.ts`),
+  conversion `lib/prestations/portable.ts`, gabarits inchangés. Texte de `<main>` comparé au site
+  en ligne sur onze pages : identique. Sans question dans la FAQ, la section, son lien du
+  sommaire et le JSON-LD `FAQPage` disparaissent. Le formulaire de devis est pré-rempli avec le
+  libellé du code, pas le titre court du Studio, pour rester dans sa liste.
+  **SEO par page** : `lib/seo/metadata.ts` (`pageMetadata`) pour toutes les pages. Relevé en
+  ligne avant correction : **aucune image de partage (`og:image`) ni nom du site sur toutes les
+  pages sauf l'accueil**, Next remplaçant tout le bloc `openGraph` du parent. L'image par défaut
+  est servie par `app/partage.png/route.tsx` (générée au build), à la place des conventions
+  `opengraph-image` et `twitter-image`, qui l'emportaient sur toute image choisie dans le Studio.
+  Case « Masquer cette page de Google » : `noindex` et retrait du plan du site.
+  **Images Sanity en local** : l'optimiseur de Next refuse cdn.sanity.io sur ce poste (400,
+  « url parameter is not allowed ») parce que le réseau le résout en NAT64 (`64:ff9b::…`), qu'il
+  prend pour une adresse privée. Sans effet sur Vercel, vérifié sur un déploiement de
+  prévisualisation. Ne pas activer `dangerouslyAllowLocalIP`.
+  `vercel link` fait le 30 septembre (dossier `.vercel/`, ignoré) ; il a ajouté
+  `VERCEL_OIDC_TOKEN` à `.env.local` et créé un jeton de contournement de la protection des
+  prévisualisations (Vercel > Settings > Deployment Protection).
+
 ## À faire
 
 Par ordre de priorité.
@@ -734,6 +763,8 @@ Par ordre de priorité.
       Administrateur, seul rôle d'écriture du forfait gratuit.
 1. **Textes juridiques et carte** — **réglé le 30 septembre 2026**, voir « Fait » : la carte
    est de nouveau bloquée, conformément aux textes, sans les modifier.
+1b. **Sanity, suite de la phase 2** : textes de l'accueil, du bureau et du contact dans le
+   Studio, avec leur SEO (même helper `pageMetadata`), puis guide client PDF.
 2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
    références à publier. La page reste masquée (404, sans lien ni entrée au plan du site) et
    apparaîtra d'elle-même dès la première référence publiée dans le Studio. Un portrait du
