@@ -600,8 +600,11 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   Comparé à la version en ligne : texte et liens identiques sur les trois pages, structure
   identique (seuls les blocs d'adresse passent de `<span class="block">` à `<br>`).
   Le convertisseur `lib/legal/portable.ts` sert aux deux usages. Studio redéployé.
-  **Webhook « Site : rafraîchissement » : vider le filtre** (sinon les pages légales ne se
-  rafraîchissent qu'au bout d'une heure) : chaque type invalide sa propre étiquette.
+  Webhook « Site : rafraîchissement » : **filtre retiré le 30 septembre 2026** par l'API de
+  gestion (`npx sanity api hooks/projects/dpjlojol/mX3Q36CDIUCYuX5K -X PATCH`, l'interface
+  refusant un filtre vide) : tout document publié invalide l'étiquette de son type, les types
+  à venir compris. Secret, déclencheurs et projection `{_type}` inchangés. Mis en ligne et
+  vérifié : les trois pages légales servies depuis Sanity, texte identique au caractère près.
 
 ## À faire
 
