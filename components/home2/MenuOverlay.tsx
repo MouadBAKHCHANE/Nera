@@ -24,10 +24,16 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
   const items: NavItem[] = withReferences(navigation, showReferences);
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);
+  // Sous-menu replié à chaque fermeture du menu. Ajusté pendant le rendu, et non dans l'effet :
+  // motif recommandé par React pour un état qui dépend d'une prop.
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
+    if (!open) setExpanded(null);
+  }
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
-    if (!open) setExpanded(null);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => {

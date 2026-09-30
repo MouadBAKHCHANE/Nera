@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Check, Minus, Settings2 } from "lucide-react";
 import { cookieCategories } from "@/content/legal";
-import { CONSENT_SAVED, openConsentManager, readConsent, type Consent } from "@/lib/consent";
+import { openConsentManager, useConsent } from "@/lib/consent";
 
 const dateFormat = new Intl.DateTimeFormat("fr-CH", { day: "numeric", month: "long", year: "numeric" });
 
@@ -14,15 +13,8 @@ const dateFormat = new Intl.DateTimeFormat("fr-CH", { day: "numeric", month: "lo
  * la vue « Personnaliser »).
  */
 export function CookieChoice() {
-  /** `undefined` tant que le composant n'est pas monté : le rendu serveur ne connaît pas le choix. */
-  const [consent, setConsent] = useState<Consent | null | undefined>(undefined);
-
-  useEffect(() => {
-    setConsent(readConsent());
-    const onSaved = (e: Event) => setConsent((e as CustomEvent<Consent>).detail);
-    window.addEventListener(CONSENT_SAVED, onSaved);
-    return () => window.removeEventListener(CONSENT_SAVED, onSaved);
-  }, []);
+  /** `undefined` avant l'hydratation : le rendu serveur ne connaît pas le choix. */
+  const consent = useConsent();
 
   const state: Record<string, boolean> = {
     necessary: true,

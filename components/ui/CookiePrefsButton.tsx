@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { openConsentManager } from "@/lib/consent";
 
 /**
@@ -7,12 +8,13 @@ import { openConsentManager } from "@/lib/consent";
  * Si aucun bandeau n'écoute (JavaScript désactivé côté bandeau), renvoie vers /cookies.
  */
 export function CookiePrefsButton({ className = "" }: { className?: string }) {
+  const router = useRouter();
   return (
     <button
       type="button"
       className={className}
       onClick={() => {
-        if (!openConsentManager()) window.location.href = "/cookies";
+        if (!openConsentManager()) router.push("/cookies");
       }}
     >
       Gérer mes cookies

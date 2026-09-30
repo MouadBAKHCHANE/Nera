@@ -622,6 +622,17 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   rafraîchissement immédiat (0 s, puis 1 ; 2,5 ; 5 s de rattrapage).
   Restent non instantanées : les redirections (≈ 45 s, elles exigent un déploiement).
 
+- **Nettoyage (30 septembre 2026).** Supprimés : la route `/home-2`, `components/sections/`
+  (six composants) et `components/ui/Button.tsx` et `Eyebrow.tsx`, qu'elles seules utilisaient
+  (graphe des imports depuis les points d'entrée, aucun autre orphelin). `robots.ts` ne cite plus
+  `/home-2`. `components/layout/` est conservé : `/devis` s'en sert. Les sept logos inutilisés de
+  `public/logos/` sont gardés exprès (kit de marque). **ESLint à zéro** (sept problèmes
+  anciens corrigés) : `useConsent()` dans `lib/consent.ts` (abonnement `useSyncExternalStore`)
+  pour le bandeau et le rappel de choix, menu mobile ajusté pendant le rendu, premier calcul du
+  défilement des prestations à l'image suivante, icônes de prestation en choix explicite
+  (`iconFor` retiré), positions du titre animé calculées d'avance, repli de « Gérer mes
+  cookies » par `router.push`. Chaque comportement vérifié au navigateur.
+
 ## À faire
 
 Par ordre de priorité.
@@ -664,10 +675,9 @@ Par ordre de priorité.
    jusqu'au consentement, alors que la carte s'affiche d'emblée. Les pages légales sont
    désormais dans le Studio (« Pages légales ») : **NERA peut corriger ces passages elle-même**,
    et changer la date de mise à jour. À lui signaler. À défaut, rétablir le blocage.
-2. **Références** — la page est désormais **pilotée par Sanity** (type « realisation ») :
-   elle n'existe, avec ses liens (menu, pied de page, page 404) et son entrée au plan du site,
-   que si au moins une référence est publiée. Reste à obtenir de NERA ses projets (titre,
-   lieu, phrase, photo), qu'elle pourra saisir elle-même dans le Studio. Un portrait du
+2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
+   références à publier. La page reste masquée (404, sans lien ni entrée au plan du site) et
+   apparaîtra d'elle-même dès la première référence publiée dans le Studio. Un portrait du
    fondateur, s'il existe, pour `#fondateur` de `/bureau`.
 3. **Envoi des e-mails** — **en service depuis le 29 septembre 2026.** Secret posé dans Vercel
    (Production, Sensitive) et dans `.env.local`. Vérifié : envoi accepté depuis noreply@,
@@ -679,9 +689,7 @@ Par ordre de priorité.
    - rappel fin août 2027 : faire générer un nouveau secret avant le **24 septembre 2027**.
 4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
-5. **Nettoyage** — supprimer `/home-2` et `components/sections/` une fois la variante validée.
-   Attention : `components/layout/` n'est pas mort, `app/devis/page.tsx` s'en sert et
-   `HeaderDark` importe son `PrestationsMenu`. Puis soumettre le site à la Search Console.
+5. **Nettoyage** — **fait le 30 septembre 2026**, voir « Fait ».
 
 ## Largeurs et rythme vertical
 

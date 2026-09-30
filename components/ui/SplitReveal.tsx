@@ -35,20 +35,21 @@ export function SplitReveal({
   const accentStart = accent ? text.indexOf(accent) : -1;
   const accentEnd = accentStart >= 0 ? accentStart + (accent as string).length : -1;
   const words = text.split(" ");
-  let index = 0; // position du caractère dans le texte complet
-  let count = 0; // rang de la lettre pour le décalage
+  // Pour chaque mot : position de son premier caractère dans le texte, et rang de sa première
+  // lettre pour le décalage de l'animation. Calculés d'avance, sans compteur modifié au rendu.
+  const starts = words.map((_, i) => words.slice(0, i).reduce((n, w) => n + w.length + 1, 0));
+  const ranks = words.map((_, i) => words.slice(0, i).reduce((n, w) => n + Array.from(w).length, 0));
 
   return (
     <Tag className={className} aria-label={text}>
       {words.map((word, wi) => {
-        const start = index;
-        index += word.length + 1;
+        const start = starts[wi];
         return (
           <span key={wi} className="inline-block overflow-hidden align-bottom" aria-hidden>
             {Array.from(word).map((ch, ci) => {
               const pos = start + ci;
               const inAccent = pos >= accentStart && pos < accentEnd;
-              const d = delay + count++ * stagger;
+              const d = delay + (ranks[wi] + ci) * stagger;
               return (
                 <span
                   key={ci}

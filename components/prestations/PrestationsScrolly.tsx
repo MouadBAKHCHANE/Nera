@@ -120,10 +120,11 @@ export function PrestationsScrolly({ entries }: { entries: ScrollyEntry[] }) {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    updateActiveSection();
+    const first = window.requestAnimationFrame(updateActiveSection);
 
     return () => {
       io.disconnect();
+      window.cancelAnimationFrame(first);
       window.removeEventListener("scroll", onScroll);
     };
   }, [updateActiveSection]);

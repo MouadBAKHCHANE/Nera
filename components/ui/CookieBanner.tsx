@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { cookieBanner, cookieCategories } from "@/content/legal";
-import { CONSENT_OPEN, readConsent, writeConsent } from "@/lib/consent";
+import { CONSENT_OPEN, readConsent, useConsent, writeConsent } from "@/lib/consent";
 
 /**
  * Bandeau cookies. Titre, texte et libellés de boutons repris mot pour mot du document
@@ -14,22 +14,22 @@ import { CONSENT_OPEN, readConsent, writeConsent } from "@/lib/consent";
  * rouvre le bandeau. Aucun traceur n'est chargé sans le consentement correspondant.
  */
 export function CookieBanner() {
-  const [open, setOpen] = useState(false);
+  // Ouvert d'office tant qu'aucun choix n'est enregistré ; rouvert par « Gérer mes cookies ».
+  const consent = useConsent();
+  const [reopened, setReopened] = useState(false);
   const [custom, setCustom] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
-    const saved = readConsent();
-    if (!saved) setOpen(true);
-    else {
-      setAnalytics(saved.analytics);
-      setMarketing(saved.marketing);
-    }
     const reopen = (e: Event) => {
       e.preventDefault();
+      // Les interrupteurs repartent du choix enregistré.
+      const saved = readConsent();
+      setAnalytics(saved?.analytics ?? false);
+      setMarketing(saved?.marketing ?? false);
       setCustom(true);
-      setOpen(true);
+      setReopened(true);
     };
     window.addEventListener(CONSENT_OPEN, reopen);
     return () => window.removeEventListener(CONSENT_OPEN, reopen);
@@ -39,10 +39,11 @@ export function CookieBanner() {
     writeConsent({ necessary: true, analytics: a, marketing: m, date: new Date().toISOString() });
     setAnalytics(a);
     setMarketing(m);
-    setOpen(false);
+    setReopened(false);
     setCustom(false);
   };
 
+  const open = reopened || consent === null;
   if (!open) return null;
 
   const outline =
