@@ -9,18 +9,18 @@ import { Reveal } from "@/components/ui/Reveal";
 import { aosBlock, aosCard } from "@/components/ui/aos";
 import { ContactForm } from "./ContactForm";
 import { ContactMap } from "./ContactMap";
-import { contact, contactRoute } from "@/content/contact";
+import { contactRoute, type ContactContent } from "@/content/contact";
 import { getSiteSettings } from "@/lib/sanity/settings";
 import { mapsHrefFor } from "@/lib/site-company";
 import { seo } from "@/content/seo";
 
 /**
  * Page « Contact » : en-tête sombre, puis le formulaire simple (le même que la section contact
- * de l'accueil) à gauche et les coordonnées à droite, enfin la carte. Le contenu vient de
- * `content/contact.ts` et n'est jamais reformulé ici. Apparitions calées sur hestera.ch
+ * de l'accueil) à gauche et les coordonnées à droite, enfin la carte. Le contenu vient du Studio
+ * Sanity (`lib/sanity/pages.ts`, repli sur `content/contact.ts`) et n'est jamais reformulé ici. Apparitions calées sur hestera.ch
  * (`components/ui/aos.ts`).
  */
-export async function ContactPage() {
+export async function ContactPage({ contact }: { contact: ContactContent }) {
   const { company } = await getSiteSettings();
   const mapsHref = mapsHrefFor(company);
   const jsonLd = [

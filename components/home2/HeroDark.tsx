@@ -3,18 +3,20 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { QuoteCta } from "./QuoteCta";
 import { DiamondOutline, LogomarkOutline, Ruler } from "./Logomark";
+import type { HomeContent } from "@/content/home";
 
 /**
  * Héro plein écran, ton sombre et cinématographique, mais construit sur la
  * géométrie NERA : grille de plan en fond, logomark au trait en grand motif,
  * anneaux de losanges en rotation lente, règle graduée sous le titre.
- * Photo : visuel fourni par le client (Assets/Visuels).
+ * Photo : visuel fourni par le client (Assets/Visuels). Textes et photo : Studio Sanity
+ * (« Page d'accueil »), repli sur `content/home.ts`.
  */
-export function HeroDark() {
+export function HeroDark({ hero }: { hero: HomeContent["hero"] }) {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-nera-navy text-nera-cream">
       <Image
-        src="/img/hero-immeuble-geneve-soleil.webp"
+        src={hero.image}
         alt=""
         fill
         // Chargée tout de suite, sans priorité haute ni préchargement : Chrome ne la compte pas
@@ -25,6 +27,7 @@ export function HeroDark() {
         quality={90}
         sizes="100vw"
         className="object-cover object-center"
+        style={hero.imagePosition ? { objectPosition: hero.imagePosition } : undefined}
       />
       <div className="absolute inset-0 bg-nera-navy/30" aria-hidden />
       {/* Voile latéral derrière le texte : lisibilité sans assombrir toute la photo */}
@@ -44,12 +47,12 @@ export function HeroDark() {
       <div className="relative flex flex-1 flex-col justify-center px-6 pb-10 pt-24 md:px-10 lg:px-[120px] lg:pt-[110px] [text-shadow:0_1px_18px_rgba(10,36,64,0.5)]">
         <Reveal as="p" effect="fade" load className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nera-cream/90 md:text-[12px]">
           <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
-          Bureau d&apos;ingénieurs en énergie et physique du bâtiment, basé à Genève
+          {hero.eyebrow}
         </Reveal>
         <SplitReveal
           as="h1"
-          text="Au service de la performance énergétique de vos bâtiments"
-          accent="performance énergétique"
+          text={hero.h1}
+          accent={hero.accent}
           delay={0.2}
           className="mt-6 max-w-3xl font-display text-[2rem] font-light leading-[1.15] text-nera-cream md:text-[2.75rem] lg:text-[3.125rem]"
         />
@@ -59,15 +62,12 @@ export function HeroDark() {
           sous `lg`, il est donc posé dès la première peinture. Fondu inchangé sur ordinateur.
         */}
         <Reveal load desktopOnly delay={1.6} className="mt-6 max-w-2xl space-y-3 text-body-sm font-light leading-[1.65] text-nera-cream/90 md:text-body-md lg:text-body-lg">
-          <p>
-            Bureau d&apos;ingénierie indépendant basé à Genève, NERA Ingénieurs Conseils intervient en énergétique, physique du
-            bâtiment et CVC dans toute la Suisse romande : audit énergétique, conception, autorisations de construire,
-            subventions et suivi de rénovation.
-          </p>
-          <p className="hidden lg:block">
-            Particuliers, copropriétés, régies, collectivités, architectes et entreprises générales : nous réduisons vos
-            consommations et valorisons votre patrimoine immobilier, sans compromis sur le confort.
-          </p>
+          {/* Sur mobile, seul le premier paragraphe : le héro tient dans l'écran. */}
+          {hero.lead.map((text, i) => (
+            <p key={i} className={i > 0 ? "hidden lg:block" : undefined}>
+              {text}
+            </p>
+          ))}
         </Reveal>
         <Reveal load delay={2.4} className="mt-8 max-w-xs">
           <Ruler className="mb-5 text-nera-cream" />

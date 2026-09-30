@@ -14,7 +14,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ImageWipe } from "@/components/ui/ImageWipe";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { aosBlock, aosCard, aosItem } from "@/components/ui/aos";
-import { bureau, bureauRoute } from "@/content/bureau";
+import { bureauRoute, type BureauContent } from "@/content/bureau";
+import { Accent } from "@/components/ui/Accent";
 import { getSiteSettings } from "@/lib/sanity/settings";
 import { seo } from "@/content/seo";
 import { QualificationIconsList } from "@/components/bureau/QualificationIcons";
@@ -96,9 +97,10 @@ function SectionHeading({
 /**
  * Page « Le bureau » : en-tête sombre, puis les H2 du texte client dans l'ordre du document,
  * en alternant les fonds (crème, blanc, marine) sans deux sections marine consécutives.
- * Le contenu vient de `content/bureau.ts` et n'est jamais reformulé ici.
+ * Le contenu vient du Studio Sanity (`lib/sanity/pages.ts`, repli sur `content/bureau.ts`) et
+ * n'est jamais reformulé ici.
  */
-export async function BureauPage() {
+export async function BureauPage({ bureau }: { bureau: BureauContent }) {
   const { company, stats } = await getSiteSettings();
   const founder = company.founder;
   const jsonLd = [
@@ -153,13 +155,14 @@ export async function BureauPage() {
         */}
         <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
           <Image
-            src="/img/bureau-batiment-clair-moderne.webp"
+            src={bureau.image}
             alt=""
             fill
             priority
             quality={90}
             sizes="100vw"
             className="object-cover opacity-70"
+            style={bureau.imagePosition ? { objectPosition: bureau.imagePosition } : undefined}
           />
           {/*
             Trois voiles au lieu d'un seul aplat. L'ancien montait à 100 % de marine sur toute
@@ -394,11 +397,12 @@ export async function BureauPage() {
               <ImageWipe curtain="bg-canvas" className="aspect-[4/3] rounded-md lg:aspect-[4/5]">
                 <Image
                   src={bureau.equipe.image}
-                  alt="Trois personnes réunies autour d’un plan d’étage lors d’une séance de travail"
+                  alt={bureau.equipe.imageAlt}
                   fill
                   quality={90}
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover saturate-[0.85]"
+                  style={bureau.equipe.imagePosition ? { objectPosition: bureau.equipe.imagePosition } : undefined}
                 />
               </ImageWipe>
               <Reveal {...aosBlock}>
@@ -562,11 +566,7 @@ export async function BureauPage() {
         {/* 9. Six cantons — crème, section de l'accueil avec le H2 de cette page. */}
         <Territory
           id={bureau.cantons.id}
-          title={
-            <>
-              Une présence dans <span className="font-medium text-accent-deep">six cantons romands</span>
-            </>
-          }
+          title={<Accent text={bureau.cantons.title} accent={bureau.cantons.accent} className="font-medium text-accent-deep" />}
           text={bureau.cantons.text}
         />
 

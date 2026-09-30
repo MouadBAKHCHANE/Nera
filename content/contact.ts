@@ -4,7 +4,8 @@
  * mentions de mise en page du document client (« H1 », « Bouton : », « Formulaire devis ? »)
  * ont été retirées, le texte restant intact.
  *
- * Consommé par `components/contact/ContactPage.tsx` et `app/contact/page.tsx`.
+ * Depuis le 1er octobre 2026, le texte se modifie dans le Studio Sanity (« Page Contact ») :
+ * ce fichier sert de source à la migration et de repli (`lib/sanity/pages.ts`).
  */
 
 export const contactRoute = "/contact";
@@ -70,3 +71,16 @@ export const contact = {
     fallbackCta: "Ouvrir dans Google Maps",
   },
 } as const;
+
+/** Type d'un contenu `as const`, élargi : ce que renvoie aussi la lecture du Studio Sanity. */
+type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends readonly (infer U)[]
+      ? readonly Widen<U>[]
+      : T extends object
+        ? { -readonly [K in keyof T]: Widen<T[K]> }
+        : T;
+
+export type ContactContent = Widen<typeof contact>;

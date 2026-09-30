@@ -3,91 +3,39 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ArrowLink } from "./ArrowLink";
 import { Ruler } from "./Logomark";
 import { ActiveOnView } from "@/components/ui/ActiveOnView";
+import { Accent } from "@/components/ui/Accent";
+import { prestationRoute } from "@/content/prestation-pages";
+import type { HomeContent } from "@/content/home";
 
 /**
  * Prestations sous le héro : H2 + introduction du client, puis six cartes au coin
  * entaillé (rappel du losange) sur grille de plan, une par prestation du pied de page.
- * Textes et liens fournis par le client.
- */
-/**
- * Les six cartes. `img` pointe des visuels **en portrait, propres aux cartes** (`card-*.webp`),
- * et non ceux des en-têtes de pages prestation, qui sont en paysage.
+ * Textes et liens fournis par le client, saisis dans le Studio Sanity (« Page d'accueil »).
  *
- * La carte fait environ 475 × 560 px. Servie à 33vw, une image en 1,9:1 n'arrivait qu'à 337 px
- * de haut pour 640 de large : le navigateur l'étirait sur 560 px, d'où un rendu flou que la
- * qualité d'encodage ne pouvait pas corriger. Un cadrage 4:5 donne plus de hauteur que la carte
- * n'en demande, donc plus aucun agrandissement.
+ * Les photos des cartes sont **en portrait** (`card-*.webp`), et non celles des en-têtes de pages
+ * prestation, en paysage. La carte fait environ 475 × 560 px : servie à 33vw, une image en 1,9:1
+ * n'arrivait qu'à 337 px de haut et le navigateur l'étirait, d'où un rendu flou. Un cadrage 4:5
+ * donne plus de hauteur que la carte n'en demande.
  */
-const panels: { n: string; title: string; text: string; cta: string; href: string; img: string; pos?: string }[] = [
-  {
-    n: "01",
-    title: "CECB et CECB Plus",
-    text: "Évaluer la performance énergétique du bâtiment, identifier son potentiel d'amélioration et établir des scénarios de rénovation hiérarchisés.",
-    cta: "Découvrir les CECB et CECB Plus",
-    href: "/prestations/audit-cecb",
-    img: "/img/card-diagnostic-energetique.webp",
-  },
-  {
-    n: "02",
-    title: "Physique du bâtiment et labels énergétiques",
-    text: "Réaliser les calculs thermiques, étudier l'enveloppe, le confort d'été et les problématiques d'humidité, et accompagner les démarches Minergie, HPE ou THPE.",
-    cta: "Découvrir la physique du bâtiment",
-    href: "/prestations/modelisation-thermique",
-    img: "/img/card-enveloppe-facade-vitree.webp",
-  },
-  {
-    n: "03",
-    title: "Ingénierie CVC et énergies renouvelables",
-    text: "Étudier, dimensionner et intégrer les installations de chauffage, ventilation et climatisation, ainsi que les solutions renouvelables adaptées au bâtiment.",
-    cta: "Découvrir l'ingénierie CVC",
-    href: "/prestations/installations-cvc",
-    img: "/img/card-pompe-a-chaleur.webp",
-  },
-  {
-    n: "04",
-    title: "Autorisations de construire",
-    text: "Préparer le volet énergétique des dossiers et accompagner les échanges techniques avec les mandataires et les services compétents.",
-    cta: "Découvrir les prestations autorisations",
-    href: "/prestations/autorisation-de-construire",
-    img: "/img/card-plans-autorisation.webp",
-  },
-  {
-    n: "05",
-    title: "Subventions",
-    text: "Identifier les aides mobilisables, préparer les demandes et assurer leur suivi jusqu'à la remise des justificatifs d'achèvement.",
-    cta: "Découvrir les prestations subventions",
-    href: "/prestations/subventions",
-    img: "/img/card-subventions-plans.webp",
-  },
-  {
-    n: "06",
-    title: "Rénovation énergétique globale",
-    text: "Piloter les différentes étapes d'une rénovation, du diagnostic initial à la réception, en qualité d'interlocuteur technique du maître d'ouvrage.",
-    cta: "Découvrir la rénovation énergétique",
-    href: "/prestations/renovation-energetique",
-    img: "/img/card-renovation-batiment.webp",
-  },
-];
-
-export function ServicePanels() {
+export function ServicePanels({ services }: { services: HomeContent["services"] }) {
+  const panels = services.cards.map((c, i) => ({
+    ...c,
+    n: String(i + 1).padStart(2, "0"),
+    href: prestationRoute(c.slug),
+  }));
   return (
     <section id="prestations" className="relative bg-nera-navy bg-blueprint py-20 text-nera-cream lg:py-28">
       <div className="px-5 md:px-8 lg:px-12">
         <Reveal className="grid gap-8 border-b border-nera-cream/15 pb-10 lg:grid-cols-[7fr_5fr] lg:items-end lg:gap-16">
           <div>
             <h2 className="font-display text-[1.75rem] font-light leading-[1.15] text-nera-cream md:text-[2.5rem]">
-              Une expertise complète pour la <span className="text-accent">performance</span> de vos bâtiments
+              <Accent text={services.title} accent={services.accent} className="text-accent" />
             </h2>
           </div>
           <div className="space-y-3 text-body-sm font-light leading-[1.7] text-nera-cream/85 md:text-body-md lg:text-body-lg">
-            <p>
-              Chaque bâtiment présente des caractéristiques constructives, techniques, énergétiques et réglementaires qui
-              lui sont propres.
-            </p>
-            <p>
-              NERA analyse le bâtiment dans son ensemble afin de proposer des solutions cohérentes avec son état, ses
-              usages, les objectifs du maître d&apos;ouvrage et les exigences applicables au projet.
-            </p>
+            {services.intro.map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
             <Ruler className="mt-4 w-48 text-nera-cream" ticks={30} />
           </div>
         </Reveal>
@@ -98,12 +46,13 @@ export function ServicePanels() {
               <ActiveOnView className="group">
               <article className="relative flex min-h-[520px] flex-col justify-end overflow-hidden clip-notch bg-nera-navy-deep lg:min-h-[560px]">
                 <Image
-                  src={p.img}
+                  src={p.image}
                   alt=""
                   fill
                   quality={90}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className={`object-cover transition-transform duration-700 ease-out-quart group-hover:scale-[1.06] group-data-active:scale-[1.06] ${p.pos ?? ""}`}
+                  className={`object-cover transition-transform duration-700 ease-out-quart group-hover:scale-[1.06] group-data-active:scale-[1.06]`}
+                  style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
                 />
                 {/*
                   Voile cantonné au bas de la carte : la photo se voit en entier, le titre, le

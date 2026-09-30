@@ -5,8 +5,8 @@ import { DiamondOutline } from "./Logomark";
 const cantons = ["Genève", "Vaud", "Valais", "Fribourg", "Neuchâtel", "Jura"];
 
 /**
- * `title` et `text` permettent au bureau de reprendre la section avec son propre H2 client.
- * Le titre est un nœud React pour garder le mot mis en avant en vert.
+ * Titre et texte fournis par la page : l'accueil et le bureau ont chacun leur H2 client, saisi
+ * dans le Studio Sanity. Le titre est un nœud React pour garder le mot mis en avant en vert.
  */
 export function Territory({
   id,
@@ -14,9 +14,9 @@ export function Territory({
   text,
 }: {
   id?: string;
-  title?: React.ReactNode;
-  text?: string;
-} = {}) {
+  title: React.ReactNode;
+  text: string;
+}) {
   return (
     <section id={id} className="scroll-mt-24 bg-canvas bg-blueprint-light py-20 text-nera-navy lg:py-28">
       <div className="px-6 md:px-10 lg:px-[120px]">
@@ -27,15 +27,10 @@ export function Territory({
               Territoire
             </p>
             <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.15] text-nera-navy md:text-[2.5rem]">
-              {title ?? (
-                <>
-                  NERA intervient dans toute la <span className="font-medium text-accent-deep">Suisse romande</span>
-                </>
-              )}
+              {title}
             </h2>
             <p className="mt-6 max-w-lg text-body-md font-light leading-[1.75] text-body">
-              {text ??
-                "Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans le reste de la Suisse romande selon la nature des projets."}
+              {text}
             </p>
           </Reveal>
           <ul className="grid grid-cols-3 gap-3 md:grid-cols-6 lg:gap-4">

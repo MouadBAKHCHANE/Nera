@@ -3,8 +3,12 @@ import {BarChartIcon} from '@sanity/icons/BarChart'
 import {CaseIcon} from '@sanity/icons/Case'
 import {CogIcon} from '@sanity/icons/Cog'
 import {DocumentTextIcon} from '@sanity/icons/DocumentText'
+import {DocumentsIcon} from '@sanity/icons/Documents'
+import {EnvelopeIcon} from '@sanity/icons/Envelope'
+import {HomeIcon} from '@sanity/icons/Home'
 import {LinkIcon} from '@sanity/icons/Link'
 import {ThLargeIcon} from '@sanity/icons/ThLarge'
+import {UsersIcon} from '@sanity/icons/Users'
 import {WrenchIcon} from '@sanity/icons/Wrench'
 
 /** Les six pages prestation : identifiant `prestation-<slug>`, adresse `/prestations/<slug>`. */
@@ -33,6 +37,29 @@ export const structure: StructureResolver = (S) =>
           S.document().schemaType('marketingSettings').documentId('marketingSettings').title('Marketing & Analytics'),
         ),
       S.divider(),
+      // Pages uniques, dans l'ordre du menu du site.
+      S.listItem()
+        .title('Pages')
+        .icon(DocumentsIcon)
+        .child(
+          S.list()
+            .title('Pages')
+            .items(
+              (
+                [
+                  ['homePage', 'Accueil', HomeIcon],
+                  ['bureauPage', 'Le bureau', UsersIcon],
+                  ['contactPage', 'Contact', EnvelopeIcon],
+                ] as const
+              ).map(([id, title, icon]) =>
+                S.listItem()
+                  .id(id)
+                  .title(title)
+                  .icon(icon)
+                  .child(S.document().schemaType(id).documentId(id).title(title)),
+              ),
+            ),
+        ),
       // Index et six pages à identifiant fixe : l'ordre est celui du menu du site.
       S.listItem()
         .title('Prestations')

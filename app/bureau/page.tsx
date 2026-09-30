@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import { BureauPage } from "@/components/bureau/BureauPage";
-import { bureau, bureauRoute } from "@/content/bureau";
+import { bureauRoute } from "@/content/bureau";
+import { getBureauPage } from "@/lib/sanity/pages";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-/** Page « Le bureau » (À propos), texte client (lignes 694 à 772 de `content/source/textes-client.md`). */
-export const metadata: Metadata = pageMetadata({
-  title: bureau.meta.title,
-  description: bureau.meta.description,
-  keywords: bureau.keywords,
-  route: bureauRoute,
-});
+/** Page « Le bureau » (À propos), texte client modifiable dans le Studio Sanity (`lib/sanity/pages.ts`). */
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getBureauPage();
+  return pageMetadata({
+    title: page.meta.title,
+    description: page.meta.description,
+    keywords: page.keywords,
+    route: bureauRoute,
+    image: page.shareImage,
+    noIndex: page.noIndex,
+  });
+}
 
-export default function Page() {
-  return <BureauPage />;
+export default async function Page() {
+  return <BureauPage bureau={await getBureauPage()} />;
 }

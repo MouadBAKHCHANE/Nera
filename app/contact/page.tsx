@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact/ContactPage";
-import { contact, contactRoute } from "@/content/contact";
+import { contactRoute } from "@/content/contact";
+import { getContactPage } from "@/lib/sanity/pages";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-/** Page « Contact », texte client (lignes 781 à 800 de `content/source/textes-client.md`). */
-export const metadata: Metadata = pageMetadata({
-  title: contact.meta.title,
-  description: contact.meta.description,
-  keywords: contact.keywords,
-  route: contactRoute,
-});
+/** Page « Contact », texte client modifiable dans le Studio Sanity (`lib/sanity/pages.ts`). */
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getContactPage();
+  return pageMetadata({
+    title: page.meta.title,
+    description: page.meta.description,
+    keywords: page.keywords,
+    route: contactRoute,
+    image: page.shareImage,
+    noIndex: page.noIndex,
+  });
+}
 
-export default function Page() {
-  return <ContactPage />;
+export default async function Page() {
+  return <ContactPage contact={await getContactPage()} />;
 }

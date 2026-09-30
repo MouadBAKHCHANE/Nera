@@ -4,13 +4,14 @@ import { getSiteSettings } from "@/lib/sanity/settings";
 import { mapsHrefFor } from "@/lib/site-company";
 import { QuoteCta } from "./QuoteCta";
 import { ContactForm } from "@/components/contact/ContactForm";
+import type { HomeContent } from "@/content/home";
 
 /**
  * Bloc contact variante hestera.ch : titre CONTACT + coordonnées, puis formulaire
  * à champs soulignés sur fond marine. Les champs vivent dans `components/contact/ContactForm.tsx`,
  * partagés avec la page `/contact` pour que les deux ne divergent pas.
  */
-export async function ContactDark() {
+export async function ContactDark({ contact }: { contact: HomeContent["contact"] }) {
   const { company } = await getSiteSettings();
   const mapsHref = mapsHrefFor(company);
   return (
@@ -19,19 +20,16 @@ export async function ContactDark() {
         <div className="grid gap-8 border-b border-nera-cream/15 pb-10 lg:grid-cols-2">
           <Reveal>
             <p className="flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80"><span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />Contact</p>
-            <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">Parlons de votre bâtiment</h2>
-            <p className="mt-5 max-w-[46ch] text-body-md font-light text-nera-cream/80">
-              Vous prévoyez une vente, une rénovation, une transformation, un remplacement de chauffage ou une
-              nouvelle construction ?
-            </p>
-            <p className="mt-3 max-w-[46ch] text-body-md font-light text-nera-cream/80">
-              Décrivez-nous votre bâtiment et votre objectif. NERA vous aidera à identifier la prestation et le niveau
-              d’accompagnement adaptés.
-            </p>
+            <h2 className="mt-6 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">{contact.title}</h2>
+            {contact.paragraphs.map((text, i) => (
+              <p key={i} className={`${i === 0 ? "mt-5" : "mt-3"} max-w-[46ch] text-body-md font-light text-nera-cream/80`}>
+                {text}
+              </p>
+            ))}
             <QuoteCta className="mt-6" />
           </Reveal>
           <Reveal delay={0.08}>
-            <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">Coordonnées</h3>
+            <h3 className="text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">{contact.coordinatesTitle}</h3>
             <ul className="mt-5 space-y-2.5 text-body-md font-light">
               <li className="flex items-center gap-3">
                 <MapPin className="size-4 text-accent" strokeWidth={1.5} />
@@ -53,7 +51,7 @@ export async function ContactDark() {
 
         <Reveal className="pt-10">
           <h3 className="text-[15px] font-medium uppercase tracking-[0.2em] text-nera-cream">
-            Entrez en contact avec NERA
+            {contact.formTitle}
           </h3>
           <ContactForm tone="dark" className="mt-6" />
         </Reveal>

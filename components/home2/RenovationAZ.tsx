@@ -2,12 +2,14 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowLink } from "./ArrowLink";
 import { DiamondOutline } from "./Logomark";
+import { Accent } from "@/components/ui/Accent";
+import type { HomeContent } from "@/content/home";
 
 /**
  * Section 2a : « Votre rénovation énergétique, de A à Z ». Texte du client,
  * image au coin entaillé dans un cadre vert décalé, médaillon losange.
  */
-export function RenovationAZ() {
+export function RenovationAZ({ renovation }: { renovation: HomeContent["renovation"] }) {
   return (
     <section className="relative overflow-hidden bg-nera-navy-deep py-24 text-nera-cream lg:py-[130px]">
       <div className="grid gap-16 px-6 md:px-10 lg:grid-cols-2 lg:gap-24 lg:px-[120px]">
@@ -15,12 +17,13 @@ export function RenovationAZ() {
           <div className="absolute inset-y-6 left-6 right-0 border border-accent/60" aria-hidden />
           <div className="absolute inset-y-0 left-0 right-6 overflow-hidden clip-notch">
             <Image
-              src="/img/accompagnement-facade-vegetale.webp"
-              alt="Façade vitrée reflétant la végétation, vue en contre-plongée"
+              src={renovation.image}
+              alt={renovation.imageAlt}
               fill
               quality={90}
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
+              style={renovation.imagePosition ? { objectPosition: renovation.imagePosition } : undefined}
             />
           </div>
           {/* Losange et libellé en blanc : le vert se perdait sur la façade vitrée verte. */}
@@ -39,18 +42,15 @@ export function RenovationAZ() {
             Accompagnement global
           </p>
           <h2 className="mt-8 font-display text-[1.75rem] font-light leading-[1.2] text-nera-cream md:text-[2.5rem]">
-            Votre rénovation énergétique, <span className="font-medium text-accent">de A à Z</span>
+            <Accent text={renovation.title} accent={renovation.accent} className="font-medium text-accent" />
           </h2>
-          <p className="mt-8 text-body-md font-light leading-[1.75] text-nera-cream/85 lg:text-body-lg">
-            Vous souhaitez rénover sans devoir coordonner vous-même les experts, l&apos;ingénieur, l&apos;administration et
-            les entreprises ?
-          </p>
-          <p className="mt-5 text-body-md font-light leading-[1.75] text-nera-cream/85 lg:text-body-lg">
-            NERA prend en charge l&apos;ensemble du projet et intervient comme interlocuteur technique unique, du premier
-            diagnostic à la réception des travaux.
-          </p>
+          {renovation.paragraphs.map((text, i) => (
+            <p key={i} className={`${i === 0 ? "mt-8" : "mt-5"} text-body-md font-light leading-[1.75] text-nera-cream/85 lg:text-body-lg`}>
+              {text}
+            </p>
+          ))}
           <ArrowLink href="/prestations/renovation-energetique" className="mt-10">
-            Découvrir notre accompagnement global
+            {renovation.cta}
           </ArrowLink>
         </Reveal>
       </div>

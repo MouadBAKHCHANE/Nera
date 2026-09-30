@@ -7,6 +7,7 @@ import { bureauRoute } from "@/content/bureau";
 import { referencesRoute } from "@/content/references";
 import { getRealisationsCount } from "@/lib/sanity/realisations";
 import { getPrestationPage, getPrestationsIndex } from "@/lib/sanity/prestations";
+import { getBureauPage, getContactPage, getHomePage } from "@/lib/sanity/pages";
 import { contactRoute } from "@/content/contact";
 
 /**
@@ -18,12 +19,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const hasReferences = (await getRealisationsCount()) > 0;
   const legal = await Promise.all(LEGAL_PAGES.map((p) => getLegalPage(p.id)));
   // Pages cochées « Masquer cette page de Google » dans le Studio : hors du plan du site.
-  const index = await getPrestationsIndex();
+  const [index, homePage, bureauPage, contactPage] = await Promise.all([
+    getPrestationsIndex(),
+    getHomePage(),
+    getBureauPage(),
+    getContactPage(),
+  ]);
   const pages = (await Promise.all(prestationPages.map((p) => getPrestationPage(p.slug)))).filter(
     (p) => p !== null && !p.noIndex,
   );
   return [
-    { url: `${seo.siteUrl}/`, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    ...(homePage.noIndex ? [] : [{ url: `${seo.siteUrl}/`, lastModified: now, changeFrequency: "monthly" as const, priority: 1 }]),
     { url: `${seo.siteUrl}/devis`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     ...(index.noIndex
       ? []
@@ -34,8 +40,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    { url: `${seo.siteUrl}${bureauRoute}`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${seo.siteUrl}${contactRoute}`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    ...(bureauPage.noIndex
+      ? []
+      : [{ url: `${seo.siteUrl}${bureauRoute}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 }]),
+    ...(contactPage.noIndex
+      ? []
+      : [{ url: `${seo.siteUrl}${contactRoute}`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.7 }]),
     // `/references` n'existe qu'une fois une référence publiée dans Sanity.
     ...(hasReferences
       ? [{ url: `${seo.siteUrl}${referencesRoute}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 }]

@@ -3,7 +3,9 @@
  * de `content/source/textes-client.md` (lignes 694 à 772). Ne jamais reformuler : seules les
  * mentions de mise en page du document client (« H2 », « H3 ») ont été retirées.
  *
- * Consommé par `components/bureau/BureauPage.tsx` et `app/bureau/page.tsx`.
+ * Depuis le 1er octobre 2026, le texte se modifie dans le Studio Sanity (« Page Le bureau ») :
+ * ce fichier sert de source à la migration et de repli (`lib/sanity/pages.ts`). Les ancres
+ * (`id`) restent ici.
  */
 
 export const bureauRoute = "/bureau";
@@ -23,6 +25,9 @@ export const bureau = {
       "ingénieur énergie Genève",
     ],
   h1: "NERA Ingénieurs Conseils",
+  /** Photo d'en-tête, décorative. */
+  image: "/img/bureau-batiment-clair-moderne.webp",
+  imagePosition: undefined as string | undefined,
   lead: [
     "NERA est un bureau d’ingénieurs spécialisé en énergétique, physique du bâtiment, installations CVC et rénovation énergétique.",
     "NERA est née de la volonté de proposer une ingénierie indépendante, claire et pragmatique, fondée sur la précision technique, la proximité et la durabilité.",
@@ -106,6 +111,9 @@ export const bureau = {
     outro: "Le client conserve un interlocuteur identifié tout en bénéficiant des compétences nécessaires aux différentes étapes.",
     /** Photo choisie par le client : `Assets/Visuels/Etude plans 2.jpg`. */
     image: "/img/bureau-equipe-etude.webp",
+    imageAlt: "Trois personnes réunies autour d’un plan d’étage lors d’une séance de travail",
+    /** Point focal choisi dans le Studio (position CSS) ; centré par défaut. */
+    imagePosition: undefined as string | undefined,
   },
 
   procedures: {
@@ -164,6 +172,8 @@ export const bureau = {
   cantons: {
     id: "cantons",
     title: "Une présence dans six cantons romands",
+    /** Partie du titre en vert. */
+    accent: "six cantons romands",
     text: "Basé à Genève, NERA intervient principalement dans les cantons de Genève et de Vaud, ainsi que dans les cantons du Valais, de Fribourg, de Neuchâtel et du Jura selon la nature des projets.",
   },
 
@@ -176,3 +186,16 @@ export const bureau = {
     secondary: "Demander un devis gratuit",
   },
 } as const;
+
+/** Type d'un contenu `as const`, élargi : ce que renvoie aussi la lecture du Studio Sanity. */
+type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends readonly (infer U)[]
+      ? readonly Widen<U>[]
+      : T extends object
+        ? { -readonly [K in keyof T]: Widen<T[K]> }
+        : T;
+
+export type BureauContent = Widen<typeof bureau>;

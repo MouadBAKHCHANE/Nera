@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo/metadata";
-import { seo } from "@/content/seo";
+import { Accent } from "@/components/ui/Accent";
+import { getHomePage } from "@/lib/sanity/pages";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { HeroDark } from "@/components/home2/HeroDark";
 import { ServicePanels } from "@/components/home2/ServicePanels";
@@ -15,24 +16,37 @@ import { FooterDark } from "@/components/home2/FooterDark";
 import { getSiteSettings } from "@/lib/sanity/settings";
 
 /** Accueil officiel : direction sombre et cinématographique, géométrie NERA. Sections et textes du client. */
-export const metadata: Metadata = pageMetadata({ title: seo.title, description: seo.description, route: "/" });
+export async function generateMetadata(): Promise<Metadata> {
+  const home = await getHomePage();
+  return pageMetadata({
+    title: home.meta.title,
+    description: home.meta.description,
+    keywords: home.keywords,
+    route: "/",
+    image: home.shareImage,
+    noIndex: home.noIndex,
+  });
+}
 
 export default async function Home() {
   // Chiffres saisis dans le Studio ; sans saisie, `Stats` garde ses valeurs par défaut.
-  const { stats } = await getSiteSettings();
+  const [{ stats }, home] = await Promise.all([getSiteSettings(), getHomePage()]);
   return (
     <>
       <HeaderDark />
       <main>
-        <HeroDark />
-        <ServicePanels />
-        <RenovationAZ />
-        <Audience2 />
-        <Approach />
+        <HeroDark hero={home.hero} />
+        <ServicePanels services={home.services} />
+        <RenovationAZ renovation={home.renovation} />
+        <Audience2 audiences={home.audiences} />
+        <Approach approach={home.approach} />
         <Stats items={stats.length ? stats : undefined} />
-        <Territory />
+        <Territory
+          title={<Accent text={home.territory.title} accent={home.territory.accent} className="font-medium text-accent-deep" />}
+          text={home.territory.text}
+        />
         <PartnerStrip />
-        <ContactDark />
+        <ContactDark contact={home.contact} />
       </main>
       <FooterDark />
     </>
