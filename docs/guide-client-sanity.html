@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Guide d'utilisation du Studio – NERA Ingénieurs Conseils</title>
+<!--
+  Source du guide client, livré en PDF (GUIDE-CLIENT-SANITY-NERA.pdf, à côté du dossier du
+  site). Pour le régénérer : ouvrir ce fichier dans Chrome, Imprimer > Enregistrer au format
+  PDF, marges par défaut, « Graphiques d'arrière-plan » coché. À mettre à jour à chaque
+  changement du Studio.
+-->
+<style>
+  @font-face { font-family: Satoshi; src: url(../public/fonts/Satoshi-Regular.woff2); font-weight: 400; }
+  @font-face { font-family: Satoshi; src: url(../public/fonts/Satoshi-Medium.woff2); font-weight: 500; }
+  @font-face { font-family: Satoshi; src: url(../public/fonts/Satoshi-Bold.woff2); font-weight: 700; }
+  @font-face { font-family: Clash; src: url(../public/fonts/ClashDisplay-Light.woff2); font-weight: 300; }
+  @font-face { font-family: Clash; src: url(../public/fonts/ClashDisplay-Medium.woff2); font-weight: 500; }
+
+  :root {
+    --navy: #0F3557; --navy-deep: #0a2440; --green: #28AC75; --green-deep: #1c7c54;
+    --cream: #F4F3EF; --body: #3a4450; --mute: #6a7076; --line: #dcdcd6;
+  }
+  @page { size: A4; margin: 18mm 18mm 20mm; }
+  @page :first { margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font-family: Satoshi, Arial, sans-serif; font-size: 10.5pt; line-height: 1.6; color: var(--body); background: #fff; }
+
+  /* Couverture */
+  .cover { height: 297mm; background: var(--navy); color: var(--cream); padding: 30mm 22mm; display: flex; flex-direction: column; justify-content: space-between;
+    background-image: linear-gradient(to right, rgba(244,243,239,.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,243,239,.06) 1px, transparent 1px);
+    background-size: 14mm 14mm; page-break-after: always; }
+  .cover img { width: 70mm; }
+  .cover .eyebrow { display: flex; align-items: center; gap: 4mm; font-size: 9pt; letter-spacing: .25em; text-transform: uppercase; opacity: .85; }
+  .cover .eyebrow::before { content: ""; width: 9mm; height: 2.5mm; background: var(--green); }
+  .cover h1 { font-family: Clash, sans-serif; font-weight: 300; font-size: 34pt; line-height: 1.12; margin: 8mm 0 6mm; }
+  .cover h1 span { color: var(--green); font-weight: 500; }
+  .cover p { font-size: 12pt; max-width: 130mm; opacity: .85; margin: 0; }
+  .cover .meta { font-size: 9.5pt; opacity: .7; }
+
+  h2 { font-family: Clash, sans-serif; font-weight: 500; font-size: 18pt; color: var(--navy); margin: 0 0 4mm; padding-top: 2mm; line-height: 1.2; }
+  h2 .n { color: var(--green-deep); margin-right: 3mm; }
+  h3 { font-family: Satoshi, sans-serif; font-weight: 700; font-size: 11.5pt; color: var(--navy); margin: 6mm 0 2mm; }
+  section { margin-top: 11mm; }
+  section.newpage { break-before: page; margin-top: 0; }
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+  h3 + table, h3 + p, h2 + p, h2 + table { break-before: avoid; }
+  p { margin: 0 0 3mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  strong { color: var(--navy); font-weight: 700; }
+  .path { font-weight: 500; color: var(--navy); background: var(--cream); padding: .3mm 1.6mm; border-radius: 1mm; white-space: nowrap; }
+  .lead { font-size: 11.5pt; color: var(--navy); }
+
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9.8pt; page-break-inside: avoid; }
+  th { text-align: left; background: var(--navy); color: var(--cream); font-weight: 500; padding: 2mm 3mm; }
+  td { padding: 2mm 3mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { font-weight: 500; color: var(--navy); width: 34%; }
+
+  .box { border-left: 1mm solid var(--green); background: #f3f8f5; padding: 3mm 4mm; margin: 3mm 0 4mm; page-break-inside: avoid; }
+  .box.warn { border-color: #c98a1a; background: #fbf5ea; }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+  .box .t { font-weight: 700; color: var(--navy); display: block; margin-bottom: 1mm; }
+
+  ol.steps { list-style: none; padding: 0; counter-reset: s; }
+  ol.steps li { counter-increment: s; position: relative; padding-left: 9mm; margin-bottom: 2.5mm; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 0; top: .2mm; width: 6mm; height: 6mm; border: 1px solid var(--navy); color: var(--navy);
+    font-size: 8.5pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+  .toc { columns: 2; column-gap: 10mm; list-style: none; padding: 0; }
+  .toc li { break-inside: avoid; padding: 1.5mm 0; border-bottom: 1px solid var(--line); }
+  .toc .n { color: var(--green-deep); font-weight: 700; margin-right: 2mm; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <img src="../public/logos/nera-tagline-cream-green.svg" alt="NERA Ingénieurs Conseils">
+  <div>
+    <div class="eyebrow">Guide d'utilisation</div>
+    <h1>Modifier le site <span>nera-ing.ch</span> avec le Studio</h1>
+    <p>Textes, photos, prestations, FAQ, coordonnées, référencement et outils de mesure : tout ce que vous pouvez modifier vous-même, et comment.</p>
+  </div>
+  <div class="meta">Version du 1er octobre 2026 · Studio : nera-ing.sanity.studio</div>
+</div>
+
+<section style="margin-top: 0">
+  <h2>Sommaire</h2>
+  <ol class="toc">
+    <li><span class="n">1</span>Se connecter</li>
+    <li><span class="n">2</span>Le principe : modifier, puis publier</li>
+    <li><span class="n">3</span>Le menu du Studio</li>
+    <li><span class="n">4</span>Les pages : accueil, bureau, contact</li>
+    <li><span class="n">5</span>Les prestations</li>
+    <li><span class="n">6</span>Les photos</li>
+    <li><span class="n">7</span>Le référencement (SEO)</li>
+    <li><span class="n">8</span>Les réglages du site</li>
+    <li><span class="n">9</span>Les références</li>
+    <li><span class="n">10</span>Les pages légales</li>
+    <li><span class="n">11</span>Marketing &amp; Analytics</li>
+    <li><span class="n">12</span>Les redirections</li>
+    <li><span class="n">13</span>Bonnes pratiques et aide</li>
+  </ol>
+
+  <section class="flow">
+    <h2><span class="n">1</span>Se connecter</h2>
+    <ol class="steps">
+      <li>Ouvrez <strong>https://nera-ing.sanity.studio</strong> dans votre navigateur (Chrome, Edge, Firefox ou Safari).</li>
+      <li>Connectez-vous avec le compte Sanity auquel l'accès a été donné (même adresse e-mail, même méthode de connexion : Google, GitHub ou e-mail et mot de passe).</li>
+      <li>Le Studio s'ouvre sur le menu « Contenu », en français.</li>
+    </ol>
+    <div class="box">
+      <span class="t">Votre rôle : Éditeur</span>
+      <p>Vous pouvez modifier et publier tout le contenu du site. Les réglages techniques du projet (connexions au site, sécurité, données) restent réservés à votre contact technique : vous ne pouvez pas les casser par erreur.</p>
+    </div>
+  </section>
+
+  <section class="flow">
+    <h2><span class="n">2</span>Le principe : modifier, puis publier</h2>
+    <p class="lead">Rien de ce que vous tapez n'apparaît sur le site avant que vous cliquiez sur <strong>Publier</strong>.</p>
+    <ol class="steps">
+      <li>Ouvrez le document à modifier depuis le menu de gauche.</li>
+      <li>Modifiez les champs. Le Studio enregistre au fur et à mesure un <strong>brouillon</strong>, visible de vous seule : vous pouvez fermer la page et revenir plus tard.</li>
+      <li>Cliquez sur <strong>Publier</strong>, en bas à droite. Le bouton est grisé tant qu'un champ obligatoire est vide ou qu'une valeur est incorrecte : le champ concerné est signalé en rouge.</li>
+      <li>La modification est en ligne <strong>en quelques secondes</strong>. Une page du site déjà ouverte se met à jour toute seule, sans recharger.</li>
+    </ol>
+    <div class="box">
+      <span class="t">Revenir en arrière</span>
+      <ul>
+        <li><strong>Avant de publier</strong> : le menu à côté du bouton Publier permet d'annuler les modifications non publiées.</li>
+        <li><strong>Après avoir publié</strong> : l'historique du document (icône d'horloge en haut du document) liste les versions précédentes ; ouvrez la bonne version et restaurez-la, puis publiez.</li>
+      </ul>
+    </div>
+    <div class="box warn">
+      <span class="t">Avertissements en orange</span>
+      <p>Un avertissement orange (par exemple « Google coupera au-delà de 160 caractères ») n'empêche pas de publier. C'est un conseil, pas une erreur.</p>
+    </div>
+  </section>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Le menu du Studio</h2>
+  <table>
+    <tr><th>Entrée du menu</th><th>Ce que vous y modifiez</th></tr>
+    <tr><td>Réglages du site</td><td>Coordonnées, réseaux sociaux, chiffres « NERA en chiffres », titre et description Google par défaut. Valables sur tout le site.</td></tr>
+    <tr><td>Marketing &amp; Analytics</td><td>Identifiants de Google Tag Manager, Google Analytics, Google Ads, Meta Pixel, et codes de vérification (Search Console, Meta).</td></tr>
+    <tr><td>Pages</td><td>Accueil, Le bureau, Contact : tous les textes et photos de ces pages, et leur référencement.</td></tr>
+    <tr><td>Prestations</td><td>La page « Nos prestations » et les six pages prestation : textes, FAQ, photos, référencement.</td></tr>
+    <tr><td>Références</td><td>Vos projets réalisés, un document par projet. La page « Références » apparaît dès le premier publié.</td></tr>
+    <tr><td>Pages légales</td><td>Mentions légales, politique de confidentialité, politique relative aux cookies.</td></tr>
+    <tr><td>Redirections</td><td>Envoyer une ancienne adresse vers une nouvelle, pour ne pas perdre les visiteurs ni le classement Google.</td></tr>
+  </table>
+  <p>Les pages et les prestations existent une seule fois chacune : elles ne se créent ni ne se suppriment, elles se modifient. Seules les <strong>références</strong> et les <strong>redirections</strong> s'ajoutent et se suppriment librement.</p>
+
+  <section class="flow">
+    <h2><span class="n">4</span>Les pages : accueil, bureau, contact</h2>
+    <p>Menu <span class="path">Pages</span>, puis la page voulue. Chaque page est découpée en <strong>onglets, un par section</strong>, dans l'ordre où elles apparaissent sur le site (par exemple pour l'accueil : En-tête, Prestations, Rénovation de A à Z, Nos clients, Approche, Territoire, Contact, SEO).</p>
+    <h3>Les champs que vous rencontrerez</h3>
+    <table>
+      <tr><th>Champ</th><th>Mode d'emploi</th></tr>
+      <tr><td>Titre</td><td>Le titre de la section, tel qu'affiché.</td></tr>
+      <tr><td>Mot mis en avant</td><td>La partie du titre affichée en vert. Recopiez-la <strong>exactement</strong> comme dans le titre (majuscules et accents compris). Si elle n'y figure pas, le Studio vous le signale. Champ vide : aucun mot en vert.</td></tr>
+      <tr><td>Paragraphes, Chapô</td><td>Un paragraphe par entrée. « Ajouter un élément » en crée un ; la poignée à gauche permet de les réordonner ; le menu « ⋯ » de l'entrée permet de la supprimer.</td></tr>
+      <tr><td>Listes</td><td>Une ligne par entrée, même fonctionnement que les paragraphes.</td></tr>
+      <tr><td>Photo</td><td>Voir la partie 6.</td></tr>
+    </table>
+    <div class="box">
+      <span class="t">Ce qui reste fixe</span>
+      <p>La mise en page, les couleurs, les petits surtitres de section (« Nos clients », « Territoire »…), les icônes, les logos et les numéros sont fixes : ils garantissent un site cohérent. L'en-tête de l'accueil n'affiche sur mobile que le premier paragraphe du chapô.</p>
+    </div>
+  </section>
+</section>
+
+<section class="newpage">
+  <h2><span class="n">5</span>Les prestations</h2>
+  <p>Menu <span class="path">Prestations</span> : la <strong>page Nos prestations</strong>, puis les <strong>six pages prestation</strong>.</p>
+
+  <h3>Une page prestation, onglet par onglet</h3>
+  <table>
+    <tr><th>Onglet</th><th>Contenu</th></tr>
+    <tr><td>En-tête</td><td>Titre court (fil d'Ariane), titre de la page, chapô, texte du bouton, photo d'en-tête, sigles affichés sous le sommaire.</td></tr>
+    <tr><td>Contenu</td><td>Les sections de la page. Chaque section apparaît dans le sommaire « Sur cette page ».</td></tr>
+    <tr><td>FAQ et fin de page</td><td>Questions et réponses, photo à côté de la FAQ, titre de fin au-dessus du bouton « Demander un devis gratuit ».</td></tr>
+    <tr><td>SEO</td><td>Voir la partie 7.</td></tr>
+  </table>
+
+  <h3>Écrire le texte d'une section</h3>
+  <p>Le champ « Texte » fonctionne comme un traitement de texte simple. En haut du champ :</p>
+  <ul>
+    <li><strong>Paragraphe</strong> ou <strong>Sous-titre</strong> : le style de la ligne. Un sous-titre regroupe tout ce qui le suit, jusqu'au sous-titre suivant.</li>
+    <li><strong>Liste à puces</strong> : une puce par ligne (touche Entrée pour la puce suivante, deux fois Entrée pour sortir de la liste).</li>
+    <li><strong>Insérer</strong> : deux blocs de mise en forme du site, la <strong>Frise numérotée</strong> (étapes numérotées automatiquement) et les <strong>Cartes</strong> (trois par ligne sur ordinateur), chacun avec un titre et un texte par élément.</li>
+  </ul>
+  <p>Le gras, l'italique et les liens ne sont volontairement pas proposés : le texte garde ainsi la même présentation sur toutes les pages.</p>
+
+  <h3>Ancre d'une section</h3>
+  <p>Chaque section a une <strong>ancre</strong> (par exemple <em>dans-quels-cas-etablir-un-cecb</em>) : c'est l'adresse du lien du sommaire. Minuscules, chiffres et tirets seulement. Évitez de modifier une ancre existante : des liens extérieurs peuvent y pointer.</p>
+
+  <h3>La FAQ</h3>
+  <p>Les questions sont aussi transmises à Google, qui peut les afficher directement dans ses résultats. Écrivez des réponses complètes et autonomes. Une page sans question n'affiche plus de FAQ.</p>
+
+  <div class="box">
+    <span class="t">Bon à savoir</span>
+    <ul>
+      <li>Le <strong>titre court</strong> sert au fil d'Ariane et à Google. Le menu du site et la liste du formulaire de devis gardent leur libellé.</li>
+      <li>Sur la page <strong>Nos prestations</strong>, chaque bloc est relié à une page prestation : son lien et sa photo viennent de cette page.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">6</span>Les photos</h2>
+  <ol class="steps">
+    <li>Survolez la photo actuelle, puis choisissez <strong>Remplacer</strong> (ou glissez un fichier depuis votre ordinateur).</li>
+    <li>Ouvrez l'outil de <strong>recadrage</strong> (icône en forme de crayon ou de recadrage sur la photo) et placez le <strong>point focal</strong> sur l'essentiel : le bâtiment, un visage. Sur mobile, la photo est recadrée autour de ce point.</li>
+    <li>Si la photo a un champ « Description de la photo », décrivez en une phrase ce qu'elle montre. Elle est lue par les personnes malvoyantes et par Google.</li>
+    <li>Publiez.</li>
+  </ol>
+  <table>
+    <tr><th>Emplacement</th><th>Format conseillé</th></tr>
+    <tr><td>En-têtes de page (accueil, bureau, prestations)</td><td>Paysage, au moins 2400 px de large.</td></tr>
+    <tr><td>Cartes des prestations (accueil)</td><td><strong>Portrait</strong>, format 4:5, au moins 1200 × 1500 px.</td></tr>
+    <tr><td>Photo à côté de la FAQ</td><td>Paysage ou carré, au moins 1600 px de large.</td></tr>
+    <tr><td>Image de partage (onglet SEO)</td><td>1200 × 630 px exactement.</td></tr>
+  </table>
+  <div class="box">
+    <span class="t">Poids des fichiers</span>
+    <p>Le site adapte lui-même la taille et le format des photos pour chaque écran. Envoyez de préférence des fichiers JPEG ou WebP de moins de 5 Mo ; évitez les captures d'écran et les photos floues ou pixellisées.</p>
+  </div>
+
+  <section class="newpage">
+    <h2><span class="n">7</span>Le référencement (SEO)</h2>
+    <p>Chaque page (accueil, bureau, contact, Nos prestations, chaque prestation, pages légales) a un onglet <strong>SEO</strong> :</p>
+    <table>
+      <tr><th>Champ</th><th>Conseil</th></tr>
+      <tr><td>Titre pour Google</td><td>Le titre bleu des résultats de recherche. 60 caractères au maximum, l'expression principale en tête.</td></tr>
+      <tr><td>Description pour Google</td><td>Le texte sous le titre. Entre 70 et 160 caractères, une phrase qui donne envie de cliquer.</td></tr>
+      <tr><td>Image de partage</td><td>L'image affichée quand la page est partagée sur LinkedIn, WhatsApp, Facebook. Sans image, le logo NERA est utilisé.</td></tr>
+      <tr><td>Masquer cette page de Google</td><td>La page reste accessible, mais Google ne l'affiche plus. À n'utiliser qu'en connaissance de cause.</td></tr>
+      <tr><td>Expressions visées</td><td>Un aide-mémoire pour la rédaction : les recherches que la page doit couvrir. Google ne s'en sert pas directement.</td></tr>
+    </table>
+    <p>Un champ SEO vide reprend une valeur par défaut. Les modifications sont prises en compte par Google à son prochain passage, en général sous quelques jours.</p>
+  </section>
+</section>
+
+<section>
+  <h2><span class="n">8</span>Les réglages du site</h2>
+  <p>Menu <span class="path">Réglages du site</span>. Ces valeurs s'appliquent partout : en-têtes, menus, pied de page, page contact, carte, formulaires, accusés de réception envoyés aux clients et informations transmises à Google.</p>
+  <table>
+    <tr><th>Onglet</th><th>Contenu</th></tr>
+    <tr><td>Coordonnées</td><td>Raison sociale, nom affiché, téléphone, e-mail de contact, adresse.</td></tr>
+    <tr><td>Réseaux sociaux</td><td>Liens LinkedIn, Facebook, Instagram et fiche Google.</td></tr>
+    <tr><td>Chiffres clés</td><td>« NERA en chiffres » (accueil et bureau) : chiffre, ce qui le précède (« + ») ou le suit (« ans »), et son libellé.</td></tr>
+    <tr><td>SEO par défaut</td><td>Titre et description Google utilisés quand une page n'a pas les siens.</td></tr>
+  </table>
+  <div class="box warn">
+    <span class="t">Téléphone et e-mail</span>
+    <p>Vérifiez deux fois avant de publier : un numéro erroné serait affiché sur toutes les pages et dans les accusés de réception. L'adresse qui <strong>reçoit</strong> les demandes du formulaire n'est pas ici : elle est réglée côté technique.</p>
+    <p>Un champ vidé ne vide pas le site : il reprend la valeur d'origine. Pour retirer un réseau social du site, adressez-vous à votre contact technique.</p>
+  </div>
+
+  <section class="flow">
+    <h2><span class="n">9</span>Les références</h2>
+    <p>Menu <span class="path">Références</span>, puis le bouton <strong>+</strong> (créer). Un document par projet :</p>
+    <ul>
+      <li><strong>Titre du projet</strong>, <strong>lieu</strong>, <strong>année</strong> ;</li>
+      <li><strong>prestations réalisées</strong>, à cocher dans la liste ;</li>
+      <li><strong>description</strong> courte du projet ;</li>
+      <li><strong>photo</strong> et sa description.</li>
+    </ul>
+    <p>La page « Références » et ses liens dans le menu <strong>apparaissent automatiquement</strong> dès la première référence publiée, et disparaissent si toutes sont supprimées. Assurez-vous d'avoir l'accord de vos clients avant de publier un projet et sa photo.</p>
+  </section>
+</section>
+
+<section>
+  <h2><span class="n">10</span>Les pages légales</h2>
+  <p>Menu <span class="path">Pages légales</span> : mentions légales, politique de confidentialité, politique relative aux cookies. Le texte se modifie comme une section de prestation, avec en plus le gras, l'italique, les liens, des tableaux et des encadrés.</p>
+  <ul>
+    <li>À chaque modification, changez la <strong>date de dernière mise à jour</strong> : elle s'affiche en tête de page.</li>
+    <li>Le bloc « Rappel du choix de cookies » affiche le choix du visiteur et le bouton « Gérer mes cookies » : laissez-le en place.</li>
+  </ul>
+  <div class="box warn">
+    <span class="t">Textes juridiques</span>
+    <p>Ces pages engagent NERA. Faites valider toute modification de fond par la personne qui a rédigé ces textes. En particulier, si un nouvel outil de mesure ou de publicité est ajouté au site, il doit y être mentionné.</p>
+  </div>
+
+  <section class="newpage">
+    <h2><span class="n">11</span>Marketing &amp; Analytics</h2>
+    <p>Menu <span class="path">Marketing &amp; Analytics</span>. Vous y collez les identifiants fournis par les outils ; le site se charge du reste. Un champ vide : l'outil n'est pas chargé.</p>
+    <table>
+      <tr><th>Onglet</th><th>Identifiants</th></tr>
+      <tr><td>Tag Manager</td><td>ID du conteneur Google Tag Manager (commence par GTM-).</td></tr>
+      <tr><td>Mesure d'audience</td><td>ID de mesure Google Analytics 4 (commence par G-).</td></tr>
+      <tr><td>Publicité</td><td>ID Google Ads (AW-) et ses libellés de conversion « Demande de devis » et « Message de contact » ; ID du Meta Pixel.</td></tr>
+      <tr><td>Vérifications</td><td>Code de vérification Google Search Console et code de vérification du domaine Meta : collez la balise entière ou sa seule valeur.</td></tr>
+    </table>
+    <div class="box">
+      <span class="t">Respect du choix des visiteurs</span>
+      <p>Aucun de ces outils n'est chargé avant que le visiteur ait fait son choix dans le bandeau cookies : la mesure d'audience seulement s'il accepte « Mesure d'audience », la publicité seulement s'il accepte « Publicité ». Les demandes de devis, messages de contact et clics sur le téléphone ou l'e-mail sont transmis aux outils comme conversions.</p>
+    </div>
+    <div class="box warn">
+      <span class="t">Tag Manager et les autres champs</span>
+      <p>Si Google Analytics, Google Ads ou le Meta Pixel sont installés <strong>dans</strong> Google Tag Manager, laissez leurs champs vides ici : sinon, chaque visite serait comptée deux fois. Le Studio vous le rappelle par un avertissement.</p>
+    </div>
+  </section>
+</section>
+
+<section>
+  <h2><span class="n">12</span>Les redirections</h2>
+  <p>Menu <span class="path">Redirections</span>. Quand une adresse du site change ou disparaît, une redirection envoie automatiquement les visiteurs (et Google) vers la nouvelle adresse.</p>
+  <ul>
+    <li><strong>Ancienne adresse</strong> : la partie après le nom de domaine, par exemple <em>/ancienne-page</em>.</li>
+    <li><strong>Nouvelle adresse</strong> : par exemple <em>/prestations/subventions</em>.</li>
+    <li><strong>Redirection définitive</strong> : à cocher si l'ancienne adresse ne reviendra pas (cas le plus courant).</li>
+    <li><strong>Active</strong> : décocher pour suspendre la redirection sans la supprimer.</li>
+  </ul>
+  <p>Contrairement au reste, une redirection met <strong>environ une minute</strong> à s'appliquer après publication.</p>
+
+  <section class="flow">
+    <h2><span class="n">13</span>Bonnes pratiques et aide</h2>
+    <ul>
+      <li><strong>Relisez sur le site</strong> après chaque publication, sur ordinateur et sur téléphone.</li>
+      <li><strong>Un titre court est un bon titre</strong> : les titres longs passent sur plusieurs lignes, surtout sur mobile.</li>
+      <li><strong>Gardez la même voix</strong> partout : le « nous » de NERA, un ton factuel et précis.</li>
+      <li><strong>Pas de données personnelles</strong> de clients dans les textes ou les références sans leur accord.</li>
+      <li><strong>N'hésitez pas</strong> : tout se corrige, et l'historique garde chaque version publiée.</li>
+    </ul>
+    <div class="box">
+      <span class="t">En cas de problème</span>
+      <p>Un bouton Publier qui reste grisé : un champ obligatoire est vide ou une valeur est incorrecte, le Studio l'indique en rouge. Une modification qui n'apparaît pas après une minute : rechargez la page du site. Si le problème persiste, ou pour toute question, contactez votre contact technique, Mouad.</p>
+    </div>
+  </section>
+</section>
+
+</body>
+</html>
