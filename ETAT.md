@@ -781,8 +781,8 @@ Par ordre de priorité.
    automatiques). Il s'ouvre dans le tableau de bord Sanity après connexion. CLI Sanity
    connecté au compte NAOENERGY (naoenergy.web@gmail.com). Pour redéployer après une
    modification des schémas : `cd studio && npx sanity deploy`.
-   Attention, le CLI Vercel de ce poste est connecté au compte du centre dentaire depuis le
-   30 septembre : `vercel login` pour revenir au compte personnel.
+   CLI Vercel de ce poste reconnecté au compte NAOENERGY (équipe `naoenergy`, projet `nera`),
+   dossier lié par `vercel link` le 30 septembre 2026.
    1. Vercel, variables d'environnement : `SANITY_REVALIDATE_SECRET` (valeur dans
       `.env.local`), Production, Sensitive. Supprimer les anciennes variables Sanity
       (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`),
@@ -805,8 +805,11 @@ Par ordre de priorité.
       essai, vérifier dans Members qu'elle a gardé ce rôle.
 1. **Textes juridiques et carte** — **réglé le 30 septembre 2026**, voir « Fait » : la carte
    est de nouveau bloquée, conformément aux textes, sans les modifier.
-1b. **Sanity, suite de la phase 2** : guide client PDF pour NERA (sur le modèle de celui de
-   Zen Énergie). Contenus et SEO de toutes les pages faits le 30 septembre et le 1er octobre.
+1b. **Sanity, phase 2** — **terminée le 1er octobre 2026** : contenus et SEO de toutes les pages
+   dans le Studio, Google Tag Manager, guide client (`docs/guide-client-sanity.html`, PDF
+   `../GUIDE-CLIENT-SANITY-NERA.pdf`, 10 pages) envoyé à Charline avec son accès. Sans
+   captures du Studio (connexion requise) ; deux libellés de l'interface à vérifier : icône de
+   l'historique (§ 2) et bouton « Insérer » (§ 5).
 2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
    références à publier. La page reste masquée (404, sans lien ni entrée au plan du site) et
    apparaîtra d'elle-même dès la première référence publiée dans le Studio. Un portrait du
@@ -819,8 +822,9 @@ Par ordre de priorité.
    - **réception confirmée par le client le 30 septembre 2026.** `RESEND_API_KEY`,
      `CONTACT_TO`, `CONTACT_FROM` supprimés de Vercel le 1er octobre 2026 ;
    - rappel fin août 2027 : faire générer un nouveau secret avant le **24 septembre 2027**.
-4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
-   `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
+4. **DNS chez Infomaniak** — **fait** (vérifié le 1er octobre 2026) : `nera-ing.ch` en A vers
+   `76.76.21.21`, `www` en CNAME vers `cname.vercel-dns.com`. Ne pas toucher
+   NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).
 5. **Nettoyage** — **fait le 30 septembre 2026**, voir « Fait ».
 
 ## Largeurs et rythme vertical
