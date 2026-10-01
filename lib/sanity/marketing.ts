@@ -10,6 +10,7 @@ import { sanityFetch } from "./fetch";
  */
 
 export type MarketingIds = {
+  googleTagManagerId?: string;
   googleAnalyticsId?: string;
   googleAdsId?: string;
   googleAdsQuoteLabel?: string;
@@ -28,6 +29,7 @@ export const MARKETING_TAG = "marketingSettings";
 
 const MARKETING_QUERY = /* groq */ `
   *[_id == "marketingSettings"][0] {
+    googleTagManagerId,
     googleAnalyticsId,
     googleAdsId,
     googleAdsQuoteLabel,
@@ -59,6 +61,7 @@ export const getMarketingSettings = cache(async (): Promise<MarketingSettings> =
     console.error("[sanity] marketing", err);
   }
   return {
+    googleTagManagerId: valid(raw?.googleTagManagerId, /^GTM-[A-Z0-9]{4,12}$/),
     googleAnalyticsId: valid(raw?.googleAnalyticsId, /^G-[A-Z0-9]{4,20}$/),
     googleAdsId: valid(raw?.googleAdsId, /^AW-\d{6,15}$/),
     googleAdsQuoteLabel: valid(raw?.googleAdsQuoteLabel, /^[A-Za-z0-9_-]{4,40}$/),

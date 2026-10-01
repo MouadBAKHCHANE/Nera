@@ -742,6 +742,25 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   erreur sur les 14 documents ; un avertissement, la description Google de la politique de
   confidentialité (172 caractères, coupée à 160 par Google), texte du client laissé tel quel.
 
+- **Google Tag Manager (1er octobre 2026).** NERA l'utilisera (la politique de cookies et la
+  politique de confidentialité, § 8, le citent déjà). Champ « Google Tag Manager : ID du
+  conteneur » dans « Marketing & Analytics » (onglet « Tag Manager », format `GTM-…`, revérifié
+  côté site). Chargé seulement après « Mesure d'audience » ou « Publicité », jamais avant un
+  choix. Ordre dans `dataLayer` : consentement Google par défaut (tout refusé), choix du
+  visiteur (`consent update`), démarrage du conteneur, puis événement `consent_update` avec
+  `analytics_consent` et `marketing_consent` (« granted » / « denied »), repoussé à chaque
+  changement. Conversions transmises en événements `devis_envoye`, `contact_envoye`,
+  `clic_telephone`, `clic_email`. Avertissement dans le Studio si GTM et un autre outil sont
+  remplis (double comptage). Testé au navigateur avec un identifiant fictif, retiré ensuite :
+  rien avant le choix, chargement unique après « Tout accepter », retrait en cours de visite,
+  rien au rechargement après refus, rien après « Tout refuser ».
+  **Configuration du conteneur, à transmettre à qui l'administre** : balises GA4 et Google Ads
+  avec le consentement intégré (Consent Mode, `analytics_storage` / `ad_storage`) ; balises
+  non Google (Meta Pixel…) déclenchées sur l'événement `consent_update` avec
+  `marketing_consent` = « granted », jamais sur « All Pages » seul ; GA4, Ads et Meta installés
+  soit dans GTM, soit dans le Studio, pas les deux. Le conteneur peut charger n'importe quel
+  script : son accès est à réserver à des personnes de confiance.
+
 ## À faire
 
 Par ordre de priorité.
@@ -797,8 +816,8 @@ Par ordre de priorité.
    refusé depuis info@ (restriction RBAC effective), jeton sans permission Entra à l'échelle
    du tenant. Un devis avec pièce jointe et un message de contact réels envoyés depuis le site
    en ligne, marqués « TEST TECHNIQUE ». Reste :
-   - **réception confirmée par le client le 30 septembre 2026.** Supprimer dans Vercel
-     `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, devenus inutiles ;
+   - **réception confirmée par le client le 30 septembre 2026.** `RESEND_API_KEY`,
+     `CONTACT_TO`, `CONTACT_FROM` supprimés de Vercel le 1er octobre 2026 ;
    - rappel fin août 2027 : faire générer un nouveau secret avant le **24 septembre 2027**.
 4. **DNS chez Infomaniak** — A `128.65.195.180` → `76.76.21.21`, www A → CNAME
    `cname.vercel-dns.com`. Ne pas toucher NS/MX/SPF/DKIM/DMARC/autodiscover (Microsoft 365).

@@ -111,6 +111,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           {/* Outils de mesure, chargés seulement après le consentement correspondant. */}
           <Tracking
             ids={{
+              googleTagManagerId: marketing.googleTagManagerId,
               googleAnalyticsId: marketing.googleAnalyticsId,
               googleAdsId: marketing.googleAdsId,
               googleAdsQuoteLabel: marketing.googleAdsQuoteLabel,

@@ -11,6 +11,12 @@ import type { MarketingIds } from "@/lib/sanity/marketing";
  *
  * - Google Analytics 4 : seulement après « Mesure d'audience ».
  * - Google Ads et Meta Pixel : seulement après « Publicité ».
+ * - Google Tag Manager : seulement après l'une des deux. Il reçoit d'abord le consentement Google
+ *   (tout refusé par défaut, puis le choix du visiteur), que ses balises Google respectent
+ *   d'elles-mêmes, puis un événement `consent_update` avec `analytics_consent` et
+ *   `marketing_consent` (« granted » ou « denied ») pour déclencher les autres (Meta Pixel…).
+ *   Les conversions lui parviennent aussi, en événements du même nom (`devis_envoye`…).
+ *   C'est au conteneur de respecter ces signaux : voir la politique de confidentialité, § 8.
  *
  * Mode de consentement Google « de base » : aucun script Google n'est chargé avant l'accord,
  * et tous les stockages partent refusés, puis sont accordés un à un. Le mode « avancé »
@@ -52,7 +58,8 @@ function loadScript(src: string) {
   document.head.appendChild(s);
 }
 
-function ensureGtag(firstId: string): Gtag {
+/** `dataLayer` et `gtag`, consentement Google refusé par défaut : avant tout script Google. */
+function ensureDataLayer(): Gtag {
   if (!window.gtag) {
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag() {
@@ -66,10 +73,30 @@ function ensureGtag(firstId: string): Gtag {
       ad_user_data: "denied",
       ad_personalization: "denied",
     });
-    window.gtag("js", new Date());
-    loadScript(`https://www.googletagmanager.com/gtag/js?id=${firstId}`);
   }
   return window.gtag;
+}
+
+/** gtag.js, pour Google Analytics et Google Ads configurés directement (hors Tag Manager). */
+function ensureGtag(firstId: string): Gtag {
+  const gtag = ensureDataLayer();
+  if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]')) {
+    gtag("js", new Date());
+    loadScript(`https://www.googletagmanager.com/gtag/js?id=${firstId}`);
+  }
+  return gtag;
+}
+
+/** Tag Manager chargé pendant cette visite : seul cas où lui transmettre choix et conversions. */
+let gtmLoaded = false;
+
+/** Conteneur Google Tag Manager, après le consentement Google qui le précède dans `dataLayer`. */
+function ensureGtm(id: string) {
+  if (gtmLoaded) return;
+  ensureDataLayer();
+  window.dataLayer!.push({ "gtm.start": Date.now(), event: "gtm.js" });
+  loadScript(`https://www.googletagmanager.com/gtm.js?id=${id}`);
+  gtmLoaded = true;
 }
 
 function ensurePixel(id: string): Fbq {
@@ -113,7 +140,7 @@ export function Tracking({ ids }: { ids: MarketingIds }) {
   const latest = useRef<{ consent: Consent | null | undefined; ids: MarketingIds }>({ consent, ids });
   const firstPath = useRef(true);
 
-  const { googleAnalyticsId: ga, googleAdsId: ads, metaPixelId: pixel } = ids;
+  const { googleTagManagerId: gtm, googleAnalyticsId: ga, googleAdsId: ads, metaPixelId: pixel } = ids;
 
   // Chargement, accord et retrait, à chaque changement du choix ou des identifiants.
   useEffect(() => {
@@ -124,8 +151,10 @@ export function Tracking({ ids }: { ids: MarketingIds }) {
 
     if (ga) window[`ga-disable-${ga}`] = !analytics;
 
-    if ((analytics && ga) || (marketing && ads)) {
-      const gtag = ensureGtag(analytics && ga ? ga : ads!);
+    const direct = (analytics && !!ga) || (marketing && !!ads);
+    const tagManager = (analytics || marketing) && !!gtm;
+    if (direct || tagManager) {
+      const gtag = direct ? ensureGtag(analytics && ga ? ga : ads!) : ensureDataLayer();
       gtag("consent", "update", {
         analytics_storage: analytics ? "granted" : "denied",
         ad_storage: marketing ? "granted" : "denied",
@@ -140,6 +169,8 @@ export function Tracking({ ids }: { ids: MarketingIds }) {
         gtag("config", ads);
         configured.add(ads);
       }
+      // Après la mise à jour du consentement : le conteneur la trouve déjà dans `dataLayer`.
+      if (tagManager) ensureGtm(gtm!);
     } else if (window.gtag) {
       window.gtag("consent", "update", {
         analytics_storage: "denied",
@@ -149,12 +180,23 @@ export function Tracking({ ids }: { ids: MarketingIds }) {
       });
     }
 
+    // Choix transmis à Tag Manager, à chaque changement, pour les balises qui ne lisent pas le
+    // consentement Google. Une balise déjà déclenchée ne se retire pas : au chargement suivant,
+    // si tout est refusé, le conteneur n'est plus chargé du tout.
+    if (gtmLoaded) {
+      window.dataLayer!.push({
+        event: "consent_update",
+        analytics_consent: analytics ? "granted" : "denied",
+        marketing_consent: marketing ? "granted" : "denied",
+      });
+    }
+
     if (marketing && pixel) ensurePixel(pixel)("consent", "grant");
     else if (window.fbq) window.fbq("consent", "revoke");
 
     if (!analytics) deleteCookies(["_ga", "_gid"]);
     if (!marketing) deleteCookies(["_gcl", "_fbp", "_fbc"]);
-  }, [consent, ids, ga, ads, pixel]);
+  }, [consent, ids, gtm, ga, ads, pixel]);
 
   // Page vue pour le Meta Pixel à chaque navigation (Google Analytics 4 la mesure seul).
   useEffect(() => {
@@ -171,6 +213,7 @@ export function Tracking({ ids }: { ids: MarketingIds }) {
     const onTrack = (e: Event) => {
       const name = (e as CustomEvent<ConversionEvent>).detail;
       const { consent: c, ids: i } = latest.current;
+      if ((c?.analytics || c?.marketing) && gtmLoaded) window.dataLayer!.push({ event: name });
       if (c?.analytics && i.googleAnalyticsId && window.gtag) window.gtag("event", name);
       if (c?.marketing && i.googleAdsId && window.gtag) {
         const label =

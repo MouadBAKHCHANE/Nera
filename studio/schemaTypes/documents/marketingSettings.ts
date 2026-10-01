@@ -4,11 +4,14 @@ import {BarChartIcon} from '@sanity/icons/BarChart'
 /**
  * Marketing & Analytics : identifiants des outils de mesure, document unique.
  *
- * Seuls les outils cités par la politique de cookies y figurent : Google Analytics 4, Google Ads
- * et le Meta Pixel. Aucun champ de script libre, volontairement : n'importe quel accès au Studio
- * pourrait sinon injecter du code dans le site. Le site charge chaque outil lui-même, et
- * seulement après le consentement correspondant (« Mesure d'audience » ou « Publicité »).
- * Un champ vide : l'outil n'est pas chargé.
+ * Seuls les outils cités par la politique de cookies y figurent : Google Tag Manager, Google
+ * Analytics 4, Google Ads et le Meta Pixel. Aucun champ de script libre, volontairement :
+ * n'importe quel accès au Studio pourrait sinon injecter du code dans le site. Le site charge
+ * chaque outil lui-même, et seulement après le consentement correspondant (« Mesure
+ * d'audience » ou « Publicité »). Un champ vide : l'outil n'est pas chargé.
+ *
+ * Google Tag Manager fait exception à l'absence de script libre : le conteneur peut charger
+ * n'importe quelle balise. Son contenu relève de qui administre le compte GTM, pas du Studio.
  */
 
 const pattern = (re: RegExp, message: string) => (value?: string) =>
@@ -20,11 +23,30 @@ export const marketingSettings = defineType({
   type: 'document',
   icon: BarChartIcon,
   groups: [
-    {name: 'audience', title: 'Mesure d’audience', default: true},
+    {name: 'balises', title: 'Tag Manager', default: true},
+    {name: 'audience', title: 'Mesure d’audience'},
     {name: 'publicite', title: 'Publicité'},
     {name: 'verifications', title: 'Vérifications'},
   ],
   fields: [
+    defineField({
+      name: 'googleTagManagerId',
+      title: 'Google Tag Manager : ID du conteneur',
+      description:
+        'Commence par « GTM- ». Chargé seulement si le visiteur accepte « Mesure d’audience » ou « Publicité ». Si Google Analytics, Google Ads ou le Meta Pixel sont installés dans GTM, laisser leurs champs vides dans cette page : sinon, tout serait compté deux fois.',
+      type: 'string',
+      group: 'balises',
+      validation: (rule) => [
+        rule.custom(pattern(/^GTM-[A-Z0-9]{4,12}$/, 'Format attendu : GTM-XXXXXXX')),
+        rule
+          .custom((value, {document}) =>
+            value && (document?.googleAnalyticsId || document?.googleAdsId || document?.metaPixelId)
+              ? 'Tag Manager et un autre outil sont remplis : vérifier que cet outil n’est pas aussi installé dans GTM (double comptage).'
+              : true,
+          )
+          .warning(),
+      ],
+    }),
     defineField({
       name: 'googleAnalyticsId',
       title: 'Google Analytics 4 : ID de mesure',
