@@ -771,8 +771,8 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   `lastmod` du plan du site = dernière publication dans le Studio (`lib/sanity/sitemap.ts`),
   sans date pour `/devis`, au lieu de l'heure de lecture. Page 404 : titres des liens « Aller
   directement à » en crème (`.font-display` les mettait en marine). Pages intérieures : en-tête
-  de page remonté (104/132 px au lieu de 120/180, fil d'Ariane à 24 px du surtitre) ; accueil,
-  404 et `/devis` inchangés.
+  de page remonté (104/132 px au lieu de 120/180, fil d'Ariane à 24 px du surtitre) ; page 404
+  idem, contenu aligné en haut au lieu d'être centré ; accueil et `/devis` inchangés.
 
 ## À faire
 
@@ -820,7 +820,8 @@ Par ordre de priorité.
    est de nouveau bloquée, conformément aux textes, sans les modifier.
 1b. **Sanity, phase 2** — **terminée le 1er octobre 2026** : contenus et SEO de toutes les pages
    dans le Studio, Google Tag Manager, guide client (`docs/guide-client-sanity.html`, PDF
-   `../GUIDE-CLIENT-SANITY-NERA.pdf`, 10 pages) envoyé à Charline avec son accès. Sans
+   `../GUIDE-CLIENT-SANITY-NERA.pdf`, 10 pages), finalement non envoyé : Charline connaît
+   déjà Sanity. Gardé pour un futur utilisateur. Sans
    captures du Studio (connexion requise) ; deux libellés de l'interface à vérifier : icône de
    l'historique (§ 2) et bouton « Insérer » (§ 5).
 2. **Références** — **reportées** (décision du 30 septembre 2026) : NERA n'a pas encore de
