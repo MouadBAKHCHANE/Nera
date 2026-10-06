@@ -98,7 +98,7 @@ export default async function NotFound() {
                         className="group flex items-center gap-6 py-5 transition-colors hover:text-accent"
                       >
                         <span className="flex-1">
-                          <span className="block font-display text-[1.125rem] font-medium leading-[1.3]">{l.label}</span>
+                          <span className="block font-display text-[1.125rem] font-medium leading-[1.3] text-nera-cream transition-colors group-hover:text-accent">{l.label}</span>
                           <span className="mt-1 block text-body-sm font-light leading-[1.6] text-nera-cream/65">
                             {l.desc}
                           </span>
