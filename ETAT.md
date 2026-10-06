@@ -761,6 +761,19 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   soit dans GTM, soit dans le Studio, pas les deux. Le conteneur peut charger n'importe quel
   script : son accès est à réserver à des personnes de confiance.
 
+- **Google Search Console et finitions SEO (6 octobre 2026).** Propriété « préfixe d'URL »
+  `https://www.nera-ing.ch/`, validée par la balise HTML collée dans Studio > Marketing &
+  Analytics > Vérifications : **ne pas vider ce champ**, Google retirerait l'accès. Plan du site
+  soumis (`sitemap.xml`, 14 adresses ; « Impossible de lire » juste après l'envoi, délai
+  habituel de Google, fichier vérifié valide et lu par Googlebot). Accueil déjà indexé.
+  Charline ajoutée à la propriété. Corrections : `/devis` désignait l'accueil comme adresse
+  canonique (canonique par défaut de la mise en page racine retirée, `/devis` a la sienne) ;
+  `lastmod` du plan du site = dernière publication dans le Studio (`lib/sanity/sitemap.ts`),
+  sans date pour `/devis`, au lieu de l'heure de lecture. Page 404 : titres des liens « Aller
+  directement à » en crème (`.font-display` les mettait en marine). Pages intérieures : en-tête
+  de page remonté (104/132 px au lieu de 120/180, fil d'Ariane à 24 px du surtitre) ; accueil,
+  404 et `/devis` inchangés.
+
 ## À faire
 
 Par ordre de priorité.
