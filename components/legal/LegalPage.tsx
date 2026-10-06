@@ -122,7 +122,7 @@ export async function LegalPage({ page: doc }: { page: LegalPageView }) {
     <>
       <HeaderDark />
       <main>
-        <header className="bg-nera-navy-deep bg-blueprint pb-14 pt-[120px] text-nera-cream lg:pb-20 lg:pt-[180px]">
+        <header className="bg-nera-navy-deep bg-blueprint pb-14 pt-[104px] text-nera-cream lg:pb-20 lg:pt-[132px]">
           <Container wide className="mx-auto max-w-3xl">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
@@ -140,7 +140,7 @@ export async function LegalPage({ page: doc }: { page: LegalPageView }) {
               </ol>
             </nav>
 
-            <p className="mt-8 flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
+            <p className="mt-6 flex items-center gap-4 text-[13px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
               <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
               Informations légales
             </p>

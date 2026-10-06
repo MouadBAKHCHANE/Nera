@@ -63,7 +63,7 @@ export async function ContactPage({ contact }: { contact: ContactContent }) {
       <HeaderDark solidOnScroll />
       <main>
         {/* En-tête sombre : fil d'Ariane, H1 et les trois paragraphes du client. */}
-        <header className="relative overflow-hidden bg-nera-navy-deep bg-blueprint pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
+        <header className="relative overflow-hidden bg-nera-navy-deep bg-blueprint pb-16 pt-[104px] text-nera-cream lg:pb-24 lg:pt-[132px]">
           <Container wide className="relative">
             <nav aria-label="Fil d'Ariane">
               <ol className="flex flex-wrap items-center gap-1 text-[12px] font-light text-nera-cream/70">
@@ -82,7 +82,7 @@ export async function ContactPage({ contact }: { contact: ContactContent }) {
             </nav>
 
             {/* Le titre a gauche, la carte des coordonnees a droite, des le hero. */}
-            <div className="mt-10 grid gap-12 lg:grid-cols-[7fr_5fr] lg:items-start lg:gap-16">
+            <div className="mt-6 grid gap-12 lg:grid-cols-[7fr_5fr] lg:items-start lg:gap-16">
               <div>
                 <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
                   <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />

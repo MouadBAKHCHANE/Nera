@@ -46,7 +46,7 @@ export function PrestationsIndexPage({ index }: { index: PrestationsIndexView })
     <>
       <HeaderDark solidOnScroll />
       <main>
-        <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
+        <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[104px] text-nera-cream lg:pb-24 lg:pt-[132px]">
           <Image
             src={index.image}
             alt=""
@@ -94,7 +94,7 @@ export function PrestationsIndexPage({ index }: { index: PrestationsIndexView })
               </ol>
             </nav>
 
-            <div className="mt-10 max-w-3xl">
+            <div className="mt-6 max-w-3xl">
               <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.25em] text-nera-cream/80">
                 <span className="h-2 w-7 shrink-0 bg-accent" aria-hidden />
                 Prestations

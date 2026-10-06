@@ -153,7 +153,7 @@ export async function BureauPage({ bureau }: { bureau: BureauContent }) {
           à 2,4 s. Le fil d'Ariane reste immédiat, c'est un repère de navigation. Les autres
           sections gardent les réglages hestera de `components/ui/aos.ts`.
         */}
-        <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[120px] text-nera-cream lg:pb-24 lg:pt-[180px]">
+        <header className="relative overflow-hidden bg-nera-navy-deep pb-16 pt-[104px] text-nera-cream lg:pb-24 lg:pt-[132px]">
           <Image
             src={bureau.image}
             alt=""
@@ -201,7 +201,7 @@ export async function BureauPage({ bureau }: { bureau: BureauContent }) {
               </ol>
             </nav>
 
-            <div className="mt-10 max-w-3xl">
+            <div className="mt-6 max-w-3xl">
               <Reveal
                 as="p"
                 effect="fade"
