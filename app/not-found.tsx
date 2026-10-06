@@ -38,7 +38,7 @@ export default async function NotFound() {
     <>
       <HeaderDark solidOnScroll />
       <main>
-        <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-nera-navy-deep bg-blueprint pb-20 pt-[104px] text-nera-cream lg:pb-28 lg:pt-[132px]">
+        <section className="relative flex min-h-[100svh] flex-col justify-start overflow-hidden bg-nera-navy-deep bg-blueprint pb-20 pt-[104px] text-nera-cream lg:pb-28 lg:pt-[132px]">
           <LogomarkOutline
             className="pointer-events-none absolute -right-[10vw] top-1/2 hidden w-[42vw] -translate-y-1/2 text-nera-cream/10 lg:block"
             strokeWidth={1}
