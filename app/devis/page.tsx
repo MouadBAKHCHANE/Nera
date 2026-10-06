@@ -3,12 +3,16 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
 import { QuoteForm } from "@/components/quote/QuoteForm";
+import { pageMetadata } from "@/lib/seo/metadata";
 
 /** Page de repli du formulaire de devis (lien direct, sans JavaScript du pop-up). */
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Demander un devis gratuit",
-  description: "Demande de devis gratuit et sans engagement : CECB, physique du bâtiment, CVC, autorisations, subventions, rénovation énergétique. Réponse sous 48 heures ouvrées.",
-};
+  description:
+    "Demande de devis gratuit et sans engagement : CECB, physique du bâtiment, CVC, autorisations, subventions, rénovation énergétique. Réponse sous 48 heures ouvrées.",
+  route: "/devis",
+  template: true,
+});
 
 export default function DevisPage() {
   return (

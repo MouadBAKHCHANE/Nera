@@ -53,7 +53,9 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   description: defaults.description ?? seo.description,
   keywords: seo.keywords,
-  alternates: { canonical: "/" },
+  // Pas d'adresse canonique par défaut : héritée par une page sans la sienne, elle désignait
+  // l'accueil (relevé sur /devis, pourtant au plan du site). Chaque page déclare la sienne par
+  // `pageMetadata` ; la page 404 n'en a pas.
   // Pages sans métadonnées propres (devis, 404) : image de partage par défaut. Les autres passent
   // par `pageMetadata` (lib/seo/metadata.ts).
   openGraph: { ...baseOpenGraph, url: SITE_URL },
