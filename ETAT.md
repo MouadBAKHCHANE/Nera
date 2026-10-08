@@ -774,6 +774,17 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   de page remonté (104/132 px au lieu de 120/180, fil d'Ariane à 24 px du surtitre) ; page 404
   idem, contenu aligné en haut au lieu d'être centré ; accueil et `/devis` inchangés.
 
+- **Quota ISR de Vercel (8 octobre 2026).** Le compte NAOENERGY (forfait Hobby, 200 000
+  écritures ISR par mois partagées entre les sites) a dépassé le plafond : 211 765, dont 91 %
+  pour ISO Tradition (reconstruction toutes les 60 s, corrigée dans ce projet-là). NERA :
+  11 741 depuis le 30 septembre, dont 1 000 à 1 700 par jour **sans publication ni
+  déploiement**, venant du rafraîchissement de secours d'une heure (chaque page reconstruite
+  toutes les heures au passage d'un visiteur ou d'un robot). Passé à **un jour**
+  (`REVALIDATE_SECONDS` dans `lib/sanity/fetch.ts`) : les 18 routes affichent « 1d » au build.
+  Les publications restent instantanées (webhook) : vérifié en ligne, 4,6 s après publication
+  et 2,1 s au rétablissement. À vérifier vers le 10 octobre : Vercel > nera > Usage > ISR
+  Writes, les jours sans publication devraient tomber à quelques dizaines.
+
 ## À faire
 
 Par ordre de priorité.
