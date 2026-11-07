@@ -5,13 +5,18 @@ import { Container } from "@/components/ui/Container";
 import { QuoteForm } from "@/components/quote/QuoteForm";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-/** Page de repli du formulaire de devis (lien direct, sans JavaScript du pop-up). */
+/**
+ * Page de repli du formulaire de devis (lien direct, sans JavaScript du pop-up).
+ * Hors de Google : un formulaire presque sans texte, que la Search Console laissait en
+ * « Découverte, actuellement non indexée ». Les liens qu'elle porte restent suivis.
+ */
 export const metadata: Metadata = pageMetadata({
   title: "Demander un devis gratuit",
   description:
     "Demande de devis gratuit et sans engagement : CECB, physique du bâtiment, CVC, autorisations, subventions, rénovation énergétique. Réponse sous 48 heures ouvrées.",
   route: "/devis",
   template: true,
+  noIndex: true,
 });
 
 export default function DevisPage() {

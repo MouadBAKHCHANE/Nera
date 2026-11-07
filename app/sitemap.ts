@@ -14,13 +14,12 @@ import { contactRoute } from "@/content/contact";
 type Entry = MetadataRoute.Sitemap[number];
 
 /**
- * Plan du site : accueil, devis, prestations, bureau, contact, références (dès qu'une référence
+ * Plan du site : accueil, prestations, bureau, contact, références (dès qu'une référence
  * est publiée dans Sanity) et pages légales. Les pages cochées « Masquer cette page de Google »
- * dans le Studio en sont exclues.
+ * dans le Studio en sont exclues, de même que `/devis`, en `noindex` dans le code.
  *
  * `lastmod` : date de la dernière publication du document dans le Studio (`getPublishedDates`),
- * et pour les pages légales leur date de mise à jour affichée. `/devis`, dont le texte est dans
- * le code, n'en a pas : une date absente vaut mieux qu'une date fausse.
+ * et pour les pages légales leur date de mise à jour affichée.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [hasReferences, legal, index, homePage, bureauPage, contactPage, dates] = await Promise.all([
@@ -48,7 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...(homePage.noIndex ? [] : [entry("/", "homePage", "monthly", 1)]),
-    entry("/devis", null, "yearly", 0.6),
     ...(index.noIndex ? [] : [entry(prestationsIndexRoute, "prestationsPage", "monthly", 0.9)]),
     ...pages.map((p) => entry(prestationRoute(p!.slug), `prestation-${p!.slug}`, "monthly", 0.8)),
     ...(bureauPage.noIndex ? [] : [entry(bureauRoute, "bureauPage", "monthly", 0.7)]),

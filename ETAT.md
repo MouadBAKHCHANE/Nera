@@ -785,6 +785,18 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   et 2,1 s au rétablissement. À vérifier vers le 10 octobre : Vercel > nera > Usage > ISR
   Writes, les jours sans publication devraient tomber à quelques dizaines.
 
+- **`/devis` hors de Google (7 novembre 2026).** La Search Console classait trois adresses en
+  « Découverte, actuellement non indexée » depuis le 10 octobre (jamais explorées) :
+  `/confidentialite`, `/devis` et `/prestations/subventions`. Pas une erreur : Google explore
+  peu un site jeune. `/devis`, simple formulaire de repli du pop-up, passe en `noindex, follow`
+  et sort du plan du site (13 adresses au lieu de 14), pour concentrer l'exploration sur les
+  pages prestation. La page fonctionne comme avant. Vérifié sur le build : balise robots,
+  `sitemap.xml` sans `/devis`, autres pages toujours `index, follow`. Après le déploiement :
+  demander l'indexation de `/prestations/subventions` (Inspection de l'URL). Ne pas cliquer sur
+  « Valider la correction » : il n'y a rien à corriger. `/confidentialite` est laissée à Google.
+  Contexte : bilan Search Console et proposition pour la page CECB (M1 à M6) envoyés à NERA,
+  en attente de validation ; ne rien modifier sur cette page avant sa réponse.
+
 ## À faire
 
 Par ordre de priorité.
