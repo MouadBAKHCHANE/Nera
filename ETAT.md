@@ -809,11 +809,19 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   Écrit par `studio/scripts/seo-cecb-novembre-2026.ts` (simulation par défaut, refuse s'il
   existe un brouillon, écriture liée à la révision lue), vérifié en ligne quelques secondes
   après. Pour revenir en arrière : remettre les anciennes valeurs ci-dessus dans le Studio.
-  **En attente de NERA (e-mail à Akram)** : communes réellement couvertes (M3), réponses sur
-  le délai d'un CECB et sur le CECB Plus pour les subventions (M4, sinon seules les deux
-  questions sans fait nouveau sont publiées), avis sur le retour des liens entre prestations
-  (M6), fiches externes (annuaire CECB, Google, local.ch). Prochain point Search Console :
-  début janvier 2027, à comparer à l'export du 6 novembre.
+  **M3 appliqué le même jour, sur décision de Mouad** : section « Expert CECB à Genève et dans
+  le canton de Vaud » (ancre `zone-d-intervention`, dans le sommaire), après « Dans quels cas
+  établir un CECB ? ». Elle cite Genève, Carouge, Lancy, Vernier, Nyon, Renens, Pully, Payerne
+  et Villeneuve : les communes tapées avec « expert CECB » dans la Search Console, **non
+  confirmées par NERA**. Phrase de fin volontairement prudente sur le reste de la Suisse
+  romande. Script `studio/scripts/zone-cecb-novembre-2026.ts`, vérifié en ligne. Pour
+  l'annuler : supprimer la section dans le Studio. Si NERA signale une commune non couverte,
+  la retirer du paragraphe.
+  **En attente de NERA (e-mail à Akram)** : réponses sur le délai d'un CECB et sur le CECB Plus
+  pour les subventions (M4, sinon seules les deux questions sans fait nouveau sont publiées),
+  avis sur le retour des liens entre prestations (M6), fiches externes (annuaire CECB, Google,
+  local.ch). Prochain point Search Console : début janvier 2027, à comparer à l'export du
+  6 novembre.
 
 ## À faire
 
