@@ -794,8 +794,26 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   `sitemap.xml` sans `/devis`, autres pages toujours `index, follow`. Après le déploiement :
   demander l'indexation de `/prestations/subventions` (Inspection de l'URL). Ne pas cliquer sur
   « Valider la correction » : il n'y a rien à corriger. `/confidentialite` est laissée à Google.
-  Contexte : bilan Search Console et proposition pour la page CECB (M1 à M6) envoyés à NERA,
-  en attente de validation ; ne rien modifier sur cette page avant sa réponse.
+
+- **Page CECB, SEO (7 novembre 2026).** Suite au bilan Search Console (page vue 283 fois, en
+  position 42, sur « expert CECB Genève » et « expert CECB » + commune), propositions M1 à M6
+  (https://claude.ai/artifact/B3qWw3747rrK54WX7wy6Ld). **M1, M2 et M5 appliqués sur décision
+  de Mouad**, sans passer par Charline. Cela déroge à la règle d'octobre, selon laquelle les
+  champs SEO suivent le document client : seule la page CECB est concernée.
+  - Titre : « CECB et CECB Plus à Genève | NERA » → « Expert CECB et CECB Plus à Genève et Vaud | NERA ».
+  - Description : « Les experts CECB de NERA réalisent CECB, CECB Plus, IDC, audits et
+    diagnostics EPIQR+ à Genève et en Suisse romande. » → « Experts CECB à Genève et dans le
+    canton de Vaud : CECB, CECB Plus, calcul de l’IDC et diagnostics EPIQR+. Visite, rapport et
+    conseil. Devis gratuit. »
+  - Expressions visées : ajout de « expert CECB Vaud », « certificat CECB Genève », « CECB Plus ».
+  Écrit par `studio/scripts/seo-cecb-novembre-2026.ts` (simulation par défaut, refuse s'il
+  existe un brouillon, écriture liée à la révision lue), vérifié en ligne quelques secondes
+  après. Pour revenir en arrière : remettre les anciennes valeurs ci-dessus dans le Studio.
+  **En attente de NERA (e-mail à Akram)** : communes réellement couvertes (M3), réponses sur
+  le délai d'un CECB et sur le CECB Plus pour les subventions (M4, sinon seules les deux
+  questions sans fait nouveau sont publiées), avis sur le retour des liens entre prestations
+  (M6), fiches externes (annuaire CECB, Google, local.ch). Prochain point Search Console :
+  début janvier 2027, à comparer à l'export du 6 novembre.
 
 ## À faire
 
