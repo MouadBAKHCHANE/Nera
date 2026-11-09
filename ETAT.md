@@ -840,6 +840,25 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
     Vaud : piste d'une page ou d'une actualité vaudoise, hors forfait.
   Prochain point Search Console : début janvier 2027, à comparer à l'export du 6 novembre.
 
+- **Boutons « Devis gratuit » : liens vers `/devis` (9 novembre 2026).** Ils étaient des
+  `<button>` qui ouvraient le pop-up : aucun lien du site ne menait à `/devis`, accessible
+  seulement en tapant l'adresse. Remarque de Mouad, juste sur ce point ; en revanche, les
+  boutons ne menaient pas à `/contact`, ils ouvraient bien le pop-up. Désormais `QuoteButton`
+  (`components/quote/QuoteModal.tsx`) est un `<a href="/devis" aria-haspopup="dialog">` ;
+  `openQuoteOnClick` intercepte le clic simple pour ouvrir le pop-up, et laisse passer le clic
+  molette, Ctrl/Cmd/Maj/Alt et « ouvrir dans un nouvel onglet ». `QuoteCta` (16 emplacements)
+  et l'onglet flottant de `CallButton` passent par là : une seule définition. Vérifié au
+  navigateur (build de production) : 4 liens `/devis` sur l'accueil, 2 sur `/contact`, plus
+  aucun ancien bouton ; un clic ouvre le pop-up sans changer d'adresse ; un Ctrl+clic ouvre
+  `/devis` dans un nouvel onglet, avec le formulaire ; le pré-remplissage depuis une page
+  prestation fonctionne toujours ; l'onglet mobile ouvre le pop-up ; aucun débordement à
+  390 px ; aucune erreur JavaScript. Limite : ouverte dans un nouvel onglet depuis une page
+  prestation, `/devis` n'est pas pré-remplie (elle ne lit pas de paramètre d'adresse).
+  **Constat sans lien avec ce changement** : sans JavaScript, le site entier n'affiche que
+  l'écran de chargement. `app/loading.tsx` fait servir la page dans un bloc
+  `<div hidden id="S:…">` que React révèle par script. Sans effet pour Google, qui exécute le
+  JavaScript ; à garder en tête si l'on vise un jour un fonctionnement sans script.
+
 ## À faire
 
 Par ordre de priorité.

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { ArrowUp, FileText, Phone } from "lucide-react";
-import { useQuote } from "@/components/quote/QuoteModal";
+import { QUOTE_ROUTE, openQuoteOnClick, useQuote } from "@/components/quote/QuoteModal";
 import { useSite } from "@/components/site/SiteProvider";
 
 /**
@@ -26,14 +26,18 @@ function Tab({
   icon: Icon,
   href,
   onClick,
+  dialog = false,
   shown,
   extra = "",
 }: {
   label: string;
   ariaLabel: string;
   icon: typeof FileText;
-  href?: string;
-  onClick?: () => void;
+  href: string;
+  /** Onglet devis : intercepte le clic pour ouvrir le pop-up (`openQuoteOnClick`). */
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
+  /** Annonce l'ouverture d'une fenêtre de dialogue (onglet devis). */
+  dialog?: boolean;
   shown: boolean;
   /** Classes supplémentaires : sert à masquer l'onglet devis en desktop. */
   extra?: string;
@@ -52,14 +56,16 @@ function Tab({
     </>
   );
 
-  return href ? (
-    <a href={href} aria-label={ariaLabel} className={className}>
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-haspopup={dialog ? "dialog" : undefined}
+      className={className}
+    >
       {inner}
     </a>
-  ) : (
-    <button type="button" onClick={onClick} aria-label={ariaLabel} className={className}>
-      {inner}
-    </button>
   );
 }
 
@@ -86,7 +92,9 @@ export function CallButton() {
           label="Devis gratuit"
           ariaLabel="Demander un devis gratuit"
           icon={FileText}
-          onClick={() => open()}
+          href={QUOTE_ROUTE}
+          onClick={(e) => openQuoteOnClick(e, open)}
+          dialog
           shown={shown}
           extra="lg:hidden"
         />

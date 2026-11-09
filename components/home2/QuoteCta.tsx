@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuote } from "@/components/quote/QuoteModal";
+import { QuoteButton } from "@/components/quote/QuoteModal";
 
 /**
  * Bouton « Devis gratuit », action principale du site : un contour qui se remplit de vert au
@@ -34,14 +34,13 @@ export function QuoteCta({
   /** Pré-remplit la prestation dans le pop-up, depuis une page prestation. */
   prestation?: string;
 }) {
-  const { open } = useQuote();
+  // Lien vers `/devis` qui ouvre le pop-up au clic (voir `openQuoteOnClick`).
   return (
-    <button
-      type="button"
-      onClick={() => open(prestation)}
+    <QuoteButton
+      prestation={prestation}
       className={`inline-flex h-12 items-center rounded-sm border px-6 text-[15px] font-medium transition-colors duration-base ${tones[tone]} ${className}`}
     >
       {children}
-    </button>
+    </QuoteButton>
   );
 }

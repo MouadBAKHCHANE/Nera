@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { X } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -100,12 +100,35 @@ export function QuoteProvider({ children }: { children: ReactNode }) {
   );
 }
 
-/** Bouton qui ouvre le pop-up. Reprend les classes passées pour s'adapter à chaque header. */
-export function QuoteButton({ className = "", children = "Devis gratuit", prestation }: { className?: string; children?: ReactNode; prestation?: string }) {
+/** Page du formulaire de devis, version page du pop-up (`app/devis/page.tsx`). */
+export const QUOTE_ROUTE = "/devis";
+
+/**
+ * Clic sur un lien vers `/devis` : ouvre le pop-up au lieu de naviguer. Un clic molette, avec
+ * Ctrl/Cmd/Maj/Alt, ou « ouvrir dans un nouvel onglet » suit le lien vers la page ; sans
+ * JavaScript aussi. Avant, les déclencheurs étaient des `<button>` : aucun lien du site ne
+ * menait à `/devis`, et rien ne se passait quand le pop-up ne pouvait pas s'ouvrir.
+ */
+export function openQuoteOnClick(e: MouseEvent<HTMLAnchorElement>, open: Ctx["open"], prestation?: string) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  open(prestation);
+}
+
+/** Lien qui ouvre le pop-up. Reprend les classes passées pour s'adapter à chaque emplacement. */
+export function QuoteButton({
+  className = "",
+  children = "Devis gratuit",
+  prestation,
+}: {
+  className?: string;
+  children?: ReactNode;
+  prestation?: string;
+}) {
   const { open } = useQuote();
   return (
-    <button type="button" onClick={() => open(prestation)} className={className}>
+    <a href={QUOTE_ROUTE} aria-haspopup="dialog" onClick={(e) => openQuoteOnClick(e, open, prestation)} className={className}>
       {children}
-    </button>
+    </a>
   );
 }
