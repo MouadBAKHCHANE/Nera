@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { HeaderDark } from "@/components/home2/HeaderDark";
 import { FooterDark } from "@/components/home2/FooterDark";
 import { QuoteCta } from "@/components/home2/QuoteCta";
 import { Ruler } from "@/components/home2/Logomark";
 import { Container } from "@/components/ui/Container";
+import { PrestationIcon } from "@/components/ui/PrestationIcon";
 import { Reveal } from "@/components/ui/Reveal";
 import { Blocks } from "./Blocks";
 import { seo } from "@/content/seo";
+import { navPrestations } from "@/content/navigation";
 import { prestationPageBySlug, prestationRoute, prestationsIndexRoute } from "@/content/prestation-pages";
 import type { PrestationView as Page } from "@/lib/sanity/prestations";
 
@@ -24,6 +26,11 @@ export function PrestationPage({ page }: { page: Page }) {
   // liste du formulaire. Le titre court du Studio peut changer sans casser ce lien.
   const quotePrestation = prestationPageBySlug.get(page.slug)?.shortTitle ?? page.shortTitle;
   const hasFaq = page.faq.length > 0;
+  // Maillage interne du client (`related`), rendu avec les libellés et descriptions du méga-menu.
+  const related = page.related.flatMap((slug) => {
+    const item = navPrestations.find((p) => p.href === prestationRoute(slug));
+    return item ? [item] : [];
+  });
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -200,6 +207,44 @@ export function PrestationPage({ page }: { page: Page }) {
                     </div>
                   </Reveal>
                 ))}
+
+                {/*
+                  « Poursuivre avec » : rétabli en novembre 2026 à la demande du client, après
+                  son retrait en septembre. Forme volontairement discrète, en fin de colonne et
+                  sur le fond du corps, pour ne pas ajouter de section entre le texte et la FAQ.
+                */}
+                {related.length > 0 && (
+                  <nav aria-labelledby="poursuivre" className="mt-16 border-t border-hairline pt-10">
+                    <h2 id="poursuivre" className="text-[12px] font-medium uppercase tracking-[0.2em] text-nera-navy">
+                      Poursuivre avec
+                    </h2>
+                    <ul className="mt-6 grid gap-3 md:grid-cols-2">
+                      {related.map((p) => (
+                        <li key={p.href} className="flex">
+                          <Link
+                            href={p.href}
+                            className="group flex w-full items-start gap-4 rounded-sm border border-hairline px-4 py-4 transition-colors hover:border-accent"
+                          >
+                            <span className="mt-0.5 flex size-11 shrink-0 items-center justify-center rounded-sm border border-hairline text-accent-deep">
+                              <PrestationIcon of={p.href} className="size-[22px]" />
+                            </span>
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-[16px] font-semibold leading-snug text-nera-navy transition-colors group-hover:text-accent-deep">
+                                {p.label}
+                              </span>
+                              <span className="mt-1.5 block text-[14px] font-light leading-[1.5] text-body">{p.desc}</span>
+                            </span>
+                            <ArrowRight
+                              className="mt-1 size-4 shrink-0 text-accent-deep transition-transform duration-300 group-hover:translate-x-1"
+                              strokeWidth={1.75}
+                              aria-hidden
+                            />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                )}
               </div>
             </div>
           </Container>

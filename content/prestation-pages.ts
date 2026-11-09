@@ -65,9 +65,9 @@ export type PrestationPage = {
   closing: string;
   faq: { q: string; a: string }[];
   /**
-   * Maillage interne (`content/source/README.md`), par slug. Le bloc « Poursuivre avec »
-   * qui l'affichait en bas de page a été retiré à la demande du client : la donnée reste
-   * ici, sans consommateur, pour rétablir le maillage sans la ressaisir.
+   * Maillage interne (`content/source/README.md`), par slug. Affiché par le bloc
+   * « Poursuivre avec » en fin de corps de page (`PrestationPage`), retiré en septembre 2026
+   * puis rétabli en novembre à la demande du client.
    */
   related: string[];
 };

@@ -817,11 +817,28 @@ Mis à jour le 29 septembre 2026. Tenir ce fichier à jour en fin de session.
   romande. Script `studio/scripts/zone-cecb-novembre-2026.ts`, vérifié en ligne. Pour
   l'annuler : supprimer la section dans le Studio. Si NERA signale une commune non couverte,
   la retirer du paragraphe.
-  **En attente de NERA (e-mail à Akram)** : réponses sur le délai d'un CECB et sur le CECB Plus
-  pour les subventions (M4, sinon seules les deux questions sans fait nouveau sont publiées),
-  avis sur le retour des liens entre prestations (M6), fiches externes (annuaire CECB, Google,
-  local.ch). Prochain point Search Console : début janvier 2027, à comparer à l'export du
-  6 novembre.
+  **Réponse de Charline le 9 novembre 2026** (e-mail « Page CECB du site : trois questions
+  rapides », PDF dans le dossier client) :
+  - **M4 appliqué** : cinq questions ajoutées à la suite des quatre existantes (que NERA avait
+    retouchées dans le Studio) : hors de Genève, documents à préparer, délais (2 à 3 semaines
+    pour un CECB, 3 à 4 pour un CECB Plus), CECB Plus et subventions (isolation dès
+    CHF 10'000 selon le canton, Valais au-delà de 142 m², rénovation globale M-10 et M-13 ;
+    en général pas pour une PAC ou du photovoltaïque), et loi vaudoise (CECB simple pour les
+    bâtiments d'avant 1986 dès 2027, à établir d'ici fin 2031). Faits de NERA, mis en forme
+    seulement. Script `studio/scripts/faq-cecb-novembre-2026.ts`, vérifié en ligne (9 questions
+    dans la page et dans le JSON-LD `FAQPage`).
+  - **M6 accepté sur les six pages** : bloc « Poursuivre avec » rétabli en fin de colonne de
+    texte (`PrestationPage`), sur le fond du corps, sans nouvelle section. Liens du champ
+    `related` (maillage du README), libellés et descriptions de `navPrestations` (méga-menu).
+    Vérifié à 1440 et 390 px : aucun débordement.
+  - Annuaire officiel CECB (cecb-tool.ch) : fiche d'Akram à jour, avec le lien vers le site.
+    Elle coche aussi « Conduite de travaux ».
+  - Fiche Google : Mouad en est administrateur. Restent à obtenir de NERA : horaires et photos
+    réelles.
+  - local.ch : Charline regarde ; elle pense qu'un abonnement payant est nécessaire.
+  - Elle propose d'autres contenus SEO et signale une forte demande de CECB dans le canton de
+    Vaud : piste d'une page ou d'une actualité vaudoise, hors forfait.
+  Prochain point Search Console : début janvier 2027, à comparer à l'export du 6 novembre.
 
 ## À faire
 
